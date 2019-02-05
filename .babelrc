@@ -1,0 +1,9 @@
+{
+    "presets": [
+        ["moxy", {
+            "react": true,
+            "namedDefaultExport": false,
+            "targets": ["browsers"]
+        }]
+    ]
+}
