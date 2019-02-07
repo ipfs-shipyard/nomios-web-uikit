@@ -1,0 +1,21 @@
+@import "../../src/styles/colors";
+
+.armadillo {
+    background-color: var(--color-armadillo);
+}
+
+.dawn-pink {
+    background-color: var(--color-dawn-pink);
+}
+
+.ocean-green {
+    background-color: var(--color-ocean-green);
+}
+
+.black {
+    background-color: var(--color-black);
+}
+
+.white {
+    background-color: var(--color-white);
+}
