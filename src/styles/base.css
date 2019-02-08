@@ -1,0 +1,87 @@
+@import "./colors";
+@import "./mixins/typography";
+
+/* ==========================================================================
+   Proper box-sizing model
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Fonts
+
+   If you are going to include custom fonts please use the /src/media/fonts
+   directory.
+   ========================================================================== */
+
+@font-face {
+    font-family: "GtSectra";
+    font-weight: 400;
+    font-style: normal;
+    src:
+        url("../media/fonts/gt-sectra/gt-sectra-display-regular-webfont-ext-400.woff2") format("woff2"),
+        url("../media/fonts/gt-sectra/gt-sectra-display-regular-webfont-ext-400.woff") format("woff");
+}
+
+@font-face {
+    font-family: "GtSectra";
+    font-weight: 500;
+    font-style: normal;
+    src:
+        url("../media/fonts/gt-sectra/gt-sectra-medium-webfont-ext-500.woff2") format("woff2"),
+        url("../media/fonts/gt-sectra/gt-sectra-medium-webfont-ext-500.woff") format("woff");
+}
+
+@font-face {
+    font-family: "IbmPlexMono";
+    font-weight: 400;
+    font-style: normal;
+    src:
+        url("../media/fonts/ibm-plex-mono/ibmplexmono-regular-webfont-ext-400.woff2") format("woff2"),
+        url("../media/fonts/ibm-plex-mono/ibmplexmono-regular-webfont-ext-400.woff") format("woff");
+}
+
+/* ==========================================================================
+   Typography Defaults
+   ========================================================================== */
+
+html {
+    font-size: 62.5%; /* 62.5% so that all the REM measurements re based on 10px sizing */
+}
+
+body {
+    @mixin typography-body-1 rem;
+    color: var(--color-black);
+    overflow-wrap: break-word;  /* Break long words by default */
+}
+
+/* ==========================================================================
+  Headings
+  ========================================================================== */
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0.7em 0;
+}
+
+h1 {
+    @mixin typography-h1 rem;
+}
+
+h2 {
+    @mixin typography-h2 rem;
+}
+
+h3 {
+    @mixin typography-h3 rem;
+}
+
+h4 {
+    @mixin typography-h4 rem;
+}

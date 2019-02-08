@@ -1,0 +1,33 @@
+@import "../../src/styles/mixins/typography";
+
+.typography > * {
+    margin-bottom: 50px;
+}
+
+.h1 {
+    @mixin typography-h1 rem;
+}
+
+.h2 {
+    @mixin typography-h2 rem;
+}
+
+.h3 {
+    @mixin typography-h3 rem;
+}
+
+.h4 {
+    @mixin typography-h4 rem;
+}
+
+.body1 {
+    @mixin typography-body-1 rem;
+}
+
+.body2 {
+    @mixin typography-body-2 rem;
+}
+
+.captions {
+    @mixin typography-captions rem;
+}
