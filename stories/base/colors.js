@@ -43,7 +43,7 @@ IDM's color pallete.
 You may use these colors in CSS files like so:
 
 \`\`\`css
-@import "@idm/styleguide/styles/colors";
+@import "@idm/web-uikit/styles/colors";
 
 .my-div {
 

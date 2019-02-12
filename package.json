@@ -1,22 +1,22 @@
 {
-  "name": "@idm/styleguide",
+  "name": "@idm/web-uikit",
   "version": "0.0.0",
-  "description": "IDM's living styleguide",
+  "description": "IDM's living wen UI kit",
   "main": "dist/index.js",
   "keywords": [
     "idm",
-    "styleguide",
+    "web-uikit",
     "react"
   ],
   "author": "Pedro Santos <pedro.santos@moxy.studio>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ipfs-shipyard/idm-styleguide/issues"
+    "url": "https://github.com/ipfs-shipyard/idm-web-uikit/issues"
   },
-  "homepage": "https://github.com/ipfs-shipyard/idm-styleguide#readme",
+  "homepage": "https://github.com/ipfs-shipyard/idm-web-uikit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ipfs-shipyard/idm-styleguide.git"
+    "url": "git+https://github.com/ipfs-shipyard/idm-web-uikit.git"
   },
   "scripts": {
     "storybook": "start-storybook -p 3010 -c .storybook",
