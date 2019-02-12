@@ -1,6 +1,6 @@
 # idm-web-uikit
 
-IDM's living styleguide.
+IDM's living web ui kit.
 
 ## Base technology
 
@@ -28,6 +28,8 @@ $ npm run build
 
 Builds the project.
 
+NOTE: at the current stage of the package, the build script has not yet been defined. It will be defined in the near future.
+
 ### lint
 
 ```sh
@@ -51,4 +53,4 @@ NOTE: this package still does not have a release script, as it is still in the i
 
 ## Contributing
 
-If you want to contribute for the project, we encourage you to read over the [discussify](https://github.com/ipfs-shipyard/pm-idm) repository README.
+If you want to contribute for the project, we encourage you to read over the [IDM](https://github.com/ipfs-shipyard/pm-idm) repository README.
