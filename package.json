@@ -1,7 +1,7 @@
 {
   "name": "@idm/web-uikit",
   "version": "0.0.0",
-  "description": "IDM's living wen UI kit",
+  "description": "IDM's living web UI kit",
   "main": "dist/index.js",
   "keywords": [
     "idm",
@@ -19,7 +19,7 @@
     "url": "git+https://github.com/ipfs-shipyard/idm-web-uikit.git"
   },
   "scripts": {
-    "storybook": "start-storybook -p 3010 -c .storybook",
+    "start": "start-storybook -p 3010 -c .storybook",
     "lint": "eslint --ignore-path .gitignore . && stylelint --ignore-path .gitignore \"**/*.css\"",
     "prerelease": "npm t && npm run lint && npm run build",
     "release": "standard-version",
