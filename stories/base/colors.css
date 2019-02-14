@@ -4,6 +4,14 @@
     background-color: var(--color-armadillo);
 }
 
+.mineral-green {
+    background-color: var(--color-mineral-green);
+}
+
+.tan {
+    background-color: var(--color-tan);
+}
+
 .dawn-pink {
     background-color: var(--color-dawn-pink);
 }
