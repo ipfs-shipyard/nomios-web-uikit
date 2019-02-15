@@ -1,5 +1,5 @@
 const path = require('path');
-const SvgStorePlugin = require('external-svg-sprite-loader/lib/SvgStorePlugin');
+const SvgStorePlugin = require('external-svg-sprite-loader');
 
 module.exports = (config) => {
     // Compile node_modules
@@ -41,7 +41,7 @@ module.exports = (config) => {
         test: /\.svg$/,
         use: [
             {
-                loader: 'external-svg-sprite-loader',
+                loader: SvgStorePlugin.loader,
                 options: {
                     name: 'static/media/svg-sprite.svg',
                 },
