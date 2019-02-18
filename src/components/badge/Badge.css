@@ -1,0 +1,63 @@
+@import "../../styles/colors.css";
+@import "../../styles/mixins/typography.css";
+
+.badge {
+    position: relative;
+    min-width: 6.5rem;
+    max-width: 15.44rem;
+    height: 4rem;
+    overflow: hidden;
+    padding: 0 1.5rem;
+    border: none;
+    border-width: 0.1rem;
+    border-style: solid;
+    border-color: color(var(--color-mineral-green) alpha(0.2));
+    outline: 0;
+    background-color: transparent;
+    border-radius: 2rem;
+    color: var(--color-armadillo);
+    text-overflow: ellipse;
+    @mixin typography-body-2 rem;
+    transition-property: background-color, color, border-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+
+    &:hover,
+    &:focus {
+        border-color: color(var(--color-mineral-green) alpha(0.5));
+    }
+
+    & div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        & span {
+            white-space: nowrap;
+        }
+    }
+
+    &:enabled {
+        cursor: pointer;
+
+        &.selected {
+            border-color: transparent;
+            background-color: var(--color-tan);
+            color: var(--color-white);
+
+            &:hover,
+            &:focus {
+                background-color: color(var(--color-tan) alpha(0.8));
+            }
+        }
+    }
+
+    &:disabled {
+        border-color: color(var(--color-mineral-green) alpha(0.2));
+        background-color: transparent;
+        color: var(--color-armadillo);
+
+        & span {
+            opacity: 0.5;
+        }
+    }
+}
