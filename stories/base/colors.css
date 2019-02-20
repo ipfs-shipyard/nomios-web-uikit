@@ -24,6 +24,22 @@
     background-color: var(--color-dune);
 }
 
+.monza {
+    background-color: var(--color-monza);
+}
+
+.web-orange {
+    background-color: var(--color-web-orange);
+}
+
+.celery {
+    background-color: var(--color-celery);
+}
+
+.green {
+    background-color: var(--color-green);
+}
+
 .black {
     background-color: var(--color-black);
 }
