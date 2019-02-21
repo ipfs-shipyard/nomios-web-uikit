@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import * as components from '../src';
 import { withReadme } from 'storybook-readme';
-import { withKnobs, boolean, object } from '@storybook/addon-knobs';
+import { withKnobs, object } from '@storybook/addon-knobs';
 import readme from '../src/components/icon/README.md';
 
 const icons = Object.entries(components).filter(([name]) => /.+Icon$/.test(name));
@@ -55,7 +55,6 @@ storiesOf('Icon', module)
 ))
 .add('Knobs playground ⚽', () => {
     const style = object('style', { fill: 'red', fillOpacity: 1, fontSize: '4.8rem' });
-    const interactive = boolean('interactive');
 
-    return <InfoIcon style={ style } interactive={ interactive } />;
+    return <InfoIcon style={ style } />;
 });

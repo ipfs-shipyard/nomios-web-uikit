@@ -25,12 +25,11 @@ InlineIcon.propTypes = {
 };
 
 const Icon = (props) => {
-    const { svg, interactive, className, ...rest } = props;
+    const { svg, className, ...rest } = props;
     const finalProps = {
-        tabIndex: interactive ? 0 : undefined,
         ...rest,
         svg,
-        className: classNames(styles.icon, interactive && styles.interactive, className),
+        className: classNames(styles.icon, className),
     };
 
     return typeof svg === 'string' ?
@@ -40,7 +39,6 @@ const Icon = (props) => {
 
 Icon.propTypes = {
     svg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-    interactive: PropTypes.bool,
     className: PropTypes.string,
 };
 
