@@ -99,4 +99,33 @@
             }
         }
     }
+
+    &.negative {
+        border-color: transparent;
+        background-color: var(--color-white);
+        color: var(--color-armadillo);
+
+        &:enabled:hover {
+            opacity: 0.6;
+
+            & span {
+                opacity: 1;
+            }
+        }
+
+        &:enabled:active,
+        &:enabled:focus:not(:hover) {
+            opacity: 1;
+            box-shadow: 0 0 0 0.3rem color(var(--color-white) alpha(0.3));
+        }
+
+        &:disabled,
+        &[disabled] {
+            background-color: color(var(--color-white) alpha(0.2));
+
+            & span {
+                opacity: 0.5;
+            }
+        }
+    }
 }

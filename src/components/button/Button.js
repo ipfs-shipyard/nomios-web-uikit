@@ -5,7 +5,7 @@ import styles from './Button.css';
 
 export default class Button extends Component {
     static propTypes = {
-        variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary']).isRequired,
+        variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'negative']).isRequired,
         disabled: PropTypes.bool,
         fullWidth: PropTypes.bool,
         children: PropTypes.node.isRequired,

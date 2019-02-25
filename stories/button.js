@@ -28,14 +28,19 @@ storiesOf('Button', module)
         <Button variant="tertiary" onClick={ action('clicked') }>Click me</Button>
     </div>
 ))
+.add('Negative', () => (
+    <div style={ wrapperStyle }>
+        <Button variant="negative" onClick={ action('clicked') }>Click me</Button>
+    </div>
+))
 .add('Knobs playground ⚽', () => {
-    const variant = select('variant', ['primary', 'secondary', 'tertiary'], 'primary');
+    const variant = select('variant', ['primary', 'secondary', 'tertiary', 'negative'], 'primary');
     const disabled = boolean('disabled');
     const fullWidth = boolean('fullWidth');
     const children = text('children', 'Click me');
 
     return (
-        <div style={ variant === 'tertiary' ? wrapperStyle : undefined }>
+        <div style={ variant === 'tertiary' || variant === 'negative' ? wrapperStyle : undefined }>
             <Button
                 variant={ variant }
                 disabled={ disabled }
