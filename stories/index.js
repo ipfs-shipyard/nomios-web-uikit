@@ -3,3 +3,4 @@ import './base/typography';
 import './button';
 import './icon';
 import './badge';
+import './feedback-message';

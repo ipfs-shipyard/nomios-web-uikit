@@ -1,0 +1,62 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+.feedbackMessage {
+    display: flex;
+    align-items: center;
+    color: color(var(--color-armadillo) alpha(0.6));
+    @mixin typography-body-2 rem;
+
+    & .icon {
+        fill: color(var(--color-armadillo) alpha(0.6));
+    }
+
+    &.small .icon {
+        width: 20px;
+        height: 20px;
+        align-self: flex-start;
+    }
+
+    &.large .icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    &.left {
+        & .icon {
+            margin-left: 0;
+        }
+
+        &.small .icon {
+            margin-right: 0.6rem;
+        }
+
+        &.large .icon {
+            margin-right: 1rem;
+        }
+    }
+
+    &.right {
+        flex-direction: row-reverse;
+
+        & .icon {
+            margin-right: 0;
+        }
+
+        &.small .icon {
+            margin-left: 0.6rem;
+        }
+
+        &.large .icon {
+            margin-left: 1rem;
+        }
+    }
+}
+
+.error {
+    color: var(--color-monza);
+
+    & .icon {
+        fill: var(--color-monza);
+    }
+}
