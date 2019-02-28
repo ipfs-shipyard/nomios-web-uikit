@@ -12,14 +12,15 @@
     }
 
     &.small .icon {
-        width: 20px;
-        height: 20px;
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-top: 0.4rem;
         align-self: flex-start;
     }
 
     &.large .icon {
-        width: 40px;
-        height: 40px;
+        width: 2.4rem;
+        height: 2.4rem;
     }
 
     &.left {
@@ -28,11 +29,11 @@
         }
 
         &.small .icon {
-            margin-right: 0.6rem;
+            margin-right: 1rem;
         }
 
         &.large .icon {
-            margin-right: 1rem;
+            margin-right: 2rem;
         }
     }
 
@@ -44,11 +45,11 @@
         }
 
         &.small .icon {
-            margin-left: 0.6rem;
+            margin-left: 1rem;
         }
 
         &.large .icon {
-            margin-left: 1rem;
+            margin-left: 2rem;
         }
     }
 }
