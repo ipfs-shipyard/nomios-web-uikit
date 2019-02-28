@@ -1,0 +1,58 @@
+@import "../../../styles/colors";
+
+.indicatorContainer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0.1rem;
+    display: flex;
+
+    & div {
+        position: relative;
+        overflow: hidden;
+        flex-grow: 1;
+        background-color: color(var(--color-armadillo) alpha(0.3));
+        transition: background-color 0.3s ease;
+
+        & .innerElement {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-101%);
+            transition-property: transform;
+            transition-timing-function: linear;
+
+            &.weak {
+                background-color: var(--color-monza);
+            }
+
+            &.fair {
+                background-color: var(--color-web-orange);
+            }
+
+            &.good {
+                background-color: var(--color-celery);
+            }
+
+            &.great {
+                background-color: var(--color-green);
+            }
+
+            &.colorTransition {
+                transition-property: background-color;
+                transition-delay: 0s;
+            }
+        }
+
+        &.filled .innerElement {
+            transform: translateX(0);
+        }
+    }
+
+    & div:not(:last-child) {
+        margin-right: 0.4rem;
+    }
+}
