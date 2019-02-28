@@ -1,6 +1,6 @@
 # idm-web-uikit
 
-IDM's living web ui kit.
+IDM's living Web UI kit.
 
 ## Base technology
 
@@ -44,11 +44,10 @@ Checks if the project has any linting errors.
 $ npm run release
 ```
 
-Releases the package. Runs tests, lints and builds the project beforehand.
+Releases the package. Runs tests, lints and builds the project beforehand. If successful, you may publish the release to npm by running `$ npm publish`.
 
 This command uses [`standard-version`](https://github.com/conventional-changelog/standard-version) underneath. The version is automatically inferred from the [conventional commits](https://conventionalcommits.org/).
 
-If successful, you may publish the release to npm by running `$ npm publish`.
 
 ## Using a linked version of idm-web-uikit
 
