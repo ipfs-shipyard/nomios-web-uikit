@@ -48,6 +48,8 @@ Releases the package. Runs tests, lints and builds the project beforehand.
 
 This command uses [`standard-version`](https://github.com/conventional-changelog/standard-version) underneath. The version is automatically inferred from the [conventional commits](https://conventionalcommits.org/).
 
+If successful, you may publish the release to npm by running `$ npm publish`.
+
 ## Using a linked version of idm-web-uikit
 
 In some cases, you may want to make changes to IDM's web-uikit at the same time as you work on your project which uses the web-uikit. In order to use a local version of [idm-web-uikit](https://github.com/ipfs-shipyard/idm-web-uikit) and have any web-uikit modifications be reflected live on your project, some pages have to be made in your main project.
