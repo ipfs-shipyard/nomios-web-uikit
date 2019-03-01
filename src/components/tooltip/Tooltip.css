@@ -1,0 +1,141 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+.tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+
+    & .container {
+        position: relative;
+        transform: scale(0.9);
+        opacity: 0;
+        filter: drop-shadow(0 0.6rem 0.8rem color(var(--color-armadillo) alpha(0.22)));
+        transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    &.enterActive,
+    &.enterDone {
+        & .container {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    &.exit {
+        pointer-events: none;
+
+        & .container {
+            transform: scale(1);
+            transition: opacity 0.15s ease;
+        }
+    }
+
+    & .arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        z-index: 1;
+        border-style: solid;
+    }
+
+    &[data-placement="top"] {
+        & {
+            margin-bottom: 1.8rem;
+        }
+
+        & .arrow {
+            bottom: -1rem;
+            border-width: 1rem 0.9rem 0 0.9rem;
+
+            &.light {
+                border-color: var(--color-white) transparent transparent transparent;
+            }
+
+            &.dark {
+                border-color: color(var(--color-armadillo) alpha(0.8)) transparent transparent transparent;
+            }
+        }
+    }
+
+    &[data-placement="right"] {
+        & {
+            margin-left: 1.8rem;
+        }
+
+        & .arrow {
+            left: -1rem;
+            border-width: 0.9rem 1rem 0.9rem 0;
+
+            &.light {
+                border-color: transparent var(--color-white) transparent transparent;
+            }
+
+            &.dark {
+                border-color: transparent color(var(--color-armadillo) alpha(0.8)) transparent transparent;
+            }
+        }
+    }
+
+    &[data-placement="bottom"] {
+        & {
+            margin-top: 1.8rem;
+        }
+
+        & .arrow {
+            top: -1rem;
+            border-width: 0 0.9rem 1rem 0.9rem;
+
+            &.light {
+                border-color: transparent transparent var(--color-white) transparent;
+            }
+
+            &.dark {
+                border-color: transparent transparent color(var(--color-armadillo) alpha(0.8)) transparent;
+            }
+        }
+    }
+
+    &[data-placement="left"] {
+        & {
+            margin-right: 1.8rem;
+        }
+
+        & .arrow {
+            right: -1rem;
+            border-width: 0.9rem 0 0.9rem 1rem;
+
+            &.light {
+                border-color: transparent transparent transparent var(--color-white);
+            }
+
+            &.dark {
+                border-color: transparent transparent transparent color(var(--color-armadillo) alpha(0.8));
+            }
+        }
+    }
+}
+
+.tooltipBox {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+
+    &.light {
+        background-color: var(--color-white);
+        color: var(--color-armadillo);
+    }
+
+    &.dark {
+        background-color: color(var(--color-armadillo) alpha(0.8));
+        color: var(--color-white);
+    }
+}
+
+.tooltipContent {
+    position: relative;
+    padding: 2rem 2.5rem;
+    backface-visibility: hidden; /* Prevent text from flickering in Webkit */
+    @mixin typography-body-2 rem;
+}

@@ -81,6 +81,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "react-popper": "^1.0.0",
+    "react-transition-group": "^2.5.3"
   }
 }
