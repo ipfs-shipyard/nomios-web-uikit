@@ -34,11 +34,11 @@
             }
 
             &.good {
-                background-color: var(--color-celery);
+                background-color: var(--color-ocean-green);
             }
 
             &.great {
-                background-color: var(--color-green);
+                background-color: var(--color-cornflower-blue);
             }
 
             &.colorTransition {
