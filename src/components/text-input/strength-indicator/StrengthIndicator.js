@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './StrengthIndicator.css';
 
 const MAX_ANIMATION_DURATION = 0.4; // In seconds
-const LEVELS_ARRAY = ['weak', 'fair', 'good', 'great']; // Poor weak fair good
+const LEVELS_ARRAY = ['poor', 'weak', 'fair', 'strong'];
 
 export default class StrengthIndicator extends PureComponent {
     static propTypes = {
