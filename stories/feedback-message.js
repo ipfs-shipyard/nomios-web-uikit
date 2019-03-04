@@ -44,6 +44,17 @@ storiesOf('Feedback Message', module)
         </FeedbackMessage>
     </div>
 ))
+.add('With tooltip', () => (
+    <div style={ wrapperStyle }>
+        <FeedbackMessage
+            type="info"
+            iconPosition="left"
+            variant="small"
+            tooltipChildren="My cool tooltip content">
+        Try hover the icon
+        </FeedbackMessage>
+    </div>
+))
 .add('Knobs playground ⚽', () => {
     const children = text('children', 'Generic feedback message');
     const variant = select('variant', ['small', 'large'], 'small');

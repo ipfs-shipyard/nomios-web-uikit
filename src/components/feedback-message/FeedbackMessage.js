@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './FeedbackMessage.css';
 import { WarningIcon, InfoIcon } from '../icon';
+import { Tooltip, TooltipTrigger } from '../tooltip';
+import styles from './FeedbackMessage.css';
 
-const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, className }) => {
-    const style = textColor ? { color: textColor } : {};
+const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, tooltipChildren, className }) => {
     const finalClassNames = classNames(
         styles.feedbackMessage,
         styles[type],
@@ -14,20 +14,28 @@ const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, cla
         className
     );
 
+    const renderTooltip = () => {
+        if (!type) {
+            return;
+        }
+
+        return tooltipChildren ?
+            <TooltipTrigger tooltip={ <Tooltip placement="bottom" style={ { maxWidth: 286 } }>{ tooltipChildren }</Tooltip> }>
+                { <div className={ styles.iconWrapper }>{ renderIcon() }</div> }
+            </TooltipTrigger> :
+            renderIcon();
+    };
+
+    const renderIcon = () => type === 'error' ?
+        <WarningIcon className={ styles.icon } /> :
+        <InfoIcon className={ styles.icon } />;
+
     return (
-        <div style={ style } className={ finalClassNames }>
-            { renderIcon(type) }
+        <div style={ { color: textColor } } className={ finalClassNames }>
+            { renderTooltip() }
             { children }
         </div>
     );
-};
-
-const renderIcon = (type) => {
-    if (!type) {
-        return;
-    }
-
-    return type === 'error' ? <WarningIcon className={ styles.icon } /> : <InfoIcon className={ styles.icon } />;
 };
 
 FeedbackMessage.propTypes = {
@@ -36,6 +44,7 @@ FeedbackMessage.propTypes = {
     type: PropTypes.oneOf(['error', 'info']),
     textColor: PropTypes.string,
     iconPosition: PropTypes.oneOf(['left', 'right']),
+    tooltipChildren: PropTypes.node,
     className: PropTypes.string,
 };
 

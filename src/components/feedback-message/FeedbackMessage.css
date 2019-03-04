@@ -7,14 +7,37 @@
     color: color(var(--color-armadillo) alpha(0.6));
     @mixin typography-body-2 rem;
 
+    & .iconWrapper {
+        display: flex;
+
+        &:hover {
+            cursor: pointer;
+
+            & .icon {
+                fill-opacity: 0.6;
+            }
+        }
+    }
+
     & .icon {
-        fill: color(var(--color-armadillo) alpha(0.6));
+        transition: fill-opacity 0.3s ease;
+        fill: var(--color-armadillo);
+        fill-opacity: 0.3;
+    }
+
+    &.small {
+        & > .iconWrapper {
+            margin-top: 0.3rem;
+        }
+
+        & > .icon {
+            margin-top: 0.5rem;
+        }
     }
 
     &.small .icon {
         width: 1.2rem;
         height: 1.2rem;
-        margin-top: 0.4rem;
         align-self: flex-start;
     }
 
@@ -24,32 +47,46 @@
     }
 
     &.left {
-        & .icon {
+        & > .iconWrapper,
+        & > .icon {
             margin-left: 0;
         }
 
-        &.small .icon {
-            margin-right: 1rem;
+        &.small {
+            & > .iconWrapper,
+            & > .icon {
+                margin-right: 1rem;
+            }
         }
 
-        &.large .icon {
-            margin-right: 2rem;
+        &.large {
+            & > .iconWrapper,
+            & > .icon {
+                margin-right: 2rem;
+            }
         }
     }
 
     &.right {
         flex-direction: row-reverse;
 
-        & .icon {
+        & > .iconWrapper,
+        & > .icon {
             margin-right: 0;
         }
 
-        &.small .icon {
-            margin-left: 1rem;
+        &.small {
+            & > .iconWrapper,
+            & > .icon {
+                margin-left: 1rem;
+            }
         }
 
-        &.large .icon {
-            margin-left: 2rem;
+        &.large {
+            & > .iconWrapper,
+            & > .icon {
+                margin-left: 2rem;
+            }
         }
     }
 }
@@ -59,5 +96,6 @@
 
     & .icon {
         fill: var(--color-monza);
+        fill-opacity: 1;
     }
 }
