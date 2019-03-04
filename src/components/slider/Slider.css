@@ -6,12 +6,6 @@
 }
 
 .slider-container {
-
-    width: 47.4rem;
-    margin: auto auto;
-
-    /* Styling the component */
-
     & :global(.rc-slider-handle) {
         width: 2.5rem;
         height: 2.5rem;
@@ -104,8 +98,6 @@
     & :global(.handle-hover) {
         background-color: var(--color-lighter-tan);
     }
-
-    /*  Animation related stuff */
 
     & .rc-slider-main :global(.rc-slider-handle) {
         transition: left 0.4s cubic-bezier(0.895, 0.03, 0.685, 0.22), background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
