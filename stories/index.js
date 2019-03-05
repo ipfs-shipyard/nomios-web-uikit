@@ -7,3 +7,4 @@ import './badge';
 import './feedback-message';
 import './slider';
 import './tooltip';
+import './modal';
