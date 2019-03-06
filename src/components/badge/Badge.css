@@ -4,7 +4,6 @@
 .badge {
     position: relative;
     min-width: 6.5rem;
-    max-width: 15.44rem;
     height: 4rem;
     overflow: hidden;
     padding: 0 1.5rem;
@@ -22,6 +21,10 @@
     transition-property: background-color, color, border-color, box-shadow;
     transition-duration: 0.2s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+
+    &.hide-overflow {
+        max-width: 15.44rem;
+    }
 
     &:hover,
     &:focus {

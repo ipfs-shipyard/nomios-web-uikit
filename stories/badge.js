@@ -57,13 +57,15 @@ storiesOf('Badge', module)
 .add('Knobs Playground 🏀', () => {
     const selected = boolean('selected');
     const disabled = boolean('disabled');
+    const hideOverflow = boolean('hideOverflow', true);
     const children = text('children', 'badge');
 
     return (
         <Badge
             onClick={ action('clicked') }
             selected={ selected }
-            disabled={ disabled }>
+            disabled={ disabled }
+            hideOverflow={ hideOverflow }>
             { children }
         </Badge>
     );
