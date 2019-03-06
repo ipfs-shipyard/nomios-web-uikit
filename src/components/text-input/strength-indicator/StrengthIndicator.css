@@ -25,19 +25,19 @@
             transition-property: transform;
             transition-timing-function: linear;
 
-            &.weak {
+            &.poor {
                 background-color: var(--color-monza);
             }
 
-            &.fair {
+            &.weak {
                 background-color: var(--color-web-orange);
             }
 
-            &.good {
+            &.fair {
                 background-color: var(--color-ocean-green);
             }
 
-            &.great {
+            &.strong {
                 background-color: var(--color-cornflower-blue);
             }
 
