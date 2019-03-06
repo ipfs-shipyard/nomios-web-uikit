@@ -11,6 +11,6 @@ storiesOf('Idle Picker', module)
 .addDecorator(withKnobs)
 .add('Idle Picker', () => (
     <div style={ { width: '47.4rem', margin: 'auto auto' } }>
-        <IdlePicker defaultValue={ 3 } handleSliderChange={ action('clicked!') } />
+        <IdlePicker defaultValue={ 3 } handlePickerChange={ action('clicked!') } />
     </div>
 ));

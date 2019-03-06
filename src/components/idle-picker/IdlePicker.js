@@ -167,12 +167,15 @@ export default class IdlePicker extends Component {
         this.previousHandleWasBeforeChange = false;
     };
 
-    afterChange = () => {
+    afterChange = (value) => {
         this.previousHandleWasBeforeChange = false;
-        this.updateValue(this.state.displayValue, null, true, true);
+        const roundedValue = Math.round(value);
+
+        this.updateValue(roundedValue, roundedValue, true, true);
+        this.props.handlePickerChange && this.props.handlePickerChange(roundedValue);
     };
 
-    updateValue = (pickerValue, displayValue, forcePickerValue, isAfter) => {
+    updateValue = (pickerValue, displayValue, forcePickerValue) => {
         const newState = {};
 
         if (pickerValue != null) {
@@ -186,7 +189,5 @@ export default class IdlePicker extends Component {
         }
 
         this.setState(newState);
-
-        isAfter && this.props.handlePickerChange && this.props.handlePickerChange(pickerValue);
     };
 }
