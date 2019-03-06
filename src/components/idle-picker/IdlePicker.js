@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Display from './display/Display';
 
-import styles from './Slider.css';
+import styles from './IdlePicker.css';
 import 'rc-slider/assets/index.css';
 
 const marks = {
@@ -20,10 +20,10 @@ const marks = {
     10: '10',
 };
 
-export default class Slider extends Component {
+export default class IdlePicker extends Component {
     static propTypes = {
         defaultValue: PropTypes.number,
-        handleSliderChange: PropTypes.func,
+        handlePickerChange: PropTypes.func,
     };
 
     static defaultProps = {
@@ -41,8 +41,8 @@ export default class Slider extends Component {
 
         this.state = {
             displayValue: defaultValue,
-            sliderValue: defaultValue,
-            forceSliderValue: true,
+            pickerValue: defaultValue,
+            forcePickerValue: true,
         };
 
         this.componentRef = React.createRef();
@@ -50,9 +50,9 @@ export default class Slider extends Component {
     }
 
     componentDidMount() {
-        const slider = this.componentRef.current;
-        const handle = slider.querySelector('.rc-slider-handle');
-        const track = slider.querySelector('.rc-slider-track');
+        const picker = this.componentRef.current;
+        const handle = picker.querySelector('.rc-slider-handle');
+        const track = picker.querySelector('.rc-slider-track');
 
         this.handleClick = false;
         this.mouseUpOnElement = false;
@@ -87,20 +87,20 @@ export default class Slider extends Component {
         };
 
         const keyboardMove = (event) => {
-            const { sliderValue } = this.state;
+            const { pickerValue } = this.state;
 
             switch (event.key) {
             case 'LEFT':
             case 'ArrowLeft':
             case 'DOWN':
             case 'ArrowDown':
-                sliderValue > 1 && this.updateValue(sliderValue - 1, sliderValue - 1, true, true);
+                pickerValue > 1 && this.updateValue(pickerValue - 1, pickerValue - 1, true, true);
                 break;
             case 'RIGHT':
             case 'ArrowRight':
             case 'UP':
             case 'ArrowUp':
-                sliderValue < 10 && this.updateValue(sliderValue + 1, sliderValue + 1, true, true);
+                pickerValue < 10 && this.updateValue(pickerValue + 1, pickerValue + 1, true, true);
                 break;
             default:
             }
@@ -119,9 +119,9 @@ export default class Slider extends Component {
     }
 
     render() {
-        const { sliderValue, displayValue, forceSliderValue } = this.state;
+        const { pickerValue, displayValue, forcePickerValue } = this.state;
 
-        const sliderProps = {
+        const pickerProps = {
             min: 1,
             max: 10,
             step: 0.01,
@@ -131,20 +131,20 @@ export default class Slider extends Component {
             onBeforeChange: this.beforeChange,
         };
         const finalClassName = classNames(
-            styles['slider-container']
+            styles['picker-container']
         );
 
-        if (forceSliderValue === true) {
-            sliderProps.value = sliderValue;
-            sliderProps.className = classNames(styles['rc-slider-main'], styles['slider-component']);
+        if (forcePickerValue === true) {
+            pickerProps.value = pickerValue;
+            pickerProps.className = classNames(styles['rc-slider-main'], styles['slider-component']);
         } else {
-            sliderProps.className = classNames(styles['is-focused'], styles['slider-component']);
+            pickerProps.className = classNames(styles['is-focused'], styles['slider-component']);
         }
 
         return (
             <div className={ finalClassName } ref={ this.componentRef }>
                 <Display currentValue={ displayValue } />
-                <RcSlider { ...sliderProps } />
+                <RcSlider { ...pickerProps } />
             </div>
         );
     }
@@ -172,21 +172,21 @@ export default class Slider extends Component {
         this.updateValue(this.state.displayValue, null, true, true);
     };
 
-    updateValue = (sliderValue, displayValue, forceSliderValue, isAfter) => {
+    updateValue = (pickerValue, displayValue, forcePickerValue, isAfter) => {
         const newState = {};
 
-        if (sliderValue != null) {
-            newState.sliderValue = sliderValue;
+        if (pickerValue != null) {
+            newState.pickerValue = pickerValue;
         }
         if (displayValue != null) {
             newState.displayValue = displayValue;
         }
-        if (forceSliderValue != null) {
-            newState.forceSliderValue = forceSliderValue;
+        if (forcePickerValue != null) {
+            newState.forcePickerValue = forcePickerValue;
         }
 
         this.setState(newState);
 
-        isAfter && this.props.handleSliderChange && this.props.handleSliderChange(sliderValue);
+        isAfter && this.props.handlePickerChange && this.props.handlePickerChange(pickerValue);
     };
 }

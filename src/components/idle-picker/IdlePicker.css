@@ -5,7 +5,7 @@
     --color-lighter-tan: #ddc4a2;
 }
 
-.slider-container {
+.picker-container {
     & :global(.rc-slider-handle) {
         width: 2.5rem;
         height: 2.5rem;
