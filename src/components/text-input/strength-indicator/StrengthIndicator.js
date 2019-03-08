@@ -5,15 +5,11 @@ import classNames from 'classnames';
 import styles from './StrengthIndicator.css';
 
 const MAX_ANIMATION_DURATION = 0.4; // In seconds
-const LEVELS_ARRAY = ['poor', 'weak', 'fair', 'strong'];
 
 export default class StrengthIndicator extends PureComponent {
     static propTypes = {
-        range: PropTypes.shape({
-            min: PropTypes.number,
-            max: PropTypes.number,
-        }).isRequired,
         strength: PropTypes.number.isRequired,
+        levelName: PropTypes.string,
         numberOfLevels: PropTypes.number,
         onColorChange: PropTypes.func,
         className: PropTypes.string,
@@ -28,7 +24,7 @@ export default class StrengthIndicator extends PureComponent {
 
         this.levelArray = new Array(props.numberOfLevels).fill(0);
         this.lastFilledElement = 0;
-        this.currentLevel = undefined;
+        this.currentLevelName = undefined;
         this.innerElementRef = React.createRef();
     }
 
@@ -53,13 +49,14 @@ export default class StrengthIndicator extends PureComponent {
 
     renderLevelElements = () => {
         this.normalizedStrength = this.normalizeStrength(this.props.numberOfLevels);
+        this.hasColorChanged = this.props.levelName !== this.currentLevelName;
+        this.currentLevelName = this.props.levelName;
+
         const directionUp = this.lastFilledElement < this.normalizedStrength;
         const animationDuration = this.calculateAnimationDuration();
-
-        this.currentLevel = this.computeCurrentLevel();
         const innerElementClasses = classNames(
             styles.innerElement,
-            styles[this.currentLevel],
+            styles[this.currentLevelName],
         );
 
         return this.levelArray
@@ -80,9 +77,9 @@ export default class StrengthIndicator extends PureComponent {
     };
 
     normalizeStrength = (numberOfLevels) => {
-        const { range, strength } = this.props;
+        const { strength } = this.props;
 
-        return Math.round(numberOfLevels * (strength - range.min) / (range.max - range.min));
+        return Math.round(numberOfLevels * strength);
     };
 
     calculateMultiplier = (index, directionUp) => {
@@ -101,15 +98,6 @@ export default class StrengthIndicator extends PureComponent {
         const numberOfLevelsToAnimate = this.normalizedStrength - this.lastFilledElement;
 
         return numberOfLevelsToAnimate !== 0 ? Math.abs(MAX_ANIMATION_DURATION / numberOfLevelsToAnimate) : 0;
-    };
-
-    computeCurrentLevel = () => {
-        const normalizedStrengthLevel = this.normalizeStrength(LEVELS_ARRAY.length);
-        const computedLevel = normalizedStrengthLevel > 0 ? LEVELS_ARRAY[normalizedStrengthLevel - 1] : LEVELS_ARRAY[0];
-
-        this.hasColorChanged = computedLevel !== this.currentLevel;
-
-        return computedLevel;
     };
 
     handlePossibleColorChange = () => {

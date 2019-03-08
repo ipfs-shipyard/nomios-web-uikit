@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, boolean, select, text, object } from '@storybook/addon-knobs';
+import { withKnobs, select, text, number } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import { TextInput } from '../src';
 import readme from '../src/components/text-input/README.md';
@@ -32,11 +32,8 @@ storiesOf('Text input', module)
     const helperText = text('helper text', '');
     const feedbackMessage = text('feedback message', '');
     const feedbackType = select('feedback type', ['', 'error', 'info'], '');
-    const successLine = boolean('with success line');
-    const useStrengthIndicator = boolean('use strength indicator');
-    const strengthIndicator = useStrengthIndicator ?
-        object('strength indicator', { range: { min: 0, max: 100 }, strength: 0 }) :
-        null;
+    const lineType = select('lineType', ['normal', 'dashed'], 'normal');
+    const lineStrength = number('line strength', undefined);
 
     return (
         <TextInput
@@ -44,8 +41,8 @@ storiesOf('Text input', module)
             placeholder={ placeholder }
             type={ type }
             helperText={ helperText }
-            successLine={ successLine }
-            feedback={ { message: feedbackMessage, type: feedbackType } }
-            strengthIndicator={ strengthIndicator } />
+            lineType={ lineType }
+            lineStrength={ lineStrength }
+            feedback={ { message: feedbackMessage, type: feedbackType } } />
     );
 });

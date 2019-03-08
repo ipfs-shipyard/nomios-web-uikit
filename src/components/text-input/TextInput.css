@@ -34,7 +34,19 @@
             border-color: color(var(--color-armadillo) alpha(0.6));
         }
 
-        &.success {
+        &.poor {
+            border-color: var(--color-monza);
+        }
+
+        &.weak {
+            border-color: var(--color-web-orange);
+        }
+
+        &.fair {
+            border-color: var(--color-ocean-green);
+        }
+
+        &.strong {
             border-color: var(--color-cornflower-blue);
         }
     }

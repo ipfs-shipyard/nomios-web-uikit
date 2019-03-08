@@ -6,28 +6,27 @@ import StrengthIndicator from './strength-indicator';
 import { EyeIcon, EyeOffIcon } from '../icon';
 import styles from './TextInput.css';
 
+const LEVELS_NAME = ['poor', 'weak', 'fair', 'strong'];
+
 export default class TextInput extends Component {
     static propTypes = {
         label: PropTypes.string,
         placeholder: PropTypes.string,
         type: PropTypes.oneOf(['text', 'password']),
         helperText: PropTypes.string,
-        successLine: PropTypes.bool,
+        lineType: PropTypes.oneOf(['normal', 'dashed']),
+        lineStrength: PropTypes.number,
         feedback: PropTypes.shape({
             message: PropTypes.string.isRequired,
             type: PropTypes.string,
             className: PropTypes.string,
-        }),
-        strengthIndicator: PropTypes.shape({
-            range: PropTypes.object,
-            strength: PropTypes.number,
-            numberOfLevels: PropTypes.number,
         }),
         onChange: PropTypes.func,
         className: PropTypes.string,
     };
 
     static defaultProps = {
+        lineType: 'normal',
         type: 'text',
     };
 
@@ -50,15 +49,16 @@ export default class TextInput extends Component {
     }
 
     renderInput = () => {
-        const { placeholder, type, successLine, strengthIndicator } = this.props;
+        const { placeholder, type, lineType, lineStrength } = this.props;
+        const currentLevel = typeof lineStrength !== 'undefined' && this.computeLevel();
 
         // Return input with no strength indication
-        if (!strengthIndicator) {
+        if (lineType === 'normal') {
             return (
                 <input type={ type }
                     placeholder={ placeholder }
                     onChange={ this.handleChange }
-                    className={ successLine && styles.success } />
+                    className={ styles[currentLevel] } />
             );
         }
 
@@ -74,8 +74,8 @@ export default class TextInput extends Component {
                 <input type={ showPassword ? 'text' : 'password' } placeholder={ placeholder } onChange={ this.handleChange } />
                 <StrengthIndicator
                     className={ styles.strengthIndicator }
-                    range={ strengthIndicator.range }
-                    strength={ strengthIndicator.strength }
+                    levelName={ currentLevel }
+                    strength={ lineStrength }
                     onColorChange={ this.handleStrengthColorChange } />
                 <EyeIcon
                     className={ classNames(styles.eyeIcon, showPassword && styles.hidden) }
@@ -117,6 +117,13 @@ export default class TextInput extends Component {
                 { feedback.message }
             </FeedbackMessage>
         );
+    };
+
+    computeLevel = () => {
+        const { lineStrength } = this.props;
+        const normalizedStrengthValue = Math.round(LEVELS_NAME.length * lineStrength);
+
+        return normalizedStrengthValue > 0 ? LEVELS_NAME[normalizedStrengthValue - 1] : LEVELS_NAME[0];
     };
 
     handleToggleShowPassword = () => this.setState(({ showPassword }) => ({
