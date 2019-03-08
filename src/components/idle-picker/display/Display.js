@@ -38,10 +38,4 @@ export default class Display extends Component {
             </div>
         );
     }
-
-    handleTransitionEnd = () => {
-        const { currentValue } = this.props;
-
-        this.setState({ latestValue: currentValue });
-    };
 }

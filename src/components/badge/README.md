@@ -13,6 +13,7 @@ import { Badge } from '@idm/web-uikit';
 ```
 
 ## Props
+
 | name                | type     | default    | description                                                                    |
 |---------------------|----------|------------|--------------------------------------------------------------------------------|
 | selected            | boolean  | false      | Sets the badge as selected                                                     |

@@ -30,97 +30,45 @@ export default class IdlePicker extends Component {
         defaultValue: 3,
     };
 
+    componentRef = React.createRef();
+    previousHandleWasBeforeChange = false;
+    handleClick = false;
+    mouseUpOnElement = false;
+    picker = undefined;
+    handle = undefined;
+    track = undefined;
+
     constructor(props) {
         super(props);
 
-        let { defaultValue } = this.props;
-
-        if (defaultValue > 10 || defaultValue < 1) {
-            defaultValue = 3;
-        }
+        const value = Math.max(Math.min(this.props.defaultValue, 10), 1);
 
         this.state = {
-            displayValue: defaultValue,
-            pickerValue: defaultValue,
+            displayValue: value,
+            pickerValue: value,
             forcePickerValue: true,
         };
-
-        this.componentRef = React.createRef();
-        this.previousHandleWasBeforeChange = false;
     }
 
     componentDidMount() {
-        const picker = this.componentRef.current;
-        const handle = picker.querySelector('.rc-slider-handle');
-        const track = picker.querySelector('.rc-slider-track');
+        this.picker = this.componentRef.current;
+        this.handle = this.picker.querySelector('.rc-slider-handle');
+        this.track = this.picker.querySelector('.rc-slider-track');
 
-        this.handleClick = false;
-        this.mouseUpOnElement = false;
+        this.handle.addEventListener('mouseenter', this.handleHandleMouseEnter);
+        this.handle.addEventListener('mouseleave', this.handleHandleMouseLeave);
+        this.handle.addEventListener('focusin', this.handleHandleFocus);
+        this.handle.addEventListener('blur', this.handleHandleBlur);
 
-        const appendClass = () => {
-            if (!track.classList.contains('handle-hover')) {
-                track.classList.add('handle-hover');
-                this.setState(this.state);
-            }
-        };
+        this.handle.addEventListener('keydown', this.handleHandleKeyDown);
 
-        const removeClass = () => {
-            if (track.classList.contains('handle-hover') && !this.handleClick) {
-                track.classList.remove('handle-hover');
-                handle.blur();
-                this.setState(this.state);
-            }
-        };
-
-        const setClick = () => {
-            this.handleClick = true;
-        };
-
-        const unsetClick = (onElement) => {
-            if (onElement) {
-                this.mouseUpOnElement = true;
-            } else {
-                this.handleClick = false;
-                !this.mouseUpOnElement && removeClass();
-                this.mouseUpOnElement = false;
-            }
-        };
-
-        const keyboardMove = (event) => {
-            const { pickerValue } = this.state;
-
-            switch (event.key) {
-            case 'LEFT':
-            case 'ArrowLeft':
-            case 'DOWN':
-            case 'ArrowDown':
-                pickerValue > 1 && this.updateValue(pickerValue - 1, pickerValue - 1, true, true);
-                break;
-            case 'RIGHT':
-            case 'ArrowRight':
-            case 'UP':
-            case 'ArrowUp':
-                pickerValue < 10 && this.updateValue(pickerValue + 1, pickerValue + 1, true, true);
-                break;
-            default:
-            }
-        };
-
-        handle.addEventListener('mouseenter', appendClass);
-        handle.addEventListener('mouseleave', removeClass);
-        handle.addEventListener('focusin', appendClass);
-        handle.addEventListener('blur', removeClass);
-
-        handle.addEventListener('keydown', keyboardMove);
-
-        handle.addEventListener('mousedown', setClick);
-        handle.addEventListener('mouseup', () => unsetClick(true));
-        window.addEventListener('mouseup', () => unsetClick(false));
+        this.handle.addEventListener('mousedown', this.handleHandleMouseDown);
+        this.handle.addEventListener('mouseup', this.handleHandleMouseUp);
+        window.addEventListener('mouseup', this.handleDocumentMouseUp);
     }
 
     render() {
         const { pickerValue, displayValue, forcePickerValue } = this.state;
-
         const pickerProps = {
             min: 1,
             max: 10,
@@ -151,7 +99,7 @@ export default class IdlePicker extends Component {
 
     beforeChange = () => {
         this.previousHandleWasBeforeChange = true;
-        this.updateValue(null, null, false);
+        this.setState({ forcePickerValue: false });
     };
 
     update = (value) => {
@@ -159,9 +107,9 @@ export default class IdlePicker extends Component {
 
         if (roundValue !== this.state.displayValue) {
             if (this.previousHandleWasBeforeChange) {
-                this.updateValue(roundValue, roundValue, true);
+                this.setState({ pickerValue: roundValue, displayValue: roundValue, forcePickerValue: true });
             } else {
-                this.updateValue(null, roundValue, false);
+                this.setState({ displayValue: roundValue });
             }
         }
         this.previousHandleWasBeforeChange = false;
@@ -171,23 +119,82 @@ export default class IdlePicker extends Component {
         this.previousHandleWasBeforeChange = false;
         const roundedValue = Math.round(value);
 
-        this.updateValue(roundedValue, roundedValue, true, true);
+        this.setState({ pickerValue: roundedValue, displayValue: roundedValue, forcePickerValue: true });
         this.props.handlePickerChange && this.props.handlePickerChange(roundedValue);
     };
 
-    updateValue = (pickerValue, displayValue, forcePickerValue) => {
-        const newState = {};
+    appendClassToTrack = () => {
+        if (!this.track.classList.contains('handle-hover')) {
+            this.track.classList.add('handle-hover');
+            this.setState(this.state);
+        }
+    };
 
-        if (pickerValue != null) {
-            newState.pickerValue = pickerValue;
-        }
-        if (displayValue != null) {
-            newState.displayValue = displayValue;
-        }
-        if (forcePickerValue != null) {
-            newState.forcePickerValue = forcePickerValue;
-        }
+    removeClassFromTrack = () => {
+        if (this.track.classList.contains('handle-hover') && !this.handleClick) {
+            this.track.classList.remove('handle-hover');
 
-        this.setState(newState);
+            this.handle.blur();
+        }
+    };
+
+    unsetHandleClick = (onElement) => {
+        if (onElement) {
+            this.mouseUpOnElement = true;
+        } else {
+            this.handleClick = false;
+            !this.mouseUpOnElement && this.removeClassFromTrack();
+            this.mouseUpOnElement = false;
+        }
+    };
+
+    handleHandleMouseEnter = () => {
+        this.appendClassToTrack();
+    };
+
+    handleHandleMouseLeave = () => {
+        this.removeClassFromTrack();
+    };
+
+    handleHandleFocus = () => {
+        this.appendClassToTrack();
+    };
+
+    handleHandleBlur = () => {
+        this.removeClassFromTrack();
+    };
+
+    handleHandleKeyDown = (event) => {
+        const { pickerValue } = this.state;
+
+        switch (event.key) {
+        case 'LEFT':
+        case 'ArrowLeft':
+        case 'DOWN':
+        case 'ArrowDown':
+            pickerValue > 1 && this.setState({ pickerValue: pickerValue - 1, displayValue: pickerValue - 1, forcePickerValue: true });
+            this.props.handlePickerChange && this.props.handlePickerChange(pickerValue - 1);
+            break;
+        case 'RIGHT':
+        case 'ArrowRight':
+        case 'UP':
+        case 'ArrowUp':
+            pickerValue < 10 && this.setState({ pickerValue: pickerValue + 1, displayValue: pickerValue + 1, forcePickerValue: true });
+            this.props.handlePickerChange && this.props.handlePickerChange(pickerValue + 1);
+            break;
+        default:
+        }
+    };
+
+    handleHandleMouseDown = () => {
+        this.handleClick = true;
+    };
+
+    handleHandleMouseUp = () => {
+        this.unsetHandleClick(true);
+    };
+
+    handleDocumentMouseUp = () => {
+        this.unsetHandleClick(false);
     };
 }
