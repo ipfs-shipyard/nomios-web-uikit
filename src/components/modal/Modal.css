@@ -1,0 +1,79 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+/* stylelint-disable max-line-length */
+
+:root {
+    --spacing: 4rem;
+    --color-darker-dawn-pink: #c8c0bb;
+    --background-pattern:
+        radial-gradient(circle at 100% 150%, color(var(--color-dawn-pink) alpha(0.8)) 24%, color(var(--color-darker-dawn-pink) alpha(0.8)) 25%, color(var(--color-darker-dawn-pink) alpha(0.8)) 28%, color(var(--color-dawn-pink) alpha(0.8)) 29%, color(var(--color-dawn-pink) alpha(0.8)) 36%, color(var(--color-darker-dawn-pink) alpha(0.8)) 36%, color(var(--color-darker-dawn-pink) alpha(0.8)) 40%, transparent 40%, transparent),
+        radial-gradient(circle at 0    150%, color(var(--color-dawn-pink) alpha(0.8)) 24%, color(var(--color-darker-dawn-pink) alpha(0.8)) 25%, color(var(--color-darker-dawn-pink) alpha(0.8)) 28%, color(var(--color-dawn-pink) alpha(0.8)) 29%, color(var(--color-dawn-pink) alpha(0.8)) 36%, color(var(--color-darker-dawn-pink) alpha(0.8)) 36%, color(var(--color-darker-dawn-pink) alpha(0.8)) 40%, transparent 40%, transparent),
+        radial-gradient(circle at 50%  100%, color(var(--color-darker-dawn-pink) alpha(0.8)) 10%, color(var(--color-dawn-pink) alpha(0.8)) 11%, color(var(--color-dawn-pink) alpha(0.8)) 23%, color(var(--color-darker-dawn-pink) alpha(0.8)) 24%, color(var(--color-darker-dawn-pink) alpha(0.8)) 30%, color(var(--color-dawn-pink) alpha(0.8)) 31%, color(var(--color-dawn-pink) alpha(0.8)) 43%, color(var(--color-darker-dawn-pink) alpha(0.8)) 44%, color(var(--color-darker-dawn-pink) alpha(0.8)) 50%, color(var(--color-dawn-pink) alpha(0.8)) 51%, color(var(--color-dawn-pink) alpha(0.8)) 63%, color(var(--color-darker-dawn-pink) alpha(0.8)) 64%, color(var(--color-darker-dawn-pink) alpha(0.8)) 71%, transparent 71%, transparent),
+        radial-gradient(circle at 100% 50%, color(var(--color-darker-dawn-pink) alpha(0.8)) 5%, color(var(--color-dawn-pink) alpha(0.8)) 6%, color(var(--color-dawn-pink) alpha(0.8)) 15%, color(var(--color-darker-dawn-pink) alpha(0.8)) 16%, color(var(--color-darker-dawn-pink) alpha(0.8)) 20%, color(var(--color-dawn-pink) alpha(0.8)) 21%, color(var(--color-dawn-pink) alpha(0.8)) 30%, color(var(--color-darker-dawn-pink) alpha(0.8)) 31%, color(var(--color-darker-dawn-pink) alpha(0.8)) 35%, color(var(--color-dawn-pink) alpha(0.8)) 36%, color(var(--color-dawn-pink) alpha(0.8)) 45%, color(var(--color-darker-dawn-pink) alpha(0.8)) 46%, color(var(--color-darker-dawn-pink) alpha(0.8)) 49%, transparent 50%, transparent),
+        radial-gradient(circle at 0    50%, color(var(--color-darker-dawn-pink) alpha(0.8)) 5%, color(var(--color-dawn-pink) alpha(0.8)) 6%, color(var(--color-dawn-pink) alpha(0.8)) 15%, color(var(--color-darker-dawn-pink) alpha(0.8)) 16%, color(var(--color-darker-dawn-pink) alpha(0.8)) 20%, color(var(--color-dawn-pink) alpha(0.8)) 21%, color(var(--color-dawn-pink) alpha(0.8)) 30%, color(var(--color-darker-dawn-pink) alpha(0.8)) 31%, color(var(--color-darker-dawn-pink) alpha(0.8)) 35%, color(var(--color-dawn-pink) alpha(0.8)) 36%, color(var(--color-dawn-pink) alpha(0.8)) 45%, color(var(--color-darker-dawn-pink) alpha(0.8)) 46%, color(var(--color-darker-dawn-pink) alpha(0.8)) 49%, transparent 50%, transparent);
+    --background-pattern-size: 1.8rem 0.9rem;
+}
+/* stylelint-enable */
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100vw - var(--spacing));
+    max-width: 128rem;
+    height: calc(100vh - var(--spacing));
+    max-height: 65rem;
+    overflow: auto;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    background-color: var(--color-white);
+    transition: opacity 0.2s 0.1s ease, transform 0.3s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &.afterOpen {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    &.beforeClose {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+}
+
+.modalContent {
+    @mixin typography-body-2 rem;
+    height: 100%;
+
+    /* Prevent text from flickering in Webkit */
+    backface-visibility: hidden;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+
+    &.afterOpen {
+        background-image: var(--background-pattern);
+        background-size: var(--background-pattern-size);
+    }
+
+    &.beforeClose {
+        background-color: transparent;
+        transition: background-color 0.3s ease;
+    }
+}
+
+.modalPortal {
+    position: relative;
+    z-index: 999999;
+}
+
+.modalBodyOpen {
+    overflow: hidden;
+}

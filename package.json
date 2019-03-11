@@ -1,46 +1,47 @@
 {
-  "name": "@idm/styleguide",
+  "name": "@idm/web-uikit",
   "version": "0.0.0",
-  "description": "IDM's living styleguide",
+  "description": "IDM's living web UI kit",
   "main": "dist/index.js",
   "keywords": [
     "idm",
-    "styleguide",
+    "web-uikit",
     "react"
   ],
   "author": "Pedro Santos <pedro.santos@moxy.studio>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ipfs-shipyard/idm-styleguide/issues"
+    "url": "https://github.com/ipfs-shipyard/idm-web-uikit/issues"
   },
-  "homepage": "https://github.com/ipfs-shipyard/idm-styleguide#readme",
+  "homepage": "https://github.com/ipfs-shipyard/idm-web-uikit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ipfs-shipyard/idm-styleguide.git"
+    "url": "git+https://github.com/ipfs-shipyard/idm-web-uikit.git"
   },
   "scripts": {
-    "storybook": "start-storybook -p 3010 -c .storybook",
+    "start": "start-storybook -p 3010 -c .storybook",
     "lint": "eslint --ignore-path .gitignore . && stylelint --ignore-path .gitignore \"**/*.css\"",
     "prerelease": "npm t && npm run lint && npm run build",
     "release": "standard-version",
     "test": "exit 0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
+    "@babel/core": "^7.3.4",
     "@commitlint/config-conventional": "^7.5.0",
-    "@storybook/addon-actions": "^4.1.11",
-    "@storybook/addon-knobs": "^4.1.11",
-    "@storybook/react": "^4.1.11",
+    "@storybook/addon-actions": "^4.1.14",
+    "@storybook/addon-knobs": "^4.1.14",
+    "@storybook/react": "^4.1.14",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-moxy": "^2.3.5",
-    "commitlint": "^7.5.0",
-    "eslint": "^5.13.0",
+    "commitlint": "^7.5.2",
+    "eslint": "^5.15.1",
     "eslint-config-moxy": "^6.1.1",
-    "external-svg-sprite-loader": "^4.0.1",
+    "external-svg-sprite-loader": "^4.0.2",
     "husky": "^1.3.1",
-    "lint-staged": "^8.1.3",
-    "postcss-cli": "^6.1.1",
+    "lint-staged": "^8.1.5",
+    "marked": "^0.6.1",
+    "postcss-cli": "^6.1.2",
     "postcss-preset-moxy": "^2.3.1",
     "storybook-readme": "^4.0.5",
     "stylelint": "^9.10.1",
@@ -76,5 +77,15 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.11",
+    "normalize.css": "^8.0.1",
+    "npm": "^6.9.0",
+    "rc-slider": "^8.6.6",
+    "react-modal": "^3.8.1",
+    "react-popper": "^1.0.0",
+    "react-transition-group": "^2.6.0"
   }
 }

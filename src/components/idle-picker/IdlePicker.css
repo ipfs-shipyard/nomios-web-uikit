@@ -1,0 +1,109 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+:root {
+    --color-lighter-tan: #ddc4a2;
+}
+
+.picker-container {
+    & :global(.rc-slider-handle) {
+        width: 2.5rem;
+        height: 2.5rem;
+        z-index: 2;
+        margin-top: -1.25rem;
+        margin-left: -1.25rem;
+        transform: scale(1);
+        border-width: 0;
+        background-color: var(--color-tan);
+        box-shadow: 0 0 0 0.4rem var(--color-white);
+
+        &:hover {
+            background-color: var(--color-lighter-tan);
+            cursor: pointer;
+        }
+
+        &:focus {
+            background-color: var(--color-lighter-tan);
+            box-shadow: 0 0 0 0.4rem var(--color-white);
+        }
+
+        &:active {
+            transform: scale(0.8);
+            background-color: var(--color-lighter-tan);
+            box-shadow: 0 0 0 0.4rem var(--color-white);
+            cursor: all-scroll;
+            transition: transform 0.2s ease-in-out;
+        }
+    }
+
+    & :global(.rc-slider-dot) {
+        position: absolute;
+        top: 0;
+        width: 0.1rem;
+        height: 1rem;
+        margin-left: 0;
+        vertical-align: middle;
+        border: 0;
+        opacity: 0.3;
+        background-color: var(--color-armadillo);
+        border-radius: 0;
+
+        &:first-child,
+        &:last-child {
+            top: -1rem;
+            height: 2rem;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: -1rem;
+            right: -1rem;
+            bottom: 0;
+            left: -1rem;
+            cursor: pointer;
+        }
+    }
+
+    & :global(.rc-slider-dot-active) {
+        border-width: 0;
+    }
+
+    & :global(.rc-slider-rail) {
+        position: absolute;
+        width: 100%;
+        height: 0.1rem;
+        opacity: 0.3;
+        background-color: var(--color-armadillo);
+        border-radius: 0;
+    }
+
+    & :global(.rc-slider-track) {
+        position: absolute;
+        left: 0;
+        height: 0.2rem;
+        z-index: 1;
+        background-color: var(--color-tan);
+        border-radius: 0;
+    }
+
+    & :global(.rc-slider-mark-text),
+    & :global(.rc-slider-mark-text-active) {
+        @mixin typography-body-1 rem;
+        opacity: 0.7;
+        color: var(--color-armadillo);
+        user-select: none;
+    }
+
+    & :global(.handle-hover) {
+        background-color: var(--color-lighter-tan);
+    }
+
+    & .rc-slider-main :global(.rc-slider-handle) {
+        transition: left 0.4s cubic-bezier(0.895, 0.03, 0.685, 0.22), background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    & .rc-slider-main :global(.rc-slider-track) {
+        transition: width 0.4s cubic-bezier(0.895, 0.03, 0.685, 0.22), background-color 0.2s ease-in-out;
+    }
+}

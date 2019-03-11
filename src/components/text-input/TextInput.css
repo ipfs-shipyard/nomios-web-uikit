@@ -1,0 +1,98 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+@keyframes fillIn {
+    to { stroke-dashoffset: 0; }
+}
+
+.wrapper {
+    min-width: 28rem;
+    max-width: 65rem;
+    display: flex;
+    flex-direction: column;
+
+    & .label {
+        @mixin typography-captions rem;
+        color: var(--color-tan);
+    }
+
+    & input {
+        @mixin typography-body-1 rem;
+        padding: 0.8rem 0;
+        border-width: 0 0 0.1rem 0;
+        border-color: color(var(--color-armadillo) alpha(0.3));
+        outline: none;
+        color: var(--color-armadillo);
+        transition: border-color 0.2s ease;
+
+        &::placeholder {
+            color: color(var(--color-armadillo) alpha(0.3));
+        }
+
+        &:active,
+        &:focus {
+            border-color: color(var(--color-armadillo) alpha(0.6));
+        }
+
+        &.poor {
+            border-color: var(--color-monza);
+        }
+
+        &.weak {
+            border-color: var(--color-web-orange);
+        }
+
+        &.fair {
+            border-color: var(--color-ocean-green);
+        }
+
+        &.strong {
+            border-color: var(--color-cornflower-blue);
+        }
+    }
+
+    & .inputWrapper {
+        position: relative;
+
+        & input {
+            width: 100%;
+            border-color: transparent;
+
+            &:focus + .strengthIndicator > div {
+                background-color: color(var(--color-armadillo) alpha(0.6));
+            }
+        }
+
+        & .eyeIcon {
+            position: absolute;
+            right: 0;
+            width: 1.6rem;
+            height: 100%;
+            fill: color(var(--color-armadillo) alpha(0.6));
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &.hidden {
+                display: none;
+            }
+        }
+    }
+
+    & .helperContainer {
+        width: 100%;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        & .helperText {
+            @mixin typography-body-2 rem;
+            color: color(var(--color-armadillo) alpha(0.6));
+        }
+
+        & .feedbackMessage {
+            margin-left: auto;
+        }
+    }
+}
