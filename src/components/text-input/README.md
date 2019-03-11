@@ -13,7 +13,7 @@ import { TextInput } from '@idm/web-uikit';
 ## Props
 
 | name | type | default | description |
-|-------------------|--------|---------|----------------------------------------------------------------------------------------------------|
+| ---- | ---- | ------- | ----------- |
 | label | string | | Defines a label for the input. |
 | placeholder | string | | Sets the input placeholder |
 | type | string | `text` | Sets the input type. Can be one of: `text` or `password`. |

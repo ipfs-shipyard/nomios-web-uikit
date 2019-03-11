@@ -19,7 +19,7 @@ import { FeedbackMessage } from '@idm/web-uikit';
 ## Props
 
 | name | type | default | description |
-|-----------------|--------|----------------------|-----------------------------------------------------------------------------------------------------------------|
+| ---- | ---- | ------- | ----------- |
 | children | string | *required* | Text to render. |
 | variant | string | `small` | The variant of the feedback message, can be one of: `small` or `large` |
 | type | string | | Can be one of: `error` or `info`. Sets the icon accordingly the type. If no type is passed, no icon is applied. |
