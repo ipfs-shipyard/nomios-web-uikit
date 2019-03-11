@@ -5,7 +5,7 @@ A standard button.
 ## Usage
 
 ```jsx
-import { Button } from '@idm/web-uikit';
+import { Button } from '@nomios/web-uikit';
 
 <Button variant="primary" onClick={ handleClick } />
 ```

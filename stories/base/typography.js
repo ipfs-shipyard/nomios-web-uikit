@@ -15,7 +15,7 @@ Take a look at \`src/styles/mixins/typography.css\` for the available mixins.
 
 You may use the typography CSS mixins like so:
 \`\`\`css
-@import "@idm/web-uikit/styles/mixins/typography";
+@import "@nomios/web-uikit/styles/mixins/typography";
 
 .my-heading {
     @mixin typography-h1 rem;

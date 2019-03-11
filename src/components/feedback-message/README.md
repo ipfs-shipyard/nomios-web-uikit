@@ -5,7 +5,7 @@ A feedback message component to provide feedback to the user.
 ## Usage
 
 ```jsx
-import { FeedbackMessage } from '@idm/web-uikit';
+import { FeedbackMessage } from '@nomios/web-uikit';
 
 <FeedbackMessage>Generic feedback</FeedbackMessage>
 

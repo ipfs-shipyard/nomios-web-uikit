@@ -7,7 +7,7 @@ A SVG icon, accepts inline svgs and svgs sprited with [external-svg-sprite-loade
 **Using a specific icon from the icon set:**
 
 ```jsx
-import { CloseIcon, ReplyIcon } from '@idm/web-uikit';
+import { CloseIcon, ReplyIcon } from '@nomios/web-uikit';
 
 <WarningIcon />
 <InfoIcon />
@@ -18,7 +18,7 @@ Please check the "Icon/All icons" under Storybook for the list of available icon
 **Using manually:**
 
 ```jsx
-import { Icon } from '@idm/web-uikit';
+import { Icon } from '@nomios/web-uikit';
 import mySvg from './path/to/my.svg';
 
 <Icon svg={ mySvg } />
@@ -32,7 +32,7 @@ Neverthless, you may change the color via the `fill` CSS property.
 Additionally, you may tweak the opacity via the `fill-opacity` CSS property.
 
 ```jsx
-import { WarningIcon } from '@idm/web-uikit';
+import { WarningIcon } from '@nomios/web-uikit';
 
 <WarningIcon style={ { fill: 'yellow' } } />
 
@@ -42,7 +42,7 @@ import { WarningIcon } from '@idm/web-uikit';
 You may change the icon size via the `fontSize` CSS property (defaults to `2.4rem`).
 
 ```jsx
-import { ReplyIcon } from '@idm/web-uikit';
+import { ReplyIcon } from '@nomios/web-uikit';
 
 <ReplyIcon style={ { fontSize: '1.6rem' } } />
 ```

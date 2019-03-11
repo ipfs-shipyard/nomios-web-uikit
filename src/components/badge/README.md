@@ -5,7 +5,7 @@ A standard badge.
 ## Usage
 
 ```jsx
-import { Badge } from '@idm/web-uikit';
+import { Badge } from '@nomios/web-uikit';
 
 <Badge onClick={ handleClick }>
     { children }

@@ -5,7 +5,7 @@ A standard Idle Picker input.
 ## Usage
 
 ```jsx
-import { IdlePicker } from '@idm/web-uikit';
+import { IdlePicker } from '@nomios/web-uikit';
 
 <IdlePicker handlePickerChange={ handleChange } />
 ```
