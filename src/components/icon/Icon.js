@@ -15,10 +15,7 @@ SpriteIcon.propTypes = {
     svg: PropTypes.object.isRequired,
 };
 
-const InlineIcon = ({ svg, ...rest }) => (
-    <i { ...rest }
-        dangerouslySetInnerHTML={ { __html: svg } } />
-);
+const InlineIcon = ({ svg, ...rest }) => <i { ...rest } dangerouslySetInnerHTML={ { __html: svg } } />;
 
 InlineIcon.propTypes = {
     svg: PropTypes.string.isRequired,

@@ -2,10 +2,10 @@
 @import "../../styles/mixins/typography";
 
 .feedbackMessage {
+    @mixin typography-body-2 rem;
     display: flex;
     align-items: center;
     color: color(var(--color-armadillo) alpha(0.6));
-    @mixin typography-body-2 rem;
 
     & .iconWrapper {
         display: flex;
@@ -98,4 +98,8 @@
         fill: var(--color-monza);
         fill-opacity: 1;
     }
+}
+
+.tooltip {
+    max-width: 28.6rem;
 }

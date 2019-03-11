@@ -134,8 +134,8 @@
 }
 
 .tooltipContent {
+    @mixin typography-body-2 rem;
     position: relative;
     padding: 2rem 2.5rem;
     backface-visibility: hidden; /* Prevent text from flickering in Webkit */
-    @mixin typography-body-2 rem;
 }

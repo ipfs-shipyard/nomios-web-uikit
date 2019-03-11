@@ -1,21 +1,10 @@
 import React, { Component, Fragment, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
-export default class ModalTrigger extends Component {
-    static propTypes = {
-        modal: PropTypes.element.isRequired,
-        children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
-        onOpen: PropTypes.func,
-        onClose: PropTypes.func,
+class ModalTrigger extends Component {
+    defaultEventProps = {
+        onClick: this.handleOpen,
     };
-
-    constructor() {
-        super();
-
-        this.defaultEventProps = {
-            onClick: this.handleOpen,
-        };
-    }
 
     state = { isOpen: false };
 
@@ -100,3 +89,12 @@ export default class ModalTrigger extends Component {
 
     handleModalRequestClose = (e, delay) => this.handleClose(e, delay);
 }
+
+ModalTrigger.propTypes = {
+    modal: PropTypes.element.isRequired,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
+};
+
+export default ModalTrigger;

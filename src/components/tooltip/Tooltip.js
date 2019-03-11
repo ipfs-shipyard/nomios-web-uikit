@@ -8,33 +8,7 @@ import styles from './Tooltip.css';
 
 const CLOSE_TRANSITION_TIMEOUT = 250; // Must be 50ms higher than the actual CSS duration
 
-export default class Tooltip extends Component {
-    static propTypes = {
-        placement: PropTypes.oneOf(['auto', 'top', 'right', 'bottom', 'left']),
-        viewportPadding: PropTypes.number,
-        boundariesElement: PropTypes.string,
-        shouldCloseOnEsc: PropTypes.bool,
-        shouldCloseOnOutsideClick: PropTypes.bool,
-        className: PropTypes.string,
-        boxClassName: PropTypes.string,
-        contentClassName: PropTypes.string,
-        children: PropTypes.node.isRequired,
-        style: PropTypes.object,
-        // The properties below are "private"
-        isOpen: PropTypes.bool,
-        onRequestCancelClose: PropTypes.func,
-        onRequestClose: PropTypes.func,
-        variant: PropTypes.oneOf(['light', 'dark']),
-    };
-
-    static defaultProps = {
-        placement: 'auto',
-        viewportPadding: 10,
-        shouldCloseOnEsc: true,
-        shouldCloseOnOutsideClick: true,
-        variant: 'light',
-    };
-
+class Tooltip extends Component {
     boxRef = createRef();
 
     componentDidMount() {
@@ -195,3 +169,31 @@ export default class Tooltip extends Component {
         }
     };
 }
+
+Tooltip.propTypes = {
+    placement: PropTypes.oneOf(['auto', 'top', 'right', 'bottom', 'left']),
+    viewportPadding: PropTypes.number,
+    boundariesElement: PropTypes.string,
+    shouldCloseOnEsc: PropTypes.bool,
+    shouldCloseOnOutsideClick: PropTypes.bool,
+    className: PropTypes.string,
+    boxClassName: PropTypes.string,
+    contentClassName: PropTypes.string,
+    children: PropTypes.node.isRequired,
+    style: PropTypes.object,
+    // The properties below are "private"
+    isOpen: PropTypes.bool,
+    onRequestCancelClose: PropTypes.func,
+    onRequestClose: PropTypes.func,
+    variant: PropTypes.oneOf(['light', 'dark']),
+};
+
+Tooltip.defaultProps = {
+    placement: 'auto',
+    viewportPadding: 10,
+    shouldCloseOnEsc: true,
+    shouldCloseOnOutsideClick: true,
+    variant: 'light',
+};
+
+export default Tooltip;

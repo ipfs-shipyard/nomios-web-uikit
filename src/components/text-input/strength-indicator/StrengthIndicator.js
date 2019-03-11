@@ -6,26 +6,15 @@ import styles from './StrengthIndicator.css';
 
 const MAX_ANIMATION_DURATION = 0.4; // In seconds
 
-export default class StrengthIndicator extends PureComponent {
-    static propTypes = {
-        strength: PropTypes.number.isRequired,
-        levelName: PropTypes.string,
-        numberOfLevels: PropTypes.number,
-        onColorChange: PropTypes.func,
-        className: PropTypes.string,
-    };
-
-    static defaultProps = {
-        numberOfLevels: 4,
-    };
+class StrengthIndicator extends PureComponent {
+    lastFilledElement = 0;
+    currentLevelName = undefined;
+    innerElementRef = React.createRef();
 
     constructor(props) {
         super(props);
 
         this.levelArray = new Array(props.numberOfLevels).fill(0);
-        this.lastFilledElement = 0;
-        this.currentLevelName = undefined;
-        this.innerElementRef = React.createRef();
     }
 
     componentDidMount() {
@@ -109,3 +98,17 @@ export default class StrengthIndicator extends PureComponent {
         }
     };
 }
+
+StrengthIndicator.propTypes = {
+    strength: PropTypes.number.isRequired,
+    levelName: PropTypes.string,
+    numberOfLevels: PropTypes.number,
+    onColorChange: PropTypes.func,
+    className: PropTypes.string,
+};
+
+StrengthIndicator.defaultProps = {
+    numberOfLevels: 4,
+};
+
+export default StrengthIndicator;

@@ -20,16 +20,7 @@ const marks = {
     10: '10',
 };
 
-export default class IdlePicker extends Component {
-    static propTypes = {
-        defaultValue: PropTypes.number,
-        handlePickerChange: PropTypes.func,
-    };
-
-    static defaultProps = {
-        defaultValue: 3,
-    };
-
+class IdlePicker extends Component {
     componentRef = React.createRef();
     previousHandleWasBeforeChange = false;
     handleClick = false;
@@ -198,3 +189,14 @@ export default class IdlePicker extends Component {
         this.unsetHandleClick(false);
     };
 }
+
+IdlePicker.propTypes = {
+    defaultValue: PropTypes.number,
+    handlePickerChange: PropTypes.func,
+};
+
+IdlePicker.defaultProps = {
+    defaultValue: 3,
+};
+
+export default IdlePicker;

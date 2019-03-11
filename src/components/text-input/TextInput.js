@@ -8,28 +8,7 @@ import styles from './TextInput.css';
 
 const LEVELS_NAME = ['poor', 'weak', 'fair', 'strong'];
 
-export default class TextInput extends Component {
-    static propTypes = {
-        label: PropTypes.string,
-        placeholder: PropTypes.string,
-        type: PropTypes.oneOf(['text', 'password']),
-        helperText: PropTypes.string,
-        lineType: PropTypes.oneOf(['normal', 'dashed']),
-        lineStrength: PropTypes.number,
-        feedback: PropTypes.shape({
-            message: PropTypes.string.isRequired,
-            type: PropTypes.string,
-            className: PropTypes.string,
-        }),
-        onChange: PropTypes.func,
-        className: PropTypes.string,
-    };
-
-    static defaultProps = {
-        lineType: 'normal',
-        type: 'text',
-    };
-
+class TextInput extends Component {
     state = {
         showPassword: false,
         feedbackMessageColor: undefined,
@@ -134,3 +113,26 @@ export default class TextInput extends Component {
 
     handleStrengthColorChange = (color) => this.setState({ feedbackMessageColor: color });
 }
+
+TextInput.propTypes = {
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
+    type: PropTypes.oneOf(['text', 'password']),
+    helperText: PropTypes.string,
+    lineType: PropTypes.oneOf(['normal', 'dashed']),
+    lineStrength: PropTypes.number,
+    feedback: PropTypes.shape({
+        message: PropTypes.string.isRequired,
+        type: PropTypes.string,
+        className: PropTypes.string,
+    }),
+    onChange: PropTypes.func,
+    className: PropTypes.string,
+};
+
+TextInput.defaultProps = {
+    lineType: 'normal',
+    type: 'text',
+};
+
+export default TextInput;

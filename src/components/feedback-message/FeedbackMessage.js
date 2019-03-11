@@ -5,6 +5,35 @@ import { WarningIcon, InfoIcon } from '../icon';
 import { Tooltip, TooltipTrigger } from '../tooltip';
 import styles from './FeedbackMessage.css';
 
+const IconRenderer = ({ type }) => {
+    if (type === 'error') {
+        return <WarningIcon className={ styles.icon } />;
+    }
+
+    return <InfoIcon className={ styles.icon } />;
+};
+
+IconRenderer.propTypes = {
+    type: PropTypes.oneOf(['error', 'info']),
+};
+
+const TooltipRenderer = ({ type, children }) => {
+    if (!children) {
+        return <IconRenderer type={ type } />;
+    }
+
+    return (
+        <TooltipTrigger tooltip={ <Tooltip className={ styles.tooltip } placement="bottom" >{ children }</Tooltip> }>
+            { <div className={ styles.iconWrapper }>{ <IconRenderer type={ type } /> }</div> }
+        </TooltipTrigger>
+    );
+};
+
+TooltipRenderer.propTypes = {
+    type: PropTypes.oneOf(['error', 'info']),
+    children: PropTypes.node,
+};
+
 const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, tooltipChildren, className }) => {
     const finalClassNames = classNames(
         styles.feedbackMessage,
@@ -14,25 +43,9 @@ const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, too
         className
     );
 
-    const renderTooltip = () => {
-        if (!type) {
-            return;
-        }
-
-        return tooltipChildren ?
-            <TooltipTrigger tooltip={ <Tooltip placement="bottom" style={ { maxWidth: 286 } }>{ tooltipChildren }</Tooltip> }>
-                { <div className={ styles.iconWrapper }>{ renderIcon() }</div> }
-            </TooltipTrigger> :
-            renderIcon();
-    };
-
-    const renderIcon = () => type === 'error' ?
-        <WarningIcon className={ styles.icon } /> :
-        <InfoIcon className={ styles.icon } />;
-
     return (
         <div style={ { color: textColor } } className={ finalClassNames }>
-            { renderTooltip() }
+            { type && <TooltipRenderer type={ type }>{ tooltipChildren }</TooltipRenderer> }
             { children }
         </div>
     );

@@ -17,6 +17,7 @@ import { FeedbackMessage } from '@idm/web-uikit';
 ```
 
 ## Props
+
 | name            | type   | default              | description                                                                                                     |
 |-----------------|--------|----------------------|-----------------------------------------------------------------------------------------------------------------|
 | children        | string | *required*           | Text to render.                                                                                                 |

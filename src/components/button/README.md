@@ -11,6 +11,7 @@ import { Button } from '@idm/web-uikit';
 ```
 
 ## Props
+
 | name      | type    | default    | description                                                                    |
 |-----------|---------|------------|--------------------------------------------------------------------------------|
 | variant   | string  | *required* | Sets the button variant. Can be one of: `primary`, `secondary` `tertiary` or `negative`   |
