@@ -6,7 +6,9 @@
   "keywords": [
     "nomios",
     "web-uikit",
-    "react"
+    "react",
+    "idm",
+    "identity manager"
   ],
   "author": "Pedro Santos <pedro.santos@moxy.studio>",
   "license": "MIT",
