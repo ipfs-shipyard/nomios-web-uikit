@@ -1,6 +1,6 @@
-# idm-web-uikit
+# nomios-web-uikit
 
-IDM's living Web UIkit.
+Nomios' living Web UIkit.
 
 
 ## Base technology
@@ -50,9 +50,9 @@ Releases the package. Runs tests, lints and builds the project beforehand. If su
 This command uses [`standard-version`](https://github.com/conventional-changelog/standard-version) underneath. The version is automatically inferred from the [conventional commits](https://conventionalcommits.org/).
 
 
-## Using a linked version of idm-web-uikit
+## Using a linked version of nomios-web-uikit
 
-In some cases, you may want to make changes to IDM's Web UIkit at the same time as you work on your project which uses the web-uikit. In order to use a local version of [idm-web-uikit](https://github.com/ipfs-shipyard/idm-web-uikit) and have any web-uikit modifications be reflected live on your project, some pages have to be made in your main project.
+In some cases, you may want to make changes to Nomios's Web UIkit at the same time as you work on your project which uses the web-uikit. In order to use a local version of [nomios-web-uikit](https://github.com/ipfs-shipyard/nomios-web-uikit) and have any web-uikit modifications be reflected live on your project, some pages have to be made in your main project.
 
 Some of the instructions below assume you are using Webpack in your main project.
 
@@ -75,17 +75,17 @@ const fs = require('fs');
 const createResolver = require('postcss-import-webpack-resolver');
 ```
 
-Before exporting the webpack configuration, add the following line to the file. This will check if there is a linked version of `idm-web-uikit`.
+Before exporting the webpack configuration, add the following line to the file. This will check if there is a linked version of `nomios-web-uikit`.
 
 ```js
-const existsWebUikitSrc = fs.existsSync(path.join(projectDir, 'node_modules/@idm/web-uikit/src'));
+const existsWebUikitSrc = fs.existsSync(path.join(projectDir, 'node_modules/@nomios/web-uikit/src'));
 ```
 
 In the `resolve` option of your webpack configuration, insert the following. This will allow your project to update when changes occur to `js` files in the web-uikit, without requiring a new web-uikit build.
 
 ```js
 alias: process.env.NODE_ENV === 'development' && existsWebUikitSrc ? {
-    '@idm/web-uikit': path.join(projectDir, 'node_modules/@idm/web-uikit/src'),
+    '@nomios/web-uikit': path.join(projectDir, 'node_modules/@nomios/web-uikit/src'),
 } : undefined,
 ```
 
@@ -94,7 +94,7 @@ Pass a [`resolve`](https://github.com/postcss/postcss-import#resolve) option to 
 ```js
 resolve: createResolver({
     alias: process.env.NODE_ENV === 'development' && existsWebUikitSrc ? {
-        '@idm/web-uikit/styles': path.join(projectDir, 'node_modules/@idm/web-uikit/src/styles'),
+        '@nomios/web-uikit/styles': path.join(projectDir, 'node_modules/@nomios/web-uikit/src/styles'),
         } : undefined,
 })
 ```
@@ -102,11 +102,11 @@ resolve: createResolver({
 NOTE: if using `postcss-preset-moxy`, this `resolve` option should be wrapped in the [`import`](https://github.com/moxystudio/postcss-preset-moxy#usage) option.
 
 
-### Link `idm-web-uikit` to your main project
+### Link `nomios-web-uikit` to your main project
 
-Link the projects by running `npm link` inside the root directory of the `idm-web-uikit` project, then run `npm link @idm/web-uikit` inside your main project. NOTE: this step has to be retaken every time you run an `npm i` command in your main project, because `npm i` will replace your linked version with an installed version.
+Link the projects by running `npm link` inside the root directory of the `nomios-web-uikit` project, then run `npm link @nomios/web-uikit` inside your main project. NOTE: this step has to be retaken every time you run an `npm i` command in your main project, because `npm i` will replace your linked version with an installed version.
 
 
 ## Contributing
 
-If you want to contribute for the project, we encourage you to read over the [IDM](https://github.com/ipfs-shipyard/pm-idm) repository README.
+If you want to contribute for the project, we encourage you to read over the [Nomios](https://github.com/ipfs-shipyard/pm-idm) repository README.

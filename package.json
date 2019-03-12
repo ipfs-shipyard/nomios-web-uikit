@@ -1,22 +1,24 @@
 {
-  "name": "@idm/web-uikit",
+  "name": "@nomios/web-uikit",
   "version": "0.0.0",
-  "description": "IDM's living web UI kit",
+  "description": "Nomios' living web UIKit",
   "main": "dist/index.js",
   "keywords": [
-    "idm",
+    "nomios",
     "web-uikit",
-    "react"
+    "react",
+    "idm",
+    "identity-manager"
   ],
   "author": "Pedro Santos <pedro.santos@moxy.studio>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ipfs-shipyard/idm-web-uikit/issues"
+    "url": "https://github.com/ipfs-shipyard/nomios-web-uikit/issues"
   },
-  "homepage": "https://github.com/ipfs-shipyard/idm-web-uikit#readme",
+  "homepage": "https://github.com/ipfs-shipyard/nomios-web-uikit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ipfs-shipyard/idm-web-uikit.git"
+    "url": "git+https://github.com/ipfs-shipyard/nomios-web-uikit.git"
   },
   "scripts": {
     "start": "start-storybook -p 3010 -c .storybook",

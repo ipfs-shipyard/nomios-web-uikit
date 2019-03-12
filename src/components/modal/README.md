@@ -7,7 +7,7 @@ A modal dialog.
 **With a trigger:**
 
 ```jsx
-import { Modal, ModalTrigger, Button } from '@idm/web-uikit';
+import { Modal, ModalTrigger, Button } from '@nomios/web-uikit';
 
 const modal = <Modal>I'm a text in a modal.</Modal>;
 
@@ -32,7 +32,7 @@ const modal = <Modal>I'm a text in a modal.</Modal>;
 **Standalone usage:**
 
 ```jsx
-import { Modal } from '@idm/web-uikit';
+import { Modal } from '@nomios/web-uikit';
 
 <Modal isOpen>I'm a text in a modal.</Modal>
 ```
@@ -42,7 +42,7 @@ import { Modal } from '@idm/web-uikit';
 You must set the app element to properly hide your application from assistive technologies, such as screenreaders:
 
 ```js
-import { Modal } from '@idm/web-uikit';
+import { Modal } from '@nomios/web-uikit';
 
 Modal.setAppElement('#root');
 ```
@@ -50,7 +50,7 @@ Modal.setAppElement('#root');
 Moreover, you may define the element in which all the portals will be inserted, which defaults to `document.body`:
 
 ```js
-import { Modal } from '@idm/web-uikit';
+import { Modal } from '@nomios/web-uikit';
 
 Modal.setPortalParentElement('#some-modal-container');
 ```

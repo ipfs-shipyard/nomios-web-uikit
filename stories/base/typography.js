@@ -8,14 +8,14 @@ import styles from './typography.css';
 storiesOf('base/Typography', module)
 .addDecorator(withReadme(marked(`
 # Typography
-IDM's typography, including headings.
+Nomios' typography, including headings.
 
 There's a set of CSS mixins to apply styles in elements other than the native HTML ones.
 Take a look at \`src/styles/mixins/typography.css\` for the available mixins.
 
 You may use the typography CSS mixins like so:
 \`\`\`css
-@import "@idm/web-uikit/styles/mixins/typography";
+@import "@nomios/web-uikit/styles/mixins/typography";
 
 .my-heading {
     @mixin typography-h1 rem;

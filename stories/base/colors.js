@@ -38,12 +38,12 @@ storiesOf('base/Colors', module)
 .addDecorator(withReadme(marked(`
 # Colors
 
-IDM's color pallete.
+Nomios' color pallete.
 
 You may use these colors in CSS files like so:
 
 \`\`\`css
-@import "@idm/web-uikit/styles/colors";
+@import "@nomios/web-uikit/styles/colors";
 
 .my-div {
 

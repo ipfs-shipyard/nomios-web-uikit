@@ -5,7 +5,7 @@ A text input with strength indication as option.
 ## Usage
 
 ```jsx
-import { TextInput } from '@idm/web-uikit';
+import { TextInput } from '@nomios/web-uikit';
 
 <TextInput label="Label" placeholder="Hint Text" />
 ```

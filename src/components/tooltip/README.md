@@ -5,7 +5,7 @@ A tooltip to display content anchored to an element.
 ## Usage
 
 ```jsx
-import { TooltipTrigger, Tooltip } from '@idm/web-uikit';
+import { TooltipTrigger, Tooltip } from '@nomios/web-uikit';
 
 const tooltip = <Tooltip>I'm a text in a tooltip.</Tooltip>
 
