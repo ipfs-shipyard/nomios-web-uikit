@@ -38,7 +38,7 @@ storiesOf('base/Colors', module)
 .addDecorator(withReadme(marked(`
 # Colors
 
-NOMIOS' color pallete.
+Nomios' color pallete.
 
 You may use these colors in CSS files like so:
 

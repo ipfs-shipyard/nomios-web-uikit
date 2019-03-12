@@ -1,6 +1,6 @@
 # nomios-web-uikit
 
-NOMIOS' living Web UIkit.
+Nomios' living Web UIkit.
 
 
 ## Base technology
@@ -52,7 +52,7 @@ This command uses [`standard-version`](https://github.com/conventional-changelog
 
 ## Using a linked version of nomios-web-uikit
 
-In some cases, you may want to make changes to NOMIOS's Web UIkit at the same time as you work on your project which uses the web-uikit. In order to use a local version of [nomios-web-uikit](https://github.com/ipfs-shipyard/nomios-web-uikit) and have any web-uikit modifications be reflected live on your project, some pages have to be made in your main project.
+In some cases, you may want to make changes to Nomios's Web UIkit at the same time as you work on your project which uses the web-uikit. In order to use a local version of [nomios-web-uikit](https://github.com/ipfs-shipyard/nomios-web-uikit) and have any web-uikit modifications be reflected live on your project, some pages have to be made in your main project.
 
 Some of the instructions below assume you are using Webpack in your main project.
 
@@ -109,4 +109,4 @@ Link the projects by running `npm link` inside the root directory of the `nomios
 
 ## Contributing
 
-If you want to contribute for the project, we encourage you to read over the [NOMIOS](https://github.com/ipfs-shipyard/pm-idm) repository README.
+If you want to contribute for the project, we encourage you to read over the [Nomios](https://github.com/ipfs-shipyard/pm-idm) repository README.

@@ -8,7 +8,7 @@ import styles from './typography.css';
 storiesOf('base/Typography', module)
 .addDecorator(withReadme(marked(`
 # Typography
-NOMIOS' typography, including headings.
+Nomios' typography, including headings.
 
 There's a set of CSS mixins to apply styles in elements other than the native HTML ones.
 Take a look at \`src/styles/mixins/typography.css\` for the available mixins.
