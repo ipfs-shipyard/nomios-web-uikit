@@ -8,7 +8,7 @@
     "web-uikit",
     "react",
     "idm",
-    "identity manager"
+    "identity-manager"
   ],
   "author": "Pedro Santos <pedro.santos@moxy.studio>",
   "license": "MIT",
