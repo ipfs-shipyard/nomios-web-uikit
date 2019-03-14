@@ -8,3 +8,4 @@ export { default as IdlePicker } from './components/idle-picker';
 export * from './components/tooltip';
 export * from './components/modal';
 export { default as Logo } from './components/logo';
+export { default as ModalLayout } from './components/modal-layout';

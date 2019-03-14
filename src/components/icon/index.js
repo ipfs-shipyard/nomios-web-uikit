@@ -14,6 +14,7 @@ import plusSvg from '../../media/icons/icon-plus.svg';
 import refreshSvg from '../../media/icons/icon-refresh.svg';
 import tabletSvg from '../../media/icons/icon-tablet.svg';
 import warningSvg from '../../media/icons/icon-warning.svg';
+import logoSvg from '../../media/icons/logo-placeholder.svg';
 
 const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-cross-outline.svg');
 const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
@@ -34,6 +35,7 @@ const PlusIcon = (props) => <Icon { ...props } svg={ plusSvg } />;
 const RefreshIcon = (props) => <Icon { ...props } svg={ refreshSvg } />;
 const TabletIcon = (props) => <Icon { ...props } svg={ tabletSvg } />;
 const WarningIcon = (props) => <Icon { ...props } svg={ warningSvg } />;
+const LogoIcon = (props) => <Icon { ...props } svg={ logoSvg } />;
 
 export default Icon;
 export {
@@ -53,4 +55,5 @@ export {
     RefreshIcon,
     TabletIcon,
     WarningIcon,
+    LogoIcon,
 };

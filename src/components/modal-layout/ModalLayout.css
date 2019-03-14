@@ -1,0 +1,60 @@
+:root {
+    --spacing: 2rem;
+}
+
+.panelWrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+
+    &.half-panel,
+    &.half-panel-bordered {
+        & .rightPanel {
+            width: 50%;
+
+            & .rightContent {
+                height: 100%;
+            }
+        }
+    }
+
+    &.half-panel-bordered {
+        & .rightPanel {
+            margin: var(--spacing) 0;
+        }
+    }
+
+    &.wide-panel {
+        & .rightPanel {
+            width: 74%;
+
+            & .rightContent {
+                width: 100%;
+                height: calc(100% - 2 * var(--spacing));
+                margin: var(--spacing) 0;
+                background: rgb(240, 240, 240);
+                transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1), width 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+
+                &.arrayElement {
+                    height: calc(100% - 3 * var(--spacing));
+                }
+
+                &:not(.activeStep) {
+                    width: calc(100% - var(--spacing));
+                    margin-right: var(--spacing);
+                }
+            }
+        }
+    }
+
+    & .leftPanel {
+        flex-grow: 1;
+        background: transparent;
+
+        & i {
+            width: 21rem;
+            margin: 7.5rem 7rem;
+        }
+    }
+}
