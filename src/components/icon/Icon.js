@@ -22,11 +22,13 @@ InlineIcon.propTypes = {
 };
 
 const Icon = (props) => {
-    const { svg, className, ...rest } = props;
+    const { svg, className, strokeBased, ...rest } = props;
     const finalProps = {
         ...rest,
         svg,
-        className: classNames(styles.icon, className),
+        className: classNames(styles.icon,
+            strokeBased && styles.strokeBased,
+            className),
     };
 
     return typeof svg === 'string' ?
@@ -37,6 +39,7 @@ const Icon = (props) => {
 Icon.propTypes = {
     svg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     className: PropTypes.string,
+    strokeBased: PropTypes.bool,
 };
 
 export default Icon;

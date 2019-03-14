@@ -1,130 +1,263 @@
 @import "../../styles/colors";
 
-.button {
+.buttonWrapper {
     position: relative;
     min-width: 12rem;
     height: 5rem;
-    padding: 0 5rem;
+    overflow: hidden;
+    padding: 0;
+    display: inline-block;
     border: none;
-    border-width: 0.1rem;
-    border-style: solid;
-    outline: 0;
-    background-color: transparent;
-    transition-property: background-color, box-shadow, border-color;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
 
-    &:not([disabled]) {
-        cursor: pointer;
-    }
+    & .button {
+        min-width: 12rem;
+        height: 5rem;
+        overflow: hidden;
+        padding: 0 5rem;
+        border: none;
+        border-width: 0.1rem;
+        border-style: solid;
+        outline: 0;
+        background-color: transparent;
+        transition-property: background-color, box-shadow, border-color;
+        transition-duration: 0.2s;
+        transition-timing-function: ease;
 
-    &.fullWidth {
-        width: 100%;
-    }
-
-    & span {
-        transition: color 0.2s ease;
-    }
-
-    &.primary {
-        border-color: transparent;
-        background-color: var(--color-armadillo);
-        color: var(--color-white);
-
-        &:enabled:hover {
-            background-color: color(var(--color-armadillo) alpha(0.8));
+        &:not([disabled]) {
+            cursor: pointer;
         }
 
-        &:enabled:active,
-        &:enabled:focus:not(:hover) {
-            background-color: var(--color-dune);
+        &.fullWidth {
+            width: 100%;
         }
 
-        &:disabled,
-        &[disabled] {
-            background-color: color(var(--color-armadillo) alpha(0.2));
+        & span {
+            transition: color 0.2s ease;
         }
-    }
 
-    &.secondary {
-        border-color: var(--color-armadillo);
+        &.primary {
+            border-color: transparent;
+            background-color: var(--color-armadillo);
+            color: var(--color-white);
 
-        &:enabled:hover {
-            border-color: color(var(--color-armadillo) alpha(0.6));
+            &:enabled:hover:not(.loading) {
+                background-color: color(var(--color-armadillo) alpha(0.8));
+            }
 
-            & span {
-                color: color(var(--color-black) alpha(0.8));
+            &:enabled:active:not(.loading),
+            &:enabled:focus:not(:hover):not(.loading) {
+                background-color: var(--color-dune);
+            }
+
+            &[disabled]:not(.loading) {
+                background-color: color(var(--color-armadillo) alpha(0.2));
             }
         }
 
-        &:enabled:active,
-        &:enabled:focus:not(:hover) {
+        &.secondary {
             border-color: var(--color-armadillo);
-            box-shadow: inset 0 0 0 0.1rem var(--color-armadillo);
 
-            & span {
-                color: var(--color-black);
+            &:enabled:hover:not(.loading) {
+                border-color: color(var(--color-armadillo) alpha(0.6));
+
+                & span {
+                    color: color(var(--color-black) alpha(0.8));
+                }
+            }
+
+            &:enabled:active:not(.loading),
+            &:enabled:focus:not(:hover):not(.loading) {
+                border-color: var(--color-armadillo);
+                box-shadow: inset 0 0 0 0.1rem var(--color-armadillo);
+
+                & span {
+                    color: var(--color-black);
+                }
+            }
+
+            &:disabled:not(.loading),
+            &[disabled]:not(.loading) {
+                opacity: 0.3;
             }
         }
 
-        &:disabled,
-        &[disabled] {
-            opacity: 0.3;
+        &.primary,
+        &.secondary {
+            &.feedback {
+                border-color: transparent;
+                background-color: color(var(--color-armadillo) alpha(0.2));
+                color: var(--color-white);
+            }
         }
-    }
 
-    &.tertiary {
-        border-color: var(--color-white);
-        color: var(--color-white);
+        &.tertiary {
+            border-color: var(--color-white);
+            color: var(--color-white);
 
-        &:enabled:hover {
-            border-color: color(var(--color-white) alpha(0.6));
+            &:enabled:hover:not(.loading) {
+                border-color: color(var(--color-white) alpha(0.6));
 
-            & span {
+                & span {
+                    color: color(var(--color-white) alpha(0.8));
+                }
+            }
+
+            &:enabled:active:not(.loading),
+            &:enabled:focus:not(:hover):not(.loading) {
+                box-shadow: inset 0 0 0 0.1rem var(--color-white);
+            }
+
+            &:disabled:not(.loading),
+            &[disabled]:not(.loading) {
+                border-color: color(var(--color-white) alpha(0.3));
+
+                & span {
+                    color: color(var(--color-white) alpha(0.5));
+                }
+            }
+        }
+
+        &.negative {
+            border-color: transparent;
+            background-color: var(--color-white);
+            color: var(--color-armadillo);
+
+            &:enabled:hover:not(.loading) {
+                opacity: 0.6;
+
+                & span {
+                    opacity: 1;
+                }
+            }
+
+            &:enabled:active:not(.loading),
+            &:enabled:focus:not(:hover):not(.loading) {
+                opacity: 1;
+                box-shadow: 0 0 0 0.3rem color(var(--color-white) alpha(0.3));
+            }
+
+            &:disabled:not(.loading),
+            &[disabled]:not(.loading) {
+                background-color: color(var(--color-white) alpha(0.2));
+
+                & span {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        &.tertiary,
+        &.negative {
+            &.feedback {
+                border-color: transparent;
+                background-color: color(var(--color-white) alpha(0.2));
                 color: color(var(--color-white) alpha(0.8));
             }
         }
+    }
 
-        &:enabled:active,
-        &:enabled:focus:not(:hover) {
-            box-shadow: inset 0 0 0 0.1rem var(--color-white);
+    & .progressBar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    & .successBlock,
+    & .errorBlock {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        transform: translateY(100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-width: 0.1rem;
+        border-color: transparent;
+        transition: transform 0.2s ease;
+
+        & .feedbackIcon {
+            font-size: 1.6rem;
+        }
+    }
+
+    &.primary,
+    &.secondary {
+        & .progressBar {
+            background-color: color(var(--color-armadillo) alpha(0.2));
         }
 
-        &:disabled,
-        &[disabled] {
-            border-color: color(var(--color-white) alpha(0.3));
+        & .successBlock {
+            background-color: var(--color-ocean-green);
 
-            & span {
-                color: color(var(--color-white) alpha(0.5));
+            & .checkmark {
+                stroke: var(--color-white);
+            }
+        }
+
+        & .errorBlock {
+            background-color: var(--color-monza);
+
+            & .cross {
+                stroke: var(--color-white);
             }
         }
     }
 
+    &.tertiary,
     &.negative {
-        border-color: transparent;
-        background-color: var(--color-white);
-        color: var(--color-armadillo);
+        & .progressBar {
+            background-color: color(var(--color-white) alpha(0.2));
+        }
 
-        &:enabled:hover {
-            opacity: 0.6;
+        & .successBlock {
+            background-color: var(--color-white);
 
-            & span {
-                opacity: 1;
+            & .checkmark {
+                stroke: var(--color-ocean-green);
             }
         }
 
-        &:enabled:active,
-        &:enabled:focus:not(:hover) {
-            opacity: 1;
-            box-shadow: 0 0 0 0.3rem color(var(--color-white) alpha(0.3));
+        & .errorBlock {
+            background-color: var(--color-white);
+
+            & .cross {
+                stroke: var(--color-monza);
+            }
         }
+    }
 
-        &:disabled,
-        &[disabled] {
-            background-color: color(var(--color-white) alpha(0.2));
+    & .cross {
+        transform: rotate(270deg);
+    }
 
-            & span {
-                opacity: 0.5;
+    & .checkmark,
+    & .cross {
+        font-size: 1rem;
+        transition: stroke-dashoffset 0.2s linear 0.2s;
+        stroke-dasharray: 20;
+        stroke-dashoffset: 20;
+    }
+
+    &.success {
+        & .successBlock {
+            transform: translateY(0);
+
+            & .checkmark {
+                stroke-dashoffset: 0;
+            }
+        }
+    }
+
+    &.error {
+        & .errorBlock {
+            transform: translateY(0);
+
+            & .cross {
+                stroke-dashoffset: 0;
             }
         }
     }
