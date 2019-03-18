@@ -8,10 +8,6 @@
     transition: fill 0.2s ease, fill-opacity 0.2s ease;
     fill: currentColor;
 
-    &.strokeBased {
-        stroke: currentColor;
-    }
-
     & svg {
         width: inherit;
         height: inherit;

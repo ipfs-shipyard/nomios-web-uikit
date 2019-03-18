@@ -29,13 +29,12 @@ class Icon extends Component {
     }
 
     render() {
-        const { svg, className, strokeBased, ...rest } = this.props;
+        const { svg, className, ...rest } = this.props;
         const { contents } = this.state;
         const finalProps = {
             ...rest,
             contents,
             className: classNames(styles.icon,
-                strokeBased && styles.strokeBased,
                 className),
         };
 
@@ -50,7 +49,6 @@ class Icon extends Component {
 Icon.propTypes = {
     svg: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ then: PropTypes.func.isRequired })]).isRequired,
     className: PropTypes.string,
-    strokeBased: PropTypes.bool,
 };
 
 export default Icon;

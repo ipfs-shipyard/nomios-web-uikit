@@ -18,8 +18,8 @@ const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media
 const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 
 const CameraIcon = (props) => <Icon { ...props } svg={ cameraSvg } />;
-const CheckmarkIcon = (props) => <Icon { ...props } strokeBased svg={ checkmarkOutlineSvg } />;
-const CrossIcon = (props) => <Icon { ...props } strokeBased svg={ crossOutlineSvg } />;
+const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkOutlineSvg } />;
+const CrossIcon = (props) => <Icon { ...props } svg={ crossOutlineSvg } />;
 const DesktopIcon = (props) => <Icon { ...props } svg={ desktopSvg } />;
 const EntityIcon = (props) => <Icon { ...props } svg={ entitySvg } />;
 const EyeOffIcon = (props) => <Icon { ...props } svg={ eyeOffSvg } />;
