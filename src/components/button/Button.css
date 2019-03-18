@@ -196,7 +196,7 @@
         & .successBlock {
             background-color: var(--color-ocean-green);
 
-            & .checkmark svg g path {
+            & .checkmark svg path {
                 stroke: var(--color-white);
             }
         }
@@ -204,7 +204,7 @@
         & .errorBlock {
             background-color: var(--color-monza);
 
-            & .cross svg g path {
+            & .cross svg path {
                 stroke: var(--color-white);
             }
         }
@@ -219,7 +219,7 @@
         & .successBlock {
             background-color: var(--color-white);
 
-            & .checkmark svg g path {
+            & .checkmark svg path {
                 stroke: var(--color-ocean-green);
             }
         }
@@ -227,20 +227,29 @@
         & .errorBlock {
             background-color: var(--color-white);
 
-            & .cross svg g path {
+            & .cross svg path {
                 stroke: var(--color-monza);
             }
         }
     }
 
     & .cross {
-        transform: rotate(270deg);
+        & svg :nth-child(1) {
+            transition: stroke-dashoffset 0.1s linear 0.3s;
+        }
+
+        & svg :nth-child(2) {
+            transition: stroke-dashoffset 0.1s linear 0.2s;
+        }
+    }
+
+    & .checkmark {
+        transition: stroke-dashoffset 0.2s linear 0.2s;
     }
 
     & .checkmark,
     & .cross {
         font-size: 1rem;
-        transition: stroke-dashoffset 0.2s linear 0.2s;
         stroke-dasharray: 20;
         stroke-dashoffset: 20;
     }
