@@ -18,13 +18,13 @@ class Icon extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const { svg } = this.props;
 
         if (typeof svg === 'object') {
-            svg.then((result) => {
-                this.setState({ contents: result.default });
-            });
+            const result = await svg;
+
+            this.setState({ contents: result.default });
         }
     }
 
