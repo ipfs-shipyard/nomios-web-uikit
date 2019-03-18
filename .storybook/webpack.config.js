@@ -48,8 +48,8 @@ module.exports = ( config ) => {
                     name: 'static/media/svg-sprite.svg',
                 },
             },
-            // Uniquify classnames and ids so that if svgxuse injects the sprite into the body,
-            // it doesn't cause DOM conflicts
+            // Uniquify classnames and ids so that they are unique and
+            // don't conflict with each other
             {
                 loader: 'svg-css-modules-loader',
                 options: {
