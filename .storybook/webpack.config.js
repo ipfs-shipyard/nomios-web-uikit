@@ -58,7 +58,6 @@ module.exports = ( config ) => {
             },
         ],
     });
-    config.plugins.push(new SvgStorePlugin());
 
     // Support web fonts
     config.module.rules.push({
