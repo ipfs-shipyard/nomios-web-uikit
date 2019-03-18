@@ -219,7 +219,7 @@
         & .successBlock {
             background-color: var(--color-white);
 
-            & .checkmark {
+            & .checkmark svg g path {
                 stroke: var(--color-ocean-green);
             }
         }
@@ -227,7 +227,7 @@
         & .errorBlock {
             background-color: var(--color-white);
 
-            & .cross {
+            & .cross svg g path {
                 stroke: var(--color-monza);
             }
         }
