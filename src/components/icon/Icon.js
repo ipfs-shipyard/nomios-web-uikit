@@ -1,43 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './Icon.css';
 
-const SpriteIcon = ({ svg, ...rest }) => (
-    <i { ...rest }>
-        <svg viewBox={ svg.viewBox }>
-            <use xlinkHref={ svg.symbol } />
-        </svg>
-    </i>
-);
+class Icon extends Component {
+    constructor(props) {
+        super(props);
 
-SpriteIcon.propTypes = {
-    svg: PropTypes.object.isRequired,
-};
+        if (typeof props.svg === 'string') {
+            this.state = {
+                contents: props.svg,
+            };
+        } else {
+            this.state = {
+                contents: null,
+            };
+        }
+    }
 
-const InlineIcon = ({ svg, ...rest }) => <i { ...rest } dangerouslySetInnerHTML={ { __html: svg } } />;
+    componentDidMount() {
+        const { svg } = this.props;
 
-InlineIcon.propTypes = {
-    svg: PropTypes.string.isRequired,
-};
+        if (typeof svg === 'object') {
+            svg.then((result) => {
+                this.setState({ contents: result.default });
+            });
+        }
+    }
 
-const Icon = (props) => {
-    const { svg, className, strokeBased, ...rest } = props;
-    const finalProps = {
-        ...rest,
-        svg,
-        className: classNames(styles.icon,
-            strokeBased && styles.strokeBased,
-            className),
-    };
+    render() {
+        const { svg, className, strokeBased, ...rest } = this.props;
+        const { contents } = this.state;
+        const finalProps = {
+            ...rest,
+            contents,
+            className: classNames(styles.icon,
+                strokeBased && styles.strokeBased,
+                className),
+        };
 
-    return typeof svg === 'string' ?
-        <InlineIcon { ...finalProps } /> :
-        <SpriteIcon svg={ svg } { ...finalProps } />;
-};
+        if (contents != null) {
+            return <i { ...finalProps } dangerouslySetInnerHTML={ { __html: contents } } />;
+        }
+
+        return null;
+    }
+}
 
 Icon.propTypes = {
-    svg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    svg: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ then: PropTypes.func.isRequired })]).isRequired,
     className: PropTypes.string,
     strokeBased: PropTypes.bool,
 };

@@ -1,9 +1,11 @@
 const path = require('path');
 const SvgStorePlugin = require('external-svg-sprite-loader');
 
-module.exports = (config) => {
+module.exports = ( config ) => {
     // Compile node_modules
     config.module.rules[0].exclude = [];
+
+    config.output.chunkFilename = '[name].bundle.js';
 
     // CSS files loader for node_modules
     config.module.rules.push({
@@ -41,7 +43,7 @@ module.exports = (config) => {
         test: /\.svg$/,
         use: [
             {
-                loader: SvgStorePlugin.loader,
+                loader: 'raw-loader',
                 options: {
                     name: 'static/media/svg-sprite.svg',
                 },
