@@ -177,7 +177,10 @@
         align-items: center;
         border-width: 0.1rem;
         border-color: transparent;
-        transition: transform 0.2s ease;
+
+        &.feedback {
+            transition: transform 0.2s ease;
+        }
 
         & .feedbackIcon {
             font-size: 1.6rem;

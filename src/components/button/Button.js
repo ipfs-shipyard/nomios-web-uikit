@@ -9,8 +9,6 @@ const FEEDBACK_OUTCOME_VISIBLE_DURATION = 1750;
 
 class Button extends Component {
     wrapperRef = React.createRef();
-    firstSuccessRender = true;
-    firstErrorRender = true;
     enterAnimation = false;
 
     state = {
@@ -51,6 +49,17 @@ class Button extends Component {
             styles[variant],
         );
 
+        const propsFeedback = this.props.feedback;
+        const hasPropsFeedback = propsFeedback === 'loading' || propsFeedback === 'success' || propsFeedback === 'error';
+        const successBlockClassName = classNames(
+            hasPropsFeedback && styles.feedback,
+            styles.successBlock
+        );
+        const errorBlockClassName = classNames(
+            hasPropsFeedback && styles.feedback,
+            styles.errorBlock
+        );
+
         return (
             <div className={ wrapperClassName } ref={ this.wrapperRef }>
                 <button { ...rest } disabled={ finalDisabled } className={ finalClassName } >
@@ -62,11 +71,11 @@ class Button extends Component {
                     onBegin={ this.handleProgressBarBegin }
                     onEnd={ this.handleProgressBarEnd } />
 
-                <span className={ styles.successBlock } onTransitionEnd={ this.handleSuccessTransitionEnd }>
-                    <CheckmarkIcon className={ styles.checkmark } />
+                <span className={ successBlockClassName } onTransitionEnd={ this.handleSpanTransitionEnd }>
+                    <CheckmarkIcon className={ styles.checkmark } onTransitionEnd={ this.handleSuccessIconTransitionEnd } />
                 </span>
-                <span className={ styles.errorBlock } onTransitionEnd={ this.handleErrorTransitionEnd }>
-                    <CrossIcon className={ styles.cross } />
+                <span className={ errorBlockClassName } onTransitionEnd={ this.handleSpanTransitionEnd }>
+                    <CrossIcon className={ styles.cross } onTransitionEnd={ this.handleErrorIconTransitionEnd } />
                 </span>
             </div>
         );
@@ -96,32 +105,6 @@ class Button extends Component {
         clearTimeout(this.resetFeedbackOutcomeTimeoutId);
     }
 
-    calculateSvgPath() {
-        const height = this.wrapperRef.current.offsetHeight;
-        const width = this.wrapperRef.current.offsetWidth;
-
-        const pathSTR = `M1,1h${width - 2}v${height - 2}H1z`;
-
-        console.log('pathSTR', pathSTR);
-
-        const proportion = 0.5;
-        const perimeter = (2 * height) + (2 * width);
-        const dashSize = perimeter / (2 * (1 + proportion));
-
-        const strokeDashArray = `${dashSize * proportion} ${dashSize}`;
-
-        console.log('strokeDashArray', strokeDashArray);
-
-        return (
-            <div styles="position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'">
-                <svg xmlns="http://www.w3.org/2000/svg" width={ width } height={ height }>
-                    <path stroke="#0000ff" strokeWidth="2" d={ pathSTR } fill="none" fillRule="evenodd"
-                        strokeDasharray={ `${dashSize * proportion} ${dashSize}` } />
-                </svg>
-            </div>
-        );
-    }
-
     handleProgressBarBegin = () => {
         this.clearFeedbackOutcomeTimers();
         this.setState({ feedbackOutcome: null });
@@ -139,29 +122,26 @@ class Button extends Component {
         });
     };
 
-    handleTransitionEnd = (isSuccess) => {
-        if (this.firstSuccessRender || this.firstErrorRender) {
-            if (isSuccess) {
-                this.firstSuccessRender = false;
-            } else {
-                this.firstErrorRender = false;
-            }
-
-            return;
-        }
+    handleSpanTransitionEnd = (event) => {
+        event.stopPropagation();
         if (this.enterAnimation) {
             this.enterAnimation = false;
 
             return;
         }
         this.enterAnimation = true;
-
-        this.props.onAnimationEnd && this.props.onAnimationEnd(isSuccess);
     };
 
-    handleSuccessTransitionEnd = () => this.handleTransitionEnd(true);
+    handleIconTransitionEnd = (event, isSuccess) => {
+        event.stopPropagation();
+        if (this.enterAnimation) {
+            this.props.onAnimationEnd && this.props.onAnimationEnd(isSuccess);
+        }
+    };
 
-    handleErrorTransitionEnd = () => this.handleTransitionEnd(false);
+    handleSuccessIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, true);
+
+    handleErrorIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, true);
 }
 
 Button.propTypes = {
