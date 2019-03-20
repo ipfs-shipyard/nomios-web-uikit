@@ -1,7 +1,7 @@
 const path = require('path');
 const SvgStorePlugin = require('external-svg-sprite-loader');
 
-module.exports = ( config ) => {
+module.exports = (config) => {
     // Compile node_modules
     config.module.rules[0].exclude = [];
 

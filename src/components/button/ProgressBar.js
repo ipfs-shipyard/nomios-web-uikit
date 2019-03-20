@@ -12,11 +12,16 @@ class ProgressBar extends Component {
     progressBarRef = createRef();
 
     componentDidMount() {
-        this.maybeHandleRunningChange(false);
+        this.handleRunningChange();
     }
 
     componentDidUpdate(prevProps) {
-        this.maybeHandleRunningChange(prevProps.running);
+        // Skip if `running` hasn't changed
+        if (this.props.running === prevProps.running) {
+            return;
+        }
+
+        this.handleRunningChange(prevProps.running);
     }
 
     componentWillUnmount() {
@@ -32,21 +37,6 @@ class ProgressBar extends Component {
                 ref={ this.progressBarRef }
                 className={ classNames(styles.progressBar, className) } />
         );
-    }
-
-    maybeHandleRunningChange(prevRunning) {
-        const { running } = this.props;
-
-        // Skip if `running` hasn't changed
-        if (running === prevRunning) {
-            return;
-        }
-
-        if (running) {
-            this.begin();
-        } else {
-            this.end();
-        }
     }
 
     begin() {
@@ -119,6 +109,16 @@ class ProgressBar extends Component {
         }
 
         return increment;
+    }
+
+    handleRunningChange() {
+        const { running } = this.props;
+
+        if (running) {
+            this.begin();
+        } else {
+            this.end();
+        }
     }
 }
 

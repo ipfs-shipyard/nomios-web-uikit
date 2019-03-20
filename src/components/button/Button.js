@@ -17,11 +17,15 @@ class Button extends Component {
     };
 
     componentDidMount() {
-        this.maybeHandleFeedbackChange();
+        this.handleFeedbackChange();
     }
 
     componentDidUpdate(prevProps) {
-        this.maybeHandleFeedbackChange(prevProps.feedback);
+        // Skip if `feedback` hasn't changed
+        if (this.props.feedback === prevProps.feedback) {
+            return;
+        }
+        this.handleFeedbackChange(prevProps.feedback);
     }
 
     componentWillUnmount() {
@@ -32,7 +36,7 @@ class Button extends Component {
         const { variant, disabled, children, fullWidth, ...rest } = this.props;
         const { feedback, feedbackOutcome } = this.state;
         const loading = feedback === 'loading';
-        const hasFeedback = feedback === 'loading' || feedback === 'success' || feedback === 'error';
+        const hasFeedback = feedback !== 'none';
         const finalDisabled = disabled || loading;
         const finalClassName = classNames(
             styles.button,
@@ -49,8 +53,7 @@ class Button extends Component {
             styles[variant],
         );
 
-        const propsFeedback = this.props.feedback;
-        const hasPropsFeedback = propsFeedback === 'loading' || propsFeedback === 'success' || propsFeedback === 'error';
+        const hasPropsFeedback = this.props.feedback !== 'none';
         const successBlockClassName = classNames(
             hasPropsFeedback && styles.feedback,
             styles.successBlock
@@ -81,13 +84,12 @@ class Button extends Component {
         );
     }
 
-    maybeHandleFeedbackChange(prevFeedback) {
-        const { feedback } = this.props;
+    clearFeedbackOutcomeTimers() {
+        clearTimeout(this.resetFeedbackOutcomeTimeoutId);
+    }
 
-        // Skip if `feedback` hasn't changed
-        if (feedback === prevFeedback) {
-            return;
-        }
+    handleFeedbackChange() {
+        const { feedback } = this.props;
 
         // If feedback prop changed to `success` or `error` without passing through `loading`,
         // force the intermidate `loading` state
@@ -99,10 +101,6 @@ class Button extends Component {
         } else {
             this.setState({ feedback });
         }
-    }
-
-    clearFeedbackOutcomeTimers() {
-        clearTimeout(this.resetFeedbackOutcomeTimeoutId);
     }
 
     handleProgressBarBegin = () => {
@@ -141,7 +139,7 @@ class Button extends Component {
 
     handleSuccessIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, true);
 
-    handleErrorIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, true);
+    handleErrorIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, false);
 }
 
 Button.propTypes = {
@@ -154,7 +152,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-    feedback: PropTypes.oneOf(['none', 'loading', 'success', 'error']),
+    feedback: 'none',
 };
 
 export default Button;

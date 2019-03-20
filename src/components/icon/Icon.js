@@ -7,15 +7,9 @@ class Icon extends Component {
     constructor(props) {
         super(props);
 
-        if (typeof props.svg === 'string') {
-            this.state = {
-                contents: props.svg,
-            };
-        } else {
-            this.state = {
-                contents: null,
-            };
-        }
+        this.state = {
+            contents: typeof props.svg === 'string' ? props.svg : null,
+        };
     }
 
     async componentDidMount() {
