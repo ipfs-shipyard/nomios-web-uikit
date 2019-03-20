@@ -1,41 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './Icon.css';
 
-const SpriteIcon = ({ svg, ...rest }) => (
-    <i { ...rest }>
-        <svg viewBox={ svg.viewBox }>
-            <use xlinkHref={ svg.symbol } />
-        </svg>
-    </i>
-);
+class Icon extends Component {
+    constructor(props) {
+        super(props);
 
-SpriteIcon.propTypes = {
-    svg: PropTypes.object.isRequired,
-};
+        this.state = {
+            contents: typeof props.svg === 'string' ? props.svg : null,
+        };
+    }
 
-const InlineIcon = ({ svg, ...rest }) => <i { ...rest } dangerouslySetInnerHTML={ { __html: svg } } />;
+    async componentDidMount() {
+        const { svg } = this.props;
 
-InlineIcon.propTypes = {
-    svg: PropTypes.string.isRequired,
-};
+        if (typeof svg === 'object') {
+            const result = await svg;
 
-const Icon = (props) => {
-    const { svg, className, ...rest } = props;
-    const finalProps = {
-        ...rest,
-        svg,
-        className: classNames(styles.icon, className),
-    };
+            this.setState({ contents: result.default });
+        }
+    }
 
-    return typeof svg === 'string' ?
-        <InlineIcon { ...finalProps } /> :
-        <SpriteIcon svg={ svg } { ...finalProps } />;
-};
+    render() {
+        const { svg, className, ...rest } = this.props;
+        const { contents } = this.state;
+        const finalProps = {
+            ...rest,
+            contents,
+            className: classNames(styles.icon,
+                className),
+        };
+
+        if (contents != null) {
+            return <i { ...finalProps } dangerouslySetInnerHTML={ { __html: contents } } />;
+        }
+
+        return null;
+    }
+}
 
 Icon.propTypes = {
-    svg: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    svg: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ then: PropTypes.func.isRequired })]).isRequired,
     className: PropTypes.string,
 };
 

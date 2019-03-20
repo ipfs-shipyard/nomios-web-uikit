@@ -5,6 +5,8 @@ module.exports = (config) => {
     // Compile node_modules
     config.module.rules[0].exclude = [];
 
+    config.output.chunkFilename = '[name].bundle.js';
+
     // CSS files loader for node_modules
     config.module.rules.push({
         test: /\.css$/,
@@ -41,13 +43,13 @@ module.exports = (config) => {
         test: /\.svg$/,
         use: [
             {
-                loader: SvgStorePlugin.loader,
+                loader: 'raw-loader',
                 options: {
                     name: 'static/media/svg-sprite.svg',
                 },
             },
-            // Uniquify classnames and ids so that if svgxuse injects the sprite into the body,
-            // it doesn't cause DOM conflicts
+            // Uniquify classnames and ids so that they are unique and
+            // don't conflict with each other
             {
                 loader: 'svg-css-modules-loader',
                 options: {
@@ -56,7 +58,6 @@ module.exports = (config) => {
             },
         ],
     });
-    config.plugins.push(new SvgStorePlugin());
 
     // Support web fonts
     config.module.rules.push({

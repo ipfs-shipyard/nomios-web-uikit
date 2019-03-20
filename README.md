@@ -29,8 +29,6 @@ $ npm run build
 
 Builds the project.
 
-NOTE: at the current stage of the package, the build script has not yet been defined. It will be defined in the near future.
-
 ### lint
 
 ```sh

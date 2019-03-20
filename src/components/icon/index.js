@@ -1,8 +1,6 @@
 import React from 'react';
 import Icon from './Icon';
 import cameraSvg from '../../media/icons/icon-camera.svg';
-import checkmarkSvg from '../../media/icons/icon-checkmark.svg';
-import crossSvg from '../../media/icons/icon-cross.svg';
 import desktopSvg from '../../media/icons/icon-desktop.svg';
 import entitySvg from '../../media/icons/icon-entity.svg';
 import eyeOffSvg from '../../media/icons/icon-eye-off.svg';
@@ -16,10 +14,12 @@ import plusSvg from '../../media/icons/icon-plus.svg';
 import refreshSvg from '../../media/icons/icon-refresh.svg';
 import tabletSvg from '../../media/icons/icon-tablet.svg';
 import warningSvg from '../../media/icons/icon-warning.svg';
+const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-cross-outline.svg');
+const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 
 const CameraIcon = (props) => <Icon { ...props } svg={ cameraSvg } />;
-const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkSvg } />;
-const CrossIcon = (props) => <Icon { ...props } svg={ crossSvg } />;
+const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkOutlineSvg } />;
+const CrossIcon = (props) => <Icon { ...props } svg={ crossOutlineSvg } />;
 const DesktopIcon = (props) => <Icon { ...props } svg={ desktopSvg } />;
 const EntityIcon = (props) => <Icon { ...props } svg={ entitySvg } />;
 const EyeOffIcon = (props) => <Icon { ...props } svg={ eyeOffSvg } />;
