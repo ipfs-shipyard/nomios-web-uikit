@@ -12,7 +12,7 @@ class Button extends Component {
     enterAnimation = false;
 
     state = {
-        feedback: null,
+        feedback: 'none',
         feedbackOutcome: null,
     };
 
