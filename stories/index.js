@@ -8,3 +8,4 @@ import './feedback-message';
 import './idle-picker';
 import './tooltip';
 import './modal';
+import './logo';
