@@ -14,6 +14,7 @@ import plusSvg from '../../media/icons/icon-plus.svg';
 import refreshSvg from '../../media/icons/icon-refresh.svg';
 import tabletSvg from '../../media/icons/icon-tablet.svg';
 import warningSvg from '../../media/icons/icon-warning.svg';
+
 const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-cross-outline.svg');
 const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 

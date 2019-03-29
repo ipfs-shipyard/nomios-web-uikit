@@ -7,3 +7,4 @@ export { default as FeedbackMessage } from './components/feedback-message';
 export { default as IdlePicker } from './components/idle-picker';
 export * from './components/tooltip';
 export * from './components/modal';
+export { default as Logo } from './components/logo';
