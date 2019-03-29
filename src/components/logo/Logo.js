@@ -35,8 +35,12 @@ const Logo = ({ variant, className, ...rest }) => {
 };
 
 Logo.propTypes = {
-    variant: PropTypes.oneOf(['symbol', 'logotype', 'horizontal', 'vertical']).isRequired,
+    variant: PropTypes.oneOf(['symbol', 'logotype', 'horizontal', 'vertical']),
     className: PropTypes.object,
+};
+
+Logo.defaultProps = {
+    variant: 'horizontal',
 };
 
 export default Logo;

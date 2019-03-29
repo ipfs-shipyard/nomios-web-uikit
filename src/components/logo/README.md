@@ -37,6 +37,6 @@ import { ReplyIcon } from '@nomios/web-uikit';
 
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
-| variant | string | | The variant of the logo. Can be one of `symbol`, `logotype`, `horizontal` and `vertical` |
+| variant | string | `horizontal` | The variant of the logo. Can be one of `symbol`, `logotype`, `horizontal` and `vertical` |
 
 Any other properties supplied will be spread to the root element.
