@@ -1,0 +1,259 @@
+@import "../../styles/colors";
+
+:root {
+    --spacing: 2rem;
+    --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+    --layout-animation-duration: 0.6s;
+    --opacity-transition-duration: 0.5s;
+    --logo-container-height: 16.5rem;
+}
+
+@keyframes emptyToHalf {
+    from { width: 0%; }
+    to { width: 50%; }
+}
+
+@keyframes hideToRight {
+    from { transform: translateX(0%); }
+    to { transform: translateX(100%); }
+}
+
+@keyframes hideToLeft {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-100%); }
+}
+
+@keyframes showFromRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0%); }
+}
+
+@keyframes showFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0%); }
+}
+
+@keyframes rightHalfBorderedToWideExiting {
+    from { width: 50%; }
+    to { width: 0%; }
+}
+
+@keyframes leftHalfBorderedToWideExiting {
+    from { width: 50%; }
+    to { width: 26%; }
+}
+
+@keyframes halfBorderedToWideEntering {
+    from { width: 0%; }
+    to { width: 74%; }
+}
+
+.logoWrapper {
+    padding-top: 7.5rem;
+    padding-left: 7rem;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+
+    &.visible {
+        opacity: 1;
+        transition: opacity var(--opacity-transition-duration) ease;
+    }
+
+    & .logo {
+        font-size: 0.9rem;
+        fill: var(--color-tan);
+    }
+}
+
+.modalFlow {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    background: rgba(250, 250, 250);
+
+    &.half-panel,
+    &.half-panel-bordered,
+    &.full-panel {
+        & .step {
+            width: 100%;
+            opacity: 0;
+            transition: opacity var(--opacity-transition-duration) ease;
+
+            &.active {
+                z-index: 2;
+                opacity: 1;
+            }
+        }
+    }
+
+    &.half-panel,
+    &.half-panel-bordered {
+        & .step {
+            height: 100%;
+        }
+
+        & .left,
+        & .right {
+            width: 50%;
+        }
+    }
+
+    &.half-panel {
+        justify-content: flex-end;
+
+        & .left {
+            background: var(--color-mineral-green);
+
+            &.empty-to-half {
+                animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.half-to-full-exiting {
+                animation: hideToLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.full-to-half-entering {
+                animation: showFromLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+        }
+    }
+
+    &.half-panel-bordered {
+        & .left {
+            width: 50%;
+
+            &.half-bordered-to-wide-exiting {
+                animation: leftHalfBorderedToWideExiting var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+        }
+
+        & .right {
+            width: 50%;
+            margin: var(--spacing) 0;
+            background: var(--color-mineral-green);
+
+            &.half-bordered-to-wide-exiting {
+                animation: rightHalfBorderedToWideExiting var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.empty-to-half {
+                animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+        }
+    }
+
+    &.wide-panel {
+        & .left {
+            width: 26%;
+        }
+
+        & .right {
+            position: relative;
+            width: 74%;
+            height: 100%;
+
+            &.wide-to-full-exiting {
+                animation: hideToRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.stepNotVisible {
+                z-index: 1;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: var(--spacing);
+                    right: 0;
+                    bottom: calc(var(--spacing) * 2);
+                    left: 0;
+                    background: var(--color-white);
+                }
+            }
+
+            &.half-bordered-to-wide-entering {
+                animation: halfBorderedToWideEntering var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.full-to-wide-entering {
+                animation: showFromRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            & .wideStepsWrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                opacity: 0;
+                transition: opacity var(--opacity-transition-duration) ease;
+
+                &.active {
+                    opacity: 1;
+                }
+
+                & .step {
+                    width: calc(100% - var(--spacing));
+                    height: calc(100% - 3 * var(--spacing));
+                    margin-top: var(--spacing);
+                    margin-right: var(--spacing);
+                    background: var(--color-mineral-green);
+                    transition:
+                        transform 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+                        width 1.2s cubic-bezier(0.23, 1, 0.32, 1),
+                        background 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+
+                    &.fullWidth,
+                    &.active {
+                        width: 100%;
+                        background: var(--color-white);
+                    }
+
+                    &.translateUp {
+                        transform: translateY(2rem);
+                    }
+                }
+            }
+        }
+    }
+
+    &.full-panel {
+        & .step {
+            height: calc(100% - var(--logo-container-height));
+        }
+
+        & .left {
+            width: 100%;
+            background: var(--color-mineral-green);
+
+            &.half-to-full-entering {
+                animation: showFromLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.full-to-half-exiting {
+                animation: hideToLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.advanced {
+                width: 0%;
+                background: transparent;
+            }
+        }
+
+        & .right {
+            width: 0%;
+
+            &.advanced {
+                width: 100%;
+                background: var(--color-mineral-green);
+
+                &.wide-to-full-entering {
+                    animation: showFromRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                }
+
+                &.full-to-wide-exiting {
+                    animation: hideToRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                }
+            }
+        }
+    }
+}
