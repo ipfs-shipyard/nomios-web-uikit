@@ -9,5 +9,4 @@ import './idle-picker';
 import './tooltip';
 import './modal';
 import './logo';
-import './modal-layout';
 import './modal-flow';
