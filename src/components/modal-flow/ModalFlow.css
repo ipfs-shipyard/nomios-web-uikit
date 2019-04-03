@@ -10,7 +10,7 @@
 
 @keyframes emptyToHalf {
     from { width: 0%; }
-    to { width: 50%; }
+    to { width: 100%; }
 }
 
 @keyframes hideToRight {
@@ -34,13 +34,13 @@
 }
 
 @keyframes rightHalfBorderedToWideExiting {
-    from { width: 50%; }
+    from { width: 100%; }
     to { width: 0%; }
 }
 
 @keyframes leftHalfBorderedToWideExiting {
-    from { width: 50%; }
-    to { width: 26%; }
+    from { flex-grow: 1; }
+    to { flex-grow: 0; }
 }
 
 @keyframes halfBorderedToWideEntering {
@@ -93,9 +93,14 @@
             height: 100%;
         }
 
-        & .left,
+        & .left {
+            min-width: 33.4rem;
+            flex-grow: 1;
+        }
+
         & .right {
             width: 50%;
+            min-width: 64rem;
         }
     }
 
@@ -106,7 +111,19 @@
             background: var(--color-mineral-green);
 
             &.empty-to-half {
-                animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                position: relative;
+                background: transparent;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    width: 100%;
+                    background: var(--color-mineral-green);
+                    animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                }
             }
 
             &.half-to-full-exiting {
@@ -121,24 +138,46 @@
 
     &.half-panel-bordered {
         & .left {
-            width: 50%;
-
             &.half-bordered-to-wide-exiting {
                 animation: leftHalfBorderedToWideExiting var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
         }
 
         & .right {
-            width: 50%;
             margin: var(--spacing) 0;
             background: var(--color-mineral-green);
 
             &.half-bordered-to-wide-exiting {
-                animation: rightHalfBorderedToWideExiting var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                position: relative;
+                background: transparent;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background: var(--color-mineral-green);
+                    animation: rightHalfBorderedToWideExiting var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                }
             }
 
             &.empty-to-half {
-                animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                position: relative;
+                background: transparent;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background: var(--color-mineral-green);
+                    animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
+                }
+
             }
         }
     }
@@ -146,6 +185,7 @@
     &.wide-panel {
         & .left {
             width: 26%;
+            min-width: 33.4rem;
         }
 
         & .right {
