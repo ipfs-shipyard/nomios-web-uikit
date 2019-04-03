@@ -1,11 +1,6 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class ModalStep extends Component {
-    render() {
-        return this.props.children;
-    }
-}
+const ModalStep = (props) => props.children;
 
 ModalStep.propTypes = {
     id: PropTypes.string.isRequired,
