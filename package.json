@@ -29,7 +29,7 @@
     "lint": "eslint --ignore-path .gitignore . && stylelint --ignore-path .gitignore \"**/*.css\"",
     "build": "npm run build:clean && npm run build:js && npm run build:css && npm run build:copy",
     "build:clean": "rimraf dist styles",
-    "build:js": "cross-env BABEL_ENV=es babel src --out-dir dist --delete-dir-on-star",
+    "build:js": "cross-env BABEL_ENV=es babel src --out-dir dist --delete-dir-on-start",
     "build:css": "npm run build:css-components && npm run build:css-styles",
     "build:css-components": "postcss \"src/components/**/*.css\" --base src --dir dist",
     "build:css-styles": "cross-env POSTCSS_ENV=dist postcss \"src/styles/index.css\" --output styles/index.css",
