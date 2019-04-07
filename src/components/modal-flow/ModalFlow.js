@@ -6,24 +6,24 @@ import Logo from '../logo';
 import styles from './ModalFlow.css';
 
 const LAYOUT = {
-    HALF_BORDERED: 'half-panel-bordered',
-    HALF: 'half-panel',
-    WIDE: 'wide-panel',
-    FULL: 'full-panel',
+    HALF_BORDERED: 'halfPanelBordered',
+    HALF: 'halfPanel',
+    WIDE: 'widePanel',
+    FULL: 'fullPanel',
 };
 
 const LAYOUT_TRANSITION = {
-    EMPTY_TO_HALF: 'empty-to-half',
-    HALF_TO_FULL_EXITING: 'half-to-full-exiting',
-    HALF_TO_FULL_ENTERING: 'half-to-full-entering',
-    HALF_BORDERED_TO_WIDE_EXITING: 'half-bordered-to-wide-exiting',
-    HALF_BORDERED_TO_WIDE_ENTERING: 'half-bordered-to-wide-entering',
-    WIDE_TO_FULL_EXITING: 'wide-to-full-exiting',
-    WIDE_TO_FULL_ENTERING: 'wide-to-full-entering',
-    FULL_TO_HALF_EXITING: 'full-to-half-exiting',
-    FULL_TO_HALF_ENTERING: 'full-to-half-entering',
-    FULL_TO_WIDE_EXITING: 'full-to-wide-exiting',
-    FULL_TO_WIDE_ENTERING: 'full-to-wide-entering',
+    EMPTY_TO_HALF: 'emptyToHalf',
+    HALF_TO_FULL_EXITING: 'halfToFullExiting',
+    HALF_TO_FULL_ENTERING: 'halfToFullEntering',
+    HALF_BORDERED_TO_WIDE_EXITING: 'halfBorderedToWideExiting',
+    HALF_BORDERED_TO_WIDE_ENTERING: 'halfBorderedToWideEntering',
+    WIDE_TO_FULL_EXITING: 'wideToFullExiting',
+    WIDE_TO_FULL_ENTERING: 'wideToFullEntering',
+    FULL_TO_HALF_EXITING: 'fullToHalfExiting',
+    FULL_TO_HALF_ENTERING: 'fullToHalfEntering',
+    FULL_TO_WIDE_EXITING: 'fullToWideExiting',
+    FULL_TO_WIDE_ENTERING: 'fullToWideEntering',
 };
 
 class ModalFlow extends Component {
@@ -37,6 +37,7 @@ class ModalFlow extends Component {
             id: child.props.id,
         }));
 
+        // New steps can only be added at the end so that we can ensure the flow will not be broken
         if (state.steps !== null && !isEqual(steps, state.steps)) {
             const subset = steps.slice(0, state.steps.length);
 
@@ -57,6 +58,16 @@ class ModalFlow extends Component {
 
         if (layout === LAYOUT.HALF_BORDERED && state.layout === LAYOUT.WIDE) {
             console.error(`This layout transition (${state.layout} to ${layout}) is not allowed`);
+        }
+
+        if (isNumber(requestNextStepIndex) && (isNumber(state.requestNextStepIndex) || state.isAnimatingStepIn)) {
+            if (requestNextStepIndex === state.requestNextStepIndex) {
+                return null;
+            }
+
+            return {
+                queuedStepIndex: requestNextStepIndex,
+            };
         }
 
         return {
@@ -96,6 +107,8 @@ class ModalFlow extends Component {
         steps: null,
         requestNextStepIndex: false,
         requestNextLayout: false,
+        isAnimatingStepIn: false,
+        queuedStepIndex: false,
     };
 
     render() {
@@ -141,6 +154,7 @@ class ModalFlow extends Component {
 
         return (
             <div className={ classNames(styles.step, !isNumber(requestNextStepIndex) && !this.isAnimatingLayout && styles.active) }
+                data-attr="step"
                 onTransitionEnd={ this.handleCurrentStepTransitionEnd } >
                 { !this.isAnimatingLayout && children[currentStepIndex] }
             </div>
@@ -152,6 +166,7 @@ class ModalFlow extends Component {
 
         return (
             <div className={ wrapperClasses }
+                data-attr="steps-wrapper"
                 onTransitionEnd={ this.handleCurrentStepTransitionEnd }>
                 { !this.isAnimatingLayout && this.renderOnlyWideSteps() }
             </div>
@@ -162,6 +177,7 @@ class ModalFlow extends Component {
         const { children } = this.props;
         const { currentStepIndex, requestNextStepIndex } = this.state;
         const wideStepsCurrentIndex = isNumber(requestNextStepIndex) ? requestNextStepIndex - 1 : currentStepIndex - 1;
+
         const transform = wideStepsCurrentIndex > 0 && `translateY(calc(-${100 * wideStepsCurrentIndex}% - ${2 * wideStepsCurrentIndex}rem))`;
 
         return children.map((child, index) => {
@@ -179,6 +195,7 @@ class ModalFlow extends Component {
             return (
                 <div key={ index }
                     style={ { transform } }
+                    data-attr="step"
                     className={ classNames(
                         styles.step,
                         shouldTranslateUp && styles.translateUp,
@@ -271,15 +288,26 @@ class ModalFlow extends Component {
     };
 
     handleCurrentStepTransitionEnd = (event) => {
-        const { requestNextStepIndex } = this.state;
+        const { requestNextStepIndex, queuedStepIndex } = this.state;
+        const dataAttr = event.target.getAttribute('data-attr');
 
-        // Ignore `transition end` event for width property
-        if (event.propertyName === 'width') {
+        if (!dataAttr || (dataAttr === 'step' && event.propertyName === 'width')) {
             return;
         }
 
-        if (isNumber(requestNextStepIndex) && !this.isAnimatingLayout) {
-            this.setState({ requestNextStepIndex: false, currentStepIndex: requestNextStepIndex });
+        if (!this.isAnimatingLayout) {
+            if (isNumber(requestNextStepIndex)) {
+                this.setState({
+                    requestNextStepIndex: queuedStepIndex,
+                    currentStepIndex: requestNextStepIndex,
+                    isAnimatingStepIn: isNumber(queuedStepIndex),
+                });
+            } else {
+                this.setState({
+                    queuedStepIndex: false,
+                    isAnimatingStepIn: false,
+                });
+            }
         }
     };
 

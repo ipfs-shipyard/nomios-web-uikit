@@ -65,6 +65,10 @@
     }
 }
 
+.lol {
+    background: red;
+}
+
 .modalFlow {
     width: 100%;
     height: 100%;
@@ -72,9 +76,9 @@
     display: flex;
     background: rgba(250, 250, 250);
 
-    &.half-panel,
-    &.half-panel-bordered,
-    &.full-panel {
+    &.halfPanel,
+    &.halfPanelBordered,
+    &.fullPanel {
         & .step {
             width: 100%;
             opacity: 0;
@@ -87,8 +91,8 @@
         }
     }
 
-    &.half-panel,
-    &.half-panel-bordered {
+    &.halfPanel,
+    &.halfPanelBordered {
         & .step {
             height: 100%;
         }
@@ -104,13 +108,13 @@
         }
     }
 
-    &.half-panel {
+    &.halfPanel {
         justify-content: flex-end;
 
         & .left {
             background: var(--color-mineral-green);
 
-            &.empty-to-half {
+            &.emptyToHalf {
                 position: relative;
                 background: transparent;
 
@@ -126,19 +130,19 @@
                 }
             }
 
-            &.half-to-full-exiting {
+            &.halfToFullExiting {
                 animation: hideToLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
 
-            &.full-to-half-entering {
+            &.fullToHalfEntering {
                 animation: showFromLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
         }
     }
 
-    &.half-panel-bordered {
+    &.halfPanelBordered {
         & .left {
-            &.half-bordered-to-wide-exiting {
+            &.halfBorderedToWideExiting {
                 animation: leftHalfBorderedToWideExiting var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
         }
@@ -147,7 +151,7 @@
             margin: var(--spacing) 0;
             background: var(--color-mineral-green);
 
-            &.half-bordered-to-wide-exiting {
+            &.halfBorderedToWideExiting {
                 position: relative;
                 background: transparent;
 
@@ -163,7 +167,7 @@
                 }
             }
 
-            &.empty-to-half {
+            &.emptyToHalf {
                 position: relative;
                 background: transparent;
 
@@ -182,7 +186,7 @@
         }
     }
 
-    &.wide-panel {
+    &.widePanel {
         & .left {
             width: 26%;
             min-width: 33.4rem;
@@ -193,7 +197,7 @@
             width: 74%;
             height: 100%;
 
-            &.wide-to-full-exiting {
+            &.wideToFullExiting {
                 animation: hideToRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
 
@@ -211,11 +215,11 @@
                 }
             }
 
-            &.half-bordered-to-wide-entering {
+            &.halfBorderedToWideEntering {
                 animation: halfBorderedToWideEntering var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
 
-            &.full-to-wide-entering {
+            &.fullToWideEntering {
                 animation: showFromRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
 
@@ -256,7 +260,7 @@
         }
     }
 
-    &.full-panel {
+    &.fullPanel {
         & .step {
             height: calc(100% - var(--logo-container-height));
         }
@@ -265,11 +269,11 @@
             width: 100%;
             background: var(--color-mineral-green);
 
-            &.half-to-full-entering {
+            &.halfToFullEntering {
                 animation: showFromLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
 
-            &.full-to-half-exiting {
+            &.fullToHalfExiting {
                 animation: hideToLeft var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
 
@@ -286,11 +290,11 @@
                 width: 100%;
                 background: var(--color-mineral-green);
 
-                &.wide-to-full-entering {
+                &.wideToFullEntering {
                     animation: showFromRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
                 }
 
-                &.full-to-wide-exiting {
+                &.fullToWideExiting {
                     animation: hideToRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
                 }
             }

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withReadme } from 'storybook-readme';
 import { State, Store } from '@sambego/storybook-state';
@@ -43,22 +43,20 @@ storiesOf('Modal Flow', module)
     });
 
     return (
-        <Fragment>
-            <State store={ store }>
-                {(state) =>
-                    (<Modal isOpen>
-                        <ModalFlow variant="simple" step={ state.stepId }>
-                            { steps.map((step, index) => (
-                                <ModalStep key={ index } id={ step.id }>
-                                    { step.content }
-                                    <button onClick={ () => store.set({ stepId: step.goToId }) } >Go to { step.goToId } step</button>
-                                </ModalStep>
-                            )) }
-                        </ModalFlow>
-                    </Modal>)
-                }
-            </State>
-        </Fragment>
+        <State store={ store }>
+            {(state) =>
+                (<Modal isOpen>
+                    <ModalFlow variant="simple" step={ state.stepId }>
+                        { steps.map((step, index) => (
+                            <ModalStep key={ index } id={ step.id }>
+                                { step.content }
+                                <button onClick={ () => store.set({ stepId: step.goToId }) } >Go to { step.goToId } step</button>
+                            </ModalStep>
+                        )) }
+                    </ModalFlow>
+                </Modal>)
+            }
+        </State>
     );
 })
 .add('Simple With Feedback', () => {
@@ -67,22 +65,20 @@ storiesOf('Modal Flow', module)
     });
 
     return (
-        <Fragment>
-            <State store={ store }>
-                {(state) =>
-                    (<Modal isOpen>
-                        <ModalFlow variant="simple-with-feedback" step={ state.stepId }>
-                            { steps.map((step, index) => (
-                                <ModalStep key={ index } id={ step.id }>
-                                    { step.content }
-                                    <button onClick={ () => store.set({ stepId: step.goToId }) } >Go to { step.goToId } step</button>
-                                </ModalStep>
-                            )) }
-                        </ModalFlow>
-                    </Modal>)
-                }
-            </State>
-        </Fragment>
+        <State store={ store }>
+            {(state) =>
+                (<Modal isOpen>
+                    <ModalFlow variant="simple-with-feedback" step={ state.stepId }>
+                        { steps.map((step, index) => (
+                            <ModalStep key={ index } id={ step.id }>
+                                { step.content }
+                                <button onClick={ () => store.set({ stepId: step.goToId }) } >Go to { step.goToId } step</button>
+                            </ModalStep>
+                        )) }
+                    </ModalFlow>
+                </Modal>)
+            }
+        </State>
     );
 })
 .add('Advanced', () => {
@@ -91,21 +87,19 @@ storiesOf('Modal Flow', module)
     });
 
     return (
-        <Fragment>
-            <State store={ store }>
-                {(state) =>
-                    (<Modal isOpen>
-                        <ModalFlow variant="advanced" step={ state.stepId }>
-                            { steps.map((step, index) => (
-                                <ModalStep key={ index } id={ step.id }>
-                                    { step.content }
-                                    <button onClick={ () => store.set({ stepId: step.goToId }) } >Go to { step.goToId } step</button>
-                                </ModalStep>
-                            )) }
-                        </ModalFlow>
-                    </Modal>)
-                }
-            </State>
-        </Fragment>
+        <State store={ store }>
+            {(state) =>
+                (<Modal isOpen>
+                    <ModalFlow variant="advanced" step={ state.stepId }>
+                        { steps.map((step, index) => (
+                            <ModalStep key={ index } id={ step.id }>
+                                { step.content }
+                                <button onClick={ () => store.set({ stepId: step.goToId }) } >Go to { step.goToId } step</button>
+                            </ModalStep>
+                        )) }
+                    </ModalFlow>
+                </Modal>)
+            }
+        </State>
     );
 });

@@ -23,10 +23,16 @@ import { ModalFlow } from '@nomios/web-uikit';
 </Modal>
 ```
 
-There are four different layouts for the modal: `half`, `half-bordered`, `wide`, `full`. The layout applied depends on the chosen variant:
-- `simple` - only `half` layout is applied;
-- `simple-with-feedback` - `half` layout is applied to all steps except for the last one. The last step is `full`;
-- `advanced` - `half-bordered` is applied to the first step; `full` layout is applied to the last step; to the other steps `wide` layout is applied.
+There are four different layouts for the modal: half, half-bordered, wide, full. The layout applied depends on the chosen variant. The following diagrams demonstrate how layouts are applied:
+
+`simple`
+![simple](https://i.imgur.com/uJlXbSh.png)
+
+`simple-with-feedback`
+![simple-with-feedback](https://i.imgur.com/O70aTas.png)
+
+`advanced`
+![advanced](https://i.imgur.com/gMXO7mD.png)
 
 ## ModalFlow Props
 
