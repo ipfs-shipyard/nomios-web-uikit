@@ -18,12 +18,16 @@ const LAYOUT_TRANSITION = {
     HALF_TO_FULL_ENTERING: 'halfToFullEntering',
     HALF_BORDERED_TO_WIDE_EXITING: 'halfBorderedToWideExiting',
     HALF_BORDERED_TO_WIDE_ENTERING: 'halfBorderedToWideEntering',
+    HALF_BORDERED_TO_FULL_EXITING: 'halfBorderedToFullExiting',
+    HALF_BORDERED_TO_FULL_ENTERING: 'halfBorderedToFullEntering',
     WIDE_TO_FULL_EXITING: 'wideToFullExiting',
     WIDE_TO_FULL_ENTERING: 'wideToFullEntering',
     FULL_TO_HALF_EXITING: 'fullToHalfExiting',
     FULL_TO_HALF_ENTERING: 'fullToHalfEntering',
     FULL_TO_WIDE_EXITING: 'fullToWideExiting',
     FULL_TO_WIDE_ENTERING: 'fullToWideEntering',
+    FULL_TO_HALF_BORDERED_EXITING: 'fullToHalfBorderedExiting',
+    FULL_TO_HALF_BORDERED_ENTERING: 'fullToHalfBorderedEntering',
 };
 
 class ModalFlow extends Component {
@@ -37,11 +41,16 @@ class ModalFlow extends Component {
             id: child.props.id,
         }));
 
-        // New steps can only be added at the end so that we can ensure the flow will not be broken
+        // It means new steps were added
         if (state.steps !== null && !isEqual(steps, state.steps)) {
             const subset = steps.slice(0, state.steps.length);
+            const isRenderedStepLastOne = state.currentStep + 1 === state.steps.length;
 
+            // New steps can only be added at the end so that we can ensure the flow will not be broken
             !isEqual(subset, state.steps) && console.error('New steps can only be added at the end');
+
+            // New steps can't be added if your current step is the last one
+            isRenderedStepLastOne && console.error('New steps can not be added on the last step');
         }
 
         const currentStepIndex = steps.findIndex((step) => step.id === props.step);
@@ -262,12 +271,28 @@ class ModalFlow extends Component {
 
                 return LAYOUT_TRANSITION.FULL_TO_WIDE_EXITING;
             }
+            if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
+                return LAYOUT_TRANSITION.HALF_BORDERED_TO_FULL_ENTERING;
+            }
+            if (requestNextLayout === LAYOUT.HALF_BORDERED) {
+                this.isAnimatingLayout = true;
+
+                return LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_EXITING;
+            }
             break;
         case LAYOUT.HALF_BORDERED:
             if (requestNextLayout === LAYOUT.WIDE) {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_EXITING;
+            }
+            if (requestNextLayout === LAYOUT.FULL) {
+                this.isAnimatingLayout = true;
+
+                return LAYOUT_TRANSITION.HALF_BORDERED_TO_FULL_EXITING;
+            }
+            if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
+                return LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_ENTERING;
             }
             break;
         case LAYOUT.WIDE:
@@ -320,10 +345,12 @@ class ModalFlow extends Component {
             this.prevLayout = layout;
             this.setState({ requestNextLayout: false, layout: requestNextLayout });
             break;
+
         case LAYOUT_TRANSITION.HALF_TO_FULL_EXITING:
             this.prevLayout = layout;
             this.setState({ layout: requestNextLayout });
             break;
+
         case LAYOUT_TRANSITION.HALF_TO_FULL_ENTERING:
             this.isAnimatingLayout = false;
 
@@ -334,20 +361,24 @@ class ModalFlow extends Component {
                 currentStepIndex: requestNextStepIndex,
             });
             break;
+
         case LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_EXITING:
             this.prevLayout = layout;
             this.setState({ layout: requestNextLayout });
             break;
+
         case LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_ENTERING:
             this.isAnimatingLayout = false;
 
             // No need of resetting `requestNextStepIndex` as it will be reset later by `handleCurrentStepTransitionEnd`
             this.setState({ requestNextLayout: false });
             break;
+
         case LAYOUT_TRANSITION.WIDE_TO_FULL_EXITING:
             this.prevLayout = layout;
             this.setState({ layout: requestNextLayout });
             break;
+
         case LAYOUT_TRANSITION.WIDE_TO_FULL_ENTERING:
             this.isAnimatingLayout = false;
 
@@ -358,10 +389,12 @@ class ModalFlow extends Component {
                 currentStepIndex: requestNextStepIndex,
             });
             break;
+
         case LAYOUT_TRANSITION.FULL_TO_HALF_EXITING:
             this.prevLayout = layout;
             this.setState({ layout: requestNextLayout });
             break;
+
         case LAYOUT_TRANSITION.FULL_TO_HALF_ENTERING:
             this.isAnimatingLayout = false;
 
@@ -371,15 +404,42 @@ class ModalFlow extends Component {
                 currentStepIndex: requestNextStepIndex,
             });
             break;
+
         case LAYOUT_TRANSITION.FULL_TO_WIDE_EXITING:
             this.prevLayout = layout;
             this.setState({ layout: requestNextLayout });
             break;
+
         case LAYOUT_TRANSITION.FULL_TO_WIDE_ENTERING:
             this.isAnimatingLayout = false;
+            this.setState({ requestNextLayout: false });
+            break;
 
+        case LAYOUT_TRANSITION.HALF_BORDERED_TO_FULL_EXITING:
+            this.prevLayout = layout;
+            this.setState({ layout: requestNextLayout });
+            break;
+
+        case LAYOUT_TRANSITION.HALF_BORDERED_TO_FULL_ENTERING:
+            this.isAnimatingLayout = false;
             this.setState({
                 requestNextLayout: false,
+                requestNextStepIndex: false,
+                currentStepIndex: requestNextStepIndex,
+            });
+            break;
+
+        case LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_EXITING:
+            this.prevLayout = layout;
+            this.setState({ layout: requestNextLayout });
+            break;
+
+        case LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_ENTERING:
+            this.isAnimatingLayout = false;
+            this.setState({
+                requestNextLayout: false,
+                requestNextStepIndex: false,
+                currentStepIndex: requestNextStepIndex,
             });
             break;
 

@@ -181,7 +181,14 @@
                     background: var(--color-mineral-green);
                     animation: emptyToHalf var(--layout-animation-duration) var(--ease-out-quint) forwards;
                 }
+            }
 
+            &.halfBorderedToFullExiting {
+                animation: hideToRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
+            }
+
+            &.fullToHalfBorderedEntering {
+                animation: showFromRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
             }
         }
     }
@@ -290,11 +297,13 @@
                 width: 100%;
                 background: var(--color-mineral-green);
 
-                &.wideToFullEntering {
+                &.wideToFullEntering,
+                &.halfBorderedToFullEntering {
                     animation: showFromRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
                 }
 
-                &.fullToWideExiting {
+                &.fullToWideExiting,
+                &.fullToHalfBorderedExiting {
                     animation: hideToRight var(--layout-animation-duration) var(--ease-out-quint) forwards;
                 }
             }
