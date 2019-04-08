@@ -1,20 +1,20 @@
 import React from 'react';
 import Icon from './Icon';
-import cameraSvg from '../../media/icons/icon-camera.svg';
-import desktopSvg from '../../media/icons/icon-desktop.svg';
-import entitySvg from '../../media/icons/icon-entity.svg';
-import eyeOffSvg from '../../media/icons/icon-eye-off.svg';
-import eyeSvg from '../../media/icons/icon-eye.svg';
-import infoSvg from '../../media/icons/icon-info.svg';
-import laptopSvg from '../../media/icons/icon-laptop.svg';
-import mobileSvg from '../../media/icons/icon-mobile.svg';
-import otherSvg from '../../media/icons/icon-other.svg';
-import userSvg from '../../media/icons/icon-user.svg';
-import plusSvg from '../../media/icons/icon-plus.svg';
-import refreshSvg from '../../media/icons/icon-refresh.svg';
-import tabletSvg from '../../media/icons/icon-tablet.svg';
-import warningSvg from '../../media/icons/icon-warning.svg';
 
+const cameraSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-camera.svg');
+const desktopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-desktop.svg');
+const entitySvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-entity.svg');
+const eyeOffSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye-off.svg');
+const eyeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye.svg');
+const infoSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-info.svg');
+const laptopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-laptop.svg');
+const mobileSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-mobile.svg');
+const otherSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-other.svg');
+const userSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-user.svg');
+const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-plus.svg');
+const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
+const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
+const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-cross-outline.svg');
 const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 

@@ -4,7 +4,7 @@
 /* stylelint-disable max-line-length */
 
 :root {
-    --spacing: 4rem;
+    --spacing: 5rem;
     --color-darker-dawn-pink: #c8c0bb;
     --background-pattern:
         radial-gradient(circle at 100% 150%, color(var(--color-dawn-pink) alpha(0.8)) 24%, color(var(--color-darker-dawn-pink) alpha(0.8)) 25%, color(var(--color-darker-dawn-pink) alpha(0.8)) 28%, color(var(--color-dawn-pink) alpha(0.8)) 29%, color(var(--color-dawn-pink) alpha(0.8)) 36%, color(var(--color-darker-dawn-pink) alpha(0.8)) 36%, color(var(--color-darker-dawn-pink) alpha(0.8)) 40%, transparent 40%, transparent),
@@ -21,11 +21,12 @@
     top: 50%;
     left: 50%;
     width: calc(100vw - var(--spacing));
+    min-width: 97.4rem;
     max-width: 128rem;
-    height: calc(100vh - var(--spacing));
-    max-height: 65rem;
+    height: 65rem;
     overflow: auto;
     transform: translate(-50%, -50%) scale(0.9);
+    outline: none;
     opacity: 0;
     background-color: var(--color-white);
     transition: opacity 0.2s 0.1s ease, transform 0.3s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -50,11 +51,13 @@
 }
 
 .modalOverlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    min-width: 102.4rem;
+    min-height: 70rem;
     background-color: transparent;
     transition: background-color 0.2s ease;
 
@@ -70,8 +73,13 @@
 }
 
 .modalPortal {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 999999;
+    overflow: scroll;
 }
 
 .modalBodyOpen {

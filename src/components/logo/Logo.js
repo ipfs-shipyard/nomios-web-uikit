@@ -36,7 +36,7 @@ const Logo = ({ variant, className, ...rest }) => {
 
 Logo.propTypes = {
     variant: PropTypes.oneOf(['symbol', 'logotype', 'horizontal', 'vertical']),
-    className: PropTypes.object,
+    className: PropTypes.string,
 };
 
 Logo.defaultProps = {

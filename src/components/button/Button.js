@@ -143,7 +143,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-    variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'negative']).isRequired,
+    variant: PropTypes.oneOf(['primary', 'secondary', 'tertiary', 'negative']),
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     feedback: PropTypes.oneOf(['none', 'loading', 'success', 'error']),
@@ -152,6 +152,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+    variant: 'primary',
     feedback: 'none',
 };
 

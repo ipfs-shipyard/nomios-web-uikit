@@ -28,7 +28,7 @@ import { Logo } from '@nomios/web-uikit';
 You may change the icon size via the `fontSize` CSS property (defaults to `1rem`).
 
 ```jsx
-import { ReplyIcon } from '@nomios/web-uikit';
+import { Logo } from '@nomios/web-uikit';
 
 <Logo variant="vertical" style={ { fontSize: '1.6rem' } } />
 ```
