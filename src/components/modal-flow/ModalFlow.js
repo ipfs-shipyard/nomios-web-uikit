@@ -75,7 +75,7 @@ class ModalFlow extends Component {
             }
 
             return {
-                queuedStepIndex: requestNextStepIndex,
+                pendingStepIndex: requestNextStepIndex,
             };
         }
 
@@ -117,7 +117,7 @@ class ModalFlow extends Component {
         requestNextStepIndex: false,
         requestNextLayout: false,
         isAnimatingStepIn: false,
-        queuedStepIndex: false,
+        pendingStepIndex: false,
     };
 
     render() {
@@ -313,7 +313,7 @@ class ModalFlow extends Component {
     };
 
     handleCurrentStepTransitionEnd = (event) => {
-        const { requestNextStepIndex, queuedStepIndex } = this.state;
+        const { requestNextStepIndex, pendingStepIndex } = this.state;
         const dataAttr = event.target.getAttribute('data-attr');
 
         if (!dataAttr || (dataAttr === 'step' && event.propertyName === 'width')) {
@@ -323,13 +323,13 @@ class ModalFlow extends Component {
         if (!this.isAnimatingLayout) {
             if (isNumber(requestNextStepIndex)) {
                 this.setState({
-                    requestNextStepIndex: queuedStepIndex,
+                    requestNextStepIndex: pendingStepIndex,
                     currentStepIndex: requestNextStepIndex,
-                    isAnimatingStepIn: isNumber(queuedStepIndex),
+                    isAnimatingStepIn: isNumber(pendingStepIndex),
                 });
             } else {
                 this.setState({
-                    queuedStepIndex: false,
+                    pendingStepIndex: false,
                     isAnimatingStepIn: false,
                 });
             }
