@@ -12,6 +12,10 @@ class ModalFlow extends Component {
             console.error('The ModalFlow variant prop can\'t be changed');
         }
 
+        if (React.Children.count(props.children) === 0) {
+            console.error('ModalFlow must have at least 1 step');
+        }
+
         const children = castArray(props.children);
         const steps = children.map((child) => ({
             id: child.props.id,
@@ -32,7 +36,7 @@ class ModalFlow extends Component {
         const currentStepIndex = steps.findIndex((step) => step.id === props.step);
         const currentStep = {
             isFirst: currentStepIndex === 0,
-            isLast: currentStepIndex + 1 === steps.length,
+            isLast: currentStepIndex + 1 === steps.length && steps.length > 1,
         };
 
         // It means that the step index has changed
@@ -135,13 +139,14 @@ class ModalFlow extends Component {
 
     renderCurrentStep = () => {
         const { children } = this.props;
-        const { currentStepIndex, requestNextStepIndex } = this.state;
+        const { currentStepIndex, requestNextStepIndex, steps } = this.state;
+        const currentStep = steps.length > 1 ? children[currentStepIndex] : children;
 
         return (
             <div className={ classNames(styles.step, !isNumber(requestNextStepIndex) && !this.isAnimatingLayout && styles.active) }
                 data-attr="step"
                 onTransitionEnd={ this.handleCurrentStepTransitionEnd } >
-                { !this.isAnimatingLayout && children[currentStepIndex] }
+                { !this.isAnimatingLayout && currentStep }
             </div>
         );
     };
