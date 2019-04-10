@@ -108,3 +108,10 @@ Link the projects by running `npm link` inside the root directory of the `nomios
 ## Contributing
 
 If you want to contribute for the project, we encourage you to read over the [Nomios](https://github.com/ipfs-shipyard/pm-idm) repository README.
+
+
+## License
+
+Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php), except for the GT Sectra font files.
+
+Due to the Grilli Type [End User License Agreement (EULA)](https://grillitype.com/api/v1/download/eula_web/Grilli-Type-Web-EULA-1_7.pdf), the GT Sectra font files should not be used outside of this project.
