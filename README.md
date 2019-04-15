@@ -8,8 +8,124 @@ Nomios' living Web UIkit.
 - React
 - CSS modules
 - [PostCSS](https://github.com/postcss/postcss) with [MOXY's preset](https://github.com/moxystudio/postcss-preset-moxy)
-- SVG spriting support with [external-svg-sprite-loader](https://github.com/karify/external-svg-sprite-loader)
 
+
+## Setup
+
+It's assumed that you will consume this package in an application bundled with Webpack. Follow the steps below:
+
+1. Activate CSS modules
+
+    Activate [CSS modules](https://github.com/webpack-contrib/css-loader#modules) for this package directory (or for your whole project if you like):
+
+    ```js
+    {
+        test: /\.css$/,
+        include: path.resolve(__dirname, 'node_modules/@nomios/web-uikit'),
+        loader: [
+            {
+                loader: require.resolve('style-loader'),
+            },
+            {
+                loader: require.resolve('css-loader'),
+                options: {
+                    modules: true,
+                    sourceMap: true,
+                    importLoaders: 1,
+                    localIdentName: '[name]__[local]___[hash:base64:5]!',
+                },
+            },
+        ],
+    },
+    ```
+
+    If you are going to use any of the CSS variables or mixins, please add `postcss-loader` after `css-loader`:
+
+    ```js
+    {
+        loader: require.resolve('postcss-loader'),
+        options: require('postcss-preset-moxy')({
+            url: 'rebase',
+        }),
+    }
+    ```
+
+2. Add SVG rule
+
+    Support inline SVGs by using `raw-loader` for this package directory (or for your whole project if you like):
+
+    ```js
+    {
+        test: /\.svg$/,
+        include: path.resolve(__dirname, 'node_modules/@nomios/web-uikit'),
+        use: [
+            require.resolve('raw-loader'),
+            {
+                loader: require.resolve('svgo-loader'),
+                options: {
+                    plugins: [
+                        { removeTitle: true },
+                        { removeDimensions: true },
+                        { cleanupIDs: false },
+                    ],
+                },
+            },
+            // Uniquify classnames and ids so they don't conflict with each other
+            {
+                loader: require.resolve('svg-css-modules-loader'),
+                options: {
+                    transformId: true,
+                },
+            },
+        ],
+    },
+    ```
+
+3. Import base styles
+
+    Import the styleguide base styles in the app's entry CSS file:
+
+    ```css
+    /* src/index.css */
+    @import "@nomios/web-uikit/styles";
+    ```
+
+    ..or in your entry JavaScript file:
+
+    ```js
+    // src/index.js
+    import "@nomios/web-uikit/styles/index.css";
+    ```
+
+4. Wrap your app
+
+   Wrap your app with `KeyboardOnlyOutlines` components to disable outlines when using a pointer device, such as a mouse:
+
+   ```js
+   import { KeyboardOnlyOutlines } from '@nomios/web-uikit';
+
+   <KeyboardOnlyOutlines>
+     <MyApp />
+   </KeyboardOnlyOutlines>
+   ```
+
+5. Use the components
+
+    ```js
+    import { TypingIndicator } from '@nomios/web-uikit';
+
+    <TypingIndicator />
+    ```
+
+    You may take a look at all the components by [running the Storybook](https://github.com/ipfs-shipyard/discussify-styleguide#start).
+
+    If you are using the `Modal` component, please call `setAppElement` with your app element:
+
+    ```js
+    import { setAppElement } from '@nomios/web-uikit';
+
+    setAppElement('#root');
+    ```
 
 ## Commands
 
