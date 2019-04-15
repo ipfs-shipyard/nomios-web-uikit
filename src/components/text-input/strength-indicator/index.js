@@ -1,1 +1,1 @@
-export { default } from './StrengthIndicator.js';
+export { default } from './StrengthIndicator';

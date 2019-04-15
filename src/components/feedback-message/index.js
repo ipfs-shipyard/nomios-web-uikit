@@ -1,1 +1,1 @@
-export { default } from './FeedbackMessage.js';
+export { default } from './FeedbackMessage';

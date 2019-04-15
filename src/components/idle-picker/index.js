@@ -1,1 +1,1 @@
-export { default } from './IdlePicker.js';
+export { default } from './IdlePicker';
