@@ -16,9 +16,7 @@ const select = () => {
 const selectedList = new Array(8).fill(false);
 const selectFromArray = (i) => {
     selectedList[i] = !selectedList[i];
-    const buttonAction = `clicked: ${i}, ${selectedList[i]}`;
-
-    action(buttonAction)();
+    action(`clicked: ${i}, ${selectedList[i]}`)();
     forceReRender();
 };
 
@@ -26,11 +24,11 @@ const styles = {
     wrapper: {
         display: 'flex',
         width: '50%',
-        'flex-wrap': 'wrap',
+        flexWrap: 'wrap',
     },
     badge: {
-        'margin-bottom': '1rem',
-        'margin-right': '1.2rem',
+        marginBottom: '1rem',
+        marginRight: '1.2rem',
     },
 };
 

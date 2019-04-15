@@ -7,15 +7,14 @@ A standard badge.
 ```jsx
 import { Badge } from '@nomios/web-uikit';
 
-<Badge onClick={ handleClick }>
-    { children }
-<Badge/>
+<Badge onClick={ handleClick }>hello<Badge/>
 ```
 
 ## Props
 
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
+| children | node | *required* | The contents to render, usually a text |
 | selected | boolean | false | Sets the badge as selected |
 | disabled | boolean | false | Sets the disable state |
 | onClick | function | | Sets a function to be called when the badge is clicked |

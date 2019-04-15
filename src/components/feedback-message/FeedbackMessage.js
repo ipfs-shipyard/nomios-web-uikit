@@ -23,8 +23,8 @@ const FeedbackTooltip = ({ type, children }) => {
     }
 
     return (
-        <TooltipTrigger tooltip={ <Tooltip className={ styles.tooltip } placement="bottom" >{ children }</Tooltip> }>
-            { <div className={ styles.iconWrapper }>{ <FeedbackIcon type={ type } /> }</div> }
+        <TooltipTrigger tooltip={ <Tooltip className={ styles.tooltip } placement="bottom">{ children }</Tooltip> }>
+            <div className={ styles.iconWrapper }>{ <FeedbackIcon type={ type } /> }</div>
         </TooltipTrigger>
     );
 };

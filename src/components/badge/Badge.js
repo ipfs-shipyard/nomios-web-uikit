@@ -22,7 +22,7 @@ const Badge = ({ selected, disabled, hideOverflow, children, onClick, ...rest })
 Badge.propTypes = {
     selected: PropTypes.bool,
     disabled: PropTypes.bool,
-    onClick: PropTypes.function,
+    onClick: PropTypes.func,
     hideOverflow: PropTypes.bool,
     children: PropTypes.node.isRequired,
 };

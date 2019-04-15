@@ -50,7 +50,7 @@ storiesOf('Feedback Message', module)
             type="info"
             iconPosition="left"
             variant="small"
-            tooltipChildren="My cool tooltip content">
+            tooltip="My cool tooltip content">
         Try hover the icon
         </FeedbackMessage>
     </div>
@@ -58,7 +58,7 @@ storiesOf('Feedback Message', module)
 .add('Knobs playground ⚽', () => {
     const children = text('children', 'Generic feedback message');
     const variant = select('variant', ['small', 'large'], 'small');
-    const type = select('type', ['', 'error', 'info'], '');
+    const type = select('type', [undefined, 'error', 'info']);
     const textColor = text('text color', '');
     const iconPosition = select('icon position', ['left', 'right'], 'left');
 
