@@ -9,7 +9,7 @@ import { action } from '@storybook/addon-actions';
 storiesOf('Idle Picker', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
-.add('Idle Picker', () => (
+.add('Default', () => (
     <div style={ { width: '47.4rem', margin: 'auto auto' } }>
         <IdlePicker defaultValue={ 3 } handlePickerChange={ action('clicked!') } />
     </div>

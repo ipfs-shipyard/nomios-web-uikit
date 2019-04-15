@@ -13,13 +13,13 @@ storiesOf('Text input', module)
         label="Label"
         placeholder="Hint Text" />
 ))
-.add('With Helper Text', () => (
+.add('With helper text', () => (
     <TextInput
         label="Label"
         placeholder="Hint Text"
         helperText="Helper text" />
 ))
-.add('With Feedback Message', () => (
+.add('With feedback message', () => (
     <TextInput
         label="Label"
         placeholder="Hint Text"
@@ -31,7 +31,7 @@ storiesOf('Text input', module)
     const type = select('input type', ['text', 'password'], 'text');
     const helperText = text('helper text', '');
     const feedbackMessage = text('feedback message', '');
-    const feedbackType = select('feedback type', ['', 'error', 'info'], '');
+    const feedbackType = select('feedback type', [undefined, 'error', 'info']);
     const lineType = select('lineType', ['normal', 'dashed'], 'normal');
     const lineStrength = number('line strength', undefined);
 
