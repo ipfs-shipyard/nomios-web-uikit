@@ -12,7 +12,7 @@ const wrapperStyle = {
     maxWidth: '280px',
 };
 
-storiesOf('Feedback Message', module)
+storiesOf('FeedbackMessage', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
 .add('Small', () => (
