@@ -109,7 +109,7 @@ class FlowModalContents extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!prevState.layout && this.state.layout) {
-            this.props.onEntered && this.props.onEntered();
+            this.firstLayoutDidRender = true;
         }
     }
 
@@ -326,6 +326,13 @@ class FlowModalContents extends Component {
         }
     };
 
+    checkOnEntered = () => {
+        if (this.firstLayoutDidRender) {
+            this.firstLayoutDidRender = undefined;
+            this.props.onEntered && this.props.onEntered();
+        }
+    };
+
     handleFlowContentsTransitionEnd = (event) => {
         if (event.target.matches(`.${styles.flowModalContents}`)) {
             this.props.onExited && this.props.onExited();
@@ -349,7 +356,7 @@ class FlowModalContents extends Component {
             } else {
                 this.setState({
                     pendingStepIndex: false,
-                });
+                }, this.checkOnEntered);
             }
         }
     };
