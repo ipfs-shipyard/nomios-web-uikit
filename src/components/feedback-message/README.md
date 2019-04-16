@@ -28,5 +28,4 @@ import { FeedbackMessage } from '@nomios/web-uikit';
 | tooltipChildren | node | | Tooltip content. If this prop is provided, a tooltip is created and it'll be triggered on icon hover. |
 | className | string | | A classname to override styles. |
 
-
 **Note:** Both text and icon color will be set to `#d0021b` when `type` is set as `error`.
