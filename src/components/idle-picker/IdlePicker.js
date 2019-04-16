@@ -111,7 +111,7 @@ class IdlePicker extends Component {
         const roundedValue = Math.round(value);
 
         this.setState({ pickerValue: roundedValue, displayValue: roundedValue, forcePickerValue: true });
-        this.props.handlePickerChange && this.props.handlePickerChange(roundedValue);
+        this.props.onChange && this.props.onChange(roundedValue);
     };
 
     appendClassToTrack = () => {
@@ -164,14 +164,14 @@ class IdlePicker extends Component {
         case 'DOWN':
         case 'ArrowDown':
             pickerValue > 1 && this.setState({ pickerValue: pickerValue - 1, displayValue: pickerValue - 1, forcePickerValue: true });
-            this.props.handlePickerChange && this.props.handlePickerChange(pickerValue - 1);
+            this.props.onChange && this.props.onChange(pickerValue - 1);
             break;
         case 'RIGHT':
         case 'ArrowRight':
         case 'UP':
         case 'ArrowUp':
             pickerValue < 10 && this.setState({ pickerValue: pickerValue + 1, displayValue: pickerValue + 1, forcePickerValue: true });
-            this.props.handlePickerChange && this.props.handlePickerChange(pickerValue + 1);
+            this.props.onChange && this.props.onChange(pickerValue + 1);
             break;
         default:
         }
@@ -192,7 +192,7 @@ class IdlePicker extends Component {
 
 IdlePicker.propTypes = {
     defaultValue: PropTypes.number,
-    handlePickerChange: PropTypes.func,
+    onChange: PropTypes.func,
 };
 
 IdlePicker.defaultProps = {

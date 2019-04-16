@@ -7,7 +7,7 @@ A standard Idle Picker input.
 ```jsx
 import { IdlePicker } from '@nomios/web-uikit';
 
-<IdlePicker handlePickerChange={ handleChange } />
+<IdlePicker onChange={ handleChange } />
 ```
 
 ## Props
@@ -15,4 +15,4 @@ import { IdlePicker } from '@nomios/web-uikit';
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
 | defaultValue | number | 3 | Sets the starting value of the idle picker. Accepts a value between 1 and 10 |
-| handlePickerChange | function | | Sets a function to be called when the value of the idle picker is changed. Receives the current value as an argument |
+| onChange | function | | Sets a function to be called when the value of the idle picker is changed. Receives the current value as an argument |
