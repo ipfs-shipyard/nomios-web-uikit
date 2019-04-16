@@ -20,5 +20,4 @@ import { Badge } from '@nomios/web-uikit';
 | onClick | function | | Sets a function to be called when the badge is clicked |
 | hideOverflow | boolean | true | Sets a maximum width on te component, making the overflowing content hidden |
 
-
 **Note:** Any other properties supplied to this component will be spread to the root element.

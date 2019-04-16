@@ -20,5 +20,4 @@ import { Button } from '@nomios/web-uikit';
 | feedback | string | | Sets the current feedback of the button. Can be one of: `none`, `loading`, `success`, `error` |
 | onAnimationEnd | function | | Function called after the `success` or `error` entrance animation finishes. Takes a boolean `isSuccess` as an argument: `true` if the animation occurs after a `success` feedback and `false` otherwise |
 
-
 **Note:** Any other properties supplied to this component will be spread to the root element.
