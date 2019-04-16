@@ -10,12 +10,8 @@
     & .iconWrapper {
         display: flex;
 
-        &:hover {
-            cursor: pointer;
-
-            & .icon {
-                fill-opacity: 0.6;
-            }
+        &:hover .icon {
+            fill-opacity: 0.6;
         }
     }
 

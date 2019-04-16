@@ -6,7 +6,7 @@ import { IdlePicker } from '../src';
 import readme from '../src/components/idle-picker/README.md';
 import { action } from '@storybook/addon-actions';
 
-storiesOf('Idle Picker', module)
+storiesOf('IdlePicker', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
 .add('Default', () => (

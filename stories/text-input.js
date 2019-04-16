@@ -5,7 +5,7 @@ import { withReadme } from 'storybook-readme';
 import { TextInput } from '../src';
 import readme from '../src/components/text-input/README.md';
 
-storiesOf('Text input', module)
+storiesOf('TextInput', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
 .add('Default', () => (
