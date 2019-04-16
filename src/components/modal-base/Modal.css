@@ -1,5 +1,4 @@
 @import "../../styles/colors";
-@import "../../styles/mixins/typography";
 
 :root {
     --screen-min-width: 102.4rem;
