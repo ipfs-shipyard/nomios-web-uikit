@@ -117,9 +117,11 @@
     }
 }
 
-.tooltipBox {
+.tooltipContent {
     position: relative;
+    @mixin typography-body-2 rem;
     z-index: 2;
+    padding: 2rem 2.5rem;
     text-align: left;
 
     &.light {
@@ -131,11 +133,4 @@
         background-color: color(var(--color-armadillo) alpha(0.8));
         color: var(--color-white);
     }
-}
-
-.tooltipContent {
-    @mixin typography-body-2 rem;
-    position: relative;
-    padding: 2rem 2.5rem;
-    backface-visibility: hidden; /* Prevent text from flickering in Webkit */
 }

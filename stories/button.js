@@ -45,5 +45,5 @@ storiesOf('Button', module)
         </Button>
     );
 }, {
-    backgrounds: [darkBackground],
+    backgrounds: [{ ...darkBackground, default: false }],
 });

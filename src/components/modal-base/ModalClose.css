@@ -1,0 +1,14 @@
+.modalClose {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 5;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    & .icon {
+        font-size: 1.4rem;
+    }
+}

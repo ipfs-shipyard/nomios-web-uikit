@@ -27,9 +27,7 @@ class Icon extends Component {
         const { contents } = this.state;
         const finalProps = {
             ...rest,
-            contents,
-            className: classNames(styles.icon,
-                className),
+            className: classNames(styles.icon, className),
         };
 
         if (contents != null) {

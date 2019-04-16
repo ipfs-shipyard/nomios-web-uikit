@@ -15,6 +15,7 @@ const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/i
 const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
+const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
 const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-cross-outline.svg');
 const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 
@@ -34,6 +35,7 @@ const PlusIcon = (props) => <Icon { ...props } svg={ plusSvg } />;
 const RefreshIcon = (props) => <Icon { ...props } svg={ refreshSvg } />;
 const TabletIcon = (props) => <Icon { ...props } svg={ tabletSvg } />;
 const WarningIcon = (props) => <Icon { ...props } svg={ warningSvg } />;
+const CloseIcon = (props) => <Icon { ...props } svg={ closeSvg } />;
 
 export default Icon;
 export {
@@ -53,4 +55,5 @@ export {
     RefreshIcon,
     TabletIcon,
     WarningIcon,
+    CloseIcon,
 };

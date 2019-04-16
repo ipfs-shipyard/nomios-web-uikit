@@ -1,0 +1,29 @@
+.standardModal {
+    will-change: opacity;
+    width: 70vw;
+    min-width: 30rem;
+    min-height: 30rem;
+    padding: 5rem;
+    transform: translateX(-15px);
+    opacity: 0;
+    transition: transform 0.15s ease-in, opacity 0.15s linear;
+
+    &.enter {
+        transform: translateX(0);
+        opacity: 1;
+        transition: transform 0.15s ease-out, opacity 0.15s linear;
+    }
+
+    & .closeButton {
+        transform: rotate(-90deg);
+        opacity: 0;
+    }
+
+    &.enterDone .closeButton,
+    &.exit .closeButton,
+    &.exitActive .closeButton {
+        transform: rotate(0);
+        opacity: 1;
+        transition: transform 0.2s ease, opacity 0.1s linear;
+    }
+}

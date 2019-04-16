@@ -1,0 +1,6 @@
+{
+    "rules": {
+        "react/jsx-no-bind": 0,
+        "react/prop-types": 0
+    }
+}

@@ -3,42 +3,33 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import { Manager, Reference } from 'react-popper';
 
-export default class TooltipTrigger extends Component {
-    static defaultHoverDelay = 200;
+const DEFAULT_HOVER_DELAY = 200;
 
-    static propTypes = {
-        tooltip: PropTypes.element,
-        children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
-        onOpen: PropTypes.func,
-        onClose: PropTypes.func,
-    };
+class TooltipTrigger extends Component {
+    defaultEventProps = null;
+    state = { open: false };
 
     constructor() {
         super();
 
         this.defaultEventProps = {
             onClick: this.handleOpen,
-            onMouseEnter: () => this.handleOpen(TooltipTrigger.defaultHoverDelay),
-            onMouseLeave: () => this.handleClose(TooltipTrigger.defaultHoverDelay),
+            onMouseEnter: () => this.handleOpen(DEFAULT_HOVER_DELAY),
+            onMouseLeave: () => this.handleClose(DEFAULT_HOVER_DELAY),
         };
     }
 
-    state = { isOpen: false };
-
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.isOpen && !prevState.isOpen) {
-            this.props.onOpen && this.props.onOpen();
-        } else if (!this.state.isOpen && prevState.isOpen) {
-            this.props.onClose && this.props.onClose();
+        if (this.state.open !== prevState.open) {
+            this.props.onChange && this.props.onChange(this.state.open);
         }
     }
 
     componentWillUnmount() {
         clearTimeout(this.openCloseTimeoutId);
-        cancelAnimationFrame(this.scheduleUpdateRequestId);
 
-        if (this.state.isOpen) {
-            this.props.onClose && this.props.onClose();
+        if (this.state.open) {
+            this.props.onChange && this.props.onChange(false);
         }
     }
 
@@ -55,11 +46,11 @@ export default class TooltipTrigger extends Component {
         this.setReferenceRef = ref;
 
         const { children: trigger } = this.props;
-        const { isOpen } = this.state;
+        const { open } = this.state;
 
         if (typeof trigger === 'function') {
             const element = trigger({
-                isOpen,
+                state: open,
                 open: this.handleOpen,
                 cancelOpen: this.handleCancelOpen,
                 close: this.handleClose,
@@ -77,14 +68,14 @@ export default class TooltipTrigger extends Component {
     };
 
     renderTooltip = () => {
-        const { isOpen } = this.state;
+        const { open } = this.state;
         const { tooltip } = this.props;
 
         return cloneElement(tooltip, {
             ref: this.storeTooltipRef,
-            isOpen,
-            onRequestCancelClose: this.handleTooltipRequestCancelClose,
-            onRequestClose: this.handleTooltipRequestClose,
+            open,
+            onRequestCancelClose: this.handleRequestCancelClose,
+            onRequestClose: this.handleRequestClose,
         });
     };
 
@@ -107,7 +98,7 @@ export default class TooltipTrigger extends Component {
         this.pendingClose = false;
 
         this.openCloseTimeoutId = setTimeout(() => {
-            this.setState({ isOpen: true });
+            this.setState({ open: true });
         }, delay);
     };
 
@@ -121,27 +112,27 @@ export default class TooltipTrigger extends Component {
 
         this.openCloseTimeoutId = setTimeout(() => {
             this.pendingClose = false;
-            this.setState({ isOpen: false });
+            this.setState({ open: false });
         }, delay);
     };
 
     handleToggle = (delay) => {
-        if (this.state.isOpen) {
+        if (this.state.open) {
             this.handleClose(delay);
         } else {
             this.handleOpen(delay);
         }
     };
 
-    handleTooltipRequestCancelClose = () => {
+    handleRequestCancelClose = () => {
         clearTimeout(this.openCloseTimeoutId);
     };
 
-    handleTooltipRequestClose = (e, reason) => {
+    handleRequestClose = (reason) => {
         const isMouseLeave = reason === 'mouseLeave';
 
         // If the reason to close is `mouseLeave`, only close it if there's a pending close
-        // We only want to "override" de trigger for `escapePress` / `closeOutside`
+        // We only want to "override" de trigger for `escapePress` / `clickOutside`
         if (isMouseLeave && !this.pendingClose) {
             return;
         }
@@ -150,7 +141,15 @@ export default class TooltipTrigger extends Component {
         clearTimeout(this.openCloseTimeoutId);
 
         this.openCloseTimeoutId = setTimeout(() => {
-            this.setState({ isOpen: false });
-        }, isMouseLeave ? TooltipTrigger.defaultHoverDelay : 0);
+            this.setState({ open: false });
+        }, isMouseLeave ? DEFAULT_HOVER_DELAY : 0);
     };
 }
+
+TooltipTrigger.propTypes = {
+    tooltip: PropTypes.element.isRequired,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
+    onChange: PropTypes.func,
+};
+
+export default TooltipTrigger;

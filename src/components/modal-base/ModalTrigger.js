@@ -2,25 +2,28 @@ import React, { Component, Fragment, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
 class ModalTrigger extends Component {
-    defaultEventProps = {
-        onClick: this.handleOpen,
-    };
+    defaultEventProps = null;
+    state = { open: false };
 
-    state = { isOpen: false };
+    constructor() {
+        super();
+
+        this.defaultEventProps = {
+            onClick: this.handleOpen,
+        };
+    }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.isOpen && !prevState.isOpen) {
-            this.props.onOpen && this.props.onOpen();
-        } else if (!this.state.isOpen && prevState.isOpen) {
-            this.props.onClose && this.props.onClose();
+        if (this.state.open !== prevState.open) {
+            this.props.onChange && this.props.onChange(this.state.open);
         }
     }
 
     componentWillUnmount() {
         clearTimeout(this.openCloseTimeoutId);
 
-        if (this.state.isOpen) {
-            this.props.onClose && this.props.onClose();
+        if (this.state.open) {
+            this.props.onChange && this.props.onChange(false);
         }
     }
 
@@ -35,11 +38,11 @@ class ModalTrigger extends Component {
 
     renderTrigger() {
         const { children: trigger } = this.props;
-        const { isOpen } = this.state;
+        const { open } = this.state;
 
         return typeof trigger === 'function' ?
             trigger({
-                isOpen,
+                state: open,
                 open: this.handleOpen,
                 cancelOpen: this.handleCancelOpen,
                 close: this.handleClose,
@@ -51,11 +54,11 @@ class ModalTrigger extends Component {
 
     renderModal() {
         const { modal } = this.props;
-        const { isOpen } = this.state;
+        const { open } = this.state;
 
         return cloneElement(modal, {
-            isOpen,
-            onRequestClose: this.handleModalRequestClose,
+            open,
+            onRequestClose: this.handleRequestClose,
         });
     }
 
@@ -63,7 +66,7 @@ class ModalTrigger extends Component {
         clearTimeout(this.openCloseTimeoutId);
 
         this.openCloseTimeoutId = setTimeout(() => {
-            this.setState({ isOpen: true });
+            this.setState({ open: true });
         }, delay);
     };
 
@@ -75,26 +78,25 @@ class ModalTrigger extends Component {
         clearTimeout(this.openCloseTimeoutId);
 
         this.openCloseTimeoutId = setTimeout(() => {
-            this.setState({ isOpen: false });
+            this.setState({ open: false });
         }, delay);
     };
 
     handleToggle = (delay) => {
-        if (this.state.isOpen) {
+        if (this.state.open) {
             this.handleClose(delay);
         } else {
             this.handleOpen(delay);
         }
     };
 
-    handleModalRequestClose = (e, delay) => this.handleClose(e, delay);
+    handleRequestClose = () => this.handleClose();
 }
 
 ModalTrigger.propTypes = {
     modal: PropTypes.element.isRequired,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired,
-    onOpen: PropTypes.func,
-    onClose: PropTypes.func,
+    onChange: PropTypes.func,
 };
 
 export default ModalTrigger;

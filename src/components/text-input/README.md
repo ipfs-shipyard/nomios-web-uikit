@@ -24,18 +24,19 @@ import { TextInput } from '@nomios/web-uikit';
 | onChange | func | | Function to be called whenever the input content changes. |
 | className | string | | A classname to override styles. |
 
-### feedback prop
+### `feedback` prop
 
 This object is used to pass down information to `<FeedbackMessage />` component.
 
 | name | type | default | description |
-|-----------|--------|------------|----------------------------------------------------------------------------------------------------------|
+| ---- | ---- | ------- | ----------- |
 | message | string | *required* | The text message. |
 | type | string | | Feedback message type. Can be one of: `error` or `info` as specified on `<FeedbackMessage />` component. |
 | className | string | | A classname to override styles. |
 
 **Example:**
-```js
+
+```jsx
 const feedback = {
     message: 'Oops, something went wrong!',
     type: 'error',
