@@ -139,6 +139,17 @@ class FlowModalContents extends Component {
             styles[layoutClass]
         );
 
+        const modalCloseClasses = classNames(
+            styles.modalClose,
+            layout && styles.visible,
+            (layout === LAYOUT.HALF_BORDERED || requestNextLayout === LAYOUT.HALF_BORDERED) && styles.halfBorderedPosition,
+        );
+
+        const modalCloseIconClasses = classNames(
+            styles.closeIcon,
+            (layout === LAYOUT.HALF_BORDERED || layout === LAYOUT.FULL) && styles.whiteColored,
+        );
+
         return (
             <div className={ flowContentsClasses } onTransitionEnd={ this.handleFlowContentsTransitionEnd }>
                 <div className={ leftClasses } onAnimationEnd={ variant !== 'advanced' ? this.handlePanelAnimationEnd : undefined }>
@@ -149,7 +160,7 @@ class FlowModalContents extends Component {
                     { shouldRenderLogoRightSide && this.renderLogo() }
                     { this.stepsPlacement === 'right' && this.renderRightSteps() }
                 </div>
-                { showClose && <ModalClose /> }
+                { showClose && <ModalClose className={ modalCloseClasses } iconClassName={ modalCloseIconClasses } /> }
             </div>
         );
     }

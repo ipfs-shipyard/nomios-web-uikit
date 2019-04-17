@@ -3,8 +3,8 @@
 :root {
     --screen-min-width: 102.4rem;
     --screen-min-height: 70rem;
-    --screen-spacing: 2.5rem;
-    --inner-spacing: 2.5rem;
+    --screen-spacing: 2rem;
+    --inner-spacing: 2rem;
     --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
     --layout-animation-duration: 0.6s;
     --opacity-transition-duration: 0.5s;
@@ -74,13 +74,35 @@
     min-width: calc(var(--screen-min-width) - 2 * var(--screen-spacing));
     max-width: 128rem;
     height: calc(var(--screen-min-height) - 2 * var(--screen-spacing));
-    overflow: auto;
+    overflow: hidden;
     display: flex;
-    background: rgba(250, 250, 250);
+    background: var(--color-white);
     transition: opacity 0.2s ease-out;
 
     &.out {
         opacity: 0;
+    }
+
+    & .modalClose {
+        margin-top: 0;
+        transform: rotate(0);
+        opacity: 0;
+        transition:
+            margin 0.2s ease,
+            transform 0.2s ease;
+
+        &.visible {
+            transform: rotate(90deg);
+            opacity: 1;
+        }
+
+        &.halfBorderedPosition {
+            margin-top: var(--screen-spacing);
+        }
+    }
+
+    & .closeIcon.whiteColored {
+        fill: var(--color-white);
     }
 
     &.halfPanel,

@@ -6,11 +6,11 @@ import styles from './ModalClose.css';
 
 const ModalCloseContext = createContext();
 
-const ModalClose = ({ className, ...rest }) => (
+const ModalClose = ({ className, iconClassName, ...rest }) => (
     <ModalCloseContext.Consumer>
         { (onRequestClose) => (
             <button { ...rest } onClick={ onRequestClose } className={ classNames(styles.modalClose, className) }>
-                <CloseIcon className={ styles.icon } />
+                <CloseIcon className={ classNames(styles.icon, iconClassName) } />
             </button>
         ) }
     </ModalCloseContext.Consumer>
@@ -18,6 +18,7 @@ const ModalClose = ({ className, ...rest }) => (
 
 ModalClose.propTypes = {
     className: PropTypes.string,
+    iconClassName: PropTypes.string,
 };
 
 export { ModalCloseContext };
