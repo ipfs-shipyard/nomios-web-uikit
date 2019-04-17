@@ -59,7 +59,7 @@ class StrengthIndicator extends PureComponent {
 
             return (
                 <div className={ classNames(i < this.normalizedStrength && styles.filled) } key={ i }>
-                    <div ref={ i === 0 && this.innerElementRef } style={ innerElementStyle } className={ innerElementClasses } />
+                    <div ref={ i === 0 ? this.innerElementRef : null } style={ innerElementStyle } className={ innerElementClasses } />
                 </div>
             );
         });
