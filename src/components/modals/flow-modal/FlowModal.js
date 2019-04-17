@@ -17,7 +17,7 @@ FlowModal.propTypes = {
     variant: PropTypes.oneOf(['simple', 'simple-with-feedback', 'advanced']),
     step: PropTypes.string.isRequired,
     showClose: PropTypes.bool,
-    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element]).isRequired,
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.element]).isRequired,
 };
 
 FlowModal.defaultProps = {

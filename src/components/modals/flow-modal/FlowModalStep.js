@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const ModalStep = (props) => props.children;
+const FlowModalStep = (props) => props.children;
 
-ModalStep.propTypes = {
+FlowModalStep.propTypes = {
     id: PropTypes.string.isRequired,
     children: PropTypes.node,
 };
 
-export default ModalStep;
+export default FlowModalStep;

@@ -40,6 +40,11 @@ storiesOf('Modal/FlowModal', module)
         stepId: steps[0].id,
     });
 
+    const handleOnClick = (event) => {
+        console.log('data', event.target.getAttribute('data-go-to-id'));
+        store.set({ stepId: event.target.getAttribute('data-go-to-id') });
+    };
+
     return (
         <State store={ store }>
             { (state) => {
@@ -51,7 +56,7 @@ storiesOf('Modal/FlowModal', module)
                         { steps.map((step, index) => (
                             <FlowModalStep key={ index } id={ step.id }>
                                 { step.content }
-                                <button onClick={ () => store.set({ stepId: step.goToId }) }>
+                                <button data-go-to-id={ step.goToId } onClick={ handleOnClick }>
                                     Go to { step.goToId } step
                                 </button>
                             </FlowModalStep>
@@ -73,6 +78,10 @@ storiesOf('Modal/FlowModal', module)
         stepId: steps[0].id,
     });
 
+    const handleOnClick = (event) => {
+        store.set({ stepId: event.target.getAttribute('data-go-to-id') });
+    };
+
     return (
         <State store={ store }>
             { (state) => {
@@ -84,7 +93,7 @@ storiesOf('Modal/FlowModal', module)
                         { steps.map((step, index) => (
                             <FlowModalStep key={ index } id={ step.id }>
                                 { step.content }
-                                <button onClick={ () => store.set({ stepId: step.goToId }) }>
+                                <button data-go-to-id={ step.goToId } onClick={ handleOnClick }>
                                     Go to { step.goToId } step
                                 </button>
                             </FlowModalStep>
@@ -106,6 +115,10 @@ storiesOf('Modal/FlowModal', module)
         stepId: steps[0].id,
     });
 
+    const handleOnClick = (event) => {
+        store.set({ stepId: event.target.getAttribute('data-go-to-id') });
+    };
+
     return (
         <State store={ store }>
             { (state) => {
@@ -117,7 +130,7 @@ storiesOf('Modal/FlowModal', module)
                         { steps.map((step, index) => (
                             <FlowModalStep key={ index } id={ step.id }>
                                 { step.content }
-                                <button onClick={ () => store.set({ stepId: step.goToId }) }>
+                                <button data-go-to-id={ step.goToId } onClick={ handleOnClick }>
                                     Go to { step.goToId } step
                                 </button>
                             </FlowModalStep>
