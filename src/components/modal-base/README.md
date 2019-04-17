@@ -134,6 +134,12 @@ const modal = (
 );
 ```
 
+## ModalClose props
+
+All the props will be spreaded into the root element.
+
+Clicking in the `<ModalClose>` component will automatically call `onRequestClose` of the nearest `<Modal>` ancestor. This is done by using the Context API.
+
 ## ModalTrigger props
 
 | name | type | default | description |
