@@ -101,8 +101,14 @@
         }
     }
 
-    & .closeIcon.whiteColored {
-        fill: var(--color-white);
+    & .closeIcon {
+        transition:
+            fill-opacity 0.3s ease,
+            fill 0.3s ease;
+
+        &.whiteColored {
+            fill: var(--color-white);
+        }
     }
 
     &.halfPanel,

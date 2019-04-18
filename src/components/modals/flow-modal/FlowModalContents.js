@@ -43,18 +43,20 @@ class FlowModalContents extends Component {
             isRenderedStepLastOne && console.error('New steps can not be added on the last step');
         }
 
-        // Short-circuit if `in` is false
-        if (!props.in) {
-            return {
-                flatChildren,
-            };
-        }
-
         const currentStepIndex = flatChildren.findIndex((step) => step.props.id === props.step);
         const currentStep = {
             isFirst: currentStepIndex === 0,
             isLast: currentStepIndex + 1 === flatChildren.length && flatChildren.length > 1,
         };
+
+        // Short-circuit if `in` is false
+        if (!props.in) {
+            !currentStep.isFirst && console.error('Once the modal is open, the first step must be rendered');
+
+            return {
+                flatChildren,
+            };
+        }
 
         // It means that the step index has changed
         const requestNextStepIndex = currentStepIndex !== state.currentStepIndex && currentStepIndex;
