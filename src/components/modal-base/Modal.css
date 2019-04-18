@@ -62,7 +62,9 @@
         left: 0;
         z-index: -1;
         opacity: 0.95;
-        background: url("../../media/images/half-circle-light-pattern-2x.jpg") repeat;
+        background: url("../../media/images/half-circle-light-pattern-2x.jpg");
+        background-size: 1.6rem 1.6rem;
+        background-repeat: repeat;
     }
 
     &.afterOpen {
