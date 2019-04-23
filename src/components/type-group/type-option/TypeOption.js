@@ -6,12 +6,8 @@ import { generateRandomString } from '../../../utils';
 import styles from './TypeOption.css';
 
 class TypeOption extends Component {
-    constructor() {
-        super();
-
-        // We are using this to greatly reduce the possibility of having duplicated ids in the dom
-        this.idPrefix = `type-option-${generateRandomString()}#`;
-    }
+    // We are using this to greatly reduce the possibility of having duplicated ids in the dom
+    idPrefix = `type-option-${generateRandomString()}#`;
 
     render() {
         const { id, label, groupName, children, defaultSelected, badge: Badge, selectable } = this.props;
