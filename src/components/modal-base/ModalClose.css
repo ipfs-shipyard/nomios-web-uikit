@@ -1,0 +1,24 @@
+@import "../../../styles/colors";
+
+.modalClose {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 5;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    & .icon {
+        font-size: 1.4rem;
+        transition: fill-opacity 0.3s ease;
+        fill: var(--color-armadillo);
+        fill-opacity: 0.6;
+
+        &:hover {
+            cursor: pointer;
+            fill-opacity: 1;
+        }
+    }
+}

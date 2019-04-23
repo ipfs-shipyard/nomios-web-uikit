@@ -4,7 +4,6 @@ import { withReadme } from 'storybook-readme';
 import marked from 'marked';
 import styles from './typography.css';
 
-/* eslint-disable max-len */
 storiesOf('base/Typography', module)
 .addDecorator(withReadme(marked(`
 # Typography
@@ -39,4 +38,3 @@ You may use the typography CSS mixins like so:
         <div className={ styles.captions }>captions - The quick brown fox jumps over the lazy dog.</div>
     </div>
 ));
-/* eslint-disable max-len */

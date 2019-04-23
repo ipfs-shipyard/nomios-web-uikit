@@ -2,14 +2,14 @@ import React, { forwardRef } from 'react';
 import { storiesOf } from '@storybook/react';
 import { withReadme } from 'storybook-readme';
 import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import { Tooltip, TooltipTrigger, Button } from '../src';
 import readme from '../src/components/tooltip/README.md';
 
 const LoremIpsumTooltip = forwardRef((props, ref) => (
-    <Tooltip
-        ref={ ref }
-        style={ { maxWidth: 250 } }
-        { ...props }>Nullam a felis porta, sollicitudin justo vel, dignissim libero</Tooltip>
+    <Tooltip ref={ ref } style={ { maxWidth: 250 } } { ...props }>
+        Nullam a felis porta, sollicitudin justo vel, dignissim libero
+    </Tooltip>
 ));
 
 const styles = {
@@ -59,21 +59,22 @@ storiesOf('Tooltip', module)
         </TooltipTrigger>
     </div>
 ))
-/* eslint-disable react/jsx-no-bind, react/prop-types */
 .add('Knobs playground ⚽', () => {
+    const variant = select('variant', ['light', 'dark'], 'light');
     const placement = select('placement', ['auto', 'top', 'right', 'bottom', 'left'], 'auto');
     const trigger = select('trigger', ['standard', 'click', 'click-toggle', 'hover'], 'standard');
     const shouldCloseOnEsc = boolean('shouldCloseOnEsc', true);
     const shouldCloseOnOutsideClick = boolean('shouldCloseOnOutsideClick', true);
     const content = text('tooltip', 'My awesome tooltip content');
-    const variant = select('variant', ['light', 'dark'], 'light');
 
     const tooltip = (
         <Tooltip
+            variant={ variant }
             placement={ placement }
             shouldCloseOnEsc={ shouldCloseOnEsc }
             shouldCloseOnOutsideClick={ shouldCloseOnOutsideClick }
-            variant={ variant }>
+            onEntered={ action('entered') }
+            onExited={ action('exited') }>
             { content }
         </Tooltip>
     );
@@ -102,4 +103,3 @@ storiesOf('Tooltip', module)
         </div>
     );
 });
-/* eslint-enable react/jsx-no-bind, react/prop-types */

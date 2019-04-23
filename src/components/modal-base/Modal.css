@@ -1,0 +1,98 @@
+@import "../../styles/colors";
+
+:root {
+    --screen-min-width: 102.4rem;
+    --screen-min-height: 70rem;
+    --screen-spacing: 2.5rem;
+    --modal-transition-duration: 0.25s;
+    --modal-overlay-duration: 0.2s;
+}
+
+.modal {
+    height: 100%;
+    margin: 0 auto;
+    display: table;
+    outline: none;
+
+    & .modalCenter {
+        position: relative;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    & .modalContent {
+        will-change: transform;
+        transform: scaleX(0);
+        transform-origin: left;
+        background: var(--color-white);
+        transition: transform var(--modal-transition-duration) cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    &.afterOpen .modalContent {
+        transform: scaleX(1);
+        transition-delay: var(--modal-overlay-duration);
+    }
+
+    &.beforeClose .modalContent {
+        transform: scaleX(0);
+        transition-delay: 0s;
+    }
+}
+
+.modalOverlay {
+    will-change: opacity;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-width: var(--screen-min-width);
+    min-height: var(--screen-min-height);
+    overflow: auto;
+    padding: var(--screen-spacing);
+    opacity: 0;
+    transition: opacity var(--modal-overlay-duration) linear;
+
+    &::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        opacity: 0.95;
+        background: url("../../media/images/half-circle-light-pattern-2x.jpg");
+        background-size: 1.6rem 1.6rem;
+        background-repeat: repeat;
+    }
+
+    &.afterOpen {
+        opacity: 1;
+        transition-delay: 0s;
+    }
+
+    &.beforeClose {
+        opacity: 0;
+        transition-delay: var(--modal-transition-duration);
+    }
+}
+
+.modalPortal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+    overflow: scroll;
+    display: none;
+}
+
+.modalBodyOpen {
+    overflow: hidden;
+
+    & .modalPortal {
+        display: block;
+    }
+}

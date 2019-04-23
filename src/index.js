@@ -7,6 +7,6 @@ export { default as Badge } from './components/badge';
 export { default as FeedbackMessage } from './components/feedback-message';
 export { default as IdlePicker } from './components/idle-picker';
 export * from './components/tooltip';
-export * from './components/modal';
+export * from './components/modal-base';
+export * from './components/modals';
 export { default as Logo } from './components/logo';
-export { default as ModalFlow, ModalStep } from './components/modal-flow';

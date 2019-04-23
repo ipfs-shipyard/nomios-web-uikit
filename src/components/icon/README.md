@@ -1,6 +1,6 @@
 # Icon
 
-A SVG icon, accepts inline svgs and svgs sprited with [external-svg-sprite-loader](https://github.com/Karify/external-svg-sprite-loader).
+A SVG icon with support for sprites via dynamic imports.
 
 ## Usage
 

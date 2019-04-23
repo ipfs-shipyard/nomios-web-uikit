@@ -2,54 +2,73 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { castArray, isNumber, isEqual } from 'lodash';
-import Logo from '../logo';
+import Logo from '../../logo';
+import { ModalClose } from '../../modal-base';
 import { LAYOUT, LAYOUT_TRANSITION } from './constants';
-import styles from './ModalFlow.css';
+import styles from './FlowModalContents.css';
 
-class ModalFlow extends Component {
+class FlowModalContents extends Component {
     static getDerivedStateFromProps(props, state) {
         if (state.variant && state.variant !== props.variant) {
-            console.error('The ModalFlow variant prop can\'t be changed');
+            console.error('The FlowModal variant prop can\'t be changed');
         }
 
         if (React.Children.count(props.children) === 0) {
-            console.error('ModalFlow must have at least 1 step');
+            console.error('FlowModal must have at least 1 step');
         }
 
-        const children = castArray(props.children);
-        const steps = children.map((child) => ({
-            id: child.props.id,
-        }));
+        // Filter children so that we can remove null elements
+        const filteredArray = castArray(props.children).filter(Boolean);
+        // Create a flat array of children elements (1 level deep)
+        const flatChildren = filteredArray.flat();
+        // Filter children elements of types other than FlowModalStep
+        const unknownChildren = flatChildren.filter((child) => child.type.name !== 'FlowModalStep');
+
+        if (unknownChildren.length > 0) {
+            console.error('FLowModal only accepts children of type <FlowModalStep>');
+        }
+
+        const currentChildrenIds = flatChildren.map((child) => ({ id: child.props.id }));
+        const oldChildrenIds = state.flatChildren !== null && state.flatChildren.map((child) => ({ id: child.props.id }));
 
         // It means new steps were added
-        if (state.steps !== null && !isEqual(steps, state.steps)) {
-            const subset = steps.slice(0, state.steps.length);
-            const isRenderedStepLastOne = state.currentStep + 1 === state.steps.length;
+        if (state.flatChildren !== null && !isEqual(currentChildrenIds, oldChildrenIds)) {
+            const subset = currentChildrenIds.slice(0, oldChildrenIds.length);
+            const isRenderedStepLastOne = state.currentStep + 1 === state.flatChildren.length;
 
             // New steps can only be added at the end so that we can ensure the flow will not be broken
-            !isEqual(subset, state.steps) && console.error('New steps can only be added at the end');
+            !isEqual(subset, oldChildrenIds) && console.error('New steps can only be added at the end');
 
             // New steps can't be added if your current step is the last one
             isRenderedStepLastOne && console.error('New steps can not be added on the last step');
         }
 
-        const currentStepIndex = steps.findIndex((step) => step.id === props.step);
+        const currentStepIndex = flatChildren.findIndex((step) => step.props.id === props.step);
         const currentStep = {
             isFirst: currentStepIndex === 0,
-            isLast: currentStepIndex + 1 === steps.length && steps.length > 1,
+            isLast: currentStepIndex + 1 === flatChildren.length && flatChildren.length > 1,
         };
+
+        // Short-circuit if `in` is false
+        if (!props.in) {
+            !currentStep.isFirst && console.error('Once the modal is open, the first step must be rendered');
+
+            return {
+                flatChildren,
+            };
+        }
 
         // It means that the step index has changed
         const requestNextStepIndex = currentStepIndex !== state.currentStepIndex && currentStepIndex;
 
-        const layout = ModalFlow.inferLayout(currentStep.isFirst, currentStep.isLast, props.variant);
+        const layout = FlowModalContents.inferLayout(currentStep.isFirst, currentStep.isLast, props.variant);
         const requestNextLayout = layout !== state.layout && layout;
 
         if (layout === LAYOUT.HALF_BORDERED && state.layout === LAYOUT.WIDE) {
             console.error(`This layout transition (${state.layout} to ${layout}) is not allowed`);
         }
 
-        if (isNumber(requestNextStepIndex) && (isNumber(state.requestNextStepIndex) || state.isAnimatingStepIn)) {
+        if (isNumber(requestNextStepIndex) && (isNumber(state.requestNextStepIndex) || isNumber(state.pendingStepIndex))) {
             if (requestNextStepIndex === state.requestNextStepIndex) {
                 return null;
             }
@@ -61,7 +80,7 @@ class ModalFlow extends Component {
 
         return {
             variant: props.variant,
-            steps,
+            flatChildren,
             requestNextStepIndex,
             requestNextLayout,
         };
@@ -93,15 +112,21 @@ class ModalFlow extends Component {
         layout: null,
         currentStepIndex: 0,
         variant: null,
-        steps: null,
+        flatChildren: null,
         requestNextStepIndex: false,
         requestNextLayout: false,
-        isAnimatingStepIn: false,
         pendingStepIndex: false,
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.layout && this.state.layout) {
+            this.firstLayoutDidRender = true;
+        }
+    }
+
     render() {
         const { layout, requestNextLayout, requestNextStepIndex, variant } = this.state;
+        const { in: in_, showClose } = this.props;
 
         this.layoutTransition = this.inferLayoutTransition();
 
@@ -119,9 +144,26 @@ class ModalFlow extends Component {
         );
         const shouldRenderLogoRightSide = layout === LAYOUT.FULL && this.stepsPlacement === 'right';
 
+        const flowContentsClasses = classNames(
+            styles.flowModalContents,
+            layout && !in_ && styles.out,
+            styles[layoutClass]
+        );
+
+        const modalCloseClasses = classNames(
+            styles.modalClose,
+            layout && styles.visible,
+            (layout === LAYOUT.HALF_BORDERED || requestNextLayout === LAYOUT.HALF_BORDERED) && styles.halfBorderedPosition,
+        );
+
+        const modalCloseIconClasses = classNames(
+            styles.closeIcon,
+            (layout === LAYOUT.HALF_BORDERED || layout === LAYOUT.FULL) && styles.whiteColored,
+        );
+
         return (
-            <div className={ classNames(styles.modalFlow, styles[layoutClass]) }>
-                <div className={ leftClasses } onAnimationEnd={ variant !== 'advanced' ? this.handlePanelAnimationEnd : undefined } >
+            <div className={ flowContentsClasses } onTransitionEnd={ this.handleFlowContentsTransitionEnd }>
+                <div className={ leftClasses } onAnimationEnd={ variant !== 'advanced' ? this.handlePanelAnimationEnd : undefined }>
                     { shouldRenderLogoRightSide ? null : this.renderLogo() }
                     { this.stepsPlacement === 'left' && this.renderLeftSteps() }
                 </div>
@@ -129,6 +171,7 @@ class ModalFlow extends Component {
                     { shouldRenderLogoRightSide && this.renderLogo() }
                     { this.stepsPlacement === 'right' && this.renderRightSteps() }
                 </div>
+                { showClose && <ModalClose className={ modalCloseClasses } iconClassName={ modalCloseIconClasses } /> }
             </div>
         );
     }
@@ -138,14 +181,25 @@ class ModalFlow extends Component {
     renderRightSteps = () => this.state.layout === LAYOUT.WIDE ? this.renderMultipleSteps() : this.renderCurrentStep();
 
     renderCurrentStep = () => {
-        const { children } = this.props;
-        const { currentStepIndex, requestNextStepIndex, steps } = this.state;
-        const currentStep = steps.length > 1 ? children[currentStepIndex] : children;
+        const { currentStepIndex, requestNextStepIndex, flatChildren } = this.state;
+        const currentStep = flatChildren[currentStepIndex];
+
+        if (!currentStep) {
+            return null;
+        }
+
+        const currentStepClassName = classNames(
+            styles.step,
+            !isNumber(requestNextStepIndex) && !this.isAnimatingLayout && styles.active,
+            currentStep.props.className,
+        );
 
         return (
-            <div className={ classNames(styles.step, !isNumber(requestNextStepIndex) && !this.isAnimatingLayout && styles.active) }
-                data-attr="step"
-                onTransitionEnd={ this.handleCurrentStepTransitionEnd } >
+            <div
+                { ...currentStep.props }
+                className={ currentStepClassName }
+                data-element-type="step"
+                onTransitionEnd={ this.handleCurrentStepTransitionEnd }>
                 { !this.isAnimatingLayout && currentStep }
             </div>
         );
@@ -156,7 +210,7 @@ class ModalFlow extends Component {
 
         return (
             <div className={ wrapperClasses }
-                data-attr="steps-wrapper"
+                data-element-type="steps-wrapper"
                 onTransitionEnd={ this.handleCurrentStepTransitionEnd }>
                 { !this.isAnimatingLayout && this.renderOnlyWideSteps() }
             </div>
@@ -164,15 +218,14 @@ class ModalFlow extends Component {
     };
 
     renderOnlyWideSteps = () => {
-        const { children } = this.props;
-        const { currentStepIndex, requestNextStepIndex } = this.state;
-        const wideStepsCurrentIndex = isNumber(requestNextStepIndex) ? requestNextStepIndex - 1 : currentStepIndex - 1;
+        const { currentStepIndex, requestNextStepIndex, flatChildren } = this.state;
 
+        const wideStepsCurrentIndex = isNumber(requestNextStepIndex) ? requestNextStepIndex - 1 : currentStepIndex - 1;
         const transform = wideStepsCurrentIndex > 0 && `translateY(calc(-${100 * wideStepsCurrentIndex}% - ${2 * wideStepsCurrentIndex}rem))`;
 
-        return children.map((child, index) => {
+        return flatChildren.map((child, index) => {
             // Do not render first and last steps
-            if (index === 0 || index + 1 === children.length) {
+            if (index === 0 || index + 1 === flatChildren.length) {
                 return null;
             }
 
@@ -185,7 +238,7 @@ class ModalFlow extends Component {
             return (
                 <div key={ index }
                     style={ { transform } }
-                    data-attr="step"
+                    data-element-type="step"
                     className={ classNames(
                         styles.step,
                         shouldTranslateUp && styles.translateUp,
@@ -293,9 +346,22 @@ class ModalFlow extends Component {
         }
     };
 
+    checkOnEntered = () => {
+        if (this.firstLayoutDidRender) {
+            this.firstLayoutDidRender = undefined;
+            this.props.onEntered && this.props.onEntered();
+        }
+    };
+
+    handleFlowContentsTransitionEnd = (event) => {
+        if (event.target.matches(`.${styles.flowModalContents}`)) {
+            this.props.onExited && this.props.onExited();
+        }
+    };
+
     handleCurrentStepTransitionEnd = (event) => {
         const { requestNextStepIndex, pendingStepIndex } = this.state;
-        const dataAttr = event.target.getAttribute('data-attr');
+        const dataAttr = event.target.getAttribute('data-element-type');
 
         if (!dataAttr || (dataAttr === 'step' && event.propertyName === 'width')) {
             return;
@@ -306,13 +372,11 @@ class ModalFlow extends Component {
                 this.setState({
                     requestNextStepIndex: pendingStepIndex,
                     currentStepIndex: requestNextStepIndex,
-                    isAnimatingStepIn: isNumber(pendingStepIndex),
                 });
             } else {
                 this.setState({
                     pendingStepIndex: false,
-                    isAnimatingStepIn: false,
-                });
+                }, this.checkOnEntered);
             }
         }
     };
@@ -429,14 +493,18 @@ class ModalFlow extends Component {
     };
 }
 
-ModalFlow.propTypes = {
+FlowModalContents.propTypes = {
     variant: PropTypes.oneOf(['simple', 'simple-with-feedback', 'advanced']),
     step: PropTypes.string.isRequired,
-    children: PropTypes.node,
+    showClose: PropTypes.bool,
+    in: PropTypes.bool,
+    onEntered: PropTypes.func,
+    onExited: PropTypes.func,
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.element]).isRequired,
 };
 
-ModalFlow.defaultProps = {
+FlowModalContents.defaultProps = {
     variant: 'simple',
 };
 
-export default ModalFlow;
+export default FlowModalContents;

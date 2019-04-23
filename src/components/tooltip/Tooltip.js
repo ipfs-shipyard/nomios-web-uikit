@@ -12,14 +12,14 @@ class Tooltip extends Component {
     boxRef = createRef();
 
     componentDidMount() {
-        if (this.props.isOpen) {
+        if (this.props.open) {
             this.addEscapeOutsideListeners();
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.isOpen !== this.props.isOpen) {
-            if (this.props.isOpen) {
+        if (prevProps.open !== this.props.open) {
+            if (this.props.open) {
                 this.addEscapeOutsideListeners();
             } else {
                 this.removeEscapeOutsideListeners();
@@ -33,13 +33,15 @@ class Tooltip extends Component {
     }
 
     render() {
-        const { placement, isOpen } = this.props;
+        const { placement, open } = this.props;
 
         return (
             <CSSTransition
-                in={ isOpen }
+                in={ open }
                 mountOnEnter
                 unmountOnExit
+                onEntered={ this.handleEntered }
+                onExited={ this.handleExited }
                 timeout={ CLOSE_TRANSITION_TIMEOUT }
                 classNames={ {
                     enterActive: styles.enterActive,
@@ -64,24 +66,23 @@ class Tooltip extends Component {
         this.placement = placement;
 
         const {
-            isOpen,
+            open,
             placement: _placement,
             viewportPadding,
             boundariesElement,
             className,
             contentClassName,
-            boxClassName,
             onRequestCancelClose,
             onRequestClose,
             shouldCloseOnEsc,
             shouldCloseOnOutsideClick,
             children,
             variant,
+            onEntered,
+            onExited,
             style: styleProp,
             ...rest
         } = this.props;
-
-        const tooltipBoxClasses = classNames(styles.tooltipBox, styles[variant], boxClassName);
 
         return (
             <div
@@ -94,8 +95,8 @@ class Tooltip extends Component {
                 data-placement={ placement }>
 
                 <div className={ styles.container }>
-                    <div ref={ this.boxRef } className={ tooltipBoxClasses }>
-                        <div className={ classNames(styles.tooltipContent, contentClassName) }>{ children }</div>
+                    <div ref={ this.boxRef } className={ classNames(styles.tooltipContent, styles[variant], contentClassName) }>
+                        { children }
                     </div>
 
                     <div ref={ arrowProps.ref } className={ classNames(styles.arrow, styles[variant]) } style={ arrowProps.style } />
@@ -119,7 +120,7 @@ class Tooltip extends Component {
         }
 
         if (shouldCloseOnEsc) {
-            document.addEventListener('keyup', this.handleKeyUp);
+            document.body.addEventListener('keydown', this.handleKeyDown);
         }
     }
 
@@ -128,24 +129,24 @@ class Tooltip extends Component {
         document.removeEventListener('mouseup', this.handleMouseUp);
         document.removeEventListener('touchstart', this.handleMouseDown);
         document.removeEventListener('touchend', this.handleMouseUp);
-        document.removeEventListener('keyup', this.handleKeyUp);
+        document.removeEventListener('keydown', this.handleKeyDown);
     }
 
-    handleMouseEnter = (event) => {
-        this.props.onRequestCancelClose && this.props.onRequestCancelClose(event, 'mouseEnter');
+    handleMouseEnter = () => {
+        this.props.onRequestCancelClose && this.props.onRequestCancelClose('mouseEnter');
     };
 
-    handleMouseLeave = (event) => {
+    handleMouseLeave = () => {
         // If user is selecting text, skip any check!
         if (!this.mouseDownEventTarget) {
-            this.props.onRequestClose && this.props.onRequestClose(event, 'mouseLeave');
+            this.props.onRequestClose && this.props.onRequestClose('mouseLeave');
         }
     };
 
-    handleKeyUp = (event) => {
+    handleKeyDown = (event) => {
         // Handle escape
         if (event.key === 'Escape') {
-            this.props.onRequestClose && this.props.onRequestClose(event, 'escapePress');
+            this.props.onRequestClose && this.props.onRequestClose('escapePress');
         }
     };
 
@@ -165,27 +166,36 @@ class Tooltip extends Component {
         const isOutsideReference = !this.referenceNode || !this.referenceNode.contains(target);
 
         if (isOutsideBox && isOutsideReference) {
-            this.props.onRequestClose && this.props.onRequestClose(event, 'clickOutside');
+            this.props.onRequestClose && this.props.onRequestClose('clickOutside');
         }
+    };
+
+    handleEntered = () => {
+        this.props.onEntered && this.props.onEntered();
+    };
+
+    handleExited = () => {
+        this.props.onExited && this.props.onExited();
     };
 }
 
 Tooltip.propTypes = {
+    variant: PropTypes.oneOf(['light', 'dark']),
     placement: PropTypes.oneOf(['auto', 'top', 'right', 'bottom', 'left']),
     viewportPadding: PropTypes.number,
     boundariesElement: PropTypes.string,
     shouldCloseOnEsc: PropTypes.bool,
     shouldCloseOnOutsideClick: PropTypes.bool,
     className: PropTypes.string,
-    boxClassName: PropTypes.string,
     contentClassName: PropTypes.string,
     children: PropTypes.node.isRequired,
+    onEntered: PropTypes.func,
+    onExited: PropTypes.func,
     style: PropTypes.object,
     // The properties below are "private"
-    isOpen: PropTypes.bool,
+    open: PropTypes.bool,
     onRequestCancelClose: PropTypes.func,
     onRequestClose: PropTypes.func,
-    variant: PropTypes.oneOf(['light', 'dark']),
 };
 
 Tooltip.defaultProps = {
