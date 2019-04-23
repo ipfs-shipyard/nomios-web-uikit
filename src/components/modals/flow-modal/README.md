@@ -7,9 +7,9 @@ The flow modal dialog.
 The `<FlowModal>` component should be used along with `<FlowModalStep>`.
 
 ```jsx
-import { FlowModal } from '@nomios/web-uikit';
+import { FlowModal, FlowModalStep } from '@nomios/web-uikit';
 
-<ModalFlow open variant="simple" step="first">
+<FlowModal open variant="simple" step="first">
     <FlowModalStep id="first">
         This is the first step.
         <button onClick={ handleGoToSecondStep }>Next step</button>
@@ -18,7 +18,7 @@ import { FlowModal } from '@nomios/web-uikit';
         This is the second step.
         <button onClick={ handleFinish }>Done</button>
     </FlowModalStep>
-</ModalFlow>
+</FlowModal>
 ```
 
 There are four different layouts for the modal: half, half-bordered, wide, full. The layout applied depends on the chosen variant. The following diagrams demonstrate how layouts are applied:
