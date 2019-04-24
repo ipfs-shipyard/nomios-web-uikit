@@ -68,7 +68,7 @@ class StrengthIndicator extends PureComponent {
     normalizeStrength = (numberOfLevels) => {
         const { strength } = this.props;
 
-        return Math.round(numberOfLevels * strength);
+        return Math.ceil(numberOfLevels * strength);
     };
 
     calculateMultiplier = (index, directionUp) => {

@@ -100,7 +100,7 @@ class TextInput extends Component {
 
     computeLevel = () => {
         const { lineStrength } = this.props;
-        const normalizedStrengthValue = Math.round(LEVELS_NAME.length * lineStrength);
+        const normalizedStrengthValue = Math.ceil(LEVELS_NAME.length * lineStrength);
 
         return normalizedStrengthValue > 0 ? LEVELS_NAME[normalizedStrengthValue - 1] : LEVELS_NAME[0];
     };
