@@ -1,0 +1,83 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+.container {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .label {
+        margin-top: 1.5rem;
+        opacity: 0.5;
+        color: var(--color-mineral-green);
+        @mixin typography-body-2 rem;
+        transition: opacity 0.2s ease;
+    }
+
+    & .circleWrapper {
+        position: relative;
+
+        & .circle {
+            transition: background-color 0.2s ease;
+        }
+
+        & .imageOverlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            background-color: color(var(--color-mineral-green) alpha(0.8));
+            border-radius: 50%;
+            transition: opacity 0.2s ease;
+
+            & .cameraIcon {
+                font-size: 1.4rem;
+                fill: var(--color-white);
+            }
+        }
+
+        & .smallCircle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2rem;
+            height: 2rem;
+            margin: 0.1rem;
+            border: 1px solid color(var(--color-mineral-green) alpha(0.2));
+            background-color: var(--color-white);
+        }
+
+        & .plusIcon {
+            font-size: 0.7rem;
+            fill: var(--color-mineral-green);
+        }
+    }
+
+    &:hover,
+    & > *:hover {
+        cursor: pointer;
+    }
+
+    &:hover {
+        & .circleWrapper {
+            & .circle {
+                background-color: color(var(--color-mineral-green) alpha(0.4));
+            }
+
+            & .imageOverlay {
+                opacity: 1;
+            }
+        }
+
+        & .label {
+            opacity: 1;
+        }
+    }
+}
