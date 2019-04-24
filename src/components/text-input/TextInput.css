@@ -88,6 +88,8 @@
 
         & .helperText {
             @mixin typography-body-2 rem;
+            margin-right: 5rem;
+            flex-shrink: 0;
             color: color(var(--color-armadillo) alpha(0.6));
         }
 
