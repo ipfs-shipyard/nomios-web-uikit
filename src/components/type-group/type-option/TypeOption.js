@@ -1,55 +1,58 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { generateRandomString } from '../../../utils';
 
 import styles from './TypeOption.css';
 
 class TypeOption extends Component {
-    // We are using this to greatly reduce the possibility of having duplicated ids in the dom
-    idPrefix = `type-option-${generateRandomString()}#`;
-
     render() {
-        const { id, label, groupName, children, defaultSelected, badge: Badge, selectable } = this.props;
-        const prefixedId = `${this.idPrefix}${id}`;
+        const { label, groupName, children, selected, badge, selectable } = this.props;
         const labelClasses = classNames(styles.label, selectable && styles.selectable);
 
         return (
             <div className={ styles.container }>
-                <input id={ prefixedId }
-                    className={ styles.input }
-                    type="radio"
-                    name={ groupName }
-                    defaultChecked={ defaultSelected }
-                    data-id-prefix={ this.idPrefix }
-                    disabled={ !selectable } />
-                <label htmlFor={ prefixedId } className={ labelClasses }>
+                <label className={ labelClasses }>
+                    <input className={ styles.input }
+                        type="radio"
+                        name={ groupName }
+                        checked={ selected }
+                        disabled={ !selectable }
+                        onChange={ this.handleInputChange } />
                     <div className={ styles.circle }>
-                        { Badge &&
+                        { badge &&
                             <span className={ styles.badge }>
-                                <Badge />
+                                { badge }
                             </span> }
                         { children }
                     </div>
-                    { label }
+                    <span>{ label }</span>
                 </label>
             </div>
         );
     }
+
+    handleInputChange = () => {
+        this.props.onSelect(this.props.id);
+    };
 }
 
 TypeOption.propTypes = {
-    id: PropTypes.string.isRequired,
-    defaultSelected: PropTypes.bool,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.element),
+        PropTypes.element,
+    ]).isRequired,
     groupName: PropTypes.string,
     selectable: PropTypes.bool,
-    children: PropTypes.node,
+    selected: PropTypes.bool,
+    onSelect: PropTypes.func,
+    badge: PropTypes.element,
     label: PropTypes.string,
-    badge: PropTypes.func,
+    id: PropTypes.string,
 };
 
 TypeOption.defaultProps = {
     selectable: true,
+    selected: false,
 };
 
 export default TypeOption;

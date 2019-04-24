@@ -1,38 +1,28 @@
-import React, { Component, cloneElement } from 'react';
+import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import styles from './TypeGroup.css';
 
-class TypeGroup extends Component {
-    render() {
-        const { className, name } = this.props;
+const TypeGroup = ({ children, className, name, onSelect, selectedId }) => {
+    const clonedChildren = React.Children.map(children, (child) => cloneElement(child, {
+        groupName: name,
+        onSelect,
+        selected: child.props.id === selectedId,
+    }));
 
-        const children = React.Children.map(this.props.children, (child) => cloneElement(child, {
-            groupName: name,
-        }));
-
-        return (
-            <div className={ classNames(styles.group, className) } onChange={ this.handleOptionChange }>
-                { children }
-            </div>
-        );
-    }
-
-    handleOptionChange = (event) => {
-        const idPrefix = event.target.getAttribute('data-id-prefix');
-        const prefixedId = event.target.id;
-        // Remove prefix from prefixed id
-        const id = prefixedId.replace(idPrefix, '');
-
-        this.props.onSelect(id);
-    };
-}
+    return (
+        <div className={ classNames(styles.group, className) }>
+            { clonedChildren }
+        </div>
+    );
+};
 
 TypeGroup.propTypes = {
     children: PropTypes.node.isRequired,
     onSelect: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
+    selectedId: PropTypes.string,
     className: PropTypes.string,
 };
 

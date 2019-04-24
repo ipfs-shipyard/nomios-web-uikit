@@ -9,23 +9,16 @@
 .input {
     display: none;
 
-    &:checked + .label {
-        color: color(var(--color-armadillo) alpha(1));
+    &:checked + .circle {
+        border-color: var(--color-tan);
+        background: var(--color-tan);
 
-        & .circle {
-            border-color: var(--color-tan);
-            background: var(--color-tan);
-
-            & .badge {
-                display: flex;
-            }
+        & .badge {
+            display: flex;
         }
 
-        &.selectable:hover {
-            & .circle {
-                border-color: color(var(--color-tan) alpha(0.8));
-                background: color(var(--color-tan) alpha(0.8));
-            }
+        & + span {
+            color: color(var(--color-armadillo) alpha(1));
         }
     }
 }
@@ -44,6 +37,13 @@
 
         & .circle {
             border-color: color(var(--color-mineral-green) alpha(0.5));
+        }
+
+        & .input:checked {
+            & + .circle {
+                border-color: color(var(--color-tan) alpha(0.8));
+                background: color(var(--color-tan) alpha(0.8));
+            }
         }
     }
 }
