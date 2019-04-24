@@ -29,7 +29,7 @@ class TextInput extends Component {
 
     renderInput = () => {
         const { placeholder, type, lineType, lineStrength } = this.props;
-        const currentLevel = typeof lineStrength !== 'undefined' && this.computeLevel();
+        const currentLevel = (typeof lineStrength !== 'undefined' && lineStrength !== -1) && this.computeLevel();
 
         // Return input with no strength indication
         if (lineType === 'normal') {
@@ -92,6 +92,7 @@ class TextInput extends Component {
                 textColor={ this.state.feedbackMessageColor }
                 type={ feedback.type }
                 iconPosition="right"
+                tooltip={ feedback.tooltip }
                 className={ finalClassNames }>
                 { feedback.message }
             </FeedbackMessage>
@@ -124,6 +125,7 @@ TextInput.propTypes = {
     feedback: PropTypes.shape({
         message: PropTypes.string.isRequired,
         type: PropTypes.string,
+        tooltip: PropTypes.node,
         className: PropTypes.string,
     }),
     onChange: PropTypes.func,
