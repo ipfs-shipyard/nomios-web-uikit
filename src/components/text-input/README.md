@@ -32,6 +32,7 @@ This object is used to pass down information to `<FeedbackMessage />` component.
 | ---- | ---- | ------- | ----------- |
 | message | string | *required* | The text message. |
 | type | string | | Feedback message type. Can be one of: `error` or `info` as specified on `<FeedbackMessage />` component. |
+| tooltip | node | | The contents of the feedback message tooltip. |
 | className | string | | A classname to override styles. |
 
 **Example:**
