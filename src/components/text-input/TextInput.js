@@ -29,7 +29,7 @@ class TextInput extends Component {
 
     renderInput = () => {
         const { placeholder, type, lineType, lineStrength } = this.props;
-        const currentLevel = (typeof lineStrength !== 'undefined' && lineStrength !== -1) && this.computeLevel();
+        const currentLevel = (typeof lineStrength !== 'undefined' && lineStrength >= 0 && lineStrength <= 1) && this.computeLevel();
 
         // Return input with no strength indication
         if (lineType === 'normal') {
