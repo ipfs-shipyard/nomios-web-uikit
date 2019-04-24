@@ -37,6 +37,7 @@ class TextInput extends Component {
                 <input type={ type }
                     placeholder={ placeholder }
                     onChange={ this.handleChange }
+                    onKeyDown={ this.handleKeyDown }
                     className={ styles[currentLevel] } />
             );
         }
@@ -50,7 +51,7 @@ class TextInput extends Component {
         // Return input with strength indication
         return (
             <div className={ styles.inputWrapper }>
-                <input type={ showPassword ? 'text' : 'password' } placeholder={ placeholder } onChange={ this.handleChange } />
+                <input type={ showPassword ? 'text' : 'password' } placeholder={ placeholder } onChange={ this.handleChange } onKeyDown={ this.handleKeyDown } />
                 <StrengthIndicator
                     className={ styles.strengthIndicator }
                     levelName={ currentLevel }
@@ -106,6 +107,14 @@ class TextInput extends Component {
         return normalizedStrengthValue > 0 ? LEVELS_NAME[normalizedStrengthValue - 1] : LEVELS_NAME[0];
     };
 
+    handleKeyDown = (event) => {
+        const { onEnter } = this.props;
+
+        if (event.key === 'Enter') {
+            onEnter != null && onEnter();
+        }
+    };
+
     handleToggleShowPassword = () => this.setState(({ showPassword }) => ({
         showPassword: !showPassword,
     }));
@@ -129,6 +138,7 @@ TextInput.propTypes = {
         className: PropTypes.string,
     }),
     onChange: PropTypes.func,
+    onEnter: PropTypes.func,
     className: PropTypes.string,
 };
 

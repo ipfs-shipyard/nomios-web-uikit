@@ -22,6 +22,7 @@ import { TextInput } from '@nomios/web-uikit';
 | feedback | object | | Adds a feedback message to the users. Right-aligned. More info on the next table. |
 | lineStrength | number | | The current strength value. ⚠️ Please note that this value must be between 0 and 1. |
 | onChange | func | | Function to be called whenever the input content changes. |
+| onEnter | func | | Function to be called whenever the user presses the enter key while the text input is focused. |
 | className | string | | A classname to override styles. |
 
 ### `feedback` prop
