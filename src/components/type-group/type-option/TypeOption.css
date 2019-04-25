@@ -1,0 +1,92 @@
+@import "../../../styles/colors";
+@import "../../../styles/mixins/typography";
+
+.container {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.input {
+    display: none;
+
+    &:checked + .circle {
+        border-color: var(--color-tan);
+        background: var(--color-tan);
+
+        & .badge {
+            display: flex;
+        }
+
+        & + span {
+            color: color(var(--color-armadillo) alpha(1));
+        }
+    }
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @mixin typography-body-2 rem;
+    color: color(var(--color-armadillo) alpha(0.5));
+    transition: color 0.2s ease;
+
+    &.selectable:hover {
+        color: color(var(--color-armadillo) alpha(1));
+        cursor: pointer;
+
+        & .circle {
+            border-color: color(var(--color-mineral-green) alpha(0.5));
+        }
+
+        & .input:checked {
+            & + .circle {
+                border-color: color(var(--color-tan) alpha(0.8));
+                background: color(var(--color-tan) alpha(0.8));
+            }
+        }
+    }
+}
+
+.circle {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid color(var(--color-mineral-green) alpha(0.2));
+    border-radius: 50%;
+    color: var(--color-armadillo);
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+
+    & > * {
+        font-size: 1.5rem;
+    }
+}
+
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    margin: 0.1rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-tan);
+    background: var(--color-white);
+    border-radius: 50%;
+    color: var(--color-mineral-green);
+
+    & > * {
+        /* We should be using font-size here to resize the svg */
+        /* But CheckmarkIcon is not working properly */
+        width: 0.8rem;
+        height: 0.8rem;
+    }
+}

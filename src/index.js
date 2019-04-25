@@ -10,3 +10,4 @@ export * from './components/tooltip';
 export * from './components/modal-base';
 export * from './components/modals';
 export { default as Logo } from './components/logo';
+export { default as TypeGroup, TypeOption } from './components/type-group';
