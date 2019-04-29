@@ -27,7 +27,7 @@ class TextInput extends Component {
         );
     }
 
-    renderInput = () => {
+    renderInput() {
         const { placeholder, type, lineType, lineStrength } = this.props;
 
         // Input handler props
@@ -83,9 +83,9 @@ class TextInput extends Component {
                     onClick={ this.handleToggleShowPassword } />
             </div>
         );
-    };
+    }
 
-    renderHelperContainer = () => {
+    renderHelperContainer() {
         const { helperText, feedback } = this.props;
 
         if (!helperText && !feedback) {
@@ -98,11 +98,13 @@ class TextInput extends Component {
                 { this.renderFeedbackMessage() }
             </div>
         );
-    };
+    }
 
-    renderHelperText = () => this.props.helperText && <span className={ styles.helperText }>{ this.props.helperText }</span>;
+    renderHelperText() {
+        return this.props.helperText && <span className={ styles.helperText }>{ this.props.helperText }</span>;
+    }
 
-    renderFeedbackMessage = () => {
+    renderFeedbackMessage() {
         const { feedback } = this.props;
         const finalClassNames = classNames(styles.feedbackMessage, feedback && feedback.className);
 
@@ -116,14 +118,14 @@ class TextInput extends Component {
                 { feedback.message }
             </FeedbackMessage>
         );
-    };
+    }
 
-    computeLevel = () => {
+    computeLevel() {
         const { lineStrength } = this.props;
         const normalizedStrengthValue = Math.ceil(LEVELS_NAME.length * lineStrength);
 
         return normalizedStrengthValue > 0 ? LEVELS_NAME[normalizedStrengthValue - 1] : LEVELS_NAME[0];
-    };
+    }
 
     handleToggleShowPassword = () => this.setState(({ showPassword }) => ({
         showPassword: !showPassword,

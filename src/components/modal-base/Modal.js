@@ -109,10 +109,10 @@ class Modal extends Component {
         );
     }
 
-    startEnterTimer = () => {
+    startEnterTimer() {
         clearTimeout(this.enterTimeoutId);
         this.enterTimeoutId = setTimeout(this.handleModalEntered, MODAL_TRANSITION_DURATION);
-    };
+    }
 
     handleModalEntered = () => {
         this.setState({ modalStatus: 'entered' });

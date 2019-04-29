@@ -18,12 +18,12 @@ class StrengthIndicator extends PureComponent {
     }
 
     componentDidMount() {
-        this.handlePossibleColorChange();
+        this.maybeReportColorChange();
     }
 
     componentDidUpdate() {
         this.lastFilledElement = this.normalizedStrength;
-        this.handlePossibleColorChange();
+        this.maybeReportColorChange();
     }
 
     render() {
@@ -36,7 +36,7 @@ class StrengthIndicator extends PureComponent {
         );
     }
 
-    renderLevelElements = () => {
+    renderLevelElements() {
         this.normalizedStrength = this.normalizeStrength(this.props.numberOfLevels);
         this.hasColorChanged = this.props.levelName !== this.currentLevelName;
         this.currentLevelName = this.props.levelName;
@@ -63,15 +63,15 @@ class StrengthIndicator extends PureComponent {
                 </div>
             );
         });
-    };
+    }
 
-    normalizeStrength = (numberOfLevels) => {
+    normalizeStrength(numberOfLevels) {
         const { strength } = this.props;
 
         return Math.ceil(numberOfLevels * strength);
-    };
+    }
 
-    calculateMultiplier = (index, directionUp) => {
+    calculateMultiplier(index, directionUp) {
         if (!directionUp) {
             return (this.lastFilledElement - 1) - index;
         }
@@ -81,22 +81,22 @@ class StrengthIndicator extends PureComponent {
         }
 
         return index - this.lastFilledElement;
-    };
+    }
 
-    calculateAnimationDuration = () => {
+    calculateAnimationDuration() {
         const numberOfLevelsToAnimate = this.normalizedStrength - this.lastFilledElement;
 
         return numberOfLevelsToAnimate !== 0 ? Math.abs(MAX_ANIMATION_DURATION / numberOfLevelsToAnimate) : 0;
-    };
+    }
 
-    handlePossibleColorChange = () => {
+    maybeReportColorChange() {
         if (this.hasColorChanged) {
             const firstInnerElement = findDOMNode(this.innerElementRef.current);
             const backgroundColor = window.getComputedStyle(firstInnerElement).getPropertyValue('background-color');
 
             this.props.onColorChange(backgroundColor);
         }
-    };
+    }
 }
 
 StrengthIndicator.propTypes = {
