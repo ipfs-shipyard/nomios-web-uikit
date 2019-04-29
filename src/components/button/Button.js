@@ -9,7 +9,6 @@ const FEEDBACK_OUTCOME_VISIBLE_DURATION = 1750;
 
 class Button extends Component {
     wrapperRef = React.createRef();
-    enterAnimation = false;
 
     state = {
         feedback: 'none',
@@ -53,13 +52,13 @@ class Button extends Component {
             styles[variant],
         );
 
-        const hasPropsFeedback = this.props.feedback !== 'none';
+        const hasFeedbackProp = this.props.feedback !== 'none';
         const successBlockClassName = classNames(
-            hasPropsFeedback && styles.feedback,
+            hasFeedbackProp && styles.feedback,
             styles.successBlock
         );
         const errorBlockClassName = classNames(
-            hasPropsFeedback && styles.feedback,
+            hasFeedbackProp && styles.feedback,
             styles.errorBlock
         );
 
@@ -74,10 +73,10 @@ class Button extends Component {
                     onBegin={ this.handleProgressBarBegin }
                     onEnd={ this.handleProgressBarEnd } />
 
-                <span className={ successBlockClassName } onTransitionEnd={ this.handleSpanTransitionEnd }>
+                <span className={ successBlockClassName }>
                     <CheckmarkIcon className={ styles.checkmark } onTransitionEnd={ this.handleSuccessIconTransitionEnd } />
                 </span>
-                <span className={ errorBlockClassName } onTransitionEnd={ this.handleSpanTransitionEnd }>
+                <span className={ errorBlockClassName }>
                     <CrossIcon className={ styles.cross } onTransitionEnd={ this.handleErrorIconTransitionEnd } />
                 </span>
             </div>
@@ -120,26 +119,17 @@ class Button extends Component {
         });
     };
 
-    handleSpanTransitionEnd = (event) => {
-        event.stopPropagation();
-        if (this.enterAnimation) {
-            this.enterAnimation = false;
-
-            return;
-        }
-        this.enterAnimation = true;
-    };
-
-    handleIconTransitionEnd = (event, isSuccess) => {
-        event.stopPropagation();
-        if (this.enterAnimation) {
-            this.props.onAnimationEnd && this.props.onAnimationEnd(isSuccess);
+    handleSuccessIconTransitionEnd = () => {
+        if (this.state.feedbackOutcome === 'success') {
+            this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(true);
         }
     };
 
-    handleSuccessIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, true);
-
-    handleErrorIconTransitionEnd = (e) => this.handleIconTransitionEnd(e, false);
+    handleErrorIconTransitionEnd = (event) => {
+        if (this.state.feedbackOutcome === 'error' && event.target.matches('path:nth-of-type(1)')) {
+            this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(false);
+        }
+    };
 }
 
 Button.propTypes = {
@@ -147,7 +137,7 @@ Button.propTypes = {
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     feedback: PropTypes.oneOf(['none', 'loading', 'success', 'error']),
-    onAnimationEnd: PropTypes.func,
+    onFeedbackAnimationEnd: PropTypes.func,
     children: PropTypes.node.isRequired,
 };
 

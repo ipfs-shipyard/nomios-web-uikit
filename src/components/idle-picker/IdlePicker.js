@@ -3,7 +3,6 @@ import { default as RcSlider } from 'rc-slider';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Display from './display/Display';
-
 import styles from './IdlePicker.css';
 import 'rc-slider/assets/index.css';
 
