@@ -11,5 +11,5 @@ export * from './components/modal-base';
 export * from './components/modals';
 export { default as Logo } from './components/logo';
 export { default as TypeGroup, TypeOption } from './components/type-group';
-export { default as AvatarController } from './components/avatar-controller';
-export { default as Circle } from './components/circle';
+export { default as AvatarPicker } from './components/avatar-picker';
+export { default as Avatar } from './components/avatar';

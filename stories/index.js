@@ -10,5 +10,5 @@ import './tooltip';
 import './modal';
 import './logo';
 import './type-group';
-import './avatar-controller';
-import './circle';
+import './avatar-picker';
+import './avatar';

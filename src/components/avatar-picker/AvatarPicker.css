@@ -1,4 +1,5 @@
 @import "../../styles/colors";
+@import "../../styles/mixins/shared";
 @import "../../styles/mixins/typography";
 
 .container {
@@ -19,7 +20,8 @@
     & .circleWrapper {
         position: relative;
 
-        & .circle {
+        & .circle,
+        & .avatarPlaceholder {
             transition: background-color 0.2s ease;
         }
 
@@ -44,19 +46,28 @@
         }
 
         & .smallCircle {
+            @mixin circular-shape 2, var(--color-white);
             position: absolute;
             top: 0;
             right: 0;
-            width: 2rem;
-            height: 2rem;
+            z-index: 10;
             margin: 0.1rem;
             border: 1px solid color(var(--color-mineral-green) alpha(0.2));
-            background-color: var(--color-white);
+
+            & .icon {
+                font-size: 0.7rem;
+                fill: var(--color-mineral-green);
+            }
         }
 
-        & .plusIcon {
-            font-size: 0.7rem;
-            fill: var(--color-mineral-green);
+        & .avatarPlaceholder {
+            @mixin circular-shape 8, color(var(--color-mineral-green) alpha(0.2));
+
+            & .icon {
+                font-size: 1.4rem;
+                fill: var(--color-mineral-green);
+                fill-opacity: 0.8;
+            }
         }
     }
 
@@ -67,11 +78,13 @@
 
     &:hover {
         & .circleWrapper {
-            & .circle {
+            & .circle,
+            & .avatarPlaceholder {
                 background-color: color(var(--color-mineral-green) alpha(0.4));
             }
 
             & .imageOverlay {
+                z-index: 10;
                 opacity: 1;
             }
         }
@@ -80,4 +93,8 @@
             opacity: 1;
         }
     }
+}
+
+.hidden {
+    display: none;
 }
