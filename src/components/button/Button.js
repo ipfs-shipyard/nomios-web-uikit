@@ -32,7 +32,7 @@ class Button extends Component {
     }
 
     render() {
-        const { variant, disabled, children, fullWidth, ...rest } = this.props;
+        const { variant, disabled, children, fullWidth, onFeedbackAnimationEnd, ...rest } = this.props;
         const { feedback, feedbackOutcome } = this.state;
         const loading = feedback === 'loading';
         const hasFeedback = feedback !== 'none';
