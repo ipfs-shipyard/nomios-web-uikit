@@ -41,7 +41,7 @@ storiesOf('Button', module)
             fullWidth={ fullWidth }
             feedback={ feedback }
             onClick={ action('clicked') }
-            onAnimationEnd={ action('animation end') }>
+            onFeedbackAnimationEnd={ action('animation end') }>
             { children }
         </Button>
     );
