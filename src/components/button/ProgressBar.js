@@ -59,7 +59,7 @@ class ProgressBar extends Component {
             this.props.onEnd && this.props.onEnd();
 
             this.progressBarRef.current.style.opacity = '0';
-            this.cancelOnTransitionEnd = onTransitionEnd(this.progressBarRef.current, () => this.reset);
+            this.cancelOnTransitionEnd = onTransitionEnd(this.progressBarRef.current, this.reset);
         });
     }
 
