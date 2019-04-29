@@ -21,8 +21,9 @@ import { TextInput } from '@nomios/web-uikit';
 | lineType | string | `normal`| Sets the type of the bottom border. Can be one of `normal` (single line) or `dashed` (for password strength indication). |
 | feedback | object | | Adds a feedback message to the users. Right-aligned. More info on the next table. |
 | lineStrength | number | | The current strength value. ⚠️ Please note that this value must be between 0 and 1. |
-| onChange | func | | Function to be called whenever the input content changes. |
 | className | string | | A classname to override styles. |
+
+**Note:** Any props related to keyboard events, such as `onKeyUp` and `onChange`, will be spread to the underlying input element. Any other props will be spread into the root element.
 
 ### `feedback` prop
 
@@ -32,6 +33,7 @@ This object is used to pass down information to `<FeedbackMessage />` component.
 | ---- | ---- | ------- | ----------- |
 | message | string | *required* | The text message. |
 | type | string | | Feedback message type. Can be one of: `error` or `info` as specified on `<FeedbackMessage />` component. |
+| tooltip | node | | The contents of the feedback message tooltip. |
 | className | string | | A classname to override styles. |
 
 **Example:**

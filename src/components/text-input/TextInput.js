@@ -29,15 +29,26 @@ class TextInput extends Component {
 
     renderInput = () => {
         const { placeholder, type, lineType, lineStrength } = this.props;
-        const currentLevel = typeof lineStrength !== 'undefined' && this.computeLevel();
+
+        // Input handler props
+        // eslint-disable-next-line react/prop-types
+        const { onKeyDown, onKeyUp, onKeyPress, onChange, onInput, onFocus, onBlur } = this.props;
+
+        const currentLevel = (typeof lineStrength !== 'undefined' && lineStrength >= 0 && lineStrength <= 1) && this.computeLevel();
 
         // Return input with no strength indication
         if (lineType === 'normal') {
             return (
                 <input type={ type }
                     placeholder={ placeholder }
-                    onChange={ this.handleChange }
-                    className={ styles[currentLevel] } />
+                    className={ styles[currentLevel] }
+                    onKeyDown={ onKeyDown }
+                    onKeyUp={ onKeyUp }
+                    onKeyPress={ onKeyPress }
+                    onChange={ onChange }
+                    onInput={ onInput }
+                    onFocus={ onFocus }
+                    onBlur={ onBlur } />
             );
         }
 
@@ -50,7 +61,15 @@ class TextInput extends Component {
         // Return input with strength indication
         return (
             <div className={ styles.inputWrapper }>
-                <input type={ showPassword ? 'text' : 'password' } placeholder={ placeholder } onChange={ this.handleChange } />
+                <input type={ showPassword ? 'text' : 'password' }
+                    placeholder={ placeholder }
+                    onKeyDown={ onKeyDown }
+                    onKeyUp={ onKeyUp }
+                    onKeyPress={ onKeyPress }
+                    onChange={ onChange }
+                    onInput={ onInput }
+                    onFocus={ onFocus }
+                    onBlur={ onBlur } />
                 <StrengthIndicator
                     className={ styles.strengthIndicator }
                     levelName={ currentLevel }
@@ -92,6 +111,7 @@ class TextInput extends Component {
                 textColor={ this.state.feedbackMessageColor }
                 type={ feedback.type }
                 iconPosition="right"
+                tooltip={ feedback.tooltip }
                 className={ finalClassNames }>
                 { feedback.message }
             </FeedbackMessage>
@@ -100,7 +120,7 @@ class TextInput extends Component {
 
     computeLevel = () => {
         const { lineStrength } = this.props;
-        const normalizedStrengthValue = Math.round(LEVELS_NAME.length * lineStrength);
+        const normalizedStrengthValue = Math.ceil(LEVELS_NAME.length * lineStrength);
 
         return normalizedStrengthValue > 0 ? LEVELS_NAME[normalizedStrengthValue - 1] : LEVELS_NAME[0];
     };
@@ -108,8 +128,6 @@ class TextInput extends Component {
     handleToggleShowPassword = () => this.setState(({ showPassword }) => ({
         showPassword: !showPassword,
     }));
-
-    handleChange = (event) => this.props.onChange && this.props.onChange(event);
 
     handleStrengthColorChange = (color) => this.setState({ feedbackMessageColor: color });
 }
@@ -124,9 +142,9 @@ TextInput.propTypes = {
     feedback: PropTypes.shape({
         message: PropTypes.string.isRequired,
         type: PropTypes.string,
+        tooltip: PropTypes.node,
         className: PropTypes.string,
     }),
-    onChange: PropTypes.func,
     className: PropTypes.string,
 };
 
