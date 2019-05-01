@@ -2,6 +2,24 @@
 @import "../../styles/mixins/shared.css";
 @import "../../styles/mixins/typography.css";
 
+.enter {
+    opacity: 0;
+}
+
+.enterActive {
+    opacity: 1;
+    transition: opacity 300ms linear;
+}
+
+.exit {
+    opacity: 1;
+}
+
+.exitActive {
+    opacity: 0;
+    transition: opacity 300ms linear;
+}
+
 .avatar {
     @mixin circular-shape 8, color(var(--color-mineral-green) alpha(0.2));
 

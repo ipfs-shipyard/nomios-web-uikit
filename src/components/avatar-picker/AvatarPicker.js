@@ -9,7 +9,7 @@ import styles from './AvatarPicker.css';
 class AvatarPicker extends Component {
     state = {
         image: undefined,
-        imageURL: undefined,
+        imageUrl: undefined,
     };
 
     inputRef = createRef();
@@ -25,23 +25,25 @@ class AvatarPicker extends Component {
                         { this.renderPlusIcon() }
                         { this.renderAvatar(rest) }
                     </div>
-                    <label className={ styles.label }>{ label }</label>
+                    <div className={ styles.label }>{ label }</div>
                 </div>
             </Fragment>
         );
     }
 
-    renderInput = () => (
-        <input
-            ref={ this.inputRef }
-            className={ styles.hidden }
-            type="file"
-            accept="image/*"
-            onChange={ this.handleOnChange } />
-    );
+    renderInput() {
+        return (
+            <input
+                ref={ this.inputRef }
+                className={ styles.hidden }
+                type="file"
+                accept="image/*"
+                onChange={ this.handleOnChange } />
+        );
+    }
 
-    renderPlusIcon = () => {
-        if (!this.props.imageURL && !this.state.imageURL) {
+    renderPlusIcon() {
+        if (!this.props.image && !this.state.imageUrl) {
             return (
                 <div className={ styles.smallCircle }>
                     <PlusIcon className={ styles.icon } />
@@ -54,13 +56,13 @@ class AvatarPicker extends Component {
                 <CameraIcon className={ styles.cameraIcon } />
             </div>
         );
-    };
+    }
 
-    renderAvatar = (props) => {
-        const { imageURL, ...rest } = props;
-        const _imageURL = this.state.imageURL ? this.state.imageURL : imageURL;
+    renderAvatar(props) {
+        const { image, ...rest } = props;
+        const imageUrl_ = this.state.imageUrl ? this.state.imageUrl : image;
 
-        if (!this.props.imageURL && !this.state.imageURL && !this.props.name) {
+        if (!this.props.image && !this.state.imageUrl && !this.props.name) {
             return (
                 <div className={ styles.avatarPlaceholder }>
                     <UserIcon className={ styles.icon } />
@@ -69,9 +71,9 @@ class AvatarPicker extends Component {
         }
 
         return (
-            <Avatar { ...rest } image={ _imageURL } className={ styles.circle } />
+            <Avatar { ...rest } image={ imageUrl_ } className={ styles.circle } />
         );
-    };
+    }
 
     handleAvatarLoaderClick = () => {
         this.inputRef.current.click();
@@ -83,7 +85,7 @@ class AvatarPicker extends Component {
         if (uploadedImage) {
             this.setState({
                 image: uploadedImage,
-                imageURL: 'https://en.gravatar.com/userimage/102855892/467eb9028a2018993024d612255dc20e.png',
+                imageUrl: URL.createObjectURL(uploadedImage),
             }, () => {
                 this.props.onChange(this.state.image);
             });
@@ -94,7 +96,7 @@ class AvatarPicker extends Component {
 AvatarPicker.propTypes = {
     onChange: PropTypes.func.isRequired,
     className: PropTypes.string,
-    imageURL: PropTypes.string,
+    image: PropTypes.string,
     label: PropTypes.string,
     icon: PropTypes.element,
     name: PropTypes.string,

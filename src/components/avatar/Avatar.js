@@ -1,29 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import PreloadImage from 'react-preload-image';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import PreloadImage from 'react-image';
 import getInitials from './initials';
 
 import styles from './Avatar.css';
 
-const Image = ({ preloadImage, lazy, ...rest }) => preloadImage ?
-    <PreloadImage { ...rest } lazy /> :
-    <img { ...rest } alt="" />;
-
-Image.propTypes = {
-    lazy: PropTypes.bool,
-    preloadImage: PropTypes.bool,
+const cssTransitionStyles = {
+    appear: styles.enter,
+    appearActive: styles.enterActive,
+    enter: styles.enter,
+    enterActive: styles.enterActive,
+    exit: styles.exit,
+    exitActive: styles.exitActive,
 };
+
+const imageContainer = (children) => (
+    <TransitionGroup appear component={ null }>
+        <CSSTransition classNames={ cssTransitionStyles } timeout={ 300 }>
+            { children }
+        </CSSTransition>
+    </TransitionGroup>
+);
 
 const Avatar = ({ className, name, image, preloadImage, ...rest }) => {
     const avatarClasses = classNames(styles.avatar, className);
 
-    console.log('MY IMAGE IS THIS', image);
-
     return (
         <div { ...rest } className={ avatarClasses }>
             <span className={ styles.initials }> { getInitials(name) || '?' } </span>
-            { image && <Image src={ image } preloadImage={ preloadImage } className={ styles.image } /> }
+            <PreloadImage
+                src={ image }
+                decode={ preloadImage }
+                container={ imageContainer }
+                className={ styles.image } />
         </div>
     );
 };

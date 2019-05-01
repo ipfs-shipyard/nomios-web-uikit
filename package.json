@@ -103,10 +103,10 @@
     "normalize.css": "^8.0.1",
     "proper-on-transition-end": "^0.3.0",
     "rc-slider": "^8.6.6",
+    "react-image": "^2.1.1",
     "react-keyboard-only-outlines": "^0.1.0",
     "react-modal": "^3.8.1",
     "react-popper": "^1.0.0",
-    "react-preload-image": "^1.0.4",
     "react-transition-group": "^4.0.0"
   }
 }

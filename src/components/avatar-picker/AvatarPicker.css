@@ -71,8 +71,7 @@
         }
     }
 
-    &:hover,
-    & > *:hover {
+    &:hover {
         cursor: pointer;
     }
 
