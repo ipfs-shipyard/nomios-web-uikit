@@ -64,9 +64,9 @@ class IdlePicker extends Component {
             max: 10,
             step: 0.01,
             marks,
-            onChange: this.update,
-            onAfterChange: this.afterChange,
-            onBeforeChange: this.beforeChange,
+            onChange: this.handleOnChange,
+            onAfterChange: this.handleAfterChange,
+            onBeforeChange: this.handleBeforeChange,
         };
         const finalClassName = classNames(
             styles['picker-container']
@@ -87,12 +87,32 @@ class IdlePicker extends Component {
         );
     }
 
-    beforeChange = () => {
-        this.previousHandleWasBeforeChange = true;
-        this.setState({ forcePickerValue: false });
-    };
+    unsetHandleClick(onElement) {
+        if (onElement) {
+            this.mouseUpOnElement = true;
+        } else {
+            this.handleClick = false;
+            !this.mouseUpOnElement && this.removeClassFromTrack();
+            this.mouseUpOnElement = false;
+        }
+    }
 
-    update = (value) => {
+    appendClassToTrack() {
+        if (!this.track.classList.contains('handle-hover')) {
+            this.track.classList.add('handle-hover');
+            this.setState(this.state);
+        }
+    }
+
+    removeClassFromTrack() {
+        if (this.track.classList.contains('handle-hover') && !this.handleClick) {
+            this.track.classList.remove('handle-hover');
+
+            this.handle.blur();
+        }
+    }
+
+    handleOnChange = (value) => {
         const roundValue = Math.round(value);
 
         if (roundValue !== this.state.displayValue) {
@@ -105,37 +125,17 @@ class IdlePicker extends Component {
         this.previousHandleWasBeforeChange = false;
     };
 
-    afterChange = (value) => {
+    handleBeforeChange = () => {
+        this.previousHandleWasBeforeChange = true;
+        this.setState({ forcePickerValue: false });
+    };
+
+    handleAfterChange = (value) => {
         this.previousHandleWasBeforeChange = false;
         const roundedValue = Math.round(value);
 
         this.setState({ pickerValue: roundedValue, displayValue: roundedValue, forcePickerValue: true });
         this.props.onChange && this.props.onChange(roundedValue);
-    };
-
-    appendClassToTrack = () => {
-        if (!this.track.classList.contains('handle-hover')) {
-            this.track.classList.add('handle-hover');
-            this.setState(this.state);
-        }
-    };
-
-    removeClassFromTrack = () => {
-        if (this.track.classList.contains('handle-hover') && !this.handleClick) {
-            this.track.classList.remove('handle-hover');
-
-            this.handle.blur();
-        }
-    };
-
-    unsetHandleClick = (onElement) => {
-        if (onElement) {
-            this.mouseUpOnElement = true;
-        } else {
-            this.handleClick = false;
-            !this.mouseUpOnElement && this.removeClassFromTrack();
-            this.mouseUpOnElement = false;
-        }
     };
 
     handleHandleMouseEnter = () => {

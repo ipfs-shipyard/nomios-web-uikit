@@ -176,11 +176,15 @@ class FlowModalContents extends Component {
         );
     }
 
-    renderLeftSteps = () => this.renderCurrentStep();
+    renderLeftSteps() {
+        return this.renderCurrentStep();
+    }
 
-    renderRightSteps = () => this.state.layout === LAYOUT.WIDE ? this.renderMultipleSteps() : this.renderCurrentStep();
+    renderRightSteps() {
+        return this.state.layout === LAYOUT.WIDE ? this.renderMultipleSteps() : this.renderCurrentStep();
+    }
 
-    renderCurrentStep = () => {
+    renderCurrentStep() {
         const { currentStepIndex, requestNextStepIndex, flatChildren } = this.state;
         const currentStep = flatChildren[currentStepIndex];
 
@@ -203,9 +207,9 @@ class FlowModalContents extends Component {
                 { !this.isAnimatingLayout && currentStep }
             </div>
         );
-    };
+    }
 
-    renderMultipleSteps = () => {
+    renderMultipleSteps() {
         const wrapperClasses = classNames(styles.wideStepsWrapper, !this.isAnimatingLayout && styles.active);
 
         return (
@@ -215,9 +219,9 @@ class FlowModalContents extends Component {
                 { !this.isAnimatingLayout && this.renderOnlyWideSteps() }
             </div>
         );
-    };
+    }
 
-    renderOnlyWideSteps = () => {
+    renderOnlyWideSteps() {
         const { currentStepIndex, requestNextStepIndex, flatChildren } = this.state;
 
         const wideStepsCurrentIndex = isNumber(requestNextStepIndex) ? requestNextStepIndex - 1 : currentStepIndex - 1;
@@ -248,9 +252,9 @@ class FlowModalContents extends Component {
                 </div>
             );
         });
-    };
+    }
 
-    renderLogo = () => {
+    renderLogo() {
         const logoWrapperClasses = classNames(
             styles.logoWrapper,
             !this.isAnimatingLayout && styles.visible
@@ -261,9 +265,9 @@ class FlowModalContents extends Component {
                 { this.state.layout !== null && <Logo className={ styles.logo } /> }
             </div>
         );
-    };
+    }
 
-    inferLayoutTransition = () => {
+    inferLayoutTransition() {
         const { layout, requestNextLayout } = this.state;
 
         switch (layout) {
@@ -344,14 +348,14 @@ class FlowModalContents extends Component {
             break;
         default: return null;
         }
-    };
+    }
 
-    checkOnEntered = () => {
+    checkOnEntered() {
         if (this.firstLayoutDidRender) {
             this.firstLayoutDidRender = undefined;
             this.props.onEntered && this.props.onEntered();
         }
-    };
+    }
 
     handleFlowContentsTransitionEnd = (event) => {
         if (event.target.matches(`.${styles.flowModalContents}`)) {
