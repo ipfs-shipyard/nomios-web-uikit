@@ -16,12 +16,9 @@ class ProgressBar extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // Skip if `running` hasn't changed
-        if (this.props.running === prevProps.running) {
-            return;
+        if (this.props.running !== prevProps.running) {
+            this.handleRunningChange(prevProps.running);
         }
-
-        this.handleRunningChange(prevProps.running);
     }
 
     componentWillUnmount() {
@@ -55,7 +52,7 @@ class ProgressBar extends Component {
         this.currentProgress = 1;
 
         this.progressBarRef.current.style.transform = 'scaleY(1)';
-        this.cancelOnTransitionEnd = onTransitionEnd(this.progressBarRef.current, () => {
+        this.cancelOnTransitionEnd = onTransitionEnd(this.progressBarRef.current, (e) => {
             this.props.onEnd && this.props.onEnd();
 
             this.progressBarRef.current.style.opacity = '0';

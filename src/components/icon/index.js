@@ -17,12 +17,12 @@ const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
 const editSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-edit.svg');
-const crossOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-cross-outline.svg');
+const crossmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark-outline.svg');
 const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 
 const CameraIcon = (props) => <Icon { ...props } svg={ cameraSvg } />;
 const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkOutlineSvg } />;
-const CrossIcon = (props) => <Icon { ...props } svg={ crossOutlineSvg } />;
+const CrossmarkIcon = (props) => <Icon { ...props } svg={ crossmarkOutlineSvg } />;
 const DesktopIcon = (props) => <Icon { ...props } svg={ desktopSvg } />;
 const EntityIcon = (props) => <Icon { ...props } svg={ entitySvg } />;
 const EyeOffIcon = (props) => <Icon { ...props } svg={ eyeOffSvg } />;
@@ -43,7 +43,7 @@ export default Icon;
 export {
     CameraIcon,
     CheckmarkIcon,
-    CrossIcon,
+    CrossmarkIcon,
     DesktopIcon,
     EntityIcon,
     EyeOffIcon,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import ProgressBar from './ProgressBar';
-import { CheckmarkIcon, CrossIcon } from '../icon';
+import { CheckmarkIcon, CrossmarkIcon } from '../icon';
 import styles from './Button.css';
 
 const FEEDBACK_OUTCOME_VISIBLE_DURATION = 1750;
@@ -20,30 +20,28 @@ class Button extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // Skip if `feedback` hasn't changed
-        if (this.props.feedback === prevProps.feedback) {
-            return;
+        if (this.props.feedback !== prevProps.feedback) {
+            this.handleFeedbackChange(prevProps.feedback);
         }
-        this.handleFeedbackChange(prevProps.feedback);
     }
 
     componentWillUnmount() {
-        this.clearFeedbackOutcomeTimers();
+        this.clearResetFeedbackOutcomeTimers();
     }
 
     render() {
-        const { variant, disabled, children, fullWidth, onFeedbackAnimationEnd, ...rest } = this.props;
+        const { variant, fullWidth, disabled, onFeedbackAnimationEnd, className, children, ...rest } = this.props;
         const { feedback, feedbackOutcome } = this.state;
         const loading = feedback === 'loading';
-        const hasFeedback = feedback !== 'none';
+        const loading2 = feedback === 'loading' || ((feedback === 'success' || feedback === 'error') && !feedbackOutcome);
         const finalDisabled = disabled || loading;
         const finalClassName = classNames(
             styles.button,
             styles[variant],
-            fullWidth && styles.fullWidth,
+            loading2 && styles.loading,
             styles[feedbackOutcome],
-            loading && styles.loading,
-            hasFeedback && styles.feedback,
+            fullWidth && styles.fullWidth,
+            className
         );
 
         const wrapperClassName = classNames(
@@ -52,38 +50,27 @@ class Button extends Component {
             styles[variant],
         );
 
-        const hasFeedbackProp = this.props.feedback !== 'none';
-        const successBlockClassName = classNames(
-            hasFeedbackProp && styles.feedback,
-            styles.successBlock
-        );
-        const errorBlockClassName = classNames(
-            hasFeedbackProp && styles.feedback,
-            styles.errorBlock
-        );
-
         return (
-            <div className={ wrapperClassName } ref={ this.wrapperRef }>
-                <button { ...rest } disabled={ finalDisabled } className={ finalClassName } >
-                    <span>{ children }</span>
-                </button>
+            <button { ...rest } disabled={ finalDisabled } className={ finalClassName }>
+                <span className={ styles.textBlock }>{ children }</span>
+
                 <ProgressBar
                     running={ loading }
                     className={ styles.progressBar }
                     onBegin={ this.handleProgressBarBegin }
                     onEnd={ this.handleProgressBarEnd } />
 
-                <span className={ successBlockClassName }>
-                    <CheckmarkIcon className={ styles.checkmark } onTransitionEnd={ this.handleSuccessIconTransitionEnd } />
+                <span className={ styles.successBlock }>
+                    <CheckmarkIcon className={ styles.checkmark } />
                 </span>
-                <span className={ errorBlockClassName }>
-                    <CrossIcon className={ styles.cross } onTransitionEnd={ this.handleErrorIconTransitionEnd } />
+                <span className={ styles.errorBlock }>
+                    <CrossmarkIcon className={ styles.crossmark } />
                 </span>
-            </div>
+            </button>
         );
     }
 
-    clearFeedbackOutcomeTimers() {
+    clearResetFeedbackOutcomeTimers() {
         clearTimeout(this.resetFeedbackOutcomeTimeoutId);
     }
 
@@ -93,9 +80,8 @@ class Button extends Component {
         // If feedback prop changed to `success` or `error` without passing through `loading`,
         // force the intermidate `loading` state
         if ((feedback === 'success' || feedback === 'error') && this.state.feedback !== 'loading') {
-            this.setState({ feedback: 'loading' }, () => {
-                this.setState({ feedback });
-            });
+            this.clearResetFeedbackOutcomeTimers();
+            this.setState({ feedback }, this.handleProgressBarEnd);
         // Otherwise, simply copy the feedback to the state
         } else {
             this.setState({ feedback });
@@ -103,16 +89,16 @@ class Button extends Component {
     }
 
     handleProgressBarBegin = () => {
-        this.clearFeedbackOutcomeTimers();
+        this.clearResetFeedbackOutcomeTimers();
         this.setState({ feedbackOutcome: null });
     };
 
     handleProgressBarEnd = () => {
         const { feedback } = this.props;
 
-        this.clearFeedbackOutcomeTimers();
+        this.clearResetFeedbackOutcomeTimers();
         this.setState({ feedbackOutcome: feedback }, () => {
-            this.clearFeedbackOutcomeTimers();
+            this.clearResetFeedbackOutcomeTimers();
             this.resetFeedbackOutcomeTimeoutId = setTimeout(() => {
                 this.setState({ feedback: 'none', feedbackOutcome: null });
             }, FEEDBACK_OUTCOME_VISIBLE_DURATION);
