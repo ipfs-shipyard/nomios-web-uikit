@@ -3,12 +3,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Avatar from '../avatar';
 import { CameraIcon, PlusIcon, UserIcon } from '../icon';
-
 import styles from './AvatarPicker.css';
 
 class AvatarPicker extends Component {
     state = {
-        image: undefined,
         imageUrl: undefined,
     };
 
@@ -82,10 +80,9 @@ class AvatarPicker extends Component {
 
         if (uploadedImage) {
             this.setState({
-                image: uploadedImage,
                 imageUrl: URL.createObjectURL(uploadedImage),
             }, () => {
-                this.props.onChange(this.state.image);
+                this.props.onChange(uploadedImage);
             });
         }
     };

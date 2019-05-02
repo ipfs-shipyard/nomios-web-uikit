@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PreloadImage from 'react-image';
 import getInitials from './initials';
-
 import styles from './Avatar.css';
 
 const cssTransitionStyles = {
