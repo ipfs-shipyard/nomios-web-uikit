@@ -5,14 +5,13 @@ import ProgressBar from './ProgressBar';
 import { CheckmarkIcon, CrossmarkIcon } from '../icon';
 import styles from './Button.css';
 
-const FEEDBACK_OUTCOME_VISIBLE_DURATION = 1750;
+const FEEDBACK_OUTCOME_VISIBLE_DURATION = 1500;
 
 class Button extends Component {
-    wrapperRef = React.createRef();
-
     state = {
         feedback: 'none',
-        feedbackOutcome: null,
+        progressbarAnimationEnded: false,
+        feedbackIconAnimationEnded: false,
     };
 
     componentDidMount() {
@@ -26,94 +25,101 @@ class Button extends Component {
     }
 
     componentWillUnmount() {
-        this.clearResetFeedbackOutcomeTimers();
+        this.clearResetFeedbackOutcomeTimer();
     }
 
     render() {
-        const { variant, fullWidth, disabled, onFeedbackAnimationEnd, className, children, ...rest } = this.props;
-        const { feedback, feedbackOutcome } = this.state;
-        const loading = feedback === 'loading';
-        const loading2 = feedback === 'loading' || ((feedback === 'success' || feedback === 'error') && !feedbackOutcome);
-        const finalDisabled = disabled || loading;
+        const { variant, feedback: _, fullWidth, disabled, onFeedbackAnimationEnd, className, children, ...rest } = this.props;
+        const { feedback, progressbarAnimationEnded, feedbackIconAnimationEnded } = this.state;
+        const hasFeedback = feedback !== 'none';
+
+        const finalDisabled = disabled || hasFeedback;
         const finalClassName = classNames(
             styles.button,
             styles[variant],
-            loading2 && styles.loading,
-            styles[feedbackOutcome],
+            hasFeedback && !progressbarAnimationEnded ? styles.loading : styles[feedback],
+            hasFeedback && !feedbackIconAnimationEnded && styles.progressVisible,
             fullWidth && styles.fullWidth,
             className
         );
 
-        const wrapperClassName = classNames(
-            styles.buttonWrapper,
-            styles[feedbackOutcome],
-            styles[variant],
-        );
-
         return (
             <button { ...rest } disabled={ finalDisabled } className={ finalClassName }>
-                <span className={ styles.textBlock }>{ children }</span>
+                <div className={ styles.textBlock }>
+                    <span className={ styles.text }>{ children }</span>
 
-                <ProgressBar
-                    running={ loading }
-                    className={ styles.progressBar }
-                    onBegin={ this.handleProgressBarBegin }
-                    onEnd={ this.handleProgressBarEnd } />
+                    <ProgressBar
+                        running={ feedback === 'loading' }
+                        className={ styles.progressBar }
+                        onEnd={ this.handleProgressBarEnd } />
+                </div>
 
                 <span className={ styles.successBlock }>
-                    <CheckmarkIcon className={ styles.checkmark } />
+                    <CheckmarkIcon className={ styles.checkmark } onTransitionEnd={ this.handleSuccessIconTransitionEnd } />
                 </span>
                 <span className={ styles.errorBlock }>
-                    <CrossmarkIcon className={ styles.crossmark } />
+                    <CrossmarkIcon className={ styles.crossmark } onTransitionEnd={ this.handleErrorIconTransitionEnd } />
                 </span>
             </button>
         );
     }
 
-    clearResetFeedbackOutcomeTimers() {
+    startResetFeedbackOutcomeTimer() {
+        this.clearResetFeedbackOutcomeTimer();
+
+        this.resetFeedbackOutcomeTimeoutId = setTimeout(() => {
+            this.setState({
+                feedback: 'none',
+                progressbarAnimationEnded: false,
+                feedbackIconAnimationEnded: false,
+            });
+        }, FEEDBACK_OUTCOME_VISIBLE_DURATION);
+    }
+
+    clearResetFeedbackOutcomeTimer() {
         clearTimeout(this.resetFeedbackOutcomeTimeoutId);
     }
 
-    handleFeedbackChange() {
+    handleFeedbackChange(prevFeedback) {
         const { feedback } = this.props;
 
-        // If feedback prop changed to `success` or `error` without passing through `loading`,
-        // force the intermidate `loading` state
-        if ((feedback === 'success' || feedback === 'error') && this.state.feedback !== 'loading') {
-            this.clearResetFeedbackOutcomeTimers();
-            this.setState({ feedback }, this.handleProgressBarEnd);
-        // Otherwise, simply copy the feedback to the state
+        this.clearResetFeedbackOutcomeTimer();
+
+        if ((feedback === 'success' || feedback === 'error') && prevFeedback !== 'loading') {
+            this.startResetFeedbackOutcomeTimer();
+            this.setState({
+                feedback,
+                progressbarAnimationEnded: true,
+                feedbackIconAnimationEnded: false,
+            });
         } else {
-            this.setState({ feedback });
+            this.setState({
+                feedback,
+                progressbarAnimationEnded: false,
+                feedbackIconAnimationEnded: false,
+            });
         }
     }
 
-    handleProgressBarBegin = () => {
-        this.clearResetFeedbackOutcomeTimers();
-        this.setState({ feedbackOutcome: null });
-    };
-
     handleProgressBarEnd = () => {
-        const { feedback } = this.props;
-
-        this.clearResetFeedbackOutcomeTimers();
-        this.setState({ feedbackOutcome: feedback }, () => {
-            this.clearResetFeedbackOutcomeTimers();
-            this.resetFeedbackOutcomeTimeoutId = setTimeout(() => {
-                this.setState({ feedback: 'none', feedbackOutcome: null });
-            }, FEEDBACK_OUTCOME_VISIBLE_DURATION);
-        });
+        this.setState({ progressbarAnimationEnded: true });
     };
 
     handleSuccessIconTransitionEnd = () => {
-        if (this.state.feedbackOutcome === 'success') {
-            this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(true);
+        if (this.state.feedback === 'success') {
+            this.startResetFeedbackOutcomeTimer();
+            this.setState({ feedbackIconAnimationEnded: true }, () => {
+                this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(true);
+            });
         }
     };
 
     handleErrorIconTransitionEnd = (event) => {
-        if (this.state.feedbackOutcome === 'error' && event.target.matches('path:nth-of-type(1)')) {
-            this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(false);
+        if (this.state.feedback === 'error' && event.target.matches('path:nth-of-type(1)')) {
+            this.startResetFeedbackOutcomeTimer();
+            this.setState({ feedbackIconAnimationEnded: true }, () => {
+                this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(false);
+            });
         }
     };
 }
@@ -124,7 +130,8 @@ Button.propTypes = {
     fullWidth: PropTypes.bool,
     feedback: PropTypes.oneOf(['none', 'loading', 'success', 'error']),
     onFeedbackAnimationEnd: PropTypes.func,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
+    className: PropTypes.string,
 };
 
 Button.defaultProps = {

@@ -31,9 +31,9 @@ storiesOf('TextInput', module)
     const type = select('input type', ['text', 'password'], 'text');
     const helperText = text('helper text', '');
     const feedbackMessage = text('feedback message', '');
-    const feedbackType = select('feedback type', [undefined, 'error', 'info']);
+    const feedbackType = select('feedback type', [null, 'error', 'info'], null);
     const lineType = select('lineType', ['normal', 'dashed'], 'normal');
-    const lineStrength = number('line strength', undefined);
+    const lineStrength = number('line strength');
 
     return (
         <TextInput
@@ -42,7 +42,7 @@ storiesOf('TextInput', module)
             type={ type }
             helperText={ helperText }
             lineType={ lineType }
-            lineStrength={ lineStrength }
+            lineStrength={ lineStrength != null ? lineStrength : undefined }
             feedback={ { message: feedbackMessage, type: feedbackType } } />
     );
 });

@@ -29,9 +29,9 @@ storiesOf('Button', module)
 })
 .add('Knobs playground ⚽', () => {
     const variant = select('variant', ['primary', 'secondary', 'tertiary', 'negative'], 'primary');
-    const disabled = boolean('disabled');
-    const fullWidth = boolean('fullWidth');
-    const feedback = select('feedback', ['none', 'loading', 'success', 'error']);
+    const disabled = boolean('disabled', false);
+    const fullWidth = boolean('fullWidth', false);
+    const feedback = select('feedback', ['none', 'loading', 'success', 'error'], 'none');
     const children = text('children', 'Click me');
 
     return (

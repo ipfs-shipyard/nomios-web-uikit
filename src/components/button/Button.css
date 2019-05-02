@@ -1,18 +1,23 @@
 @import "../../styles/colors";
 @import "../../styles/mixins/typography";
 
+:root {
+    --feedback-transition-duration: 0.2s;
+}
+
 .button {
     position: relative;
     min-width: 12rem;
     height: 5rem;
     overflow: hidden;
-    padding: 0 5rem;
+    padding: 0;
     border: none;
-    transition-property: background-color, color, border-color, opacity;
-    transition-duration: 0.2s;
-    transition-timing-function: ease;
+    background: transparent;
+    transition-property: opacity, box-shadow;
+    transition-duration: var(--feedback-transition-duration);
+    transition-timing-function: ease-out;
 
-    &:not([disabled]) {
+    &:enabled {
         cursor: pointer;
     }
 
@@ -20,54 +25,146 @@
         width: 100%;
     }
 
+    & .textBlock {
+        position: relative;
+        @mixin typography-body-1 rem;
+        height: 100%;
+        padding: 0 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: border-color, color, background-color;
+        transition-duration: var(--feedback-transition-duration);
+        transition-timing-function: ease-out;
+
+        & .text {
+            position: relative;
+            z-index: 2;
+        }
+
+        & .progressBar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
+        }
+    }
+
     &.primary {
-        background-color: var(--color-armadillo);
-        color: var(--color-white);
-
-        &:active,
-        &:focus {
-            background-color: var(--color-dune);
-        }
-
-        &:hover {
-            background-color: color(var(--color-armadillo) alpha(0.8));
-        }
-
-        &[disabled] {
-            background-color: color(var(--color-armadillo) alpha(0.2));
-        }
-
-        &.loading {
-            border-color: transparent;
-            background-color: color(var(--color-armadillo) alpha(0.2));
+        & .textBlock {
+            background-color: var(--color-armadillo);
             color: var(--color-white);
+        }
+
+        &:enabled {
+            &:active .textBlock,
+            &:focus:not(:hover) .textBlock {
+                background-color: var(--color-dune);
+            }
+
+            &:hover:not(:active) .textBlock {
+                background-color: color(var(--color-armadillo) alpha(0.8));
+            }
+        }
+
+        &:disabled .textBlock {
+            background-color: color(var(--color-armadillo) alpha(0.2));
         }
     }
 
     &.secondary {
-        border: 0.1rem solid var(--color-armadillo);
-        background-color: transparent;
-        color: var(--color-black);
+        & .textBlock {
+            border: 0.1rem solid var(--color-armadillo);
+            background-color: transparent;
+            color: var(--color-black);
 
-        &:active,
-        &:focus {
-            border-color: var(--color-armadillo);
-            box-shadow: inset 0 0 0 0.1rem var(--color-armadillo);
+            & .progressBar {
+                top: -1px;
+                right: -1px;
+                bottom: -1px;
+                left: -1px;
+            }
         }
 
-        &:hover {
-            border-color: color(var(--color-armadillo) alpha(0.6));
-            color: color(var(--color-black) alpha(0.8));
+        &:enabled {
+            &:active,
+            &:focus:not(:hover) {
+                box-shadow: inset 0 0 0 0.2rem var(--color-armadillo);
+
+                & .textBlock {
+                    border-color: var(--color-armadillo);
+                }
+            }
+
+            &:hover:not(:active) .textBlock {
+                border-color: color(var(--color-armadillo) alpha(0.6));
+                color: color(var(--color-black) alpha(0.8));
+            }
         }
 
-        &[disabled] {
+        &:disabled {
             opacity: 0.3;
         }
+    }
 
-        &.loading {
-            border: none;
-            background-color: color(var(--color-armadillo) alpha(0.2));
+    &.tertiary {
+        & .textBlock {
+            border: 0.1rem solid var(--color-white);
+            background-color: transparent;
             color: var(--color-white);
+
+            & .progressBar {
+                top: -1px;
+                right: -1px;
+                bottom: -1px;
+                left: -1px;
+            }
+        }
+
+        &:enabled {
+            &:active,
+            &:focus:not(:hover) {
+                box-shadow: inset 0 0 0 0.2rem var(--color-white);
+
+                & .textBlock {
+                    border-color: color(var(--color-white) alpha(0.6));
+                }
+            }
+
+            &:hover:not(:active) .textBlock {
+                border-color: color(var(--color-white) alpha(0.6));
+                color: color(var(--color-white) alpha(0.8));
+            }
+        }
+
+        &:disabled .textBlock {
+            border-color: color(var(--color-white) alpha(0.3));
+            color: color(var(--color-white) alpha(0.5));
+        }
+    }
+
+    &.negative {
+        & .textBlock {
+            background-color: var(--color-white);
+            color: var(--color-armadillo);
+        }
+
+        &:enabled {
+            &:active,
+            &:focus:not(:hover) {
+                box-shadow: 0 0 0 0.3rem color(var(--color-white) alpha(0.3));
+            }
+
+            &:hover:not(:active) .textBlock {
+                background-color: color(var(--color-white) alpha(0.6));
+            }
+        }
+
+        &:disabled .textBlock {
+            background-color: color(var(--color-white) alpha(0.2));
+            color: color(var(--color-armadillo) alpha(0.5));
         }
     }
 
@@ -75,23 +172,8 @@
       Text + feedback
       ========================================================================== */
 
-    & .progressBar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-    }
-
     & .textBlock {
-        @mixin typography-body-2 rem;
-        position: relative;
-        height: 100%;
-        z-index: 2;
-        transform: translateY(0);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: transform 0.2s ease;
+        z-index: 1;
     }
 
     & .successBlock,
@@ -101,62 +183,42 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 1;
+        z-index: 2;
         transform: translateY(100%);
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: transform 0.2s ease;
+        transition: transform var(--feedback-transition-duration) ease-out;
+    }
 
-        & .feedbackIcon {
-            font-size: 1.6rem;
+    &.success .successBlock,
+    &.error .errorBlock {
+        transform: translateY(0);
+    }
+
+    /* Primary & Secondary */
+
+    &.primary.progressVisible .textBlock,
+    &.secondary.progressVisible .textBlock {
+        background-color: color(var(--color-armadillo) alpha(0.2));
+        color: var(--color-white);
+    }
+
+    &.secondary {
+        &.loading,
+        &.success,
+        &.error {
+            opacity: 1;
         }
-    }
 
-    & .crossmark {
-        & svg path:nth-of-type(1) {
-            transition: stroke-dashoffset 0.1s linear 0.3s;
-        }
-
-        & svg path:nth-of-type(2) {
-            transition: stroke-dashoffset 0.1s linear 0.2s;
-        }
-    }
-
-    & .checkmark {
-        transition: stroke-dashoffset 0.2s linear 0.2s;
-    }
-
-    & .checkmark,
-    & .crossmark {
-        font-size: 1rem;
-        stroke-dasharray: 20;
-        stroke-dashoffset: 20;
-    }
-
-    &.success {
-        & .successBlock {
-            transform: translateY(0);
-
-            & .checkmark {
-                stroke-dashoffset: 0;
-            }
-        }
-    }
-
-    &.error {
-        & .errorBlock {
-            transform: translateY(0);
-
-            & .crossmark {
-                stroke-dashoffset: 0;
-            }
+        &.progressVisible .textBlock {
+            border-color: transparent;
         }
     }
 
     &.primary,
     &.secondary {
-        & .progressBar {
+        & .textBlock .progressBar {
             background-color: color(var(--color-armadillo) alpha(0.2));
         }
 
@@ -177,23 +239,67 @@
         }
     }
 
-    &.success {
-        & .textBlock {
-            transform: translateY(-100%);
+    /* Tertiary & Negative */
+
+    &.tertiary,
+    &.negative {
+        &.progressVisible .textBlock {
+            border-color: transparent;
+            background-color: color(var(--color-white) alpha(0.2));
+            color: var(--color-white);
+        }
+
+        & .textBlock .progressBar {
+            background-color: color(var(--color-white) alpha(0.2));
         }
 
         & .successBlock {
-            transform: translateY(0);
-        }
-    }
+            background-color: var(--color-white);
 
-    &.error {
-        & .textBlock {
-            transform: translateY(-100%);
+            & .checkmark svg path {
+                stroke: var(--color-ocean-green);
+            }
         }
 
         & .errorBlock {
-            transform: translateY(0);
+            background-color: var(--color-white);
+
+            & .crossmark svg path {
+                stroke: var(--color-monza);
+            }
         }
+    }
+
+    /* ==========================================================================
+      Feedback icons
+      ========================================================================== */
+
+    & .checkmark,
+    & .crossmark {
+        font-size: 1rem;
+        stroke-dasharray: 20;
+        stroke-dashoffset: 20;
+    }
+
+    & .checkmark {
+        transition: stroke-dashoffset 0.2s linear 0.2s;
+    }
+
+    & .crossmark {
+        & svg path:nth-of-type(1) {
+            transition: stroke-dashoffset 0.1s linear 0.3s;
+        }
+
+        & svg path:nth-of-type(2) {
+            transition: stroke-dashoffset 0.1s linear 0.2s;
+        }
+    }
+
+    &.success .checkmark {
+        stroke-dashoffset: 0;
+    }
+
+    &.error .crossmark {
+        stroke-dashoffset: 0;
     }
 }

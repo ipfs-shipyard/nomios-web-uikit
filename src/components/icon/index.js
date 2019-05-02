@@ -2,7 +2,11 @@ import React from 'react';
 import Icon from './Icon';
 
 const cameraSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-camera.svg');
+const checkmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark.svg');
+const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
+const crossmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark.svg');
 const desktopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-desktop.svg');
+const editSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-edit.svg');
 const entitySvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-entity.svg');
 const eyeOffSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye-off.svg');
 const eyeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye.svg');
@@ -15,15 +19,13 @@ const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/i
 const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
-const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
-const editSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-edit.svg');
-const crossmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark-outline.svg');
-const checkmarkOutlineSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark-outline.svg');
 
 const CameraIcon = (props) => <Icon { ...props } svg={ cameraSvg } />;
-const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkOutlineSvg } />;
-const CrossmarkIcon = (props) => <Icon { ...props } svg={ crossmarkOutlineSvg } />;
+const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkSvg } />;
+const CloseIcon = (props) => <Icon { ...props } svg={ closeSvg } />;
+const CrossmarkIcon = (props) => <Icon { ...props } svg={ crossmarkSvg } />;
 const DesktopIcon = (props) => <Icon { ...props } svg={ desktopSvg } />;
+const EditIcon = (props) => <Icon { ...props } svg={ editSvg } />;
 const EntityIcon = (props) => <Icon { ...props } svg={ entitySvg } />;
 const EyeOffIcon = (props) => <Icon { ...props } svg={ eyeOffSvg } />;
 const EyeIcon = (props) => <Icon { ...props } svg={ eyeSvg } />;
@@ -36,15 +38,15 @@ const PlusIcon = (props) => <Icon { ...props } svg={ plusSvg } />;
 const RefreshIcon = (props) => <Icon { ...props } svg={ refreshSvg } />;
 const TabletIcon = (props) => <Icon { ...props } svg={ tabletSvg } />;
 const WarningIcon = (props) => <Icon { ...props } svg={ warningSvg } />;
-const CloseIcon = (props) => <Icon { ...props } svg={ closeSvg } />;
-const EditIcon = (props) => <Icon { ...props } svg={ editSvg } />;
 
 export default Icon;
 export {
     CameraIcon,
     CheckmarkIcon,
+    CloseIcon,
     CrossmarkIcon,
     DesktopIcon,
+    EditIcon,
     EntityIcon,
     EyeOffIcon,
     EyeIcon,
@@ -57,6 +59,4 @@ export {
     RefreshIcon,
     TabletIcon,
     WarningIcon,
-    CloseIcon,
-    EditIcon,
 };

@@ -6,7 +6,7 @@ import onTransitionEnd from 'proper-on-transition-end';
 import styles from './ProgressBar.css';
 
 const INCREMENT_INTERVAL = 300;
-const MAX_PROGRESS = 0.95;
+const MAX_PROGRESS = 0.85;
 
 class ProgressBar extends Component {
     progressBarRef = createRef();
@@ -52,7 +52,7 @@ class ProgressBar extends Component {
         this.currentProgress = 1;
 
         this.progressBarRef.current.style.transform = 'scaleY(1)';
-        this.cancelOnTransitionEnd = onTransitionEnd(this.progressBarRef.current, (e) => {
+        this.cancelOnTransitionEnd = onTransitionEnd(this.progressBarRef.current, () => {
             this.props.onEnd && this.props.onEnd();
 
             this.progressBarRef.current.style.opacity = '0';
