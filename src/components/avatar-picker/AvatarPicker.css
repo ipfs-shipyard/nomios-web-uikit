@@ -1,0 +1,97 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/shared";
+@import "../../styles/mixins/typography";
+
+.container {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & .hidden {
+        display: none;
+    }
+
+    & .label {
+        margin-top: 1.5rem;
+        opacity: 0.5;
+        color: var(--color-mineral-green);
+        @mixin typography-body-2 rem;
+        transition: opacity 0.2s ease;
+    }
+
+    & .circleWrapper {
+        position: relative;
+
+        & .circle,
+        & .avatarPlaceholder {
+            transition: background-color 0.2s ease;
+        }
+
+        & .imageOverlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            border-radius: 50%;
+            transition: opacity 0.2s ease;
+
+            & .cameraIcon {
+                font-size: 1.4rem;
+                fill: var(--color-white);
+            }
+        }
+
+        & .smallCircle {
+            @mixin circular-shape 2, var(--color-white);
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 10;
+            margin: 0.1rem;
+            border: 1px solid color(var(--color-mineral-green) alpha(0.2));
+
+            & .icon {
+                font-size: 0.7rem;
+                fill: var(--color-mineral-green);
+            }
+        }
+
+        & .avatarPlaceholder {
+            @mixin circular-shape 8, color(var(--color-mineral-green) alpha(0.2));
+
+            & .icon {
+                font-size: 1.4rem;
+                fill: var(--color-mineral-green);
+                fill-opacity: 0.8;
+            }
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        & .circleWrapper {
+            & .circle,
+            & .avatarPlaceholder {
+                background-color: color(var(--color-mineral-green) alpha(0.4));
+            }
+
+            & .imageOverlay {
+                z-index: 10;
+                opacity: 1;
+                background-color: color(var(--color-mineral-green) alpha(0.8));
+            }
+        }
+
+        & .label {
+            opacity: 1;
+        }
+    }
+}

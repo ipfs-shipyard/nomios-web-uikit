@@ -10,3 +10,5 @@ import './tooltip';
 import './modal';
 import './logo';
 import './type-group';
+import './avatar-picker';
+import './avatar';
