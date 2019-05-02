@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Avatar from '../avatar';
@@ -18,16 +18,14 @@ class AvatarPicker extends Component {
         const { label, className, onChange, ...rest } = this.props;
 
         return (
-            <Fragment>
+            <div className={ classNames(styles.container, className) } onClick={ this.handleAvatarLoaderClick }>
                 { this.renderInput() }
-                <div className={ classNames(styles.container, className) } onClick={ this.handleAvatarLoaderClick }>
-                    <div className={ styles.circleWrapper }>
-                        { this.renderPlusIcon() }
-                        { this.renderAvatar(rest) }
-                    </div>
-                    <div className={ styles.label }>{ label }</div>
+                <div className={ styles.circleWrapper }>
+                    { this.renderPlusIcon() }
+                    { this.renderAvatar(rest) }
                 </div>
-            </Fragment>
+                <div className={ styles.label }>{ label }</div>
+            </div>
         );
     }
 
