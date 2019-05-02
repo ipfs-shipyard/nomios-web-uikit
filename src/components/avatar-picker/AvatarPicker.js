@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, cloneElement } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Avatar from '../avatar';
@@ -55,13 +55,13 @@ class AvatarPicker extends Component {
     }
 
     renderAvatar(props) {
-        const { image, ...rest } = props;
+        const { image, icon, ...rest } = props;
         const imageUrl_ = this.state.imageUrl ? this.state.imageUrl : image;
 
         if (!this.props.image && !this.state.imageUrl && !this.props.name) {
             return (
                 <div className={ styles.avatarPlaceholder }>
-                    <UserIcon className={ styles.icon } />
+                    { cloneElement(icon, { className: classNames(icon.props.className, styles.icon) }) }
                 </div>
             );
         }
@@ -95,6 +95,10 @@ AvatarPicker.propTypes = {
     label: PropTypes.string,
     icon: PropTypes.element,
     name: PropTypes.string,
+};
+
+AvatarPicker.defaultProps = {
+    icon: <UserIcon />,
 };
 
 export default AvatarPicker;
