@@ -1,4 +1,4 @@
-# Avatar Controller
+# Avatar Picker
 
 A component to manage avatar uploads.
 
