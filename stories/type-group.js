@@ -44,7 +44,7 @@ storiesOf('Type Group', module)
         label="Person"
         badge={ <CheckmarkIcon /> }
         selected
-        selectable={ false }>
+        onClick={ action('Clicked!') }>
         <UserIcon />
     </TypeOption>
 ))
