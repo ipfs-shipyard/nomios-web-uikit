@@ -17,7 +17,8 @@ class TypeOption extends Component {
                         name={ groupName }
                         checked={ selected }
                         disabled={ !selectable }
-                        onChange={ this.handleInputChange } />
+                        onChange={ this.handleInputChange }
+                        onClick={ this.handleClick } />
                     <div className={ styles.circle }>
                         { badge &&
                             <span className={ styles.badge }>
@@ -34,6 +35,10 @@ class TypeOption extends Component {
     handleInputChange = () => {
         this.props.onSelect(this.props.id);
     };
+
+    handleClick = () => {
+        this.props.onClick && this.props.onClick();
+    };
 }
 
 TypeOption.propTypes = {
@@ -45,6 +50,7 @@ TypeOption.propTypes = {
     selectable: PropTypes.bool,
     selected: PropTypes.bool,
     onSelect: PropTypes.func,
+    onClick: PropTypes.func,
     badge: PropTypes.element,
     label: PropTypes.string,
     id: PropTypes.string,

@@ -38,13 +38,24 @@ storiesOf('Type Group', module)
         </State>
     );
 })
-.add('Individual TypeOption', () => (
+.add('Individual TypeOption (clickable)', () => (
     <TypeOption
         id="1"
         label="Person"
         badge={ <CheckmarkIcon /> }
         selected
-        selectable={ false }>
+        onClick={ action('Clicked!') }>
+        <UserIcon />
+    </TypeOption>
+))
+.add('Individual TypeOption (not selectable with onClick)', () => (
+    <TypeOption
+        id="1"
+        label="Person"
+        badge={ <CheckmarkIcon /> }
+        selected
+        selectable={ false }
+        onClick={ action('Clicked!') }>
         <UserIcon />
     </TypeOption>
 ))
