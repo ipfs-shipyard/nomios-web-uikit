@@ -58,7 +58,7 @@ storiesOf('FeedbackMessage', module)
 .add('Knobs playground ⚽', () => {
     const children = text('children', 'Generic feedback message');
     const variant = select('variant', ['small', 'large'], 'small');
-    const type = select('type', [undefined, 'error', 'info']);
+    const type = select('type', [null, 'error', 'info'], null);
     const textColor = text('text color', '');
     const iconPosition = select('icon position', ['left', 'right'], 'left');
 

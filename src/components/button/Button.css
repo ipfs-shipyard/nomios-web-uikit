@@ -1,165 +1,178 @@
 @import "../../styles/colors";
+@import "../../styles/mixins/typography";
 
-.buttonWrapper {
+:root {
+    --feedback-transition-duration: 0.2s;
+}
+
+.button {
     position: relative;
     min-width: 12rem;
     height: 5rem;
     overflow: hidden;
     padding: 0;
-    display: inline-block;
     border: none;
+    background: transparent;
+    transition-property: opacity, box-shadow;
+    transition-duration: var(--feedback-transition-duration);
+    transition-timing-function: ease-out;
 
-    & .button {
-        min-width: 12rem;
-        height: 5rem;
-        overflow: hidden;
+    &:enabled {
+        cursor: pointer;
+    }
+
+    &.fullWidth {
+        width: 100%;
+    }
+
+    & .textBlock {
+        position: relative;
+        @mixin typography-body-1 rem;
+        height: 100%;
         padding: 0 5rem;
-        border: none;
-        border-width: 0.1rem;
-        border-style: solid;
-        outline: 0;
-        background-color: transparent;
-        transition-property: background-color, box-shadow, border-color;
-        transition-duration: 0.2s;
-        transition-timing-function: ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: border-color, color, background-color;
+        transition-duration: var(--feedback-transition-duration);
+        transition-timing-function: ease-out;
 
-        &:not([disabled]) {
-            cursor: pointer;
+        & .text {
+            position: relative;
+            z-index: 2;
         }
 
-        &.fullWidth {
-            width: 100%;
-        }
-
-        & span {
-            transition: color 0.2s ease;
-        }
-
-        &.primary {
-            border-color: transparent;
-            background-color: var(--color-armadillo);
-            color: var(--color-white);
-
-            &:enabled:hover:not(.loading) {
-                background-color: color(var(--color-armadillo) alpha(0.8));
-            }
-
-            &:enabled:active:not(.loading),
-            &:enabled:focus:not(:hover):not(.loading) {
-                background-color: var(--color-dune);
-            }
-
-            &[disabled]:not(.loading) {
-                background-color: color(var(--color-armadillo) alpha(0.2));
-            }
-        }
-
-        &.secondary {
-            border-color: var(--color-armadillo);
-
-            &:enabled:hover:not(.loading) {
-                border-color: color(var(--color-armadillo) alpha(0.6));
-
-                & span {
-                    color: color(var(--color-black) alpha(0.8));
-                }
-            }
-
-            &:enabled:active:not(.loading),
-            &:enabled:focus:not(:hover):not(.loading) {
-                border-color: var(--color-armadillo);
-                box-shadow: inset 0 0 0 0.1rem var(--color-armadillo);
-
-                & span {
-                    color: var(--color-black);
-                }
-            }
-
-            &:disabled:not(.loading),
-            &[disabled]:not(.loading) {
-                opacity: 0.3;
-            }
-        }
-
-        &.primary,
-        &.secondary {
-            &.feedback {
-                border-color: transparent;
-                background-color: color(var(--color-armadillo) alpha(0.2));
-                color: var(--color-white);
-            }
-        }
-
-        &.tertiary {
-            border-color: var(--color-white);
-            color: var(--color-white);
-
-            &:enabled:hover:not(.loading) {
-                border-color: color(var(--color-white) alpha(0.6));
-
-                & span {
-                    color: color(var(--color-white) alpha(0.8));
-                }
-            }
-
-            &:enabled:active:not(.loading),
-            &:enabled:focus:not(:hover):not(.loading) {
-                box-shadow: inset 0 0 0 0.1rem var(--color-white);
-            }
-
-            &:disabled:not(.loading),
-            &[disabled]:not(.loading) {
-                border-color: color(var(--color-white) alpha(0.3));
-
-                & span {
-                    color: color(var(--color-white) alpha(0.5));
-                }
-            }
-        }
-
-        &.negative {
-            border-color: transparent;
-            background-color: var(--color-white);
-            color: var(--color-armadillo);
-
-            &:enabled:hover:not(.loading) {
-                opacity: 0.6;
-
-                & span {
-                    opacity: 1;
-                }
-            }
-
-            &:enabled:active:not(.loading),
-            &:enabled:focus:not(:hover):not(.loading) {
-                opacity: 1;
-                box-shadow: 0 0 0 0.3rem color(var(--color-white) alpha(0.3));
-            }
-
-            &:disabled:not(.loading),
-            &[disabled]:not(.loading) {
-                background-color: color(var(--color-white) alpha(0.2));
-
-                & span {
-                    opacity: 0.5;
-                }
-            }
-        }
-
-        &.tertiary,
-        &.negative {
-            &.feedback {
-                border-color: transparent;
-                background-color: color(var(--color-white) alpha(0.2));
-                color: color(var(--color-white) alpha(0.8));
-            }
+        & .progressBar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1;
         }
     }
 
-    & .progressBar {
-        position: absolute;
-        top: 0;
-        left: 0;
+    &.primary {
+        & .textBlock {
+            background-color: var(--color-armadillo);
+            color: var(--color-white);
+        }
+
+        &:enabled {
+            &:active .textBlock,
+            &:focus:not(:hover) .textBlock {
+                background-color: var(--color-dune);
+            }
+
+            &:hover:not(:active) .textBlock {
+                background-color: color(var(--color-armadillo) alpha(0.8));
+            }
+        }
+
+        &:disabled .textBlock {
+            background-color: color(var(--color-armadillo) alpha(0.2));
+        }
+    }
+
+    &.secondary {
+        & .textBlock {
+            border: 0.1rem solid var(--color-armadillo);
+            background-color: transparent;
+            color: var(--color-black);
+
+            & .progressBar {
+                top: -1px;
+                right: -1px;
+                bottom: -1px;
+                left: -1px;
+            }
+        }
+
+        &:enabled {
+            &:active,
+            &:focus:not(:hover) {
+                box-shadow: inset 0 0 0 0.2rem var(--color-armadillo);
+
+                & .textBlock {
+                    border-color: var(--color-armadillo);
+                }
+            }
+
+            &:hover:not(:active) .textBlock {
+                border-color: color(var(--color-armadillo) alpha(0.6));
+                color: color(var(--color-black) alpha(0.8));
+            }
+        }
+
+        &:disabled {
+            opacity: 0.3;
+        }
+    }
+
+    &.tertiary {
+        & .textBlock {
+            border: 0.1rem solid var(--color-white);
+            background-color: transparent;
+            color: var(--color-white);
+
+            & .progressBar {
+                top: -1px;
+                right: -1px;
+                bottom: -1px;
+                left: -1px;
+            }
+        }
+
+        &:enabled {
+            &:active,
+            &:focus:not(:hover) {
+                box-shadow: inset 0 0 0 0.2rem var(--color-white);
+
+                & .textBlock {
+                    border-color: color(var(--color-white) alpha(0.6));
+                }
+            }
+
+            &:hover:not(:active) .textBlock {
+                border-color: color(var(--color-white) alpha(0.6));
+                color: color(var(--color-white) alpha(0.8));
+            }
+        }
+
+        &:disabled .textBlock {
+            border-color: color(var(--color-white) alpha(0.3));
+            color: color(var(--color-white) alpha(0.5));
+        }
+    }
+
+    &.negative {
+        & .textBlock {
+            background-color: var(--color-white);
+            color: var(--color-armadillo);
+        }
+
+        &:enabled {
+            &:active,
+            &:focus:not(:hover) {
+                box-shadow: 0 0 0 0.3rem color(var(--color-white) alpha(0.3));
+            }
+
+            &:hover:not(:active) .textBlock {
+                background-color: color(var(--color-white) alpha(0.6));
+            }
+        }
+
+        &:disabled .textBlock {
+            background-color: color(var(--color-white) alpha(0.2));
+            color: color(var(--color-armadillo) alpha(0.5));
+        }
+    }
+
+    /* ==========================================================================
+      Text + feedback
+      ========================================================================== */
+
+    & .textBlock {
         z-index: 1;
     }
 
@@ -167,29 +180,45 @@
     & .errorBlock {
         position: absolute;
         top: 0;
-        right: 0;
-        bottom: 0;
         left: 0;
-        z-index: 1;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
         transform: translateY(100%);
         display: flex;
         justify-content: center;
         align-items: center;
-        border-width: 0.1rem;
-        border-color: transparent;
+        transition: transform var(--feedback-transition-duration) ease-out;
+    }
 
-        &.feedback {
-            transition: transform 0.2s ease;
+    &.success .successBlock,
+    &.error .errorBlock {
+        transform: translateY(0);
+    }
+
+    /* Primary & Secondary */
+
+    &.primary.progressVisible .textBlock,
+    &.secondary.progressVisible .textBlock {
+        background-color: color(var(--color-armadillo) alpha(0.2));
+        color: var(--color-white);
+    }
+
+    &.secondary {
+        &.loading,
+        &.success,
+        &.error {
+            opacity: 1;
         }
 
-        & .feedbackIcon {
-            font-size: 1.6rem;
+        &.progressVisible .textBlock {
+            border-color: transparent;
         }
     }
 
     &.primary,
     &.secondary {
-        & .progressBar {
+        & .textBlock .progressBar {
             background-color: color(var(--color-armadillo) alpha(0.2));
         }
 
@@ -204,15 +233,23 @@
         & .errorBlock {
             background-color: var(--color-monza);
 
-            & .cross svg path {
+            & .crossmark svg path {
                 stroke: var(--color-white);
             }
         }
     }
 
+    /* Tertiary & Negative */
+
     &.tertiary,
     &.negative {
-        & .progressBar {
+        &.progressVisible .textBlock {
+            border-color: transparent;
+            background-color: color(var(--color-white) alpha(0.2));
+            color: var(--color-white);
+        }
+
+        & .textBlock .progressBar {
             background-color: color(var(--color-white) alpha(0.2));
         }
 
@@ -227,13 +264,28 @@
         & .errorBlock {
             background-color: var(--color-white);
 
-            & .cross svg path {
+            & .crossmark svg path {
                 stroke: var(--color-monza);
             }
         }
     }
 
-    & .cross {
+    /* ==========================================================================
+      Feedback icons
+      ========================================================================== */
+
+    & .checkmark,
+    & .crossmark {
+        font-size: 1rem;
+        stroke-dasharray: 20;
+        stroke-dashoffset: 20;
+    }
+
+    & .checkmark {
+        transition: stroke-dashoffset 0.2s linear 0.2s;
+    }
+
+    & .crossmark {
         & svg path:nth-of-type(1) {
             transition: stroke-dashoffset 0.1s linear 0.3s;
         }
@@ -243,34 +295,11 @@
         }
     }
 
-    & .checkmark {
-        transition: stroke-dashoffset 0.2s linear 0.2s;
+    &.success .checkmark {
+        stroke-dashoffset: 0;
     }
 
-    & .checkmark,
-    & .cross {
-        font-size: 1rem;
-        stroke-dasharray: 20;
-        stroke-dashoffset: 20;
-    }
-
-    &.success {
-        & .successBlock {
-            transform: translateY(0);
-
-            & .checkmark {
-                stroke-dashoffset: 0;
-            }
-        }
-    }
-
-    &.error {
-        & .errorBlock {
-            transform: translateY(0);
-
-            & .cross {
-                stroke-dashoffset: 0;
-            }
-        }
+    &.error .crossmark {
+        stroke-dashoffset: 0;
     }
 }

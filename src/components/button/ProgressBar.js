@@ -6,7 +6,7 @@ import onTransitionEnd from 'proper-on-transition-end';
 import styles from './ProgressBar.css';
 
 const INCREMENT_INTERVAL = 300;
-const MAX_PROGRESS = 0.95;
+const MAX_PROGRESS = 0.85;
 
 class ProgressBar extends Component {
     progressBarRef = createRef();
@@ -16,12 +16,9 @@ class ProgressBar extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // Skip if `running` hasn't changed
-        if (this.props.running === prevProps.running) {
-            return;
+        if (this.props.running !== prevProps.running) {
+            this.handleRunningChange(prevProps.running);
         }
-
-        this.handleRunningChange(prevProps.running);
     }
 
     componentWillUnmount() {
