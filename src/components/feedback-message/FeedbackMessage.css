@@ -7,34 +7,19 @@
     align-items: center;
     color: color(var(--color-armadillo) alpha(0.6));
 
-    & .iconWrapper {
-        display: flex;
-
-        &:hover .icon {
-            fill-opacity: 0.6;
-        }
-    }
-
     & .icon {
         transition: fill-opacity 0.3s ease;
         fill: var(--color-armadillo);
         fill-opacity: 0.3;
-    }
 
-    &.small {
-        & > .iconWrapper {
-            margin-top: 0.3rem;
-        }
-
-        & > .icon {
-            margin-top: 0.5rem;
+        &.interactive:hover {
+            fill-opacity: 0.6;
         }
     }
 
     &.small .icon {
         width: 1.2rem;
         height: 1.2rem;
-        align-self: flex-start;
     }
 
     &.large .icon {
@@ -42,61 +27,56 @@
         height: 2.4rem;
     }
 
+    & .tooltip {
+        max-width: 28.6rem;
+    }
+
     &.left {
-        & > .iconWrapper,
-        & > .icon {
+        & .icon {
             margin-left: 0;
         }
 
-        &.small {
-            & > .iconWrapper,
-            & > .icon {
-                margin-right: 1rem;
-            }
+        &.small .icon {
+            margin-right: 1rem;
         }
 
-        &.large {
-            & > .iconWrapper,
-            & > .icon {
-                margin-right: 2rem;
-            }
+        &.large .icon {
+            margin-right: 2rem;
         }
     }
 
     &.right {
         flex-direction: row-reverse;
-        text-align: right;
+        justify-content: flex-end;
 
-        & > .iconWrapper,
-        & > .icon {
+        & .icon {
             margin-right: 0;
         }
 
-        &.small {
-            & > .iconWrapper,
-            & > .icon {
-                margin-left: 1rem;
-            }
+        &.small .icon {
+            margin-left: 1rem;
+
         }
 
-        &.large {
-            & > .iconWrapper,
-            & > .icon {
-                margin-left: 2rem;
+        &.large .icon {
+            margin-left: 2rem;
+        }
+    }
+
+    &.error {
+        color: var(--color-monza);
+
+        & .icon {
+            fill: var(--color-monza);
+            fill-opacity: 0.9;
+
+            &.interactive {
+                fill-opacity: 0.7;
+
+                &:hover {
+                    fill-opacity: 1;
+                }
             }
         }
     }
-}
-
-.error {
-    color: var(--color-monza);
-
-    & .icon {
-        fill: var(--color-monza);
-        fill-opacity: 1;
-    }
-}
-
-.tooltip {
-    max-width: 28.6rem;
 }

@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { WarningIcon, InfoIcon } from '../icon';
 import { Tooltip, TooltipTrigger } from '../tooltip';
 import styles from './FeedbackMessage.css';
 
-const FeedbackIcon = ({ type }) => {
-    if (type === 'error') {
-        return <WarningIcon className={ styles.icon } />;
-    }
+const FeedbackIcon = forwardRef(({ type, interactive }, ref) => {
+    const className = classNames(styles.icon, interactive && styles.interactive);
 
-    return <InfoIcon className={ styles.icon } />;
-};
+    switch (type) {
+    case 'error': return <WarningIcon ref={ ref } className={ className } />;
+    case 'info': return <InfoIcon ref={ ref } className={ className } />;
+    default: return null;
+    }
+});
 
 FeedbackIcon.propTypes = {
     type: PropTypes.oneOf(['error', 'info']),
+    interactive: PropTypes.bool,
 };
 
 const FeedbackTooltip = ({ type, children }) => {
@@ -24,7 +27,7 @@ const FeedbackTooltip = ({ type, children }) => {
 
     return (
         <TooltipTrigger tooltip={ <Tooltip className={ styles.tooltip } placement="bottom">{ children }</Tooltip> }>
-            <div className={ styles.iconWrapper }>{ <FeedbackIcon type={ type } /> }</div>
+            <FeedbackIcon type={ type } interactive />
         </TooltipTrigger>
     );
 };
@@ -52,7 +55,7 @@ const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, too
 };
 
 FeedbackMessage.propTypes = {
-    children: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
     variant: PropTypes.oneOf(['small', 'large']),
     type: PropTypes.oneOf(['error', 'info']),
     textColor: PropTypes.string,
