@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { pick } from 'lodash';
 import FeedbackMessage from '../feedback-message';
 import StrengthIndicator from './strength-indicator';
 import { EyeIcon, EyeOffIcon } from '../icon';
 import styles from './TextInput.css';
 
 const LEVELS_NAME = ['poor', 'weak', 'fair', 'strong'];
+const INPUT_PROPS = ['id', 'name', 'placeholder', 'autoComplete', 'onKeyDown', 'onKeyUp', 'onKeyPress', 'onChange', 'onInput', 'onFocus', 'onBlur', 'onCut', 'onCopy', 'onPaste'];
 
 class TextInput extends Component {
     state = {
@@ -28,27 +30,17 @@ class TextInput extends Component {
     }
 
     renderInput() {
-        const { placeholder, type, lineType, lineStrength } = this.props;
+        const { type, lineType, lineStrength } = this.props;
 
-        // Input handler props
-        // eslint-disable-next-line react/prop-types
-        const { onKeyDown, onKeyUp, onKeyPress, onChange, onInput, onFocus, onBlur } = this.props;
-
-        const currentLevel = (typeof lineStrength !== 'undefined' && lineStrength >= 0 && lineStrength <= 1) && this.computeLevel();
+        const inputProps = pick(this.props, INPUT_PROPS);
+        const currentLevel = lineStrength >= 0 && lineStrength <= 1 ? this.computeLevel() : undefined;
 
         // Return input with no strength indication
         if (lineType === 'normal') {
             return (
                 <input type={ type }
-                    placeholder={ placeholder }
                     className={ styles[currentLevel] }
-                    onKeyDown={ onKeyDown }
-                    onKeyUp={ onKeyUp }
-                    onKeyPress={ onKeyPress }
-                    onChange={ onChange }
-                    onInput={ onInput }
-                    onFocus={ onFocus }
-                    onBlur={ onBlur } />
+                    { ...inputProps } />
             );
         }
 
@@ -62,14 +54,7 @@ class TextInput extends Component {
         return (
             <div className={ styles.inputWrapper }>
                 <input type={ showPassword ? 'text' : 'password' }
-                    placeholder={ placeholder }
-                    onKeyDown={ onKeyDown }
-                    onKeyUp={ onKeyUp }
-                    onKeyPress={ onKeyPress }
-                    onChange={ onChange }
-                    onInput={ onInput }
-                    onFocus={ onFocus }
-                    onBlur={ onBlur } />
+                    { ...inputProps } />
                 <StrengthIndicator
                     className={ styles.strengthIndicator }
                     levelName={ currentLevel }
@@ -136,7 +121,6 @@ class TextInput extends Component {
 
 TextInput.propTypes = {
     label: PropTypes.string,
-    placeholder: PropTypes.string,
     type: PropTypes.oneOf(['text', 'password']),
     helperText: PropTypes.string,
     lineType: PropTypes.oneOf(['normal', 'dashed']),

@@ -100,7 +100,7 @@ class StrengthIndicator extends PureComponent {
 }
 
 StrengthIndicator.propTypes = {
-    strength: PropTypes.number.isRequired,
+    strength: PropTypes.number,
     levelName: PropTypes.string,
     numberOfLevels: PropTypes.number,
     onColorChange: PropTypes.func,
@@ -109,6 +109,7 @@ StrengthIndicator.propTypes = {
 
 StrengthIndicator.defaultProps = {
     numberOfLevels: 4,
+    strength: 0,
 };
 
 export default StrengthIndicator;
