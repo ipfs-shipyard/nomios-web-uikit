@@ -6,9 +6,7 @@ import { FeedbackMessage } from '../src';
 import readme from '../src/components/feedback-message/README.md';
 
 const wrapperStyle = {
-    display: 'inline-flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    display: 'inline-block',
     maxWidth: '280px',
 };
 
@@ -48,6 +46,14 @@ storiesOf('FeedbackMessage', module)
     <div style={ wrapperStyle }>
         <FeedbackMessage
             type="info"
+            iconPosition="left"
+            variant="small"
+            tooltip="My cool tooltip content">
+        Try hover the icon
+        </FeedbackMessage>
+
+        <FeedbackMessage
+            type="error"
             iconPosition="left"
             variant="small"
             tooltip="My cool tooltip content">

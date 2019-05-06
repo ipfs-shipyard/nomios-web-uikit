@@ -28,6 +28,6 @@
     font-weight: 400;
     font-style: normal;
     src:
-        url("../../media/fonts/ibm-plex-mono/ibmplexmono-regular-webfont-ext-400.woff2") format("woff2"),
-        url("../../media/fonts/ibm-plex-mono/ibmplexmono-regular-webfont-ext-400.woff") format("woff");
+        url("../../media/fonts/ibm-plex-mono/ibm-plex-mono-v4-cyrillic_cyrillic-ext_vietnamese_latin-ext_latin-regular.woff2") format("woff2"),
+        url("../../media/fonts/ibm-plex-mono/ibm-plex-mono-v4-cyrillic_cyrillic-ext_vietnamese_latin-ext_latin-regular.woff") format("woff");
 }
