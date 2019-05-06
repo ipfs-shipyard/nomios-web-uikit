@@ -15,7 +15,6 @@ import { TextInput } from '@nomios/web-uikit';
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
 | label | string | | Defines a label for the input. |
-| placeholder | string | | Sets the input placeholder |
 | type | string | `text` | Sets the input type. Can be one of: `text` or `password`. |
 | helperText | string | | Additional information to guide users. Left-aligned. |
 | lineType | string | `normal`| Sets the type of the bottom border. Can be one of `normal` (single line) or `dashed` (for password strength indication). |
@@ -23,7 +22,7 @@ import { TextInput } from '@nomios/web-uikit';
 | lineStrength | number | | The current strength value. ⚠️ Please note that this value must be between 0 and 1. |
 | className | string | | A classname to override styles. |
 
-**Note:** Any props related to keyboard events, such as `onKeyUp` and `onChange`, will be spread to the underlying input element. Any other props will be spread into the root element.
+**Note:** Any props related to the input, such as `placeholder`, `onKeyUp` and `onChange`, will be spread to the underlying input element. Any other props will be spread into the root element.
 
 ### `feedback` prop
 
