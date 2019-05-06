@@ -5,8 +5,6 @@ import ProgressBar from './ProgressBar';
 import { CheckmarkIcon, CrossmarkIcon } from '../icon';
 import styles from './Button.css';
 
-const FEEDBACK_OUTCOME_VISIBLE_DURATION = 1500;
-
 class Button extends Component {
     state = {
         feedback: 'none',
@@ -24,12 +22,8 @@ class Button extends Component {
         }
     }
 
-    componentWillUnmount() {
-        this.clearResetFeedbackOutcomeTimer();
-    }
-
     render() {
-        const { variant, feedback: _, fullWidth, disabled, onFeedbackAnimationEnd, className, children, ...rest } = this.props;
+        const { variant, feedback: _, fullWidth, disabled, className, children, ...rest } = this.props;
         const { feedback, progressbarAnimationEnded, feedbackIconAnimationEnded } = this.state;
         const hasFeedback = feedback !== 'none';
 
@@ -64,29 +58,10 @@ class Button extends Component {
         );
     }
 
-    startResetFeedbackOutcomeTimer() {
-        this.clearResetFeedbackOutcomeTimer();
-
-        this.resetFeedbackOutcomeTimeoutId = setTimeout(() => {
-            this.setState({
-                feedback: 'none',
-                progressbarAnimationEnded: false,
-                feedbackIconAnimationEnded: false,
-            });
-        }, FEEDBACK_OUTCOME_VISIBLE_DURATION);
-    }
-
-    clearResetFeedbackOutcomeTimer() {
-        clearTimeout(this.resetFeedbackOutcomeTimeoutId);
-    }
-
     handleFeedbackChange(prevFeedback) {
         const { feedback } = this.props;
 
-        this.clearResetFeedbackOutcomeTimer();
-
         if ((feedback === 'success' || feedback === 'error') && prevFeedback !== 'loading') {
-            this.startResetFeedbackOutcomeTimer();
             this.setState({
                 feedback,
                 progressbarAnimationEnded: true,
@@ -107,19 +82,13 @@ class Button extends Component {
 
     handleSuccessIconTransitionEnd = () => {
         if (this.state.feedback === 'success') {
-            this.startResetFeedbackOutcomeTimer();
-            this.setState({ feedbackIconAnimationEnded: true }, () => {
-                this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(true);
-            });
+            this.setState({ feedbackIconAnimationEnded: true });
         }
     };
 
     handleErrorIconTransitionEnd = (event) => {
         if (this.state.feedback === 'error' && event.target.matches('path:nth-of-type(1)')) {
-            this.startResetFeedbackOutcomeTimer();
-            this.setState({ feedbackIconAnimationEnded: true }, () => {
-                this.props.onFeedbackAnimationEnd && this.props.onFeedbackAnimationEnd(false);
-            });
+            this.setState({ feedbackIconAnimationEnded: true });
         }
     };
 }
@@ -129,7 +98,6 @@ Button.propTypes = {
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     feedback: PropTypes.oneOf(['none', 'loading', 'success', 'error']),
-    onFeedbackAnimationEnd: PropTypes.func,
     children: PropTypes.node,
     className: PropTypes.string,
 };
