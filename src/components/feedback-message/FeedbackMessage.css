@@ -48,6 +48,7 @@
     &.right {
         flex-direction: row-reverse;
         justify-content: flex-end;
+        text-align: right;
 
         & .icon {
             margin-right: 0;
