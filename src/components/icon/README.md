@@ -53,6 +53,6 @@ Alternatively you may change the `width` and `height` CSS properties.
 
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
-| svg | string, object | | The svg contents or the object exported by [external-svg-sprite-loader](https://github.com/Karify/external-svg-sprite-loader) |
+| svg | string, Promise | | The svg contents or a promise for its contents |
 
 Any other properties supplied will be spread to the root element.
