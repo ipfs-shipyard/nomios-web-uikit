@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Icon from './Icon';
 
 const cameraSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-camera.svg');
@@ -20,24 +20,24 @@ const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icon
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 
-const CameraIcon = (props) => <Icon { ...props } svg={ cameraSvg } />;
-const CheckmarkIcon = (props) => <Icon { ...props } svg={ checkmarkSvg } />;
-const CloseIcon = (props) => <Icon { ...props } svg={ closeSvg } />;
-const CrossmarkIcon = (props) => <Icon { ...props } svg={ crossmarkSvg } />;
-const DesktopIcon = (props) => <Icon { ...props } svg={ desktopSvg } />;
-const EditIcon = (props) => <Icon { ...props } svg={ editSvg } />;
-const EntityIcon = (props) => <Icon { ...props } svg={ entitySvg } />;
-const EyeOffIcon = (props) => <Icon { ...props } svg={ eyeOffSvg } />;
-const EyeIcon = (props) => <Icon { ...props } svg={ eyeSvg } />;
-const InfoIcon = (props) => <Icon { ...props } svg={ infoSvg } />;
-const LaptopIcon = (props) => <Icon { ...props } svg={ laptopSvg } />;
-const MobileIcon = (props) => <Icon { ...props } svg={ mobileSvg } />;
-const OtherIcon = (props) => <Icon { ...props } svg={ otherSvg } />;
-const UserIcon = (props) => <Icon { ...props } svg={ userSvg } />;
-const PlusIcon = (props) => <Icon { ...props } svg={ plusSvg } />;
-const RefreshIcon = (props) => <Icon { ...props } svg={ refreshSvg } />;
-const TabletIcon = (props) => <Icon { ...props } svg={ tabletSvg } />;
-const WarningIcon = (props) => <Icon { ...props } svg={ warningSvg } />;
+const CameraIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ cameraSvg } />);
+const CheckmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ checkmarkSvg } />);
+const CloseIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ closeSvg } />);
+const CrossmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ crossmarkSvg } />);
+const DesktopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ desktopSvg } />);
+const EditIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ editSvg } />);
+const EntityIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ entitySvg } />);
+const EyeOffIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeOffSvg } />);
+const EyeIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeSvg } />);
+const InfoIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ infoSvg } />);
+const LaptopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ laptopSvg } />);
+const MobileIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ mobileSvg } />);
+const OtherIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ otherSvg } />);
+const UserIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ userSvg } />);
+const PlusIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ plusSvg } />);
+const RefreshIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ refreshSvg } />);
+const TabletIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ tabletSvg } />);
+const WarningIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ warningSvg } />);
 
 export default Icon;
 export {
