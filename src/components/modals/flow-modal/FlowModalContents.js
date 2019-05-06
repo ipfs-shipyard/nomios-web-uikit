@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { castArray, isNumber, isEqual } from 'lodash';
+import { castArray, isNumber, isEqual, get } from 'lodash';
 import Logo from '../../logo';
 import { ModalClose } from '../../modal-base';
 import { LAYOUT, LAYOUT_TRANSITION } from './constants';
@@ -17,16 +17,24 @@ class FlowModalContents extends Component {
             console.error('FlowModal must have at least 1 step');
         }
 
-        // Filter children so that we can remove null elements
-        const filteredArray = castArray(props.children).filter(Boolean);
-        // Create a flat array of children elements (1 level deep)
-        const flatChildren = filteredArray.flat();
-        // Filter children elements of types other than FlowModalStep
-        const unknownChildren = flatChildren.filter((child) => child.type.name !== 'FlowModalStep');
+        const flatChildren = castArray(props.children).reduce((acc, child) => {
+            if (child) {
+                const type = get(child, 'type.name', child.type).toString();
 
-        if (unknownChildren.length > 0) {
-            console.error('FLowModal only accepts children of type <FlowModalStep>');
-        }
+                switch (type) {
+                case 'FlowModalStep':
+                    acc.push(child);
+                    break;
+                case 'Symbol(react.fragment)':
+                    acc.push(...child.props.children);
+                    break;
+                default:
+                    console.error(`FlowModal only accepts children of type <FlowModalStep>. Found: ${type}`);
+                }
+            }
+
+            return acc;
+        }, []);
 
         const currentChildrenIds = flatChildren.map((child) => ({ id: child.props.id }));
         const oldChildrenIds = state.flatChildren !== null && state.flatChildren.map((child) => ({ id: child.props.id }));
