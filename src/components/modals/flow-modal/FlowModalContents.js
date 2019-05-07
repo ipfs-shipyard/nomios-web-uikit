@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { castArray, isNumber, isEqual, get } from 'lodash';
+import { castArray, isNumber, isEqual } from 'lodash';
 import Logo from '../../logo';
 import { ModalClose } from '../../modal-base';
-import { LAYOUT, LAYOUT_TRANSITION } from './constants';
+import { LAYOUT, LAYOUT_TRANSITION } from './utils/constants';
+import flatContentsChildren from './utils/flatContentsChildren';
 import styles from './FlowModalContents.css';
 
 class FlowModalContents extends Component {
@@ -17,24 +18,7 @@ class FlowModalContents extends Component {
             console.error('FlowModal must have at least 1 step');
         }
 
-        const flatChildren = castArray(props.children).reduce((acc, child) => {
-            if (child) {
-                const type = get(child, 'type.name', child.type).toString();
-
-                switch (type) {
-                case 'FlowModalStep':
-                    acc.push(child);
-                    break;
-                case 'Symbol(react.fragment)':
-                    acc.push(...child.props.children);
-                    break;
-                default:
-                    console.error(`FlowModal only accepts children of type <FlowModalStep>. Found: ${type}`);
-                }
-            }
-
-            return acc;
-        }, []);
+        const flatChildren = flatContentsChildren(castArray(props.children));
 
         const currentChildrenIds = flatChildren.map((child) => ({ id: child.props.id }));
         const oldChildrenIds = state.flatChildren !== null && state.flatChildren.map((child) => ({ id: child.props.id }));
