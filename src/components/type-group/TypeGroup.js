@@ -20,10 +20,10 @@ const TypeGroup = ({ children, className, name, onSelect, selectedId }) => {
 
 TypeGroup.propTypes = {
     children: PropTypes.node.isRequired,
-    onSelect: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
     selectedId: PropTypes.string,
     className: PropTypes.string,
+    onSelect: PropTypes.func,
 };
 
 export default TypeGroup;
