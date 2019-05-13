@@ -92,7 +92,7 @@
 .modalBodyOpen {
     overflow: hidden;
 
-    & .modalPortal {
+    & .modalPortal:not(:empty) {
         display: block;
     }
 }
