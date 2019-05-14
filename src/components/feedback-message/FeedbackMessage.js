@@ -5,12 +5,12 @@ import { WarningIcon, InfoIcon } from '../icon';
 import { Tooltip, TooltipTrigger } from '../tooltip';
 import styles from './FeedbackMessage.css';
 
-const FeedbackIcon = forwardRef(({ type, interactive }, ref) => {
+const FeedbackIcon = forwardRef(({ type, interactive, ...rest }, ref) => {
     const className = classNames(styles.icon, interactive && styles.interactive);
 
     switch (type) {
-    case 'error': return <WarningIcon ref={ ref } className={ className } />;
-    case 'info': return <InfoIcon ref={ ref } className={ className } />;
+    case 'error': return <WarningIcon ref={ ref } { ...rest } className={ className } />;
+    case 'info': return <InfoIcon ref={ ref } { ...rest } className={ className } />;
     default: return null;
     }
 });
