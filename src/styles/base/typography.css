@@ -15,6 +15,11 @@ body {
     overflow-wrap: break-word;  /* Break long words by default */
 }
 
+::selection {
+    background: var(--color-dawn-pink);
+    color: var(--color-armadillo);
+}
+
 /* ==========================================================================
   Headings
   ========================================================================== */
