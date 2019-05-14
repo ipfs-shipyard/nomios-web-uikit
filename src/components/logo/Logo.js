@@ -11,25 +11,24 @@ const Logo = ({ variant, className, ...rest }) => {
 
     const containerClass = classNames(
         styles.container,
-        styles[variant]
+        styles[variant],
+        className,
     );
 
     const symbolClassName = classNames(
         styles.svg,
         styles.symbol,
-        className
     );
 
     const logotypeClassName = classNames(
         styles.svg,
         styles.logotype,
-        className
     );
 
     return (
-        <div className={ containerClass }>
-            { showSymbol && <i { ...rest } className={ symbolClassName } dangerouslySetInnerHTML={ { __html: symbolSvg } } /> }
-            { showLogotype && <i { ...rest } className={ logotypeClassName } dangerouslySetInnerHTML={ { __html: logotypeSvg } } /> }
+        <div { ...rest } className={ containerClass }>
+            { showSymbol && <i className={ symbolClassName } dangerouslySetInnerHTML={ { __html: symbolSvg } } /> }
+            { showLogotype && <i className={ logotypeClassName } dangerouslySetInnerHTML={ { __html: logotypeSvg } } /> }
         </div>
     );
 };
