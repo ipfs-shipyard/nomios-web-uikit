@@ -49,7 +49,7 @@
         }
 
         & .smallCircle {
-            @mixin circular-shape 2, var(--color-white);
+            @mixin circular-shape 2rem, var(--color-white);
             position: absolute;
             top: 0;
             right: 0;
@@ -64,7 +64,7 @@
         }
 
         & .avatarPlaceholder {
-            @mixin circular-shape 8, color(var(--color-mineral-green) alpha(0.2));
+            @mixin circular-shape 8rem, color(var(--color-mineral-green) alpha(0.2));
 
             & .icon {
                 font-size: 1.4rem;
