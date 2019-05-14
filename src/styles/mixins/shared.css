@@ -1,9 +1,9 @@
 @define-mixin circular-shape $size, $backgroundColor: transparent {
     position: relative;
-    width: $(size)rem;
-    height: $(size)rem;
+    width: $(size);
+    height: $(size);
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     background-color: $backgroundColor;

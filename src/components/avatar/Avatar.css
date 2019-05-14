@@ -3,12 +3,14 @@
 @import "../../styles/mixins/typography.css";
 
 .avatar {
-    @mixin circular-shape 8, color(var(--color-mineral-green) alpha(0.2));
+    @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
+    font-size: 2rem;
 
     & .initials {
-        @mixin typography-h3 rem;
+        @mixin font-sectra;
         opacity: 0.8;
         color: var(--color-mineral-green);
+        font-size: 1.4em;
     }
 
     & .image {
