@@ -12,8 +12,6 @@ class TypeOption extends Component {
         const labelClasses = classNames(styles.label, selectable && styles.selectable);
         const inputProps = pick(this.props, INPUT_PROPS);
 
-        console.log('INPUT PROPS', inputProps);
-
         return (
             <div className={ styles.container }>
                 <label className={ labelClasses }>

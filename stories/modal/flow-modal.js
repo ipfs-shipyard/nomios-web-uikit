@@ -41,7 +41,6 @@ storiesOf('Modal/FlowModal', module)
     });
 
     const handleOnClick = (event) => {
-        console.log('data', event.target.getAttribute('data-go-to-id'));
         store.set({ stepId: event.target.getAttribute('data-go-to-id') });
     };
 
