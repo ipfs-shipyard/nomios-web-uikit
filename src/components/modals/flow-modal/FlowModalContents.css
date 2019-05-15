@@ -52,6 +52,8 @@
 }
 
 .logoWrapper {
+    position: absolute;
+    z-index: 10;
     padding-top: 7.5rem;
     padding-left: 7rem;
     opacity: 0;
@@ -304,7 +306,7 @@
 
     &.fullPanel {
         & .step {
-            height: calc(100% - var(--logo-container-height));
+            height: 100%;
         }
 
         & .left {
