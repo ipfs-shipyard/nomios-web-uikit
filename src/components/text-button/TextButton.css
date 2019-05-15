@@ -1,0 +1,47 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+.textButton {
+    padding: 0;
+    border: 0;
+    opacity: 0.8;
+    background: none;
+    color: var(--color-armadillo);
+    font-size: 1rem;
+    white-space: nowrap;
+    transition-property: opacity, color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+
+    &:not([disabled]) {
+        cursor: pointer;
+    }
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+
+    &[disabled] {
+        opacity: 0.3;
+    }
+
+    & .text {
+        display: inline-block;
+        @mixin typography-body-1 rem;
+        vertical-align: middle;
+    }
+
+    & .icon {
+        vertical-align: middle;
+        font-size: 1.5rem;
+    }
+
+    &.left .icon {
+        margin-right: calc(0.8rem / 1.5);
+    }
+
+    &.right .icon {
+        margin-left: calc(0.8rem / 1.5);
+    }
+}

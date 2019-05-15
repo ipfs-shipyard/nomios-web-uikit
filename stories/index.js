@@ -12,3 +12,4 @@ import './logo';
 import './type-group';
 import './avatar-picker';
 import './avatar';
+import './text-button';
