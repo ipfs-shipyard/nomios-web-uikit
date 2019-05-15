@@ -49,7 +49,7 @@ class AvatarPicker extends Component {
 
         return (
             <div className={ styles.imageOverlay }>
-                <CameraIcon className={ styles.cameraIcon } />
+                <CameraIcon className={ styles.icon } />
             </div>
         );
     }
