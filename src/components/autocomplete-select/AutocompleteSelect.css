@@ -1,0 +1,100 @@
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
+
+.container {
+    min-width: 28rem;
+    max-width: 65rem;
+
+    & :global(.autocomplete__control) {
+        will-change: border-color;
+        @mixin typography-body-1 rem;
+        min-height: 0;
+        padding: 0.4rem 0;
+        border-width: 0 0 0.1rem 0;
+        border-color: color(var(--color-armadillo) alpha(0.3));
+        outline: none;
+        border-radius: 0;
+        color: var(--color-armadillo);
+        cursor: text;
+        transition: border-color 0.2s ease;
+
+        &:global(.autocomplete__control--is-focused),
+        &:global(.autocomplete__control--menu-is-open) {
+            border-color: color(var(--color-armadillo) alpha(0.6));
+            outline: none;
+            box-shadow: none;
+        }
+
+        & :global(.autocomplete__value-container) {
+            padding: 0;
+
+            & > * {
+                width: 100%;
+            }
+
+            & :global(.autocomplete__placeholder) {
+                padding: 0;
+                color: color(var(--color-armadillo) alpha(0.3));
+            }
+
+            & :global(.autocomplete__input) {
+                width: 100%;
+                color: var(--color-armadillo);
+
+                & > input {
+                    /* This is being used to avoid text sliding while typing */
+                    width: 100% !important;
+                }
+            }
+
+            & :global(.autocomplete__single-value) {
+                color: var(--color-armadillo);
+            }
+        }
+
+        & :global(.autocomplete__indicators) {
+            display: none;
+        }
+    }
+
+    & :global(.autocomplete__menu) {
+        margin: 0;
+        background: var(--color-white);
+        border-radius: 0;
+        box-shadow: 0 1.2rem 1.4rem 0 rgba(75, 69, 61, 0.22);
+        cursor: pointer;
+
+        & :global(.autocomplete__menu-list) {
+            max-height: 20rem;
+            padding: 0;
+
+            & :global(.autocomplete__option) {
+                padding: 0.7rem 1.5rem;
+                color: var(--color-armadillo);
+                cursor: pointer;
+
+                &:global(.autocomplete__option--is-focused) {
+                    will-change: background-color;
+                    background-color: transparent;
+                    transition: background-color 0.2s ease;
+
+                    &:hover {
+                        background-color: var(--color-dawn-pink);
+                    }
+                }
+
+                &:global(.autocomplete__option--is-selected) {
+                    background-color: transparent;
+                    color: var(--color-armadillo);
+                }
+            }
+
+            & :global(.autocomplete__menu-notice) {
+                padding: 0.7rem 1.5rem;
+                color: color(var(--color-armadillo) alpha(0.3));
+                text-align: left;
+                cursor: default;
+            }
+        }
+    }
+}
