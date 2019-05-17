@@ -1,3 +1,13 @@
 .group {
-    display: inline-flex;
+    display: flex;
+
+    & > * {
+        min-width: 11rem;
+        flex: 0 1 18rem;
+
+        &:last-child {
+            min-width: 8rem;
+            flex-basis: 8rem;
+        }
+    }
 }

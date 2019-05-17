@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
+import { pick } from 'lodash';
 import styles from './TypeOption.css';
+
+const INPUT_PROPS = ['id', 'name', 'value', 'defaultValue', 'onClick', 'onChange', 'onInput', 'onFocus', 'onBlur'];
 
 class TypeOption extends Component {
     render() {
         const { label, groupName, children, selected, badge, selectable } = this.props;
         const labelClasses = classNames(styles.label, selectable && styles.selectable);
+        const inputProps = pick(this.props, INPUT_PROPS);
 
         return (
             <div className={ styles.container }>
@@ -18,7 +21,7 @@ class TypeOption extends Component {
                         checked={ selected }
                         disabled={ !selectable }
                         onChange={ this.handleInputChange }
-                        onClick={ this.handleClick } />
+                        { ...inputProps } />
                     <div className={ styles.circle }>
                         { badge &&
                             <span className={ styles.badge }>
@@ -33,11 +36,7 @@ class TypeOption extends Component {
     }
 
     handleInputChange = () => {
-        this.props.onSelect(this.props.id);
-    };
-
-    handleClick = () => {
-        this.props.onClick && this.props.onClick();
+        this.props.onSelect && this.props.onSelect(this.props.id);
     };
 }
 
@@ -50,7 +49,6 @@ TypeOption.propTypes = {
     selectable: PropTypes.bool,
     selected: PropTypes.bool,
     onSelect: PropTypes.func,
-    onClick: PropTypes.func,
     badge: PropTypes.element,
     label: PropTypes.string,
     id: PropTypes.string,

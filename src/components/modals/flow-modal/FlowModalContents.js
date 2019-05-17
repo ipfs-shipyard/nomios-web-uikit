@@ -163,7 +163,9 @@ class FlowModalContents extends Component {
                     { shouldRenderLogoRightSide && this.renderLogo() }
                     { this.stepsPlacement === 'right' && this.renderRightSteps() }
                 </div>
-                { showClose && <ModalClose className={ modalCloseClasses } iconClassName={ modalCloseIconClasses } /> }
+                { showClose &&
+                    layout !== LAYOUT.FULL &&
+                    <ModalClose className={ modalCloseClasses } iconClassName={ modalCloseIconClasses } /> }
             </div>
         );
     }

@@ -8,10 +8,11 @@
     padding: 0;
     border: none;
     background: transparent;
+    font-size: 1rem;
     cursor: pointer;
 
     & .icon {
-        font-size: 1.4rem;
+        font-size: 2.4em;
         transition: fill-opacity 0.3s ease;
         fill: var(--color-armadillo);
         fill-opacity: 0.6;

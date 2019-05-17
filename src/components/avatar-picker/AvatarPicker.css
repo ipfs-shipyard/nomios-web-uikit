@@ -1,5 +1,5 @@
 @import "../../styles/colors";
-@import "../../styles/mixins/shared";
+@import "../../styles/mixins/shapes";
 @import "../../styles/mixins/typography";
 
 .container {
@@ -30,44 +30,44 @@
         }
 
         & .imageOverlay {
+            will-change: opacity;
+            @mixin circular-shape 100%, color(var(--color-mineral-green) alpha(0.8));
             position: absolute;
             top: 0;
-            right: 0;
-            bottom: 0;
             left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            z-index: 10;
             opacity: 0;
-            border-radius: 50%;
+            font-size: 2rem;
             transition: opacity 0.2s ease;
 
-            & .cameraIcon {
-                font-size: 1.4rem;
+            & .icon {
+                font-size: 1.5em;
                 fill: var(--color-white);
             }
         }
 
         & .smallCircle {
-            @mixin circular-shape 2rem, var(--color-white);
+            @mixin circular-shape 1.9em, var(--color-white);
             position: absolute;
             top: 0;
             right: 0;
             z-index: 10;
             margin: 0.1rem;
             border: 1px solid color(var(--color-mineral-green) alpha(0.2));
+            font-size: 1rem;
 
             & .icon {
-                font-size: 0.7rem;
+                font-size: 1.5em;
                 fill: var(--color-mineral-green);
             }
         }
 
         & .avatarPlaceholder {
-            @mixin circular-shape 8rem, color(var(--color-mineral-green) alpha(0.2));
+            @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
+            font-size: 2rem;
 
             & .icon {
-                font-size: 1.4rem;
+                font-size: 1.5em;
                 fill: var(--color-mineral-green);
                 fill-opacity: 0.8;
             }
@@ -84,9 +84,7 @@
             }
 
             & .imageOverlay {
-                z-index: 10;
                 opacity: 1;
-                background-color: color(var(--color-mineral-green) alpha(0.8));
             }
         }
 
