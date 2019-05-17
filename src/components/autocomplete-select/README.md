@@ -18,9 +18,7 @@ const myOptions = [
 
 ## Props
 
-| name | type | default | description |
-| ---- | ---- | ------- | ----------- |
-| className | string | | A classname to override styles. This classname will be applied to the `SelectContainer`. |
-
-Any other properties supplied will be spread to [react-select](https://github.com/JedWatson/react-select) component.
+All the properties supplied will be spread to [react-select](https://github.com/JedWatson/react-select) component.
 You can check all the available props [here](https://react-select.com/props).
+
+**Note**: `classNamePrefix` prop cannot be changed as we are using it to style the input.

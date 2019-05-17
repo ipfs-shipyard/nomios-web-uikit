@@ -7,12 +7,11 @@ import styles from './AutocompleteSelect.css';
 
 const hideMenuWithNoOptions = () => 'No options available';
 
-const AutocompleteSelect = ({ className, noOptionsMessage, ...rest }) => (
+const AutocompleteSelect = ({ className, ...rest }) => (
     <Select
         { ...rest }
         className={ classNames(styles.container, className) }
-        classNamePrefix="autocomplete"
-        noOptionsMessage={ noOptionsMessage } />
+        classNamePrefix="autocomplete" />
 );
 
 AutocompleteSelect.propTypes = {
