@@ -36,7 +36,7 @@ class TypeOption extends Component {
     }
 
     handleInputChange = () => {
-        this.props.onSelect(this.props.id);
+        this.props.onSelect && this.props.onSelect(this.props.id);
     };
 }
 
