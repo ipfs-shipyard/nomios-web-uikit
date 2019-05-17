@@ -13,3 +13,4 @@ export { default as Logo } from './components/logo';
 export { default as TypeGroup, TypeOption } from './components/type-group';
 export { default as AvatarPicker } from './components/avatar-picker';
 export { default as Avatar } from './components/avatar';
+export { default as TextButton } from './components/text-button';
