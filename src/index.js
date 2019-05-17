@@ -16,3 +16,4 @@ export { default as AvatarPicker } from './components/avatar-picker';
 export { default as Avatar } from './components/avatar';
 export { default as AutocompleteSelect } from './components/autocomplete-select';
 export { default as TextButton } from './components/text-button';
+export { default as Radio } from './components/radio';
