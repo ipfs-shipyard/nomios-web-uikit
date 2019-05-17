@@ -1,6 +1,6 @@
 # Icon
 
-A SVG icon with support for sprites via dynamic imports.
+An SVG icon with support for sprites by using the SVG component.
 
 ## Usage
 
