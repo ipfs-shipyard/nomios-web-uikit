@@ -21,7 +21,6 @@ class TypeOption extends Component {
                         checked={ selected }
                         disabled={ !selectable }
                         onChange={ this.handleInputChange }
-                        onClick={ this.handleClick }
                         { ...inputProps } />
                     <div className={ styles.circle }>
                         { badge &&
@@ -37,11 +36,7 @@ class TypeOption extends Component {
     }
 
     handleInputChange = () => {
-        this.props.onSelect && this.props.onSelect(this.props.id);
-    };
-
-    handleClick = () => {
-        this.props.onClick && this.props.onClick();
+        this.props.onSelect(this.props.id);
     };
 }
 
@@ -54,7 +49,6 @@ TypeOption.propTypes = {
     selectable: PropTypes.bool,
     selected: PropTypes.bool,
     onSelect: PropTypes.func,
-    onClick: PropTypes.func,
     badge: PropTypes.element,
     label: PropTypes.string,
     id: PropTypes.string,

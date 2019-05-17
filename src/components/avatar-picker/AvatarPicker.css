@@ -1,5 +1,5 @@
 @import "../../styles/colors";
-@import "../../styles/mixins/shared";
+@import "../../styles/mixins/shapes";
 @import "../../styles/mixins/typography";
 
 .container {
