@@ -1,5 +1,5 @@
-@import "../../../styles/colors";
-@import "../../../styles/mixins/typography";
+@import "../../styles/colors";
+@import "../../styles/mixins/typography";
 
 .inputContainer {
     display: inline-flex;

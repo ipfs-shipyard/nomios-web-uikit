@@ -3,16 +3,15 @@
 @import "../../styles/mixins/typography.css";
 
 .avatar {
-    @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
+    @mixin circular-shape 4em, var(--color-white);
     font-size: 2rem;
 
     &::after {
-        @mixin circular-shape 4em, var(--color-white);
+        @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
         content: "";
         position: absolute;
         top: 0;
         left: 0;
-        z-index: -1;
     }
 
     & .initials {

@@ -24,8 +24,8 @@
     & .circleWrapper {
         position: relative;
 
-        & .circle,
-        & .avatarPlaceholder {
+        & .circle::after,
+        & .avatarPlaceholder::after {
             transition: background-color 0.2s ease;
         }
 
@@ -63,16 +63,15 @@
         }
 
         & .avatarPlaceholder {
-            @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
+            @mixin circular-shape 4em, var(--color-white);
             font-size: 2rem;
 
             &::after {
-                @mixin circular-shape 4em, var(--color-white);
+                @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
                 content: "";
                 position: absolute;
                 top: 0;
                 left: 0;
-                z-index: -1;
             }
 
             & .icon {
@@ -87,8 +86,8 @@
         cursor: pointer;
 
         & .circleWrapper {
-            & .circle,
-            & .avatarPlaceholder {
+            & .circle::after,
+            & .avatarPlaceholder::after {
                 background-color: color(var(--color-mineral-green) alpha(0.4));
             }
 
