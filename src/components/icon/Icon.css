@@ -4,13 +4,5 @@
     display: inline-block;
     vertical-align: middle;
     font-size: 2.4rem;
-    user-select: none;
     transition: fill 0.2s ease, fill-opacity 0.2s ease;
-    fill: currentColor;
-
-    & svg {
-        width: inherit;
-        height: inherit;
-        display: block;  /* Remove little margin between the svg and its parent */
-    }
 }

@@ -14,3 +14,4 @@ import './avatar-picker';
 import './avatar';
 import './text-button';
 import './autocomplete-select';
+import './svg';

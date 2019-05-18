@@ -1,65 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Cancelable from 'cancel.it';
+import Svg from '../svg';
 import styles from './Icon.css';
 
-class Icon extends Component {
-    static getDeriveStateFromProps(props, state) {
-        return {
-            contents: typeof props.svg === 'string' ? props.svg : state.contents,
-        };
-    }
+const Icon = (props) => {
+    const { className, ...rest } = props;
+    const finalProps = {
+        ...rest,
+        className: classNames(styles.icon, className),
+    };
 
-    promise = null;
-    state = { contents: '' };
-
-    componentDidMount() {
-        this.maybeWaitForSvg();
-    }
-
-    componentDidUpdate(prevProps) {
-        if (this.props.svg !== prevProps.svg) {
-            this.maybeWaitForSvg();
-        }
-    }
-
-    componentWillUnmount() {
-        this.cancelWaitForSvg();
-    }
-
-    render() {
-        const { svg, className, ...rest } = this.props;
-        const { contents } = this.state;
-        const finalProps = {
-            ...rest,
-            className: classNames(styles.icon, className),
-        };
-
-        return <i { ...finalProps } dangerouslySetInnerHTML={ { __html: contents } } />;
-    }
-
-    cancelWaitForSvg() {
-        if (this.promise) {
-            this.promise.cancel();
-            this.promise = null;
-        }
-    }
-
-    async maybeWaitForSvg() {
-        const { svg } = this.props;
-
-        this.cancelWaitForSvg();
-
-        if (typeof svg === 'object') {
-            this.promise = Cancelable.from(svg);
-
-            const result = await this.promise.catch(() => ({ default: '' }));
-
-            this.setState({ contents: result.default });
-        }
-    }
-}
+    return <Svg { ...finalProps } />;
+};
 
 Icon.propTypes = {
     svg: PropTypes.oneOfType([PropTypes.string, PropTypes.shape({ then: PropTypes.func.isRequired })]).isRequired,
