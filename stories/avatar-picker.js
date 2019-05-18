@@ -12,6 +12,7 @@ storiesOf('AvatarPicker', module)
 .add('With name', () => (
     <AvatarPicker
         label="Add photo"
+        labelAlignment="left"
         name="Pedro Santos"
         onChange={ action('changed') } />
 ))
