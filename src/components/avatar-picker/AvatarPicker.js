@@ -13,10 +13,10 @@ class AvatarPicker extends Component {
     inputRef = createRef();
 
     render() {
-        const { label, className, onChange, ...rest } = this.props;
+        const { label, className, onChange, labelAlignment, ...rest } = this.props;
 
         return (
-            <div className={ classNames(styles.container, className) } onClick={ this.handleAvatarLoaderClick }>
+            <div className={ classNames(styles.container, styles[labelAlignment], className) } onClick={ this.handleAvatarLoaderClick }>
                 { this.renderInput() }
                 <div className={ styles.circleWrapper }>
                     { this.renderPlusIcon() }
@@ -89,6 +89,7 @@ class AvatarPicker extends Component {
 }
 
 AvatarPicker.propTypes = {
+    labelAlignment: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
     onChange: PropTypes.func.isRequired,
     className: PropTypes.string,
     image: PropTypes.string,
@@ -98,6 +99,7 @@ AvatarPicker.propTypes = {
 };
 
 AvatarPicker.defaultProps = {
+    labelAlignment: 'bottom',
     icon: <UserIcon />,
 };
 

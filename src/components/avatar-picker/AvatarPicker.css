@@ -5,16 +5,46 @@
 .container {
     position: relative;
     display: inline-flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    &.bottom {
+        flex-direction: column;
+
+        & .label {
+            margin-top: 1.5rem;
+        }
+    }
+
+    &.top {
+        flex-direction: column-reverse;
+
+        & .label {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    &.right {
+        flex-direction: row;
+
+        & .label {
+            margin-left: 2rem;
+        }
+    }
+
+    &.left {
+        flex-direction: row-reverse;
+
+        & .label {
+            margin-right: 2rem;
+        }
+    }
 
     & .hidden {
         display: none;
     }
 
     & .label {
-        margin-top: 1.5rem;
         opacity: 0.5;
         color: var(--color-mineral-green);
         @mixin typography-body-2 rem;
