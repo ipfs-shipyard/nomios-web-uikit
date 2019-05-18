@@ -17,7 +17,6 @@ const handleChange = (event) => console.log(event.target.value);
 
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
-| className | string | | A classname to override styles. This classname will be applied to the wrapper element |
 | label | string | | Sets the label text |
 
 **Note:** Any props related to the input, such as `value`, `name` and `onChange`, will be spread to the underlying input element. All the other props will be spread into the root element.
