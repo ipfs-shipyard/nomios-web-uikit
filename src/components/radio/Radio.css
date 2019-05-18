@@ -1,0 +1,58 @@
+@import "../../../styles/colors";
+@import "../../../styles/mixins/typography";
+
+.inputContainer {
+    display: inline-flex;
+
+    &:hover label span {
+        color: color(var(--color-armadillo) alpha(1));
+
+        &::before {
+            border-color: color(var(--color-armadillo) alpha(0.8));
+        }
+    }
+
+    & label {
+        position: relative;
+        cursor: pointer;
+
+        & span {
+            will-change: color;
+            @mixin typography-body-1 rem;
+            margin-left: calc(1.6rem + 1.2rem);
+            color: color(var(--color-armadillo) alpha(0.7));
+            transition: color 0.2s ease;
+
+            &::before {
+                content: "";
+                box-sizing: border-box;
+                will-change: border;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                width: 1.6rem;
+                height: 1.6rem;
+                transform: translateY(-50%);
+                border: 1px solid color(var(--color-armadillo) alpha(0.3));
+                border-radius: 50%;
+                transition: border 0.2s ease;
+            }
+        }
+
+        & input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+
+            &:checked {
+                & + span {
+                    color: color(var(--color-armadillo) alpha(1));
+
+                    &::before {
+                        border: 0.6rem solid var(--color-tan);
+                    }
+                }
+            }
+        }
+    }
+}
