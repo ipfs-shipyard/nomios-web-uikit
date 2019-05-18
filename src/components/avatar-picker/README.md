@@ -17,6 +17,7 @@ const handleOnChange = (image) => console.log('My awesome avatar', image);
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
 | label | string | | Sets the label text |
+| labelAlignment | string | `bottom` | Sets the label position. It can be one of: `bottom`, `top`, `left` or `right`. |
 | icon | element | | An icon to render inside the circle when the name and image are not provided |
 | name | string | | The text to render inside the circle. This prop will be spread to `<Avatar>` component |
 | image | string | | The image URL to render inside the circle. This prop will be spread to `<Avatar>` component |
