@@ -10,6 +10,7 @@ export * from './components/tooltip';
 export * from './components/modal-base';
 export * from './components/modals';
 export { default as Logo } from './components/logo';
+export { default as Svg } from './components/svg';
 export { default as TypeGroup, TypeOption } from './components/type-group';
 export { default as AvatarPicker } from './components/avatar-picker';
 export { default as Avatar } from './components/avatar';

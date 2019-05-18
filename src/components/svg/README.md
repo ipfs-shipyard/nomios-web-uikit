@@ -15,7 +15,7 @@ import mySvg from './path/to/my.svg';
 
 By default, `fill` inherits from the current `color`.
 
-Neverthless, you may change the color via the `fill` CSS property.
+Neverthless, you may change the color via the `fill` CSS property, as well as the `stroke` CSS property.
 Additionally, you may tweak the opacity via the `fill-opacity` CSS property.
 
 ```jsx
