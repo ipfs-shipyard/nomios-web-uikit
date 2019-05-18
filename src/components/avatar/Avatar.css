@@ -6,6 +6,15 @@
     @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
     font-size: 2rem;
 
+    &::after {
+        @mixin circular-shape 4em, var(--color-white);
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
     & .initials {
         @mixin font-sectra;
         opacity: 0.8;
