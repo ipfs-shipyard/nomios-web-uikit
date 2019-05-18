@@ -15,12 +15,12 @@ const groupStyles = {
 storiesOf('Radio', module)
 .addDecorator(withReadme(readme))
 .add('Single', () => (
-    <Radio label="Example" onChange={ selectedAction } />
+    <Radio label="Example" name="group" value="example" onChange={ selectedAction } />
 ))
 .add('Multiple Options', () => (
-    <group style={ groupStyles }>
-        <Radio label="Istanbul" name="group" onChange={ selectedAction } />
-        <Radio label="Moscow" name="group" onChange={ selectedAction } />
-        <Radio label="London" name="group" onChange={ selectedAction } />
-    </group>
+    <div style={ groupStyles }>
+        <Radio label="Istanbul" name="group" value="istanbul" onChange={ selectedAction } />
+        <Radio label="Moscow" name="group" value="moscow" onChange={ selectedAction } />
+        <Radio label="London" name="group" value="london" onChange={ selectedAction } />
+    </div>
 ));

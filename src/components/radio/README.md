@@ -7,9 +7,10 @@ A standard radio button.
 ```jsx
 import { Radio } from '@nomios/web-uikit';
 
-const handleChange = (event) => console.log(event.target.id);
+const handleChange = (event) => console.log(event.target.value);
 
-<Radio label="Example" onChange={ handleChange } />
+<Radio name="example" label="Bar" value="bar" onChange={ handleChange } />
+<Radio name="example" label="Foo" value="foo" onChange={ handleChange } />
 ```
 
 ## Props
@@ -19,4 +20,4 @@ const handleChange = (event) => console.log(event.target.id);
 | className | string | | A classname to override styles. This classname will be applied to the wrapper element |
 | label | string | | Sets the label text |
 
-Any other properties supplied will be spread to the input field.
+**Note:** Any props related to the input, such as `value`, `name` and `onChange`, will be spread to the underlying input element. All the other props will be spread into the root element.
