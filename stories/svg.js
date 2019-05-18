@@ -11,7 +11,7 @@ storiesOf('Svg', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
 .add('Knobs playground ⚽', () => {
-    const style = object('style', { stroke: 'red', color: 'red', width: '50rem' });
+    const style = object('style', { stroke: 'red', fill: 'red', width: '50rem' });
 
     return (
         <Svg svg={ svgContent } style={ style } />
