@@ -118,9 +118,19 @@ storiesOf('Modal/FlowModal', module)
         store.set({ stepId: event.target.getAttribute('data-go-to-id') });
     };
 
+    store.subscribe((state) => {
+        console.log(state);
+
+        if (state.stepId === 'last' && !state.batatas) {
+            console.log('forcing rerender');
+            setTimeout(() => store.set({ batatas: 'fritas' }), 0);
+        }
+    });
+
     return (
         <State store={ store }>
             { (state) => {
+                console.log('rerender story', state);
                 const modal = (
                     <FlowModal
                         variant="advanced"
