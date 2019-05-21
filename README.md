@@ -8,6 +8,7 @@ Nomios' living Web UIkit.
 - React
 - CSS modules
 - [PostCSS](https://github.com/postcss/postcss) with [MOXY's preset](https://github.com/moxystudio/postcss-preset-moxy)
+- Automatically enables [keyboard-online-outlines](https://github.com/moxystudio/js-keyboard-only-outlines) so that outlines are only shown when necessary
 
 
 ## Setup
@@ -97,19 +98,7 @@ It's assumed that you will consume this package in an application bundled with W
     import "@nomios/web-uikit/styles/index.css";
     ```
 
-4. Wrap your app
-
-   Wrap your app with `KeyboardOnlyOutlines` components to disable outlines when using a pointer device, such as a mouse:
-
-   ```js
-   import { KeyboardOnlyOutlines } from '@nomios/web-uikit';
-
-   <KeyboardOnlyOutlines>
-     <MyApp />
-   </KeyboardOnlyOutlines>
-   ```
-
-5. Use the components
+4. Use the components
 
     ```js
     import { TypingIndicator } from '@nomios/web-uikit';
