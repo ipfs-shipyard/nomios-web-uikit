@@ -51,6 +51,7 @@
 }
 
 .circle {
+    @mixin circular-shape 4em;
     will-change: background-color, border-color;
     overflow: visible;
     margin-bottom: 1.5rem;
@@ -61,7 +62,6 @@
         background-color 0.2s ease,
         border-color 0.2s ease;
     fill: var(--color-armadillo);
-    @mixin circular-shape 4em;
 
     & > i {
         font-size: 1.5em;
