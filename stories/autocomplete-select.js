@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, object } from '@storybook/addon-knobs';
+import { State, Store } from '@sambego/storybook-state';
+import { action } from '@storybook/addon-actions';
 import { withReadme } from 'storybook-readme';
 import { AutocompleteSelect } from '../src';
 import readme from '../src/components/autocomplete-select/README.md';
@@ -26,14 +28,59 @@ const biggerOptions = [
 storiesOf('AutocompleteSelect', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
-.add('Small list', () => (
-    <AutocompleteSelect options={ options } />
-))
-.add('Long list', () => (
-    <AutocompleteSelect options={ biggerOptions } />
-))
+.add('Small list', () => {
+    const store = new Store({ selectedValue: '' });
+    const handleSelectChange = (value) => {
+        action('Changed')(value);
+        store.set({ selectedValue: value });
+    };
+
+    return (
+        <State store={ store }>
+            { (state) => (
+                <AutocompleteSelect
+                    options={ options }
+                    value={ state.selectedValue }
+                    onChange={ handleSelectChange } />
+            ) }
+        </State>
+    );
+})
+.add('Long list', () => {
+    const store = new Store({ selectedValue: '' });
+    const handleSelectChange = (value) => {
+        action('Changed')(value);
+        store.set({ selectedValue: value });
+    };
+
+    return (
+        <State store={ store }>
+            { (state) => (
+                <AutocompleteSelect
+                    options={ biggerOptions }
+                    value={ state.selectedValue }
+                    onChange={ handleSelectChange } />
+            ) }
+        </State>
+    );
+})
 .add('Knobs playground ⚽', () => {
     const optionsObj = object('Options', options, 'GROUP-ID1');
 
-    return <AutocompleteSelect options={ optionsObj } />;
+    const store = new Store({ selectedValue: '' });
+    const handleSelectChange = (value) => {
+        action('Changed')(value);
+        store.set({ selectedValue: value });
+    };
+
+    return (
+        <State store={ store }>
+            { (state) => (
+                <AutocompleteSelect
+                    options={ optionsObj }
+                    value={ state.selectedValue }
+                    onChange={ handleSelectChange } />
+            ) }
+        </State>
+    );
 });
