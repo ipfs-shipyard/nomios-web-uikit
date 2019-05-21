@@ -13,6 +13,7 @@ const eyeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/ic
 const eyeOffSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye-off.svg');
 const infoSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-info.svg');
 const laptopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-laptop.svg');
+const locationSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-location.svg');
 const mobileSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-mobile.svg');
 const otherSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-other.svg');
 const userSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-user.svg');
@@ -34,6 +35,7 @@ const EyeIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ 
 const EyeOffIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeOffSvg } />);
 const InfoIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ infoSvg } />);
 const LaptopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ laptopSvg } />);
+const LocationIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ locationSvg } />);
 const MobileIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ mobileSvg } />);
 const OtherIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ otherSvg } />);
 const UserIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ userSvg } />);
@@ -57,6 +59,7 @@ export {
     EyeOffIcon,
     InfoIcon,
     LaptopIcon,
+    LocationIcon,
     MobileIcon,
     OtherIcon,
     UserIcon,
