@@ -18,6 +18,12 @@ const myOptions = [
 
 ## Props
 
+| name | type | default | description |
+| ---- | ---- | ------- | ----------- |
+| value | string | *required* | The selected value |
+| onChange | function | *required* | A callback to be called whenever an option changes. Only the `value` is passed as argument to the callback |
+| options | array | *required* | Array of objects. Option object example: `{ value: 'car', label: 'Car' }` |
+
 All the properties supplied will be spread to [react-select](https://github.com/JedWatson/react-select) component.
 You can check all the available props [here](https://react-select.com/props).
 
