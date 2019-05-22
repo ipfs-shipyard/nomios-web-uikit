@@ -87,12 +87,12 @@
     overflow-x: auto;
     overflow-y: scroll;
     display: none;
+
+    &:not(:empty) {
+        display: block;
+    }
 }
 
 .modalBodyOpen {
     overflow: hidden;
-
-    & .modalPortal:not(:empty) {
-        display: block;
-    }
 }
