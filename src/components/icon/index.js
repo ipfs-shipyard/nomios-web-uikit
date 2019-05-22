@@ -11,8 +11,11 @@ const editSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/i
 const entitySvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-entity.svg');
 const eyeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye.svg');
 const eyeOffSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye-off.svg');
+const facebookSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-facebook.svg');
+const githubSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-github.svg');
 const infoSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-info.svg');
 const laptopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-laptop.svg');
+const linkedinSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-linkedin.svg');
 const locationSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-location.svg');
 const mobileSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-mobile.svg');
 const otherSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-other.svg');
@@ -21,6 +24,7 @@ const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/i
 const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
 const settingsSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-settings.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
+const twitterSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-twitter.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 
 const BellIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ bellSvg } />);
@@ -33,8 +37,11 @@ const EditIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={
 const EntityIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ entitySvg } />);
 const EyeIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeSvg } />);
 const EyeOffIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeOffSvg } />);
+const FacebookIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ facebookSvg } />);
+const GithubIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ githubSvg } />);
 const InfoIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ infoSvg } />);
 const LaptopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ laptopSvg } />);
+const LinkedinIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ linkedinSvg } />);
 const LocationIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ locationSvg } />);
 const MobileIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ mobileSvg } />);
 const OtherIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ otherSvg } />);
@@ -43,6 +50,7 @@ const PlusIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={
 const RefreshIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ refreshSvg } />);
 const SettingsIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ settingsSvg } />);
 const TabletIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ tabletSvg } />);
+const TwitterIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ twitterSvg } />);
 const WarningIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ warningSvg } />);
 
 export default Icon;
@@ -57,8 +65,11 @@ export {
     EntityIcon,
     EyeIcon,
     EyeOffIcon,
+    FacebookIcon,
+    GithubIcon,
     InfoIcon,
     LaptopIcon,
+    LinkedinIcon,
     LocationIcon,
     MobileIcon,
     OtherIcon,
@@ -67,5 +78,6 @@ export {
     RefreshIcon,
     SettingsIcon,
     TabletIcon,
+    TwitterIcon,
     WarningIcon,
 };
