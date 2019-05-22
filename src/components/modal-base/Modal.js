@@ -79,6 +79,7 @@ class Modal extends Component {
 
         const contentProps = {
             in: contentIn,
+            modalStatus,
             onEntered: this.handleContentEntered,
             onExited: this.handleContentExited,
         };

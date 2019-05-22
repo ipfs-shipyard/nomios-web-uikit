@@ -41,10 +41,12 @@ class FlowModalContents extends Component {
             isLast: currentStepIndex + 1 === flatChildren.length && flatChildren.length > 1,
         };
 
+        if (props.modalStatus === 'entering') {
+            !currentStep.isFirst && console.error('Once the modal is open, the first step must be rendered');
+        }
+
         // Short-circuit if `in` is false
         if (!props.in) {
-            !currentStep.isFirst && console.error('Once the modal is open, the first step must be rendered');
-
             return {
                 flatChildren,
             };
@@ -494,6 +496,7 @@ class FlowModalContents extends Component {
 FlowModalContents.propTypes = {
     variant: PropTypes.oneOf(['simple', 'simple-with-feedback', 'advanced']),
     step: PropTypes.string.isRequired,
+    modalStatus: PropTypes.string,
     showClose: PropTypes.bool,
     in: PropTypes.bool,
     onEntered: PropTypes.func,
