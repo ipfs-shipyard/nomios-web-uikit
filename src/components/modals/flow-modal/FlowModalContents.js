@@ -273,15 +273,15 @@ class FlowModalContents extends Component {
             }
             break;
         case LAYOUT.HALF:
-            if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
-                this.stepsPlacement = 'right';
-
-                return LAYOUT_TRANSITION.FULL_TO_HALF_ENTERING;
-            }
             if (requestNextLayout === LAYOUT.FULL) {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.HALF_TO_FULL_EXITING;
+            }
+            if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
+                this.stepsPlacement = 'right';
+
+                return LAYOUT_TRANSITION.FULL_TO_HALF_ENTERING;
             }
             break;
         case LAYOUT.FULL:
@@ -289,6 +289,16 @@ class FlowModalContents extends Component {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.FULL_TO_HALF_EXITING;
+            }
+            if (requestNextLayout === LAYOUT.WIDE) {
+                this.isAnimatingLayout = true;
+
+                return LAYOUT_TRANSITION.FULL_TO_WIDE_EXITING;
+            }
+            if (requestNextLayout === LAYOUT.HALF_BORDERED) {
+                this.isAnimatingLayout = true;
+
+                return LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_EXITING;
             }
             if (this.prevLayout === LAYOUT.HALF && this.isAnimatingLayout) {
                 this.stepsPlacement = 'left';
@@ -298,18 +308,8 @@ class FlowModalContents extends Component {
             if (this.prevLayout === LAYOUT.WIDE && this.isAnimatingLayout) {
                 return LAYOUT_TRANSITION.WIDE_TO_FULL_ENTERING;
             }
-            if (requestNextLayout === LAYOUT.WIDE) {
-                this.isAnimatingLayout = true;
-
-                return LAYOUT_TRANSITION.FULL_TO_WIDE_EXITING;
-            }
             if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
                 return LAYOUT_TRANSITION.HALF_BORDERED_TO_FULL_ENTERING;
-            }
-            if (requestNextLayout === LAYOUT.HALF_BORDERED) {
-                this.isAnimatingLayout = true;
-
-                return LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_EXITING;
             }
             break;
         case LAYOUT.HALF_BORDERED:
@@ -328,13 +328,13 @@ class FlowModalContents extends Component {
             }
             break;
         case LAYOUT.WIDE:
-            if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
-                return LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_ENTERING;
-            }
-            if (layout === LAYOUT.WIDE && requestNextLayout === LAYOUT.FULL) {
+            if (requestNextLayout === LAYOUT.FULL) {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.WIDE_TO_FULL_EXITING;
+            }
+            if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
+                return LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_ENTERING;
             }
             if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
                 return LAYOUT_TRANSITION.FULL_TO_WIDE_ENTERING;
