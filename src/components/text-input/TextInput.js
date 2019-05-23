@@ -8,7 +8,7 @@ import { EyeIcon, EyeOffIcon } from '../icon';
 import styles from './TextInput.css';
 
 const LEVELS_NAME = ['poor', 'weak', 'fair', 'strong'];
-const INPUT_PROPS = ['id', 'name', 'value', 'defaultValue', 'placeholder', 'autoComplete', 'onKeyDown', 'onKeyUp', 'onKeyPress', 'onChange', 'onInput', 'onFocus', 'onBlur', 'onCut', 'onCopy', 'onPaste'];
+const INPUT_PROPS = ['id', 'name', 'value', 'disabled', 'defaultValue', 'placeholder', 'autoComplete', 'onKeyDown', 'onKeyUp', 'onKeyPress', 'onChange', 'onInput', 'onFocus', 'onBlur', 'onCut', 'onCopy', 'onPaste'];
 
 class TextInput extends Component {
     state = {
