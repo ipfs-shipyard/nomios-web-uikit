@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import Icon from './Icon';
 
+const arrowRightSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-arrow-right.svg');
 const bellSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-bell.svg');
 const cameraSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-camera.svg');
 const checkmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark.svg');
@@ -27,6 +28,7 @@ const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons
 const twitterSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-twitter.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 
+const ArrowRightIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ arrowRightSvg } />);
 const BellIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ bellSvg } />);
 const CameraIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ cameraSvg } />);
 const CheckmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ checkmarkSvg } />);
@@ -55,6 +57,7 @@ const WarningIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } sv
 
 export default Icon;
 export {
+    ArrowRightIcon,
     BellIcon,
     CameraIcon,
     CheckmarkIcon,
