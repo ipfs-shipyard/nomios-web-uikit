@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PreloadImage from 'react-image';
-import getInitials from './initials';
+import { getInitials } from '../../utils';
 import styles from './Avatar.css';
 
 const cssTransitionStyles = {
