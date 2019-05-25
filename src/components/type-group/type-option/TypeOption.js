@@ -8,12 +8,12 @@ const INPUT_PROPS = ['id', 'name', 'value', 'defaultValue', 'onClick', 'onChange
 
 class TypeOption extends Component {
     render() {
-        const { label, groupName, children, selected, badge, selectable } = this.props;
+        const { label, groupName, children, selected, badge, selectable, className } = this.props;
         const labelClasses = classNames(styles.label, selectable && styles.selectable);
         const inputProps = pick(this.props, INPUT_PROPS);
 
         return (
-            <div className={ styles.container }>
+            <div className={ classNames(styles.container, className) }>
                 <label className={ labelClasses }>
                     <input className={ styles.input }
                         type="radio"
@@ -46,6 +46,7 @@ TypeOption.propTypes = {
         PropTypes.element,
     ]).isRequired,
     groupName: PropTypes.string,
+    className: PropTypes.string,
     selectable: PropTypes.bool,
     selected: PropTypes.bool,
     onSelect: PropTypes.func,
