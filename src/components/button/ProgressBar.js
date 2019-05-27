@@ -12,12 +12,12 @@ class ProgressBar extends Component {
     progressBarRef = createRef();
 
     componentDidMount() {
-        this.handleRunningChange();
+        this.handleRunningChange(true);
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.running !== prevProps.running) {
-            this.handleRunningChange(prevProps.running);
+            this.handleRunningChange(false);
         }
     }
 
@@ -108,12 +108,12 @@ class ProgressBar extends Component {
         return increment;
     }
 
-    handleRunningChange() {
+    handleRunningChange(wasJustMounted) {
         const { running } = this.props;
 
         if (running) {
             this.begin();
-        } else {
+        } else if (!wasJustMounted) {
             this.end();
         }
     }
