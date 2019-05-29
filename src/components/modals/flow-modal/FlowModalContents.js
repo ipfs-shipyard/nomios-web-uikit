@@ -63,7 +63,7 @@ class FlowModalContents extends Component {
         }
 
         if (isNumber(requestNextStepIndex) && (isNumber(state.requestNextStepIndex) || isNumber(state.pendingStepIndex))) {
-            if (requestNextStepIndex === state.requestNextStepIndex) {
+            if (requestNextStepIndex === state.requestNextStepIndex || requestNextStepIndex === state.pendingStepIndex) {
                 return null;
             }
 
@@ -382,7 +382,7 @@ class FlowModalContents extends Component {
     };
 
     handlePanelAnimationEnd = () => {
-        const { requestNextLayout, layout, requestNextStepIndex } = this.state;
+        const { requestNextLayout, layout, requestNextStepIndex, pendingStepIndex } = this.state;
 
         switch (this.layoutTransition) {
         case LAYOUT_TRANSITION.EMPTY_TO_HALF:
@@ -431,7 +431,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
@@ -446,7 +446,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
@@ -470,7 +470,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
@@ -484,7 +484,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
