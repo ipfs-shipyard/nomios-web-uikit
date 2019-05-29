@@ -8,6 +8,7 @@
 .wrapper {
     min-width: 28rem;
     max-width: 65rem;
+    min-height: 9.1rem;
     display: flex;
     flex-direction: column;
 
