@@ -41,11 +41,14 @@ class FlowModalContents extends Component {
             isLast: currentStepIndex + 1 === flatChildren.length && flatChildren.length > 1,
         };
 
+        if (!state.in && props.in) {
+            !currentStep.isFirst && console.error('Once the modal is open, the first step must be rendered');
+        }
+
         // Short-circuit if `in` is false
         if (!props.in) {
-            !currentStep.isFirst && console.error('Once the modal is open, the first step must be rendered');
-
             return {
+                in: props.in,
                 flatChildren,
             };
         }
@@ -61,7 +64,7 @@ class FlowModalContents extends Component {
         }
 
         if (isNumber(requestNextStepIndex) && (isNumber(state.requestNextStepIndex) || isNumber(state.pendingStepIndex))) {
-            if (requestNextStepIndex === state.requestNextStepIndex) {
+            if (requestNextStepIndex === state.requestNextStepIndex || requestNextStepIndex === state.pendingStepIndex) {
                 return null;
             }
 
@@ -71,6 +74,7 @@ class FlowModalContents extends Component {
         }
 
         return {
+            in: props.in,
             variant: props.variant,
             flatChildren,
             requestNextStepIndex,
@@ -101,6 +105,7 @@ class FlowModalContents extends Component {
     stepsPlacement = 'right';
 
     state = {
+        in: false,
         layout: null,
         currentStepIndex: 0,
         variant: null,
@@ -273,15 +278,15 @@ class FlowModalContents extends Component {
             }
             break;
         case LAYOUT.HALF:
-            if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
-                this.stepsPlacement = 'right';
-
-                return LAYOUT_TRANSITION.FULL_TO_HALF_ENTERING;
-            }
             if (requestNextLayout === LAYOUT.FULL) {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.HALF_TO_FULL_EXITING;
+            }
+            if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
+                this.stepsPlacement = 'right';
+
+                return LAYOUT_TRANSITION.FULL_TO_HALF_ENTERING;
             }
             break;
         case LAYOUT.FULL:
@@ -289,6 +294,16 @@ class FlowModalContents extends Component {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.FULL_TO_HALF_EXITING;
+            }
+            if (requestNextLayout === LAYOUT.WIDE) {
+                this.isAnimatingLayout = true;
+
+                return LAYOUT_TRANSITION.FULL_TO_WIDE_EXITING;
+            }
+            if (requestNextLayout === LAYOUT.HALF_BORDERED) {
+                this.isAnimatingLayout = true;
+
+                return LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_EXITING;
             }
             if (this.prevLayout === LAYOUT.HALF && this.isAnimatingLayout) {
                 this.stepsPlacement = 'left';
@@ -298,18 +313,8 @@ class FlowModalContents extends Component {
             if (this.prevLayout === LAYOUT.WIDE && this.isAnimatingLayout) {
                 return LAYOUT_TRANSITION.WIDE_TO_FULL_ENTERING;
             }
-            if (requestNextLayout === LAYOUT.WIDE) {
-                this.isAnimatingLayout = true;
-
-                return LAYOUT_TRANSITION.FULL_TO_WIDE_EXITING;
-            }
             if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
                 return LAYOUT_TRANSITION.HALF_BORDERED_TO_FULL_ENTERING;
-            }
-            if (requestNextLayout === LAYOUT.HALF_BORDERED) {
-                this.isAnimatingLayout = true;
-
-                return LAYOUT_TRANSITION.FULL_TO_HALF_BORDERED_EXITING;
             }
             break;
         case LAYOUT.HALF_BORDERED:
@@ -328,13 +333,13 @@ class FlowModalContents extends Component {
             }
             break;
         case LAYOUT.WIDE:
-            if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
-                return LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_ENTERING;
-            }
-            if (layout === LAYOUT.WIDE && requestNextLayout === LAYOUT.FULL) {
+            if (requestNextLayout === LAYOUT.FULL) {
                 this.isAnimatingLayout = true;
 
                 return LAYOUT_TRANSITION.WIDE_TO_FULL_EXITING;
+            }
+            if (this.prevLayout === LAYOUT.HALF_BORDERED && this.isAnimatingLayout) {
+                return LAYOUT_TRANSITION.HALF_BORDERED_TO_WIDE_ENTERING;
             }
             if (this.prevLayout === LAYOUT.FULL && this.isAnimatingLayout) {
                 return LAYOUT_TRANSITION.FULL_TO_WIDE_ENTERING;
@@ -380,7 +385,7 @@ class FlowModalContents extends Component {
     };
 
     handlePanelAnimationEnd = () => {
-        const { requestNextLayout, layout, requestNextStepIndex } = this.state;
+        const { requestNextLayout, layout, requestNextStepIndex, pendingStepIndex } = this.state;
 
         switch (this.layoutTransition) {
         case LAYOUT_TRANSITION.EMPTY_TO_HALF:
@@ -429,7 +434,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
@@ -444,7 +449,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
@@ -468,7 +473,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
@@ -482,7 +487,7 @@ class FlowModalContents extends Component {
             this.setState({
                 requestNextLayout: false,
                 requestNextStepIndex: false,
-                currentStepIndex: requestNextStepIndex,
+                currentStepIndex: !isNumber(requestNextStepIndex) ? pendingStepIndex : requestNextStepIndex,
             });
             break;
 
