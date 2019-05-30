@@ -6,10 +6,11 @@ import styles from './TextButton.css';
 const renderIcon = (icon, className) =>
     icon ? React.cloneElement(icon, { className: classNames(styles.icon, className) }) : null;
 
-const TextButton = forwardRef(({ icon, iconPosition, children, className, ...rest }, ref) => {
+const TextButton = forwardRef(({ variant, icon, iconPosition, children, className, ...rest }, ref) => {
     const finalClassName = classNames(
         styles.textButton,
         styles[iconPosition],
+        styles[variant],
         className
     );
 
@@ -24,6 +25,7 @@ const TextButton = forwardRef(({ icon, iconPosition, children, className, ...res
 
 TextButton.propTypes = {
     children: PropTypes.node.isRequired,
+    variant: PropTypes.oneOf(['small', 'large']),
     icon: PropTypes.element,
     iconPosition: PropTypes.oneOf(['left', 'right']),
     className: PropTypes.string,
@@ -31,6 +33,7 @@ TextButton.propTypes = {
 
 TextButton.defaultProps = {
     iconPosition: 'right',
+    variant: 'large',
 };
 
 export default TextButton;

@@ -21,8 +21,8 @@ Additionally, you may tweak the opacity via the `fill-opacity` CSS property.
 import { Logo } from '@nomios/web-uikit';
 
 <Logo variant="horizontal" style={ { fill: 'yellow' } } />
-
 ```
+
 ### Changing the size
 
 You may change the icon size via the `fontSize` CSS property (defaults to `1rem`).

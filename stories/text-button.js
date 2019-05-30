@@ -9,8 +9,11 @@ import readme from '../src/components/text-button/README.md';
 storiesOf('TextButton', module)
 .addDecorator(withReadme(readme))
 .addDecorator(withKnobs)
-.add('Standard', () => (
+.add('Large', () => (
     <TextButton onClick={ action('clicked') }>Click me</TextButton>
+))
+.add('Small', () => (
+    <TextButton variant="small" onClick={ action('clicked') }>Click me</TextButton>
 ))
 .add('With an icon (right)', () => (
     <TextButton
@@ -28,6 +31,7 @@ storiesOf('TextButton', module)
     </TextButton>
 ))
 .add('Knobs playground ⚽', () => {
+    const variant = select('variant', ['small', 'large'], 'large');
     const withIcon = boolean('withIcon');
     const iconPosition = select('iconPosition', ['left', 'right'], 'right');
     const disabled = boolean('disabled');
@@ -35,6 +39,7 @@ storiesOf('TextButton', module)
 
     return (
         <TextButton
+            variant={ variant }
             icon={ withIcon ? <EditIcon /> : undefined }
             iconPosition={ iconPosition }
             disabled={ disabled }
