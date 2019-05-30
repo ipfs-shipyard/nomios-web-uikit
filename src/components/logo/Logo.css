@@ -1,7 +1,6 @@
 .container {
     display: inline-flex;
     font-size: 1rem;
-    fill: currentColor;
 
     &.vertical {
         flex-direction: column;
