@@ -37,7 +37,7 @@ FeedbackTooltip.propTypes = {
     children: PropTypes.node,
 };
 
-const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, tooltip, className }) => {
+const FeedbackMessage = ({ children, type, iconPosition, variant, tooltip, className }) => {
     const finalClassNames = classNames(
         styles.feedbackMessage,
         styles[type],
@@ -47,7 +47,7 @@ const FeedbackMessage = ({ children, type, textColor, iconPosition, variant, too
     );
 
     return (
-        <div style={ { color: textColor } } className={ finalClassNames }>
+        <div className={ finalClassNames }>
             { type && <FeedbackTooltip type={ type }>{ tooltip }</FeedbackTooltip> }
             { children }
         </div>
@@ -58,7 +58,6 @@ FeedbackMessage.propTypes = {
     children: PropTypes.node.isRequired,
     variant: PropTypes.oneOf(['small', 'large']),
     type: PropTypes.oneOf(['error', 'info']),
-    textColor: PropTypes.string,
     iconPosition: PropTypes.oneOf(['left', 'right']),
     tooltip: PropTypes.node,
     className: PropTypes.string,

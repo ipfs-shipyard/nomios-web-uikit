@@ -95,7 +95,7 @@ class TextInput extends Component {
 
         return feedback && (
             <FeedbackMessage
-                textColor={ this.state.feedbackMessageColor }
+                style={ { color: this.state.feedbackMessageColor } }
                 type={ feedback.type }
                 iconPosition="right"
                 tooltip={ feedback.tooltip }
