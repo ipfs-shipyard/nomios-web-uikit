@@ -1,6 +1,7 @@
 .svgWrapper {
     display: inline-block;
     vertical-align: middle;
+    fill: currentColor;
 
     & svg {
         width: inherit;
