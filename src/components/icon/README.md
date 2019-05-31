@@ -35,8 +35,8 @@ Additionally, you may tweak the opacity via the `fill-opacity` CSS property.
 import { WarningIcon } from '@nomios/web-uikit';
 
 <WarningIcon style={ { fill: 'yellow' } } />
-
 ```
+
 ### Changing the size
 
 You may change the icon size via the `fontSize` CSS property (defaults to `2.4rem`).

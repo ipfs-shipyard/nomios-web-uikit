@@ -28,20 +28,42 @@
 
     & .text {
         display: inline-block;
-        @mixin typography-body-1 rem;
         vertical-align: middle;
     }
 
     & .icon {
         vertical-align: middle;
-        font-size: 1.5rem;
     }
 
-    &.left .icon {
-        margin-right: calc(0.8rem / 1.5);
+    &.large {
+        & .text {
+            @mixin typography-body-1 rem;
+        }
+
+        &.left .icon {
+            margin-right: 1.6rem;
+            font-size: 1.6rem;
+        }
+
+        &.right .icon {
+            margin-left: 1.6rem;
+            font-size: 1.6rem;
+        }
     }
 
-    &.right .icon {
-        margin-left: calc(0.8rem / 1.5);
+    &.small {
+        & .text {
+            @mixin typography-body-2 rem;
+        }
+
+        &.left .icon {
+            margin-right: 1.2rem;
+            font-size: 1.2rem;
+        }
+
+        &.right .icon {
+            margin-left: 1.2rem;
+            font-size: 1.2rem;
+        }
     }
 }

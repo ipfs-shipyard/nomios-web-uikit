@@ -23,8 +23,8 @@ import { Svg } from '@nomios/web-uikit';
 import mySvg from './path/to/my.svg';
 
 <Svg svg={ mySvg } style={ { fill: 'yellow' } } />
-
 ```
+
 ### Changing the size
 
 You may change the `width` and `height` CSS properties.
