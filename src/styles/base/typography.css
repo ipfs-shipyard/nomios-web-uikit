@@ -11,7 +11,7 @@ html {
 
 body {
     @mixin typography-body-1 rem;
-    color: var(--color-black);
+    color: var(--color-armadillo);
     overflow-wrap: break-word;  /* Break long words by default */
 }
 
