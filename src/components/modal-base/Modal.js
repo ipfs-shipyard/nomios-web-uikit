@@ -2,10 +2,15 @@ import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactModal from 'react-modal';
+import scrollbarCompensate from 'scrollbar-compensate';
 import { ModalCloseContext } from './ModalClose';
 import styles from './Modal.css';
 
 const MODAL_TRANSITION_DURATION = 450;
+
+document.addEventListener('DOMContentLoaded', () => {
+    scrollbarCompensate([`.${styles.modalBodyOpen}`]);
+});
 
 class Modal extends Component {
     static getDerivedStateFromProps(props, state) {

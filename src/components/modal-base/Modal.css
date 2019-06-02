@@ -94,5 +94,7 @@
 }
 
 .modalBodyOpen {
+    /* Alongside this, `padding-right` equal to the sidebar width will be added */
+    /* See: https://github.com/srph/scrollbar-compensate */
     overflow: hidden;
 }

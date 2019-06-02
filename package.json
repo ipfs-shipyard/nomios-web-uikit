@@ -110,6 +110,7 @@
     "react-modal": "^3.8.1",
     "react-popper": "^1.0.0",
     "react-select": "^2.4.3",
-    "react-transition-group": "^4.0.0"
+    "react-transition-group": "^4.0.0",
+    "scrollbar-compensate": "^0.2.2"
   }
 }
