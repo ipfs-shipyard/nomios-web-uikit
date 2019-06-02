@@ -1,22 +1,15 @@
-import { get } from 'lodash';
+import { Fragment } from 'react';
+import { castArray } from 'lodash';
+import FlowModalStep from '../FlowModalStep';
 
-const flatContentsChildren = (array, depth = 1) => array.reduce((acc, item) => {
+const flatContentsChildren = (children) => castArray(children).reduce((acc, item) => {
     if (item) {
-        if (Array.isArray(item) && depth > 0) {
-            acc.push(...flatContentsChildren(item, depth - 1));
+        if (item.type === Fragment) {
+            acc.push(...flatContentsChildren(item.props.children));
+        } else if (item.type === FlowModalStep) {
+            acc.push(item);
         } else {
-            const type = item.type ? get(item, 'type.name', item.type).toString() : typeof item;
-
-            switch (type) {
-            case 'FlowModalStep':
-                acc.push(item);
-                break;
-            case 'Symbol(react.fragment)':
-                acc.push(...item.props.children);
-                break;
-            default:
-                console.error(`FlowModal only accepts children of type <FlowModalStep>. Found: ${type}`);
-            }
+            console.error('FlowModal only accepts children of type <FlowModalStep>');
         }
     }
 

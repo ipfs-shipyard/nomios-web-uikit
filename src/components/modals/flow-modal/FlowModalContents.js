@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { castArray, isNumber, isEqual } from 'lodash';
+import { isNumber, isEqual } from 'lodash';
 import Logo from '../../logo';
 import { ModalClose } from '../../modal-base';
 import { LAYOUT, LAYOUT_TRANSITION } from './utils/constants';
@@ -18,7 +18,7 @@ class FlowModalContents extends Component {
             console.error('FlowModal must have at least 1 step');
         }
 
-        const flatChildren = flatContentsChildren(castArray(props.children));
+        const flatChildren = flatContentsChildren(props.children);
 
         const currentChildrenIds = flatChildren.map((child) => ({ id: child.props.id }));
         const oldChildrenIds = state.flatChildren !== null && state.flatChildren.map((child) => ({ id: child.props.id }));
