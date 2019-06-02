@@ -1,0 +1,16 @@
+:root {
+    --screen-spacing: 2.5rem;
+    --screen-min-width: 102.4rem;
+    --screen-min-height: 70rem;
+}
+
+.modal {
+    width: 100%;
+    min-width: var(--screen-min-width);
+    max-width: 128rem;
+}
+
+.modalContent {
+    height: calc(var(--screen-min-height) - 2 * var(--screen-spacing));
+    overflow: hidden;
+}

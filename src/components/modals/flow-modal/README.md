@@ -45,6 +45,7 @@ You may want to use this modal with the `<ModalTrigger>` component. There are a 
 | variant | string | `simple` | Sets the layout variant. Can be one of: `simple`, `simple-with-feedback` or `advanced` |
 | step | string | *required* | Sets the current active step |
 | showClose | bool | | Wether to show the close button or not |
+| contentClassName | string | | A custom CSS class to add to the content container |
 
 All the other base [Modal](/?path=/story/modal-base--standalone) props are supported.
 

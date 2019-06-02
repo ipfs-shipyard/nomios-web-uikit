@@ -7,8 +7,8 @@ import styles from './StandardModal.css';
 
 const TRANSITION_DURATION = 150;
 
-const StandardModal = ({ children, showClose, contentClassName, ...rest }) => (
-    <Modal { ...rest }>
+const StandardModal = ({ children, showClose, contentClassName, className, ...rest }) => (
+    <Modal className={ classNames(styles.modal, className) } { ...rest }>
         <CSSTransition
             timeout={ TRANSITION_DURATION }
             classNames={ {
@@ -28,8 +28,8 @@ const StandardModal = ({ children, showClose, contentClassName, ...rest }) => (
 
 StandardModal.propTypes = {
     showClose: PropTypes.bool,
-    className: PropTypes.string,
     contentClassName: PropTypes.string,
+    className: PropTypes.string,
     children: PropTypes.node,
 };
 

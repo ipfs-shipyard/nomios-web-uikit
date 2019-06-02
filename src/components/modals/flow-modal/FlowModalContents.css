@@ -1,9 +1,6 @@
 @import "../../../styles/colors";
 
 :root {
-    --screen-min-width: 102.4rem;
-    --screen-min-height: 70rem;
-    --screen-spacing: 2rem;
     --inner-spacing: 2rem;
     --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
     --layout-animation-duration: 0.6s;
@@ -72,11 +69,6 @@
 
 .flowModalContents {
     will-change: opacity;
-    width: calc(100vw - 2 * var(--screen-spacing));
-    min-width: calc(var(--screen-min-width) - 2 * var(--screen-spacing));
-    max-width: 128rem;
-    height: calc(var(--screen-min-height) - 2 * var(--screen-spacing));
-    overflow: hidden;
     display: flex;
     background: var(--color-white);
     transition: opacity 0.2s ease-out;
@@ -99,7 +91,7 @@
         }
 
         &.halfBorderedPosition {
-            margin-top: var(--screen-spacing);
+            margin-top: 2rem;
         }
     }
 

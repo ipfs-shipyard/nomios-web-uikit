@@ -80,7 +80,7 @@ setAppElement('#root');
 
 Important notes:
 
-- The modal has a `max-width` and `max-height` defined to prevent it from touching the viewport, with `2.5rem` of spacing.
+- The modal has a `2.5rem` of padding, to avoid its contents to touch the viewport.
 - The contents of the modal will be automatically centered both vertically and horizontally.
 - The modal will adjust itself based on its contents, preferring to fill the screen. You tweak the contents width to change this behavior.
 - The `children` of the modal must be a render function or a `<Transition>` compatible element, see below.

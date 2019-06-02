@@ -123,7 +123,7 @@ class FlowModalContents extends Component {
 
     render() {
         const { layout, requestNextLayout, requestNextStepIndex, variant } = this.state;
-        const { in: in_, showClose } = this.props;
+        const { in: in_, showClose, className } = this.props;
 
         this.layoutTransition = this.inferLayoutTransition();
 
@@ -144,7 +144,8 @@ class FlowModalContents extends Component {
         const flowContentsClasses = classNames(
             styles.flowModalContents,
             layout && !in_ && styles.out,
-            styles[layoutClass]
+            styles[layoutClass],
+            className,
         );
 
         const modalCloseClasses = classNames(
@@ -503,6 +504,7 @@ FlowModalContents.propTypes = {
     in: PropTypes.bool,
     onEntered: PropTypes.func,
     onExited: PropTypes.func,
+    className: PropTypes.string,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.element]).isRequired,
 };
 

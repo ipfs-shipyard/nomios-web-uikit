@@ -1,8 +1,15 @@
-.standardModal {
-    will-change: opacity;
-    width: 70vw;
+:root {
+    --screen-spacing: 2.5rem;
+}
+
+.modal {
+    width: 70%;
     min-width: 30rem;
     min-height: 30rem;
+}
+
+.standardModal {
+    will-change: transform, opacity;
     padding: 5rem;
     transform: translateX(-15px);
     opacity: 0;
