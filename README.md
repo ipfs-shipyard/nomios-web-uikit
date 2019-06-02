@@ -121,7 +121,7 @@ It's assumed that you will consume this package in an application bundled with W
 ### start
 
 ```sh
-$ npm run storybook
+$ npm start
 ```
 
 Starts [Storybook](https://storybook.js.org/).
@@ -141,6 +141,14 @@ $ npm run lint
 ```
 
 Checks if the project has any linting errors.
+
+### test
+
+```sh
+$ npm test
+```
+
+Runs the project tests.
 
 ### release
 
