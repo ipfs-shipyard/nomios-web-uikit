@@ -5,7 +5,7 @@ import Cancelable from 'cancel.it';
 import styles from './Svg.css';
 
 class Icon extends Component {
-    static getDeriveStateFromProps(props, state) {
+    static getDerivedStateFromProps(props, state) {
         return {
             contents: typeof props.svg === 'string' ? props.svg : state.contents,
         };
