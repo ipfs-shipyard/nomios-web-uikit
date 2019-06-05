@@ -6,7 +6,7 @@
     @mixin circular-shape 4em, var(--color-white);
     font-size: 2rem;
 
-    &::after {
+    &::before {
         @mixin circular-shape 4em, color(var(--color-mineral-green) alpha(0.2));
         content: "";
         position: absolute;
