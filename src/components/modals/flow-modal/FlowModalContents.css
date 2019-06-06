@@ -155,7 +155,14 @@
         justify-content: flex-end;
 
         & .left {
+            position: relative;
             background: var(--color-mineral-green);
+
+            & .flowModalBackground {
+                z-index: auto;
+                opacity: 0.4;
+                background-position: left center;
+            }
 
             &.emptyToHalf {
                 position: relative;
@@ -321,6 +328,7 @@
         }
 
         & .step {
+            position: relative;
             height: 100%;
         }
 
@@ -344,10 +352,6 @@
 
         & .right {
             width: 0%;
-
-            & .step {
-                position: relative;
-            }
 
             &.advanced {
                 width: 100%;

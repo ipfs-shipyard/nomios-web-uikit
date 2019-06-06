@@ -123,7 +123,7 @@ class FlowModalContents extends Component {
 
     render() {
         const { layout, requestNextLayout, requestNextStepIndex, variant } = this.state;
-        const { in: in_, showClose, className } = this.props;
+        const { in: in_, showClose, className, variant: propsVariant } = this.props;
 
         this.layoutTransition = this.inferLayoutTransition();
 
@@ -159,15 +159,24 @@ class FlowModalContents extends Component {
             (layout === LAYOUT.HALF_BORDERED || layout === LAYOUT.FULL) && styles.whiteColored,
         );
 
+        console.log('propsVariant', propsVariant);
+
         return (
             <div className={ flowContentsClasses } onTransitionEnd={ this.handleFlowContentsTransitionEnd }>
-                { layout !== LAYOUT.FULL && <div className={ styles.flowModalBackground } /> }
+                { layout !== LAYOUT.FULL &&
+                    propsVariant === 'advanced' &&
+                    <div className={ styles.flowModalBackground } /> }
                 <div className={ leftClasses } onAnimationEnd={ variant !== 'advanced' ? this.handlePanelAnimationEnd : undefined }>
+                    { (layout === LAYOUT.FULL || layout === LAYOUT.HALF) &&
+                        propsVariant === 'simple-with-feedback' &&
+                        <div className={ styles.flowModalBackground } /> }
                     { shouldRenderLogoRightSide ? null : this.renderLogo() }
                     { this.stepsPlacement === 'left' && this.renderLeftSteps() }
                 </div>
                 <div className={ rightClasses } onAnimationEnd={ variant === 'advanced' ? this.handlePanelAnimationEnd : undefined }>
-                    { layout === LAYOUT.FULL && <div className={ styles.flowModalBackground } /> }
+                    { layout === LAYOUT.FULL &&
+                        propsVariant === 'advanced' &&
+                        <div className={ styles.flowModalBackground } /> }
                     { shouldRenderLogoRightSide && this.renderLogo() }
                     { this.stepsPlacement === 'right' && this.renderRightSteps() }
                 </div>
