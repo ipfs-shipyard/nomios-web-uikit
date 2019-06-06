@@ -161,11 +161,13 @@ class FlowModalContents extends Component {
 
         return (
             <div className={ flowContentsClasses } onTransitionEnd={ this.handleFlowContentsTransitionEnd }>
+                { layout !== LAYOUT.FULL && <div className={ styles.flowModalBackground } /> }
                 <div className={ leftClasses } onAnimationEnd={ variant !== 'advanced' ? this.handlePanelAnimationEnd : undefined }>
                     { shouldRenderLogoRightSide ? null : this.renderLogo() }
                     { this.stepsPlacement === 'left' && this.renderLeftSteps() }
                 </div>
                 <div className={ rightClasses } onAnimationEnd={ variant === 'advanced' ? this.handlePanelAnimationEnd : undefined }>
+                    { layout === LAYOUT.FULL && <div className={ styles.flowModalBackground } /> }
                     { shouldRenderLogoRightSide && this.renderLogo() }
                     { this.stepsPlacement === 'right' && this.renderRightSteps() }
                 </div>
