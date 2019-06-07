@@ -8,12 +8,15 @@
     color: color(var(--color-armadillo) alpha(0.6));
 
     & .icon {
-        transition: fill-opacity 0.3s ease;
-        fill: var(--color-armadillo);
-        fill-opacity: 0.3;
+        fill-opacity: 0.7;
 
-        &.interactive:hover {
-            fill-opacity: 0.6;
+        &.interactive {
+            will-change: fill-opacity;
+            transition: fill-opacity 0.3s ease;
+
+            &:hover {
+                fill-opacity: 1;
+            }
         }
     }
 
@@ -66,18 +69,5 @@
 
     &.error {
         color: var(--color-monza);
-
-        & .icon {
-            fill: var(--color-monza);
-            fill-opacity: 0.9;
-
-            &.interactive {
-                fill-opacity: 0.7;
-
-                &:hover {
-                    fill-opacity: 1;
-                }
-            }
-        }
     }
 }
