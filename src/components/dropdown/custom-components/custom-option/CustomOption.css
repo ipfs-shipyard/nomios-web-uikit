@@ -1,0 +1,14 @@
+@import "../../../../styles/colors";
+
+.option {
+    will-change: background-color;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--color-white);
+    color: var(--color-armadillo);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &.focused {
+        background-color: var(--color-dawn-pink);
+    }
+}

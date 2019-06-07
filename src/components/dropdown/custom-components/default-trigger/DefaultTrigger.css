@@ -1,0 +1,28 @@
+@import "../../../../styles/colors";
+
+.trigger {
+    width: 100%;
+    padding: 0.7rem 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.1rem solid color(var(--color-armadillo) alpha(0.3));
+    cursor: pointer;
+
+    &.placeholder {
+        color: color(var(--color-armadillo) alpha(0.3));
+    }
+
+    &.menuIsOpen {
+        & .chevron {
+            transform: rotateZ(-180deg);
+        }
+    }
+
+    & .chevron {
+        will-change: transform;
+        align-self: center;
+        font-size: 1.6rem;
+        transition: transform 0.2s ease;
+        fill: color(var(--color-armadillo) alpha(0.6));
+    }
+}
