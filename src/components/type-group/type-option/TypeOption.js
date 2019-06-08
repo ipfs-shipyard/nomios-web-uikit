@@ -9,7 +9,7 @@ const INPUT_PROPS = ['id', 'name', 'value', 'defaultValue', 'onClick', 'onChange
 class TypeOption extends Component {
     render() {
         const { label, groupName, children, selected, badge, selectable, className } = this.props;
-        const labelClasses = classNames(styles.label, selectable && styles.selectable);
+        const labelClasses = classNames(styles.label, selectable && styles.selectable, !label && styles.noLabel);
         const inputProps = pick(this.props, INPUT_PROPS);
 
         return (
@@ -29,7 +29,7 @@ class TypeOption extends Component {
                             </span> }
                         { children }
                     </div>
-                    <span>{ label }</span>
+                    { label && <span>{ label } </span> }
                 </label>
             </div>
         );
