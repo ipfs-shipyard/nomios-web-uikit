@@ -23,7 +23,7 @@ const imageContainer = (children) => (
     </TransitionGroup>
 );
 
-const Avatar = ({ className, name, image, preloadImage, ...rest }) => {
+const Avatar = ({ className, name, image, preloadImage, animateOnEnter, ...rest }) => {
     const avatarClasses = classNames(styles.avatar, className);
 
     return (
@@ -32,7 +32,7 @@ const Avatar = ({ className, name, image, preloadImage, ...rest }) => {
             <PreloadImage
                 src={ image }
                 decode={ preloadImage }
-                container={ imageContainer }
+                container={ animateOnEnter ? imageContainer : undefined }
                 className={ styles.image } />
         </div>
     );
@@ -41,12 +41,14 @@ const Avatar = ({ className, name, image, preloadImage, ...rest }) => {
 Avatar.propTypes = {
     name: PropTypes.string,
     image: PropTypes.string,
-    preloadImage: PropTypes.bool,
     className: PropTypes.string,
+    preloadImage: PropTypes.bool,
+    animateOnEnter: PropTypes.bool,
 };
 
 Avatar.defaultProps = {
     preloadImage: true,
+    animateOnEnter: true,
 };
 
 export default Avatar;
