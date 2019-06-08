@@ -48,6 +48,10 @@
             }
         }
     }
+
+    &.noLabel .circle {
+        margin-bottom: 0;
+    }
 }
 
 .circle {
