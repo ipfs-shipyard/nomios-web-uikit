@@ -31,7 +31,7 @@
     "build:clean": "rimraf dist styles",
     "build:js": "cross-env BABEL_ENV=es babel src --out-dir dist --delete-dir-on-start",
     "build:css": "npm run build:css-components && npm run build:css-styles",
-    "build:css-components": "postcss \"src/components/**/*.css\" --base src --dir dist",
+    "build:css-components": "cross-env POSTCSS_ENV=dist postcss \"src/components/**/*.css\" --base src --dir dist",
     "build:css-styles": "cross-env POSTCSS_ENV=dist postcss \"src/styles/index.css\" --output styles/index.css",
     "build:copy": "npm run build:copy-media && npm run build:copy-styles",
     "build:copy-media": "cpr src/media dist/media",
@@ -79,7 +79,7 @@
   },
   "standard-version": {
     "scripts": {
-      "posttag": "git push --follow-tags origin master && npm publish"
+      "posttag": "git push --follow-tags origin master"
     }
   },
   "lint-staged": {
