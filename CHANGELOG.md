@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.1.0...v0.1.1) (2019-06-09)
+
+
+### Bug Fixes
+
+* fix build process ([65575e9](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/65575e9))
+
+
+
 ## 0.1.0 (2019-06-09)
 
 
