@@ -10,7 +10,7 @@ const CustomMenuList = ({ children, selectProps }) => (
 );
 
 CustomMenuList.propTypes = {
-    selectProps: PropTypes.object,
+    selectProps: PropTypes.object.isRequired,
     children: PropTypes.node,
 };
 

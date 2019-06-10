@@ -32,10 +32,10 @@ const DefaultTrigger = ({ selectedData, placeholder, menuIsOpen, className }) =>
 };
 
 DefaultTrigger.propTypes = {
-    selectedData: PropTypes.object,
-    placeholder: PropTypes.string,
+    selectedData: PropTypes.object.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    menuIsOpen: PropTypes.bool.isRequired,
     className: PropTypes.string,
-    menuIsOpen: PropTypes.bool,
 };
 
 export default DefaultTrigger;

@@ -14,10 +14,10 @@ const CustomMenu = ({ innerRef, innerProps, children, selectProps }) => {
 };
 
 CustomMenu.propTypes = {
-    selectProps: PropTypes.object,
-    innerProps: PropTypes.object,
-    innerRef: PropTypes.func,
-    children: PropTypes.node,
+    selectProps: PropTypes.object.isRequired,
+    innerProps: PropTypes.object.isRequired,
+    innerRef: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default CustomMenu;

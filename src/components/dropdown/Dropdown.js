@@ -10,7 +10,8 @@ import {
     CustomMenuList,
     CustomValueContainer,
     NullComponent,
-    DefaultTrigger } from './custom-components';
+    DefaultTrigger,
+} from './custom-components';
 
 class Dropdown extends Component {
     render() {
@@ -44,6 +45,7 @@ Dropdown.propTypes = {
     menuClassName: PropTypes.string,
     renderTrigger: PropTypes.func,
     placeholder: PropTypes.string,
+    renderOption: PropTypes.func,
     onChange: PropTypes.func,
 };
 

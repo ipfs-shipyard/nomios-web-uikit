@@ -66,6 +66,7 @@ const handleChange = (data) => console.log(data);
 | ---- | ---- | ------- | ----------- |
 | options | array | *required* | Array of objects. Check [options notes](#options) to further details on this prop |
 | renderTrigger | function || A function to render a custom dropdown trigger. Check [renderTrigger notes](#renderTrigger) to further details |
+| renderOption | function || A function to render a custom option |
 | onChange | function || A callback to be called whenever an option changes. All the options are passed as argument except for the render property |
 | placeholder | string || A placeholder for the trigger |
 | menuClassName | string || A className to override menu default styles |
@@ -82,24 +83,22 @@ You can check other available props [here](https://react-select.com/props).
 #### Options
 
 This prop must be an array of objects. Each object must/may have the following properties:
+
 - **value** - The option's value.
 
-	Type: `string`
-
+	Type: `string`   
     Required: `true`
 
 - **label** - The option's label
 
-	Type: `string`
-
+	Type: `string`   
     Required: `false`
 
 	The dropdown will render the value as fallback if this property is not provided.
 
 - **render** - Method to delegate option renderization. If available, it will be the preferred way to render an option.
 
-	Type: `function`
-
+	Type: `function`   
     Required: `false`
 
 	This method will receive an object with the following properties:

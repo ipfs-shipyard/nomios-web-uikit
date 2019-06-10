@@ -8,21 +8,24 @@ const CustomOption = ({ innerProps, isSelected, isDisabled, isFocused, data, sel
     const optionClassName = classNames(styles.option, { [styles.focused]: isFocused }, selectProps.optionClassName);
     const optionProps = { isSelected, isDisabled, isFocused, defaultClassName: optionClassName, data: omit(data, 'render') };
 
-    return (
-        <div { ...innerProps } className={ data.render ? undefined : optionClassName }>
-            { data.render ? data.render(optionProps) : data.label }
-        </div>
-    );
+    if (data.render || selectProps.renderOption) {
+        return (
+            <div { ...innerProps }>
+                { data.render ? data.render(optionProps) : selectProps.renderOption(optionProps) }
+            </div>
+        );
+    }
+
+    return <div { ...innerProps } className={ optionClassName }>{ data.label }</div>;
 };
 
 CustomOption.propTypes = {
-    selectProps: PropTypes.object,
-    innerProps: PropTypes.object,
-    isSelected: PropTypes.bool,
-    isDisabled: PropTypes.bool,
-    isFocused: PropTypes.bool,
-    children: PropTypes.node,
-    data: PropTypes.object,
+    selectProps: PropTypes.object.isRequired,
+    innerProps: PropTypes.object.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    isDisabled: PropTypes.bool.isRequired,
+    isFocused: PropTypes.bool.isRequired,
+    data: PropTypes.object.isRequired,
 };
 
 export default CustomOption;

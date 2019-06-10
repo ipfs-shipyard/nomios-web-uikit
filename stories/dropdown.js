@@ -63,8 +63,9 @@ storiesOf('Dropdown', module)
 .add('Custom options', () => (
     <div style={ containerStyles }>
         <Dropdown
+            renderOption={ CustomOption }
             onChange={ handleChange }
-            options={ customOptions } />
+            options={ options } />
     </div>
 ))
 .add('Custom trigger', () => (

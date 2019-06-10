@@ -19,11 +19,11 @@ const CustomInput = (props) => {
 };
 
 CustomInput.propTypes = {
-    selectProps: PropTypes.object,
+    selectProps: PropTypes.object.isRequired,
+    innerRef: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
     tabIndex: PropTypes.string,
-    innerRef: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
 };
 
 export default CustomInput;

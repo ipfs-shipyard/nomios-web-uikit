@@ -8,9 +8,9 @@ const CustomControl = ({ innerRef, innerProps, children, selectProps }) => (
 );
 
 CustomControl.propTypes = {
-    selectProps: PropTypes.object,
-    innerProps: PropTypes.object,
-    innerRef: PropTypes.func,
+    selectProps: PropTypes.object.isRequired,
+    innerProps: PropTypes.object.isRequired,
+    innerRef: PropTypes.func.isRequired,
     children: PropTypes.node,
 };
 
