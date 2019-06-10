@@ -20,13 +20,13 @@ storiesOf('Avatar', module)
     <Avatar image={ imageUrl } />
 ))
 .add('No animation on enter', () => (
-    <Avatar animateOnEnter={ false } image={ imageUrl } />
+    <Avatar animateImageOnEnter={ false } image={ imageUrl } />
 ))
 .add('Knobs playground ⚽', () => {
     const name = text('name', 'Pedro Santos');
     const image = text('image', imageUrl);
     const preloadImage = boolean('preloadImage', true);
-    const animateOnEnter = boolean('animateOnEnter', true);
+    const animateImageOnEnter = boolean('animateImageOnEnter', true);
 
-    return <Avatar name={ name } image={ image } preloadImage={ preloadImage } animateOnEnter={ animateOnEnter } />;
+    return <Avatar name={ name } image={ image } preloadImage={ preloadImage } animateImageOnEnter={ animateImageOnEnter } />;
 });
