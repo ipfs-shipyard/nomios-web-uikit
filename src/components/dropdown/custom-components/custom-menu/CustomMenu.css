@@ -1,0 +1,48 @@
+@import "../../../../styles/colors";
+
+:root {
+    --default-margin-top: 0.5rem;
+    --arrow-size: 1.2rem;
+}
+
+.menu {
+    box-sizing: border-box;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    z-index: 1;
+    margin-top: var(--default-margin-top);
+    background-color: var(--color-white);
+    box-shadow: 0 1.2rem 1.4rem 0 rgba(75, 69, 61, 0.22);
+
+    &.left,
+    &.right,
+    &.center {
+        margin-top: calc(var(--default-margin-top) * 2 + calc(var(--arrow-size) / 2));
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: calc(var(--arrow-size) / 2 * -1);
+            width: var(--arrow-size);
+            height: var(--arrow-size);
+            z-index: -1;
+            transform: rotateZ(45deg);
+            border: 1px solid color(var(--color-armadillo) alpha(0.08));
+            background-color: var(--color-white);
+        }
+    }
+
+    &.left::before {
+        left: 1.5rem;
+    }
+
+    &.right::before {
+        right: 1.5rem;
+    }
+
+    &.center::before {
+        left: 50%;
+        transform: translateX(-50%) rotateZ(45deg);
+    }
+}

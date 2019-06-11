@@ -1,0 +1,7 @@
+@import "../../../../styles/colors";
+
+.menuList {
+    max-height: 20rem;
+    overflow-y: scroll;
+    background-color: var(--color-white);
+}

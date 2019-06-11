@@ -6,6 +6,7 @@ const bellSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/i
 const cameraSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-camera.svg');
 const checkmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-checkmark.svg');
 const checkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-check.svg');
+const chevronSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-chevron.svg');
 const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
 const crossmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark.svg');
 const desktopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-desktop.svg');
@@ -34,6 +35,7 @@ const BellIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={
 const CameraIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ cameraSvg } />);
 const CheckmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ checkmarkSvg } />);
 const CheckIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ checkSvg } />);
+const ChevronIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ chevronSvg } />);
 const CloseIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ closeSvg } />);
 const CrossmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ crossmarkSvg } />);
 const DesktopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ desktopSvg } />);
@@ -64,6 +66,7 @@ export {
     CameraIcon,
     CheckmarkIcon,
     CheckIcon,
+    ChevronIcon,
     CloseIcon,
     CrossmarkIcon,
     DesktopIcon,
