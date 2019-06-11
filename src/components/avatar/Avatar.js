@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import memoizeOne from 'memoize-one';
 import classNames from 'classnames';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PreloadImage from 'react-image';
@@ -15,13 +16,13 @@ const cssTransitionStyles = {
     exitActive: styles.exitActive,
 };
 
-const imageContainer = (children) => (
-    <TransitionGroup appear component={ null }>
+const imageContainer = memoizeOne((animateImageOnEnter) => (children) => (
+    <TransitionGroup appear={ animateImageOnEnter } component={ null }>
         <CSSTransition classNames={ cssTransitionStyles } timeout={ 300 }>
             { children }
         </CSSTransition>
     </TransitionGroup>
-);
+));
 
 const Avatar = ({ className, name, image, preloadImage, animateImageOnEnter, ...rest }) => {
     const avatarClasses = classNames(styles.avatar, className);
@@ -32,7 +33,7 @@ const Avatar = ({ className, name, image, preloadImage, animateImageOnEnter, ...
             <PreloadImage
                 src={ image }
                 decode={ preloadImage }
-                container={ animateImageOnEnter ? imageContainer : undefined }
+                container={ imageContainer(animateImageOnEnter) }
                 className={ styles.image } />
         </div>
     );
