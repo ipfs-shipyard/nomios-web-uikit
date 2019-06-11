@@ -65,15 +65,15 @@ const handleChange = (data) => console.log(data);
 | name | type | default | description |
 | ---- | ---- | ------- | ----------- |
 | options | array | *required* | Array of objects. Check [options notes](#options) to further details on this prop |
-| renderTrigger | function || A function to render a custom dropdown trigger. Check [renderTrigger notes](#renderTrigger) to further details |
-| renderOption | function || A function to render a custom option |
-| onChange | function || A callback to be called whenever an option changes. All the options are passed as argument except for the render property |
-| placeholder | string || A placeholder for the trigger |
-| menuClassName | string || A className to override menu default styles |
-| menuListClassName | string || A className to override menu list default styles |
-| optionClassName | string || A className to override option default styles |
-| triggerClassName | string || A className to override trigger default styles |
-| controlClassName | string || A className to override control default styles |
+| renderTrigger | function | | A function to render a custom dropdown trigger. Check [renderTrigger notes](#renderTrigger) to further details |
+| renderOption | function | | A function to render a custom option |
+| onChange | function | | A callback to be called whenever an option changes. All the options are passed as argument except for the render property |
+| placeholder | string | | A placeholder for the trigger |
+| menuClassName | string | | A className to override menu default styles |
+| menuListClassName | string | | A className to override menu list default styles |
+| optionClassName | string | | A className to override option default styles |
+| triggerClassName | string | | A className to override trigger default styles |
+| controlClassName | string | | A className to override control default styles |
 | arrowPlacement | string | `none` | Defines the placement of the arrow. It can be one of: `left`, `right`, `center` or `none` |
 
 All the props supplied will be spread to [react-select](https://github.com/JedWatson/react-select) component.
