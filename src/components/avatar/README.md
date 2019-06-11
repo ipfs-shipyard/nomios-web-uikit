@@ -29,6 +29,7 @@ import { Avatar } from '@nomios/web-uikit';
 | ---- | ---- | ------- | ----------- |
 | name | string | | The user's name |
 | image | string | | The user's image |
+| animateImageOnEnter | bool | true | Applies `fade in` animation to the image |
 | preloadImage | bool | true | Show the user's image only when it's loaded |
 
 Any other properties supplied will be spread to the root element.
