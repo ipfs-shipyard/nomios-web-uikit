@@ -10,6 +10,7 @@ const chevronSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icon
 const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
 const crossmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark.svg');
 const desktopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-desktop.svg');
+const downloadSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-download.svg');
 const editSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-edit.svg');
 const entitySvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-entity.svg');
 const eyeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye.svg');
@@ -40,6 +41,7 @@ const ChevronIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } sv
 const CloseIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ closeSvg } />);
 const CrossmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ crossmarkSvg } />);
 const DesktopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ desktopSvg } />);
+const DownloadIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ downloadSvg } />);
 const EditIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ editSvg } />);
 const EntityIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ entitySvg } />);
 const EyeIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeSvg } />);
@@ -72,6 +74,7 @@ export {
     CloseIcon,
     CrossmarkIcon,
     DesktopIcon,
+    DownloadIcon,
     EditIcon,
     EntityIcon,
     EyeIcon,
