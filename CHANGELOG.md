@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.1.1...v0.2.0) (2019-06-15)
+
+
+### Bug Fixes
+
+* fix badge component not assuming className ([#66](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/66)) ([252df35](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/252df35))
+
+
+### Features
+
+* add modal-global ([#67](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/67)) ([61b350e](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/61b350e))
+* add several icons ([#65](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/65)) ([122f661](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/122f661))
+* dropdown ([#62](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/62)) ([33d66ad](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/33d66ad))
+
+
+
 ### [0.1.1](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.1.0...v0.1.1) (2019-06-09)
 
 
