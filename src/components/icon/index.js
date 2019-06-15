@@ -10,6 +10,7 @@ const chevronSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icon
 const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
 const crossmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark.svg');
 const desktopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-desktop.svg');
+const downloadSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-download.svg');
 const editSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-edit.svg');
 const entitySvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-entity.svg');
 const eyeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-eye.svg');
@@ -23,12 +24,14 @@ const locationSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/ico
 const mobileSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-mobile.svg');
 const otherSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-other.svg');
 const userSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-user.svg');
+const pdfSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-pdf.svg');
 const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-plus.svg');
 const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
 const settingsSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-settings.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
 const twitterSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-twitter.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
+const writeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-write.svg');
 
 const ArrowRightIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ arrowRightSvg } />);
 const BellIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ bellSvg } />);
@@ -39,6 +42,7 @@ const ChevronIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } sv
 const CloseIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ closeSvg } />);
 const CrossmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ crossmarkSvg } />);
 const DesktopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ desktopSvg } />);
+const DownloadIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ downloadSvg } />);
 const EditIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ editSvg } />);
 const EntityIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ entitySvg } />);
 const EyeIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ eyeSvg } />);
@@ -52,12 +56,14 @@ const LocationIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } s
 const MobileIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ mobileSvg } />);
 const OtherIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ otherSvg } />);
 const UserIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ userSvg } />);
+const PdfIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ pdfSvg } />);
 const PlusIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ plusSvg } />);
 const RefreshIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ refreshSvg } />);
 const SettingsIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ settingsSvg } />);
 const TabletIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ tabletSvg } />);
 const TwitterIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ twitterSvg } />);
 const WarningIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ warningSvg } />);
+const WriteIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ writeSvg } />);
 
 export default Icon;
 export {
@@ -70,6 +76,7 @@ export {
     CloseIcon,
     CrossmarkIcon,
     DesktopIcon,
+    DownloadIcon,
     EditIcon,
     EntityIcon,
     EyeIcon,
@@ -83,10 +90,12 @@ export {
     MobileIcon,
     OtherIcon,
     UserIcon,
+    PdfIcon,
     PlusIcon,
     RefreshIcon,
     SettingsIcon,
     TabletIcon,
     TwitterIcon,
     WarningIcon,
+    WriteIcon,
 };
