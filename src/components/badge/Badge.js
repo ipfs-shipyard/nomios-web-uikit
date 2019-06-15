@@ -3,11 +3,12 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styles from './Badge.css';
 
-const Badge = ({ selected, disabled, hideOverflow, children, onClick, ...rest }) => {
+const Badge = ({ selected, disabled, hideOverflow, children, onClick, className, ...rest }) => {
     const finalClassName = classNames(
         styles.badge,
         selected && styles.selected,
-        hideOverflow && styles['hide-overflow']
+        hideOverflow && styles['hide-overflow'],
+        className
     );
 
     return (
@@ -23,6 +24,7 @@ Badge.propTypes = {
     selected: PropTypes.bool,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
+    className: PropTypes.string,
     hideOverflow: PropTypes.bool,
     children: PropTypes.node.isRequired,
 };
