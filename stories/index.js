@@ -17,3 +17,4 @@ import './autocomplete-select';
 import './svg';
 import './radio';
 import './dropdown';
+import './modal-global';
