@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { pick } from 'lodash';
@@ -30,21 +30,20 @@ class TextInput extends Component {
     }
 
     renderInput() {
-        const { type, lineType, lineStrength } = this.props;
+        const { type, lineType, lineStrength, showPasswordAdornment } = this.props;
 
         const inputProps = pick(this.props, INPUT_PROPS);
         const currentLevel = lineStrength >= 0 && lineStrength <= 1 ? this.computeLevel() : undefined;
 
         // Return input with no strength indication
-        if (lineType === 'normal') {
+        if (type === 'text') {
             return (
-                <input type={ type }
-                    className={ styles[currentLevel] }
-                    { ...inputProps } />
+                <input type={ type } className={ styles[currentLevel] } { ...inputProps } />
             );
         }
 
         const { showPassword } = this.state;
+        const inputClass = lineType === 'normal' ? styles[currentLevel] : styles.noBorderBottom;
         const eyeOffClasses = classNames(styles.eyeIcon, {
             [styles.hidden]: !showPassword,
             [styles.eyeOff]: showPassword,
@@ -53,19 +52,27 @@ class TextInput extends Component {
         // Return input with strength indication
         return (
             <div className={ styles.inputWrapper }>
-                <input type={ showPassword ? 'text' : 'password' }
+                <input
+                    type={ showPassword ? 'text' : 'password' }
+                    className={ inputClass }
                     { ...inputProps } />
-                <StrengthIndicator
-                    className={ styles.strengthIndicator }
-                    levelName={ currentLevel }
-                    strength={ lineStrength }
-                    onColorChange={ this.handleStrengthColorChange } />
-                <EyeIcon
-                    className={ classNames(styles.eyeIcon, showPassword && styles.hidden) }
-                    onClick={ this.handleToggleShowPassword } />
-                <EyeOffIcon
-                    className={ eyeOffClasses }
-                    onClick={ this.handleToggleShowPassword } />
+                { lineType === 'dashed' && (
+                    <StrengthIndicator
+                        className={ styles.strengthIndicator }
+                        levelName={ currentLevel }
+                        strength={ lineStrength }
+                        onColorChange={ this.handleStrengthColorChange } />
+                ) }
+                { showPasswordAdornment && (
+                    <Fragment>
+                        <EyeIcon
+                            className={ classNames(styles.eyeIcon, showPassword && styles.hidden) }
+                            onClick={ this.handleToggleShowPassword } />
+                        <EyeOffIcon
+                            className={ eyeOffClasses }
+                            onClick={ this.handleToggleShowPassword } />
+                    </Fragment>
+                ) }
             </div>
         );
     }
@@ -77,31 +84,22 @@ class TextInput extends Component {
             return;
         }
 
-        return (
-            <div className={ styles.helperContainer }>
-                { this.renderHelperText() }
-                { this.renderFeedbackMessage() }
-            </div>
-        );
-    }
-
-    renderHelperText() {
-        return this.props.helperText && <span className={ styles.helperText }>{ this.props.helperText }</span>;
-    }
-
-    renderFeedbackMessage() {
-        const { feedback } = this.props;
         const finalClassNames = classNames(styles.feedbackMessage, feedback && feedback.className);
 
-        return feedback && (
-            <FeedbackMessage
-                style={ { color: this.state.feedbackMessageColor } }
-                type={ feedback.type }
-                iconPosition="right"
-                tooltip={ feedback.tooltip }
-                className={ finalClassNames }>
-                { feedback.message }
-            </FeedbackMessage>
+        return (
+            <div className={ styles.helperContainer }>
+                { helperText && <span className={ styles.helperText }>{ helperText }</span> }
+                { feedback && (
+                    <FeedbackMessage
+                        style={ { color: this.state.feedbackMessageColor } }
+                        type={ feedback.type }
+                        iconPosition="right"
+                        tooltip={ feedback.tooltip }
+                        className={ finalClassNames }>
+                        { feedback.message }
+                    </FeedbackMessage>
+                ) }
+            </div>
         );
     }
 
@@ -125,6 +123,7 @@ TextInput.propTypes = {
     helperText: PropTypes.string,
     lineType: PropTypes.oneOf(['normal', 'dashed']),
     lineStrength: PropTypes.number,
+    showPasswordAdornment: PropTypes.bool,
     feedback: PropTypes.shape({
         message: PropTypes.string.isRequired,
         type: PropTypes.string,
@@ -135,6 +134,7 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
+    showPasswordAdornment: true,
     lineType: 'normal',
     type: 'text',
 };

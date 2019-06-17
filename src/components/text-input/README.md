@@ -20,6 +20,7 @@ import { TextInput } from '@nomios/web-uikit';
 | lineType | string | `normal`| Sets the type of the bottom border. Can be one of `normal` (single line) or `dashed` (for password strength indication). |
 | feedback | object | | Adds a feedback message to the users. Right-aligned. More info on the next table. |
 | lineStrength | number | | The current strength value. ⚠️ Please note that this value must be between 0 and 1. |
+| showPasswordAdornment | boolean | true | Toggles password adornment (eye icon) that reveals/hides password. ⚠️ Please note that this prop is only valid for inputs of type `password`. |
 | className | string | | A classname to override styles. |
 
 **Note:** Any props related to the input, such as `placeholder`, `onKeyUp` and `onChange`, will be spread to the underlying input element. Any other props will be spread into the root element.
