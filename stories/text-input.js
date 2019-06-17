@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, select, text, number } from '@storybook/addon-knobs';
+import { withKnobs, select, text, number, boolean } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import { TextInput } from '../src';
 import readme from '../src/components/text-input/README.md';
@@ -29,6 +29,7 @@ storiesOf('TextInput', module)
     const label = text('label', 'Label');
     const placeholder = text('placeholder', 'Hint Text');
     const type = select('input type', ['text', 'password'], 'text');
+    const showPasswordAdornment = boolean('showPasswordAdornment', true);
     const helperText = text('helper text', '');
     const feedbackMessage = text('feedback message', '');
     const feedbackType = select('feedback type', [null, 'error', 'info'], null);
@@ -43,6 +44,7 @@ storiesOf('TextInput', module)
             helperText={ helperText }
             lineType={ lineType }
             lineStrength={ lineStrength != null ? lineStrength : undefined }
-            feedback={ { message: feedbackMessage, type: feedbackType } } />
+            feedback={ { message: feedbackMessage, type: feedbackType } }
+            showPasswordAdornment={ showPasswordAdornment } />
     );
 });

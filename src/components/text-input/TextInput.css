@@ -57,7 +57,10 @@
 
         & input {
             width: 100%;
-            border-color: transparent;
+
+            &.noBorderBottom {
+                border-color: transparent;
+            }
 
             &:focus + .strengthIndicator > div {
                 background-color: color(var(--color-armadillo) alpha(0.6));
