@@ -35,13 +35,6 @@ class TextInput extends Component {
         const inputProps = pick(this.props, INPUT_PROPS);
         const currentLevel = lineStrength >= 0 && lineStrength <= 1 ? this.computeLevel() : undefined;
 
-        // Return input with no strength indication
-        if (type === 'text') {
-            return (
-                <input type={ type } className={ styles[currentLevel] } { ...inputProps } />
-            );
-        }
-
         const { showPassword } = this.state;
         const inputClass = lineType === 'normal' ? styles[currentLevel] : styles.noBorderBottom;
         const eyeOffClasses = classNames(styles.eyeIcon, {
@@ -49,11 +42,10 @@ class TextInput extends Component {
             [styles.eyeOff]: showPassword,
         });
 
-        // Return input with strength indication
         return (
             <div className={ styles.inputWrapper }>
                 <input
-                    type={ showPassword ? 'text' : 'password' }
+                    type={ showPassword ? 'text' : type }
                     className={ inputClass }
                     { ...inputProps } />
                 { lineType === 'dashed' && (
@@ -63,7 +55,7 @@ class TextInput extends Component {
                         strength={ lineStrength }
                         onColorChange={ this.handleStrengthColorChange } />
                 ) }
-                { showPasswordAdornment && (
+                { type === 'password' && showPasswordAdornment && (
                     <Fragment>
                         <EyeIcon
                             className={ classNames(styles.eyeIcon, showPassword && styles.hidden) }
