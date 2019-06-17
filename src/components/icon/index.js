@@ -8,6 +8,7 @@ const checkmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/ic
 const checkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-check.svg');
 const chevronSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-chevron.svg');
 const closeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-close.svg');
+const copySvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-copy.svg');
 const crossmarkSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-crossmark.svg');
 const desktopSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-desktop.svg');
 const downloadSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-download.svg');
@@ -26,6 +27,7 @@ const otherSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/
 const userSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-user.svg');
 const pdfSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-pdf.svg');
 const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-plus.svg');
+const printSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-print.svg');
 const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
 const settingsSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-settings.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
@@ -40,6 +42,7 @@ const CheckmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } 
 const CheckIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ checkSvg } />);
 const ChevronIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ chevronSvg } />);
 const CloseIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ closeSvg } />);
+const CopyIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ copySvg } />);
 const CrossmarkIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ crossmarkSvg } />);
 const DesktopIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ desktopSvg } />);
 const DownloadIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ downloadSvg } />);
@@ -58,6 +61,7 @@ const OtherIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg=
 const UserIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ userSvg } />);
 const PdfIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ pdfSvg } />);
 const PlusIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ plusSvg } />);
+const PrintIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ printSvg } />);
 const RefreshIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ refreshSvg } />);
 const SettingsIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ settingsSvg } />);
 const TabletIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ tabletSvg } />);
@@ -74,6 +78,7 @@ export {
     CheckIcon,
     ChevronIcon,
     CloseIcon,
+    CopyIcon,
     CrossmarkIcon,
     DesktopIcon,
     DownloadIcon,
@@ -92,6 +97,7 @@ export {
     UserIcon,
     PdfIcon,
     PlusIcon,
+    PrintIcon,
     RefreshIcon,
     SettingsIcon,
     TabletIcon,
