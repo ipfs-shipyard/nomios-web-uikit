@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.2](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.1...v0.2.2) (2019-06-23)
+
+
+### Bug Fixes
+
+* fix fonts not being like the designs due to smoothing ([#70](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/70)) ([a1a32d2](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/a1a32d2))
+* fix very rate setState after unmount on svg ([0061127](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/0061127))
+
+
+
 ### [0.2.1](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.0...v0.2.1) (2019-06-17)
 
 
