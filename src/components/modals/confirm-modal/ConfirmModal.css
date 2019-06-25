@@ -1,0 +1,33 @@
+@import "../../../styles/colors.css";
+
+.modal {
+    width: auto;
+}
+
+.content {
+    max-width: 66rem;
+}
+
+.title {
+    margin-top: 0.5rem;
+    margin-bottom: 3rem;
+    color: var(--color-tan);
+}
+
+.description {
+    margin-top: 0;
+    margin-bottom: 8rem;
+}
+
+.buttonsContainer {
+    display: flex;
+}
+
+.button {
+    margin-right: 2rem;
+    flex: 1 0 0;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
