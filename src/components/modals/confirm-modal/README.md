@@ -26,8 +26,8 @@ You may want to use this modal with the `<ModalTrigger>` component. There are a 
 | ---- | ---- | ------- | ----------- |
 | title | string | *required* | The title. Usually a question. |
 | description | string | *required* | A description for better understanding before confirmation. |
-| onConfirm | func | *required* | Handler to be called on confirm. |
-| onCancel | func | *required* | Handler to be called on cancel. |
+| onConfirm | function | *required* | Handler to be called on confirm. |
+| onCancel | function | *required* | Handler to be called on cancel. |
 | open | boolean | false | The visibility state of the confirmation modal. |
 | confirmText | string | `Yes` | Confirmation button text |
 | confirmVariant | string | `secondary` | Confirmation button variant |
