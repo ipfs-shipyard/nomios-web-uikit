@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 import Icon from './Icon';
 
+const actionsSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-actions.svg');
 const arrowRightSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-arrow-right.svg');
 const bellSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-bell.svg');
 const cameraSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-camera.svg');
@@ -29,12 +30,15 @@ const pdfSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/ic
 const plusSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-plus.svg');
 const printSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-print.svg');
 const refreshSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-refresh.svg');
+const removeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-remove.svg');
 const settingsSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-settings.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
+const trashSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-trash.svg');
 const twitterSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-twitter.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 const writeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-write.svg');
 
+const ActionsIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ actionsSvg } />);
 const ArrowRightIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ arrowRightSvg } />);
 const BellIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ bellSvg } />);
 const CameraIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ cameraSvg } />);
@@ -63,14 +67,17 @@ const PdfIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ 
 const PlusIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ plusSvg } />);
 const PrintIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ printSvg } />);
 const RefreshIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ refreshSvg } />);
+const RemoveIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ removeSvg } />);
 const SettingsIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ settingsSvg } />);
 const TabletIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ tabletSvg } />);
+const TrashIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ trashSvg } />);
 const TwitterIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ twitterSvg } />);
 const WarningIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ warningSvg } />);
 const WriteIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ writeSvg } />);
 
 export default Icon;
 export {
+    ActionsIcon,
     ArrowRightIcon,
     BellIcon,
     CameraIcon,
@@ -99,8 +106,10 @@ export {
     PlusIcon,
     PrintIcon,
     RefreshIcon,
+    RemoveIcon,
     SettingsIcon,
     TabletIcon,
+    TrashIcon,
     TwitterIcon,
     WarningIcon,
     WriteIcon,
