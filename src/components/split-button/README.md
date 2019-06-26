@@ -27,7 +27,7 @@ const actions = [
 | mainActionId | string | | The id of the main action, i.e., the action that is always visible outside the menu |
 | onActionClick | function | | A function to be called whenever an action is clicked. It receives the id of the clicked action |
 
-**Note:** Any other properties supplied to this component will be spread to the root element which is the `<Dropdown>` component.
+**Note:** Any other properties supplied to this component will be spread to the root element which is the [Dropdown](/?path=/story/dropdown--standard-small-list) component.
 
 
 #### Actions
