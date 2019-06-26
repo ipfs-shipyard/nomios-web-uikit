@@ -1,4 +1,5 @@
 import keyboardOnlyOutlines from 'keyboard-only-outlines';
+export { default as BoxedStar } from './components/boxed-star';
 export { default as Button } from './components/button';
 export { default as TextInput } from './components/text-input';
 export { default as Icon } from './components/icon';

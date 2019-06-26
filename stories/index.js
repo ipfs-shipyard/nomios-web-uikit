@@ -1,5 +1,6 @@
 import './base/colors';
 import './base/typography';
+import './boxed-star';
 import './button';
 import './text-input';
 import './icon';

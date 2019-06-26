@@ -75,8 +75,8 @@ setAppElement('#root');
 | shouldCloseOnEsc | boolean | false | Whether the modal should close when hitting ESC key or not |
 | shouldCloseOnOverlayClick | boolean | false | Whether the modal should close when clicking the overlay or not |
 | onRequestClose | boolean | false | Function to be called when there\'s an intent to close the modal |
-| onEntered | func | | Function to be called when the modal finishes opening |
-| onExited | func | | Function to be called when the modal finishes closing |
+| onEntered | function | | Function to be called when the modal finishes opening |
+| onExited | function | | Function to be called when the modal finishes closing |
 
 Important notes:
 
