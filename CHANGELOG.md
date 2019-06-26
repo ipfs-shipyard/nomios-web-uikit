@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.2...v0.2.3) (2019-06-26)
+
+
+### Features
+
+* add <SplitButton> component ([#73](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/73)) ([aebfcc9](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/aebfcc9))
+* add boxed star ([#74](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/74)) ([64a1715](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/64a1715))
+* add confirm modal ([#71](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/71)) ([e25a458](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/e25a458))
+
+
+
 ### [0.2.2](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.1...v0.2.2) (2019-06-23)
 
 
