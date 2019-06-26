@@ -19,3 +19,4 @@ import './svg';
 import './radio';
 import './dropdown';
 import './modal-global';
+import './split-button';

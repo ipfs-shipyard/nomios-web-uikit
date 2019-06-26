@@ -1,0 +1,84 @@
+@import "../../styles/colors";
+
+.menu {
+    margin-top: 0.1rem;
+}
+
+.container {
+    display: flex;
+}
+
+.button {
+    width: 100%;
+    height: 5rem;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: none;
+    transition: background-color 0.2s ease-out;
+
+    &.triggerButton {
+        width: 5rem;
+        padding: 0 1.7rem;
+
+        & > i {
+            margin-right: 0;
+        }
+    }
+
+    &.negative {
+        background-color: var(--color-white);
+        color: var(--color-armadillo);
+
+        &:enabled {
+            &:hover,
+            &:focus,
+            &.menuIsOpen {
+                background-color: var(--color-dawn-pink);
+                cursor: pointer;
+            }
+        }
+
+        &:disabled {
+            background-color: color(var(--color-white) alpha(0.2));
+            color: color(var(--color-armadillo) alpha(0.5));
+        }
+    }
+
+    &.primary {
+        position: relative;
+        background-color: var(--color-armadillo);
+        color: var(--color-white);
+
+        &:enabled {
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transition: background-color 0.2s ease-out;
+            }
+
+            &:hover,
+            &:focus,
+            &.menuIsOpen {
+                &::before {
+                    background-color: color(var(--color-dawn-pink) alpha(0.2));
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &:disabled {
+            background-color: color(var(--color-armadillo) alpha(0.2));
+        }
+    }
+
+    & > i {
+        margin-right: 1.5rem;
+        font-size: 1.4rem;
+    }
+}
