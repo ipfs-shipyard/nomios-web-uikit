@@ -81,9 +81,9 @@ const MyComponent = () => {
 
 ### ModalGlobalProvider
 
-This component uses [react context api](https://reactjs.org/docs/context.html) and it will provide two functions to its consumers:
+This component uses [react context api](https://reactjs.org/docs/context.html) and it will provide one object (`globalModal`) to its consumers. The object has two functions:
 
-- `closeModal(component)`   
+- `closeModal()`   
 This function receives the modal component to be closed.
 
 - `openModal(component)`   
@@ -93,16 +93,16 @@ This function receives the modal component to be opened.
 
 ### ModalGlobalConsumer
 
-The `<ModalGlobalConsumer>` component allows you to trigger a modal imperatively by providing a children render prop with two props:
+The `<ModalGlobalConsumer>` component allows you to trigger a modal imperatively by providing a children render prop with the `globalModal` object prop with two functions:
 
-- `closeModal(component)`
+- `closeModal()`
 
 - `openModal(component)`
 
 ### withModalGlobal(component)
 
-The HOC version of the <ModalGlobalConsumer> component. The injected props are exactly the same of the <ModalGlobalConsumer> children render prop:
+The HOC version of the <ModalGlobalConsumer> component. The injected prop is exactly the same of the <ModalGlobalConsumer> children render prop. `globalModal` with the same two functions:
 
-- `closeModal(component)`
+- `closeModal()`
 
 - `openModal(component)`
