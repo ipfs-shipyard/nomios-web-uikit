@@ -33,15 +33,17 @@ class ModalGlobalProvider extends Component {
 
     renderModal() {
         const { component: Modal, props, open } = this.state;
+        const onRequestClose = props.onRequestClose || this.handleCloseModal;
 
         if (!Modal) {
             return null;
         }
 
         return (
-            <Modal { ...props }
+            <Modal
+                { ...props }
                 open={ open }
-                onRequestClose={ this.handleCloseModal }
+                onRequestClose={ onRequestClose }
                 onExited={ this.handleOnExited } />
         );
     }
@@ -60,10 +62,16 @@ class ModalGlobalProvider extends Component {
         });
     };
 
-    handleOnExited = () => this.setState({
-        props: {},
-        component: null,
-    });
+    handleOnExited = () => {
+        const { props: { onExited } } = this.state;
+
+        onExited && onExited();
+
+        this.setState({
+            props: {},
+            component: null,
+        });
+    };
 }
 
 ModalGlobalProvider.propTypes = {

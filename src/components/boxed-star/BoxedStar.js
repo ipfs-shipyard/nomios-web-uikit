@@ -27,7 +27,7 @@ class BoxedStar extends Component {
 
 BoxedStar.propTypes = {
     children: PropTypes.node,
-    onRemove: PropTypes.bool,
+    onRemove: PropTypes.func,
     id: PropTypes.string,
     className: PropTypes.string,
     contentClassName: PropTypes.string,
