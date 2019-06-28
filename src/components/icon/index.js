@@ -34,6 +34,7 @@ const removeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons
 const settingsSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-settings.svg');
 const tabletSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-tablet.svg');
 const trashSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-trash.svg');
+const uploadSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-upload.svg');
 const twitterSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-twitter.svg');
 const warningSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-warning.svg');
 const writeSvg = import(/* webpackChunkName: "svg-sprite" */ '../../media/icons/icon-write.svg');
@@ -72,6 +73,7 @@ const SettingsIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } s
 const TabletIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ tabletSvg } />);
 const TrashIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ trashSvg } />);
 const TwitterIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ twitterSvg } />);
+const UploadIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ uploadSvg } />);
 const WarningIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ warningSvg } />);
 const WriteIcon = forwardRef((props, ref) => <Icon ref={ ref } { ...props } svg={ writeSvg } />);
 
@@ -111,6 +113,7 @@ export {
     TabletIcon,
     TrashIcon,
     TwitterIcon,
+    UploadIcon,
     WarningIcon,
     WriteIcon,
 };
