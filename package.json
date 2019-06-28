@@ -1,6 +1,6 @@
 {
   "name": "@nomios/web-uikit",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Nomios' living web UIKit",
   "main": "dist/index.js",
   "files": [

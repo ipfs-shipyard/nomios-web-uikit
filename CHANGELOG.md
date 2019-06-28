@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.7](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.6...v0.2.7) (2019-06-28)
+
+
+### Bug Fixes
+
+* fix text wrapping inside button ([#78](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/78)) ([3294bf2](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/3294bf2))
+* resize logo on flow modal ([#79](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/79)) ([eadcebc](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/eadcebc))
+
+
+
 ### [0.2.6](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.5...v0.2.6) (2019-06-28)
 
 
