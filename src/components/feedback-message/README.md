@@ -35,6 +35,7 @@ import { FeedbackMessage } from '@nomios/web-uikit';
 | children | node | *required* | The contents to render, usually a text |
 | variant | string | `small` | The variant of the feedback message, can be one of: `small` or `large` |
 | type | string | | Can be one of: `error` or `info`. Sets the icon accordingly the type. If no type is passed, no icon is applied. |
+| textColor | string |`rgba(75, 69, 61, .6)`| Sets the color of the message. E.g.: `rgb(255, 172, 0)` or `#ffac00`. This prop will be ignored if `type` prop is set to `error`: #d0021b will be applied. |
 | iconPosition | string | `left` | Aligns the icon accordingly the passed value. Can be one of: `left`, `right`. |
 | tooltip | node | | Tooltip content. If this prop is provided, a tooltip is created and it'll be triggered on icon hover. |
 | className | string | | A classname to override styles. |
