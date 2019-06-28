@@ -83,7 +83,7 @@ class TextInput extends Component {
                 { helperText && <span className={ styles.helperText }>{ helperText }</span> }
                 { feedback && (
                     <FeedbackMessage
-                        style={ { color: this.state.feedbackMessageColor } }
+                        textColor={ this.state.feedbackMessageColor }
                         type={ feedback.type }
                         iconPosition="right"
                         tooltip={ feedback.tooltip }
