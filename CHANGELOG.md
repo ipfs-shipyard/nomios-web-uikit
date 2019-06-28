@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.4...v0.2.5) (2019-06-28)
+
+
+### Bug Fixes
+
+* feedback-message not changing text color on text-input ([#76](https://github.com/ipfs-shipyard/nomios-web-uikit/issues/76)) ([48c7dd8](https://github.com/ipfs-shipyard/nomios-web-uikit/commit/48c7dd8))
+
+
+
 ### [0.2.4](https://github.com/ipfs-shipyard/nomios-web-uikit/compare/v0.2.3...v0.2.4) (2019-06-27)
 
 
