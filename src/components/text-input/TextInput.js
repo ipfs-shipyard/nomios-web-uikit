@@ -37,6 +37,7 @@ class TextInput extends Component {
 
         const { showPassword } = this.state;
         const inputClass = lineType === 'normal' ? styles[currentLevel] : styles.noBorderBottom;
+        const shouldShowPasswordAdornment = type === 'password' && showPasswordAdornment;
         const eyeOffClasses = classNames(styles.eyeIcon, {
             [styles.hidden]: !showPassword,
             [styles.eyeOff]: showPassword,
@@ -46,7 +47,7 @@ class TextInput extends Component {
             <div className={ styles.inputWrapper }>
                 <input
                     type={ showPassword ? 'text' : type }
-                    className={ inputClass }
+                    className={ classNames(inputClass, shouldShowPasswordAdornment && styles.paddingRight) }
                     { ...inputProps } />
                 { lineType === 'dashed' && (
                     <StrengthIndicator
@@ -55,7 +56,7 @@ class TextInput extends Component {
                         strength={ lineStrength }
                         onColorChange={ this.handleStrengthColorChange } />
                 ) }
-                { type === 'password' && showPasswordAdornment && (
+                { shouldShowPasswordAdornment && (
                     <Fragment>
                         <EyeIcon
                             className={ classNames(styles.eyeIcon, showPassword && styles.hidden) }
