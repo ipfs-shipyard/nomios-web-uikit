@@ -53,6 +53,7 @@
     }
 
     & .inputWrapper {
+        --icon-width: 1.6rem;
         position: relative;
 
         & input {
@@ -60,6 +61,10 @@
 
             &.noBorderBottom {
                 border-color: transparent;
+            }
+
+            &.paddingRight {
+                padding-right: var(--icon-width);
             }
 
             &:focus + .strengthIndicator > div {
@@ -70,7 +75,7 @@
         & .eyeIcon {
             position: absolute;
             right: 0;
-            width: 1.6rem;
+            width: var(--icon-width);
             height: 100%;
             fill: color(var(--color-armadillo) alpha(0.6));
 
