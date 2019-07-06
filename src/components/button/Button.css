@@ -207,8 +207,8 @@
 
     /* Primary & Secondary */
 
-    &.primary.progressVisible .textBlock,
-    &.secondary.progressVisible .textBlock {
+    &.primary.hasFeedback .textBlock,
+    &.secondary.hasFeedback .textBlock {
         background-color: color(var(--color-armadillo) alpha(0.2));
         color: var(--color-white);
     }
@@ -220,7 +220,7 @@
             opacity: 1;
         }
 
-        &.progressVisible .textBlock {
+        &.hasFeedback .textBlock {
             border-color: transparent;
         }
     }
@@ -234,7 +234,7 @@
         & .successBlock {
             background-color: var(--color-ocean-green);
 
-            & .checkmark svg path {
+            & .checkmark {
                 stroke: var(--color-white);
             }
         }
@@ -242,7 +242,7 @@
         & .errorBlock {
             background-color: var(--color-monza);
 
-            & .crossmark svg path {
+            & .crossmark {
                 stroke: var(--color-white);
             }
         }
@@ -252,7 +252,7 @@
 
     &.tertiary,
     &.negative {
-        &.progressVisible .textBlock {
+        &.hasFeedback .textBlock {
             border-color: transparent;
             background-color: color(var(--color-white) alpha(0.2));
             color: var(--color-white);
@@ -265,7 +265,7 @@
         & .successBlock {
             background-color: var(--color-white);
 
-            & .checkmark svg path {
+            & .checkmark {
                 stroke: var(--color-ocean-green);
             }
         }
@@ -273,7 +273,7 @@
         & .errorBlock {
             background-color: var(--color-white);
 
-            & .crossmark svg path {
+            & .crossmark {
                 stroke: var(--color-monza);
             }
         }
