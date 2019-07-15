@@ -5,11 +5,17 @@ import ProgressBar from './ProgressBar';
 import { CheckmarkIcon, CrossmarkIcon } from '../icon';
 import styles from './Button.css';
 
+const PROGRESS_STATUS_MAP = {
+    none: 'initial',
+    loading: 'running',
+    success: 'complete',
+    error: 'complete',
+};
+
 class Button extends Component {
     state = {
         feedback: 'none',
         progressbarAnimationEnded: false,
-        feedbackIconAnimationEnded: false,
     };
 
     componentDidMount() {
@@ -24,7 +30,7 @@ class Button extends Component {
 
     render() {
         const { element, variant, feedback: _, fullWidth, disabled, className, children, ...rest } = this.props;
-        const { feedback, progressbarAnimationEnded, feedbackIconAnimationEnded } = this.state;
+        const { feedback, progressbarAnimationEnded } = this.state;
         const hasFeedback = feedback !== 'none';
 
         const finalDisabled = disabled || hasFeedback;
@@ -32,8 +38,8 @@ class Button extends Component {
             styles.button,
             styles[variant],
             finalDisabled && styles.disabled,
-            hasFeedback && !progressbarAnimationEnded ? styles.loading : styles[feedback],
-            hasFeedback && !feedbackIconAnimationEnded && styles.progressVisible,
+            hasFeedback && progressbarAnimationEnded && styles[feedback],
+            hasFeedback && styles.hasFeedback,
             fullWidth && styles.fullWidth,
             element.props.className,
             className,
@@ -45,20 +51,20 @@ class Button extends Component {
                 { ...rest }
                 { ...this.getDisabledProps(finalDisabled) }
                 className={ finalClassName }>
-                <div className={ styles.textBlock }>
+                <span className={ styles.textBlock }>
                     <span className={ styles.text }>{ children }</span>
 
                     <ProgressBar
-                        running={ feedback === 'loading' }
+                        status={ PROGRESS_STATUS_MAP[feedback] }
                         className={ styles.progressBar }
                         onEnd={ this.handleProgressBarEnd } />
-                </div>
+                </span>
 
                 <span className={ styles.successBlock }>
-                    <CheckmarkIcon className={ styles.checkmark } onTransitionEnd={ this.handleSuccessIconTransitionEnd } />
+                    <CheckmarkIcon className={ styles.checkmark } />
                 </span>
                 <span className={ styles.errorBlock }>
-                    <CrossmarkIcon className={ styles.crossmark } onTransitionEnd={ this.handleErrorIconTransitionEnd } />
+                    <CrossmarkIcon className={ styles.crossmark } />
                 </span>
             </element.type>
         );
@@ -78,36 +84,16 @@ class Button extends Component {
 
     handleFeedbackChange(prevFeedback) {
         const { feedback } = this.props;
+        const progressbarAnimationEnded = (feedback === 'success' || feedback === 'error') && prevFeedback !== 'loading';
 
-        if ((feedback === 'success' || feedback === 'error') && prevFeedback !== 'loading') {
-            this.setState({
-                feedback,
-                progressbarAnimationEnded: true,
-                feedbackIconAnimationEnded: false,
-            });
-        } else {
-            this.setState({
-                feedback,
-                progressbarAnimationEnded: false,
-                feedbackIconAnimationEnded: false,
-            });
-        }
+        this.setState({
+            feedback,
+            progressbarAnimationEnded,
+        });
     }
 
     handleProgressBarEnd = () => {
         this.setState({ progressbarAnimationEnded: true });
-    };
-
-    handleSuccessIconTransitionEnd = () => {
-        if (this.state.feedback === 'success') {
-            this.setState({ feedbackIconAnimationEnded: true });
-        }
-    };
-
-    handleErrorIconTransitionEnd = (event) => {
-        if (this.state.feedback === 'error' && event.target.matches('path:nth-of-type(1)')) {
-            this.setState({ feedbackIconAnimationEnded: true });
-        }
     };
 }
 
