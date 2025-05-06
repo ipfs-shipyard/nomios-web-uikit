@@ -23,7 +23,7 @@ class Button extends Component {
     }
 
     render() {
-        const { variant, feedback: _, fullWidth, disabled, className, children, ...rest } = this.props;
+        const { element, variant, feedback: _, fullWidth, disabled, className, children, ...rest } = this.props;
         const { feedback, progressbarAnimationEnded, feedbackIconAnimationEnded } = this.state;
         const hasFeedback = feedback !== 'none';
 
@@ -31,14 +31,20 @@ class Button extends Component {
         const finalClassName = classNames(
             styles.button,
             styles[variant],
+            finalDisabled && styles.disabled,
             hasFeedback && !progressbarAnimationEnded ? styles.loading : styles[feedback],
             hasFeedback && !feedbackIconAnimationEnded && styles.progressVisible,
             fullWidth && styles.fullWidth,
-            className
+            element.props.className,
+            className,
         );
 
         return (
-            <button { ...rest } disabled={ finalDisabled } className={ finalClassName }>
+            <element.type
+                { ...element.props }
+                { ...rest }
+                { ...this.getDisabledProps(finalDisabled) }
+                className={ finalClassName }>
                 <div className={ styles.textBlock }>
                     <span className={ styles.text }>{ children }</span>
 
@@ -54,8 +60,20 @@ class Button extends Component {
                 <span className={ styles.errorBlock }>
                     <CrossmarkIcon className={ styles.crossmark } onTransitionEnd={ this.handleErrorIconTransitionEnd } />
                 </span>
-            </button>
+            </element.type>
         );
+    }
+
+    getDisabledProps(disabled) {
+        if (!disabled) {
+            return {};
+        }
+
+        const elementType = this.props.element.type;
+
+        return elementType === 'button' ?
+            { disabled: true } :
+            { 'aria-disabled': 'true', tabIndex: '-1' };
     }
 
     handleFeedbackChange(prevFeedback) {
@@ -98,11 +116,13 @@ Button.propTypes = {
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     feedback: PropTypes.oneOf(['none', 'loading', 'success', 'error']),
+    element: PropTypes.element,
     children: PropTypes.node,
     className: PropTypes.string,
 };
 
 Button.defaultProps = {
+    element: <button />,
     variant: 'primary',
     feedback: 'none',
 };

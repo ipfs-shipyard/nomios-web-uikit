@@ -32,6 +32,7 @@ storiesOf('Button', module)
     const disabled = boolean('disabled', false);
     const fullWidth = boolean('fullWidth', false);
     const feedback = select('feedback', ['none', 'loading', 'success', 'error'], 'none');
+    const anchor = boolean('anchor', false);
     const children = text('children', 'Click me');
 
     return (
@@ -40,6 +41,7 @@ storiesOf('Button', module)
             disabled={ disabled }
             fullWidth={ fullWidth }
             feedback={ feedback }
+            element={ anchor ? <a href="http://google.com" rel="noopener noreferrer" target="_blank" /> : undefined }
             onClick={ action('clicked') }>
             { children }
         </Button>
